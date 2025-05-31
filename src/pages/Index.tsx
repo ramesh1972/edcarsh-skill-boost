@@ -1,12 +1,368 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  Clock, 
+  DollarSign, 
+  Globe, 
+  Calendar, 
+  Target, 
+  Users, 
+  Star,
+  ArrowRight,
+  CheckCircle,
+  Play,
+  Zap,
+  Award,
+  BookOpen,
+  TrendingUp
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Header } from '@/components/Header';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Index = () => {
+  const { theme } = useTheme();
+
+  const featuredCourses = [
+    {
+      title: "React Crash Course",
+      instructor: "Sarah Chen",
+      duration: "12 hours",
+      price: "$25",
+      rating: 4.9,
+      students: 2847,
+      nextSession: "Tomorrow 7PM",
+      tags: ["Beginner", "Live Session"]
+    },
+    {
+      title: "Python for Data Science",
+      instructor: "Dr. Mike Rodriguez",
+      duration: "16 hours",
+      price: "$25",
+      rating: 4.8,
+      students: 1923,
+      nextSession: "Friday 8PM",
+      tags: ["Intermediate", "Tools-focused"]
+    },
+    {
+      title: "Digital Marketing Fundamentals",
+      instructor: "Emma Wilson",
+      duration: "8 hours",
+      price: "$25",
+      rating: 4.9,
+      students: 3102,
+      nextSession: "Saturday 6PM",
+      tags: ["Beginner", "Multi-lingual"]
+    }
+  ];
+
+  const usps = [
+    {
+      icon: <Zap className="w-8 h-8 text-yellow-500" />,
+      title: "Crash Course Focus",
+      description: "Short, intense courses designed for rapid upskilling - no lengthy lectures, just practical knowledge"
+    },
+    {
+      icon: <Clock className="w-8 h-8 text-blue-500" />,
+      title: "Short & Terse Format",
+      description: "8-30 hour courses that get straight to the point, perfect for busy professionals"
+    },
+    {
+      icon: <Target className="w-8 h-8 text-green-500" />,
+      title: "Tools-Oriented Learning",
+      description: "Learn using industry-appropriate tools and real-world applications"
+    },
+    {
+      icon: <Calendar className="w-8 h-8 text-purple-500" />,
+      title: "Live Sessions",
+      description: "2-8 hours daily live sessions outside office hours for working professionals"
+    },
+    {
+      icon: <DollarSign className="w-8 h-8 text-green-600" />,
+      title: "Super Affordable",
+      description: "Premium quality education starting at just $25 per course"
+    },
+    {
+      icon: <Globe className="w-8 h-8 text-red-500" />,
+      title: "Multi-lingual Support",
+      description: "Courses available in multiple languages to reach global learners"
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Alex Thompson",
+      role: "Software Developer",
+      content: "EdCrash's React course helped me land my dream job in just 2 weeks! The live sessions were incredibly engaging.",
+      rating: 5
+    },
+    {
+      name: "Maria Garcia",
+      role: "Marketing Manager",
+      content: "Perfect for my busy schedule. The $25 price point is unbeatable for the quality of content provided.",
+      rating: 5
+    },
+    {
+      name: "David Kim",
+      role: "Data Analyst",
+      content: "Tools-focused approach made all the difference. I was implementing what I learned immediately at work.",
+      rating: 5
+    }
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Header />
+      
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32">
+        <div className="container px-4 mx-auto">
+          <div className="text-center">
+            <Badge className="mb-4" variant="secondary">
+              🚀 Launch Your Skills in Hours, Not Months
+            </Badge>
+            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
+              Master Skills Fast with{' '}
+              <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+                Crash Courses
+              </span>
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
+              and industry-focused training - all starting from just $25 per course.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="gap-2">
+                <Play className="w-5 h-5" />
+                Start Learning Now
+              </Button>
+              <Button size="lg" variant="outline" className="gap-2">
+                <Calendar className="w-5 h-5" />
+                View Upcoming Sessions
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* USPs Section */}
+      <section className="py-20 bg-muted/50">
+        <div className="container px-4 mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Why Choose EdCrash?</h2>
+            <p className="text-xl text-muted-foreground">
+              We're revolutionizing online education with our unique approach
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {usps.map((usp, index) => (
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="mx-auto mb-4">
+                    {usp.icon}
+                  </div>
+                  <CardTitle className="text-xl">{usp.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base">
+                    {usp.description}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Courses */}
+      <section className="py-20">
+        <div className="container px-4 mx-auto">
+          <div className="flex justify-between items-center mb-12">
+            <div>
+              <h2 className="text-3xl font-bold mb-4">Upcoming Courses</h2>
+              <p className="text-xl text-muted-foreground">
+                Start your learning journey with these popular courses
+              </p>
+            </div>
+            <Link to="/courses">
+              <Button variant="outline" className="gap-2">
+                View All Courses
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredCourses.map((course, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="flex gap-2">
+                      {course.tags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      <span className="text-sm font-medium">{course.rating}</span>
+                    </div>
+                  </div>
+                  <CardTitle className="text-xl">{course.title}</CardTitle>
+                  <CardDescription>by {course.instructor}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-sm">
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        {course.duration}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Users className="w-4 h-4" />
+                        {course.students.toLocaleString()} students
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-bold text-primary">{course.price}</span>
+                      <div className="text-sm text-muted-foreground">
+                        Next: {course.nextSession}
+                      </div>
+                    </div>
+                    <Button className="w-full gap-2">
+                      <BookOpen className="w-4 h-4" />
+                      Enroll Now
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 bg-primary text-primary-foreground">
+        <div className="container px-4 mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold mb-2">50K+</div>
+              <div className="text-sm opacity-90">Active Students</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">500+</div>
+              <div className="text-sm opacity-90">Courses Available</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">95%</div>
+              <div className="text-sm opacity-90">Success Rate</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">24/7</div>
+              <div className="text-sm opacity-90">Support Available</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 bg-muted/50">
+        <div className="container px-4 mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">What Our Students Say</h2>
+            <p className="text-xl text-muted-foreground">
+              Real success stories from our learning community
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index}>
+                <CardHeader>
+                  <div className="flex items-center gap-1 mb-2">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <CardTitle className="text-lg">{testimonial.name}</CardTitle>
+                  <CardDescription>{testimonial.role}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">"{testimonial.content}"</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-primary to-blue-600 text-white">
+        <div className="container px-4 mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Crash Your Way to Success?</h2>
+          <p className="text-xl mb-8 opacity-90">
+            Join thousands of professionals who've accelerated their careers with EdCrash
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" variant="secondary" className="gap-2">
+              <Target className="w-5 h-5" />
+              Express Your Learning Intent
+            </Button>
+            <Button size="lg" variant="outline" className="gap-2 text-white border-white hover:bg-white hover:text-primary">
+              <Calendar className="w-5 h-5" />
+              View Course Calendar
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 bg-background border-t">
+        <div className="container px-4 mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="bg-primary text-primary-foreground rounded-lg p-2">
+                  <span className="text-xl font-bold">EC</span>
+                </div>
+                <span className="text-2xl font-bold">EdCrash</span>
+              </div>
+              <p className="text-muted-foreground">
+                Accelerating careers through focused, practical education.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Courses</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><Link to="/courses" className="hover:text-foreground">Browse All</Link></li>
+                <li><Link to="/express-intent" className="hover:text-foreground">Express Intent</Link></li>
+                <li><Link to="/calendar" className="hover:text-foreground">Course Calendar</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Community</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><Link to="/instructors" className="hover:text-foreground">Instructors</Link></li>
+                <li><Link to="/testimonials" className="hover:text-foreground">Testimonials</Link></li>
+                <li><Link to="/community" className="hover:text-foreground">Discussion</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Support</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><Link to="/faq" className="hover:text-foreground">FAQ</Link></li>
+                <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
+                <li><Link to="/about" className="hover:text-foreground">About Us</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
+            <p>&copy; 2024 EdCrash. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
