@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -38,22 +37,22 @@ export const Header: React.FC = () => {
     { name: 'Demo', href: '/demo', icon: 'live' }
   ];
 
-  // Get skin-specific header background classes - remove shadows
+  // Get skin-specific header background classes - remove shadows and borders
   const getHeaderBackground = () => {
     switch (theme.skin) {
       case 'gradient':
-        return 'bg-gradient-to-r from-background/95 via-background/98 to-background/95 backdrop-blur-xl border-border/50';
+        return 'bg-gradient-to-r from-background/95 via-background/98 to-background/95 backdrop-blur-xl';
       case 'textured':
-        return 'bg-background/98 backdrop-blur-sm border-2 border-border/60';
+        return 'bg-background/98 backdrop-blur-sm';
       case 'glassmorphism':
-        return 'bg-background/20 backdrop-blur-2xl border border-white/20';
+        return 'bg-background/20 backdrop-blur-2xl';
       default:
         return 'bg-background/95 backdrop-blur';
     }
   };
 
   return (
-    <header className={`sticky top-0 z-50 w-full border-b supports-[backdrop-filter]:bg-background/60 ${getHeaderBackground()} ${getSkinClasses()}`}>
+    <header className={`sticky top-0 z-50 w-full supports-[backdrop-filter]:bg-background/60 ${getHeaderBackground()} ${getSkinClasses()}`}>
       {/* Single line - Logo, main navigation, and right-aligned tools */}
       <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-8">
         {/* Logo */}
@@ -141,7 +140,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className={`lg:hidden border-t ${getHeaderBackground()}`}>
+        <div className={`lg:hidden ${getHeaderBackground()}`}>
           <div className="w-full px-6 py-6 space-y-3">
             {/* Mobile EdTools and Live Session buttons */}
             <div className="flex gap-3 mb-6">
