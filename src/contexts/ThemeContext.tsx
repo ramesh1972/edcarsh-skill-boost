@@ -151,7 +151,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.classList.add(theme.colorTheme);
     root.classList.add(`${theme.designSystem}-design`);
     root.classList.add(`layout-${theme.layout}`);
-    root.classList.add(skinStyles[theme.skin].classes);
+    root.classList.add(`skin-${theme.skin}`);
     
     // Apply typography to body
     body.classList.add(`font-${theme.typography}`);
@@ -325,11 +325,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const getBackground = (): string => {
-    return skinStyles[theme.skin].pageBackground;
+    return '';
   };
 
   const getSkinClasses = (): string => {
-    return skinStyles[theme.skin].classes;
+    return `skin-${theme.skin}`;
   };
 
   const updateTheme = (updates: Partial<ThemeConfig>) => {

@@ -150,7 +150,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     transition: background-color 0.3s ease, color 0.3s ease, font-family 0.3s ease;
     font-family: 'Poppins', sans-serif;
   }
@@ -183,6 +183,68 @@
   .font-modern *,
   .font-playful * {
     font-family: inherit !important;
+  }
+
+  /* Skin Styles - Applied to body and main containers */
+  
+  /* Default Skin */
+  .skin-default body {
+    @apply bg-background;
+  }
+  
+  /* Gradient Skin */
+  .skin-gradient body {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.05), 
+      hsl(var(--background)), 
+      hsl(var(--secondary) / 0.08), 
+      hsl(var(--accent) / 0.06)
+    );
+    min-height: 100vh;
+  }
+  
+  .skin-gradient #root {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.03), 
+      transparent, 
+      hsl(var(--accent) / 0.04)
+    );
+    min-height: 100vh;
+  }
+  
+  /* Textured Skin */
+  .skin-textured body {
+    background-color: hsl(var(--background));
+    background-image: 
+      radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.15) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+  
+  .skin-textured #root {
+    background-image: 
+      url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.02'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 40px 40px;
+    min-height: 100vh;
+  }
+  
+  /* Glassmorphism Skin */
+  .skin-glassmorphism body {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.1), 
+      hsl(var(--background)), 
+      hsl(var(--secondary) / 0.12)
+    );
+    min-height: 100vh;
+  }
+  
+  .skin-glassmorphism #root {
+    background: linear-gradient(135deg, 
+      rgba(255,255,255,0.1), 
+      transparent, 
+      rgba(255,255,255,0.05)
+    );
+    backdrop-filter: blur(10px);
+    min-height: 100vh;
   }
 
   /* Design System Variations - All components inherit these styles */
@@ -472,7 +534,7 @@
   /* Theme-aware components */
   .theme-card {
     border-radius: var(--radius);
-    @apply border bg-card text-card-foreground;
+    @apply border text-card-foreground;
     box-shadow: var(--shadow);
   }
 
@@ -482,78 +544,81 @@
     box-shadow: var(--shadow);
   }
 
-  /* Skin-specific styles */
-  .skin-default {
-    /* Default skin uses standard backgrounds */
+  /* Enhanced Skin-specific component styles */
+  
+  /* Default Skin */
+  .skin-default .theme-card,
+  .skin-default [class*="card"] {
+    @apply bg-card;
   }
-
-  .skin-gradient * {
-    transition: all 0.3s ease;
-  }
-
+  
+  /* Gradient Skin */
   .skin-gradient .theme-card,
   .skin-gradient [class*="card"] {
-    background: linear-gradient(135deg, hsl(var(--card))/0.9, hsl(var(--card))/0.7);
+    background: linear-gradient(135deg, 
+      hsl(var(--card) / 0.95), 
+      hsl(var(--card) / 0.85)
+    );
     backdrop-filter: blur(8px);
-    border: 1px solid hsl(var(--primary))/0.2;
+    border: 1px solid hsl(var(--border) / 0.8);
     box-shadow: 0 8px 32px rgba(0,0,0,0.1);
   }
-
-  .skin-gradient .theme-button,
-  .skin-gradient button:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary))/0.8);
+  
+  .skin-gradient button,
+  .skin-gradient [class*="button"]:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary)), 
+      hsl(var(--primary) / 0.9)
+    );
     transition: all 0.3s ease;
   }
-
-  .skin-gradient .theme-button:hover,
-  .skin-gradient button:not(.variant-outline):not(.variant-ghost):not(.variant-link):hover {
-    background: linear-gradient(135deg, hsl(var(--primary))/0.9, hsl(var(--primary))/0.7);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px hsl(var(--primary))/0.3;
+  
+  .skin-gradient button:hover,
+  .skin-gradient [class*="button"]:not(.variant-outline):not(.variant-ghost):not(.variant-link):hover {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.95), 
+      hsl(var(--primary) / 0.85)
+    );
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px hsl(var(--primary) / 0.3);
   }
-
-  .skin-textured {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpath d='M30 30c0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12 12-5.373 12-12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-
+  
+  /* Textured Skin */
   .skin-textured .theme-card,
   .skin-textured [class*="card"] {
-    background: hsl(var(--card))/0.95;
-    border: 2px solid hsl(var(--border))/0.5;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-    backdrop-filter: blur(4px);
+    background: hsl(var(--card) / 0.98);
+    border: 2px solid hsl(var(--border) / 0.6);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    backdrop-filter: blur(2px);
   }
-
-  .skin-textured .theme-button,
-  .skin-textured button:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
-    background: hsl(var(--primary))/0.9;
-    border: 1px solid hsl(var(--primary-foreground))/0.2;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  
+  .skin-textured button,
+  .skin-textured [class*="button"]:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
+    background: hsl(var(--primary) / 0.95);
+    border: 1px solid hsl(var(--border) / 0.4);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   }
-
-  .skin-glassmorphism {
-    background: linear-gradient(135deg, hsl(var(--primary))/0.1, hsl(var(--background)), hsl(var(--secondary))/0.1);
-  }
-
+  
+  /* Glassmorphism Skin */
   .skin-glassmorphism .theme-card,
   .skin-glassmorphism [class*="card"] {
-    background: hsl(var(--card))/0.2;
+    background: hsl(var(--card) / 0.3);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   }
-
-  .skin-glassmorphism .theme-button,
-  .skin-glassmorphism button:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
-    background: hsl(var(--primary))/0.8;
+  
+  .skin-glassmorphism button,
+  .skin-glassmorphism [class*="button"]:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
+    background: hsl(var(--primary) / 0.8);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.3);
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
   }
-
-  .skin-glassmorphism .theme-button:hover,
-  .skin-glassmorphism button:not(.variant-outline):not(.variant-ghost):not(.variant-link):hover {
-    background: hsl(var(--primary))/0.9;
+  
+  .skin-glassmorphism button:hover,
+  .skin-glassmorphism [class*="button"]:not(.variant-outline):not(.variant-ghost):not(.variant-link):hover {
+    background: hsl(var(--primary) / 0.9);
     box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   }
 }
