@@ -15,6 +15,19 @@ import {
 export const ToolsSection: React.FC = () => {
   return (
     <div className="flex items-center gap-2">
+      {/* Theme Menu - moved to first position */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm" className="flex items-center gap-1 border border-secondary/50 hover:border-secondary/80 transition-colors">
+            <Palette className="w-4 h-4" />
+            <span className="hidden sm:inline">Theme</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-64 bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl p-2">
+          <ThemeSelector />
+        </DropdownMenuContent>
+      </DropdownMenu>
+
       {/* My Dashboard Menu */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -66,19 +79,6 @@ export const ToolsSection: React.FC = () => {
           <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground transition-colors px-3 py-2">
             <Link to="/tools/articles" className="w-full flex items-start">Articles</Link>
           </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      {/* Theme Menu */}
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="flex items-center gap-1 border border-secondary/50 hover:border-secondary/80 transition-colors">
-            <Palette className="w-4 h-4" />
-            <span className="hidden sm:inline">Theme</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-64 bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl p-2">
-          <ThemeSelector />
         </DropdownMenuContent>
       </DropdownMenu>
 
