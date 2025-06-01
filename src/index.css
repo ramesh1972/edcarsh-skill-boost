@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
@@ -306,21 +307,21 @@
     min-height: 100vh;
   }
 
-  /* Design System Variations - FIXED SELECTORS */
-  .material-design button,
+  /* Design System Variations - Updated to exclude text elements from shadows/borders */
+  .material-design button:not([class*="menu"]):not([class*="nav"]),
   .material-design input, .material-design textarea, .material-design select,
-  .material-design [class*="card"], .material-design [data-radix-collection-item] {
+  .material-design .card, .material-design [class*="card"] {
     border-radius: 4px !important;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
   }
 
-  .material-design [class*="card"], .material-design [data-radix-collection-item] {
+  .material-design .card, .material-design [class*="card"] {
     box-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08) !important;
     border-radius: 4px !important;
   }
 
-  .material-design button,
-  .material-design [class*="button"] {
+  .material-design button:not([class*="menu"]):not([class*="nav"]),
+  .material-design [class*="button"]:not([class*="menu"]):not([class*="nav"]) {
     text-transform: uppercase;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -328,117 +329,117 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
   }
 
-  .human-interface button,
+  .human-interface button:not([class*="menu"]):not([class*="nav"]),
   .human-interface input, .human-interface textarea, .human-interface select,
-  .human-interface [class*="card"], .human-interface [data-radix-collection-item] {
+  .human-interface .card, .human-interface [class*="card"] {
     border-radius: 12px !important;
     box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important;
   }
 
-  .human-interface [class*="card"], .human-interface [data-radix-collection-item] {
+  .human-interface .card, .human-interface [class*="card"] {
     border: none !important;
     box-shadow: 0 8px 32px rgba(0,0,0,0.12) !important;
     border-radius: 16px !important;
   }
 
-  .human-interface button,
-  .human-interface [class*="button"] {
+  .human-interface button:not([class*="menu"]):not([class*="nav"]),
+  .human-interface [class*="button"]:not([class*="menu"]):not([class*="nav"]) {
     border-radius: 12px !important;
     font-weight: 500;
     padding: 12px 24px;
   }
 
-  .fluent-design button,
+  .fluent-design button:not([class*="menu"]):not([class*="nav"]),
   .fluent-design input, .fluent-design textarea, .fluent-design select,
-  .fluent-design [class*="card"], .fluent-design [data-radix-collection-item] {
+  .fluent-design .card, .fluent-design [class*="card"] {
     border-radius: 2px !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
   }
 
-  .fluent-design [class*="card"], .fluent-design [data-radix-collection-item] {
+  .fluent-design .card, .fluent-design [class*="card"] {
     border: 2px solid hsl(var(--border)) !important;
     background: rgba(255,255,255,0.8);
     backdrop-filter: blur(8px);
   }
 
-  .ant-design button,
+  .ant-design button:not([class*="menu"]):not([class*="nav"]),
   .ant-design input, .ant-design textarea, .ant-design select,
-  .ant-design [class*="card"], .ant-design [data-radix-collection-item] {
+  .ant-design .card, .ant-design [class*="card"] {
     border-radius: 6px !important;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
   }
 
-  .ant-design [class*="card"], .ant-design [data-radix-collection-item] {
+  .ant-design .card, .ant-design [class*="card"] {
     border: 1px solid hsl(var(--border)) !important;
     border-radius: 6px !important;
   }
 
-  .carbon-design button,
+  .carbon-design button:not([class*="menu"]):not([class*="nav"]),
   .carbon-design input, .carbon-design textarea, .carbon-design select,
-  .carbon-design [class*="card"], .carbon-design [data-radix-collection-item] {
+  .carbon-design .card, .carbon-design [class*="card"] {
     border-radius: 0px !important;
     box-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
   }
 
-  .carbon-design [class*="card"], .carbon-design [data-radix-collection-item] {
+  .carbon-design .card, .carbon-design [class*="card"] {
     border: 1px solid hsl(var(--border)) !important;
     border-radius: 0px !important;
   }
 
-  .carbon-design button,
-  .carbon-design [class*="button"] {
+  .carbon-design button:not([class*="menu"]):not([class*="nav"]),
+  .carbon-design [class*="button"]:not([class*="menu"]):not([class*="nav"]) {
     border-radius: 0px !important;
     border: 1px solid hsl(var(--border)) !important;
   }
 
-  .atlassian-design button,
+  .atlassian-design button:not([class*="menu"]):not([class*="nav"]),
   .atlassian-design input, .atlassian-design textarea, .atlassian-design select,
-  .atlassian-design [class*="card"], .atlassian-design [data-radix-collection-item] {
+  .atlassian-design .card, .atlassian-design [class*="card"] {
     border-radius: 3px !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
   }
 
-  .bootstrap-design button,
+  .bootstrap-design button:not([class*="menu"]):not([class*="nav"]),
   .bootstrap-design input, .bootstrap-design textarea, .bootstrap-design select,
-  .bootstrap-design [class*="card"], .bootstrap-design [data-radix-collection-item] {
+  .bootstrap-design .card, .bootstrap-design [class*="card"] {
     border-radius: 0.375rem !important;
     box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075) !important;
   }
 
-  .bootstrap-design [class*="card"], .bootstrap-design [data-radix-collection-item] {
+  .bootstrap-design .card, .bootstrap-design [class*="card"] {
     border: 1px solid rgba(0,0,0,0.125) !important;
     border-radius: 0.375rem !important;
   }
 
-  .polaris-design button,
+  .polaris-design button:not([class*="menu"]):not([class*="nav"]),
   .polaris-design input, .polaris-design textarea, .polaris-design select,
-  .polaris-design [class*="card"], .polaris-design [data-radix-collection-item] {
+  .polaris-design .card, .polaris-design [class*="card"] {
     border-radius: 8px !important;
     box-shadow: 0 1px 0 rgba(0,0,0,0.05) !important;
   }
 
-  .polaris-design [class*="card"], .polaris-design [data-radix-collection-item] {
+  .polaris-design .card, .polaris-design [class*="card"] {
     border: 1px solid hsl(var(--border)) !important;
     border-radius: 8px !important;
     background: hsl(var(--card));
   }
 
-  .lightning-design button,
+  .lightning-design button:not([class*="menu"]):not([class*="nav"]),
   .lightning-design input, .lightning-design textarea, .lightning-design select,
-  .lightning-design [class*="card"], .lightning-design [data-radix-collection-item] {
+  .lightning-design .card, .lightning-design [class*="card"] {
     border-radius: 0.25rem !important;
     box-shadow: 0 2px 2px rgba(0,0,0,0.1) !important;
   }
 
-  .lightning-design button,
-  .lightning-design [class*="button"] {
+  .lightning-design button:not([class*="menu"]):not([class*="nav"]),
+  .lightning-design [class*="button"]:not([class*="menu"]):not([class*="nav"]) {
     border-radius: 0.25rem !important;
     border: 1px solid hsl(var(--border)) !important;
   }
 
-  .tailwind-design button,
+  .tailwind-design button:not([class*="menu"]):not([class*="nav"]),
   .tailwind-design input, .tailwind-design textarea, .tailwind-design select,
-  .tailwind-design [class*="card"], .tailwind-design [data-radix-collection-item] {
+  .tailwind-design .card, .tailwind-design [class*="card"] {
     border-radius: 0.5rem !important;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
   }

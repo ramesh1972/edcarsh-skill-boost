@@ -193,15 +193,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     
     // Apply color theme variables
     applyColorTheme(theme.colorTheme);
-    
-    // Debug logging
-    console.log('Applied theme classes:', {
-      colorTheme: theme.colorTheme,
-      designSystem: `${theme.designSystem}-design`,
-      layout: `layout-${theme.layout}`,
-      skin: `skin-${theme.skin}`,
-      typography: `font-${theme.typography}`
-    });
   }, [theme]);
 
   const applyDesignSystemStyles = (designSystem: string) => {
