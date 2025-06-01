@@ -1,4 +1,4 @@
-
+[]
 import React from 'react';
 import { Settings, Palette, Type, Image, Layout, Brush, Layers } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -40,12 +40,12 @@ export const ThemeSelector: React.FC = () => {
           <Palette className="w-4 h-4" />
           Color Palette
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="w-64 bg-card border-2 border-secondary/60 shadow-xl">
+        <DropdownMenuSubContent className="w-64 bg-card border-2 border-secondary/60 shadow-xl z-[200]">
           {colorThemes.map((color) => (
             <DropdownMenuItem
               key={color.key}
               onClick={() => updateTheme({ colorTheme: color.key as any })}
-              className={`flex flex-col items-start gap-1 p-3 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all z-[200] ${
+              className={`flex flex-col items-start gap-1 p-3 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all z-[210] ${
                 theme.colorTheme === color.key 
                   ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
                   : 'hover:bg-card/50 hover:text-card-foreground'
