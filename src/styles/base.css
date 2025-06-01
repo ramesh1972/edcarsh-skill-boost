@@ -101,31 +101,19 @@
     font-family: 'Poppins', sans-serif;
   }
 
-  /* Remove borders and shadows from text elements only - not interactive elements */
-  h1, h2, h3, h4, h5, h6, p, span, label, 
-  div:not([class*="card"]):not([class*="button"]):not([role="button"]):not([class*="dropdown"]):not([class*="menu"]):not([class*="popover"]), 
-  a:not([class*="button"]):not([role="button"]), li, ul, ol, blockquote, pre, code {
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
+  /* IMPORTANT: Remove borders and shadows from ALL text elements - overrides ALL themes */
+  h1, h2, h3, h4, h5, h6, p, span, label, div, a, li, ul, ol, blockquote, pre, code {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
   }
 
-  /* Additional text element selectors to ensure complete coverage - but exclude interactive elements */
-  .text:not([class*="button"]):not([role="button"]), 
-  [class*="text"]:not([class*="button"]):not([role="button"]), 
-  .title:not([class*="button"]):not([role="button"]), 
-  [class*="title"]:not([class*="button"]):not([role="button"]), 
-  .heading:not([class*="button"]):not([role="button"]),
-  [class*="heading"]:not([class*="button"]):not([role="button"]),
-  .label:not([class*="button"]):not([role="button"]), 
-  [class*="label"]:not([class*="button"]):not([role="button"]), 
-  .caption:not([class*="button"]):not([role="button"]), 
-  [class*="caption"]:not([class*="button"]):not([role="button"]), 
-  .description:not([class*="button"]):not([role="button"]), 
-  [class*="description"]:not([class*="button"]):not([role="button"]) {
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
+  /* Additional text element selectors to ensure complete coverage */
+  .text, [class*="text"], .title, [class*="title"], .heading, [class*="heading"],
+  .label, [class*="label"], .caption, [class*="caption"], .description, [class*="description"] {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
   }
 }
 
@@ -145,67 +133,4 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary));
-}
-
-/* Animation keyframes */
-@keyframes slide-in-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-right {
-  0% {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-in-down {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
-  }
 }

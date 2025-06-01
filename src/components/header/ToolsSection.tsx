@@ -44,34 +44,34 @@ export const ToolsSection: React.FC = () => {
             <span className="hidden sm:inline">EdTools</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-60 bg-card/95 backdrop-blur-md border-2 border-primary/60 shadow-xl p-0">
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors px-3 py-2">
-            <Link to="/tools/classroom" className="w-full flex items-start">Your Classroom</Link>
+        <DropdownMenuContent align="end" className="w-60 bg-card/95 backdrop-blur-md border-2 border-primary/60 shadow-xl">
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/classroom" className="w-full text-left">Your Classroom</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors px-3 py-2">
-            <Link to="/tools/truth-ai" className="w-full flex items-start">Truth AI</Link>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/truth-ai" className="w-full text-left">Truth AI</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors px-3 py-2">
-            <Link to="/tools/instructor-qa" className="w-full flex items-start">Instructor Q&A</Link>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/instructor-qa" className="w-full text-left">Instructor Q&A</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors px-3 py-2">
-            <Link to="/tools/community-discussion" className="w-full flex items-start">Community Discussion</Link>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/community-discussion" className="w-full text-left">Community Discussion</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors px-3 py-2">
-            <Link to="/tools/calculators" className="w-full flex items-start">Calculators</Link>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/calculators" className="w-full text-left">Calculators</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors px-3 py-2">
-            <Link to="/tools/guides" className="w-full flex items-start">Guides</Link>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/guides" className="w-full text-left">Guides</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground transition-colors px-3 py-2">
-            <Link to="/tools/articles" className="w-full flex items-start">Articles</Link>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground transition-colors justify-start">
+            <Link to="/tools/articles" className="w-full text-left">Articles</Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
       {/* Theme Menu */}
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm" className="flex items-center gap-1 border border-secondary/50 hover:border-secondary/80 transition-colors">
             <Palette className="w-4 h-4" />
             <span className="hidden sm:inline">Theme</span>
