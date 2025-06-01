@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
@@ -53,93 +54,98 @@
   }
 
   .ocean {
+    /* Ocean theme: Deep blues with coral and teal accents */
     --background: 210 45% 96%;
-    --foreground: 210 50% 12%;
+    --foreground: 220 40% 18%;
     --primary: 210 85% 40%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 195 35% 88%;
-    --secondary-foreground: 210 50% 12%;
+    --secondary: 180 45% 85%;
+    --secondary-foreground: 220 40% 18%;
     --muted: 210 25% 92%;
     --muted-foreground: 210 25% 45%;
-    --accent: 185 45% 82%;
-    --accent-foreground: 210 50% 12%;
+    --accent: 14 80% 65%;
+    --accent-foreground: 0 0% 100%;
     --card: 205 40% 99%;
-    --card-foreground: 210 50% 12%;
-    --border: 210 25% 82%;
+    --card-foreground: 220 40% 18%;
+    --border: 180 25% 82%;
     --input: 210 25% 90%;
-    --ring: 210 85% 40%;
+    --ring: 14 80% 65%;
   }
 
   .sunset {
-    --background: 25 50% 95%;
-    --foreground: 15 40% 18%;
-    --primary: 20 80% 50%;
+    /* Sunset theme: Warm oranges with purple and pink accents */
+    --background: 30 60% 95%;
+    --foreground: 25 40% 18%;
+    --primary: 20 85% 55%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 40 45% 85%;
-    --secondary-foreground: 15 40% 18%;
-    --muted: 30 35% 90%;
-    --muted-foreground: 20 25% 40%;
-    --accent: 35 55% 80%;
-    --accent-foreground: 15 40% 18%;
-    --card: 30 60% 98%;
-    --card-foreground: 15 40% 18%;
-    --border: 30 30% 80%;
-    --input: 30 30% 88%;
-    --ring: 20 80% 50%;
+    --secondary: 45 70% 88%;
+    --secondary-foreground: 25 40% 18%;
+    --muted: 35 45% 90%;
+    --muted-foreground: 25 35% 40%;
+    --accent: 290 70% 65%;
+    --accent-foreground: 0 0% 100%;
+    --card: 35 80% 98%;
+    --card-foreground: 25 40% 18%;
+    --border: 45 40% 80%;
+    --input: 35 40% 88%;
+    --ring: 290 70% 65%;
   }
 
   .forest {
-    --background: 125 25% 94%;
+    /* Forest theme: Rich greens with earth browns and golden accents */
+    --background: 125 30% 94%;
     --foreground: 125 35% 16%;
-    --primary: 140 55% 32%;
+    --primary: 140 60% 35%;
     --primary-foreground: 0 0% 100%;
     --secondary: 115 25% 86%;
     --secondary-foreground: 125 35% 16%;
     --muted: 120 20% 91%;
     --muted-foreground: 120 18% 42%;
-    --accent: 130 35% 78%;
-    --accent-foreground: 125 35% 16%;
+    --accent: 45 75% 55%;
+    --accent-foreground: 25 40% 15%;
     --card: 120 35% 97%;
     --card-foreground: 125 35% 16%;
-    --border: 120 18% 80%;
+    --border: 115 18% 80%;
     --input: 120 18% 87%;
-    --ring: 140 55% 32%;
+    --ring: 45 75% 55%;
   }
 
   .lavender {
-    --background: 285 35% 95%;
+    /* Lavender theme: Soft purples with mint green and rose accents */
+    --background: 285 40% 95%;
     --foreground: 270 25% 18%;
-    --primary: 275 65% 45%;
+    --primary: 275 65% 50%;
     --primary-foreground: 0 0% 100%;
     --secondary: 295 35% 86%;
     --secondary-foreground: 270 25% 18%;
     --muted: 280 22% 90%;
     --muted-foreground: 270 18% 45%;
-    --accent: 285 45% 82%;
-    --accent-foreground: 270 25% 18%;
-    --card: 290 40% 97%;
+    --accent: 160 45% 65%;
+    --accent-foreground: 160 50% 15%;
+    --card: 290 50% 97%;
     --card-foreground: 270 25% 18%;
-    --border: 280 20% 82%;
-    --input: 280 20% 88%;
-    --ring: 275 65% 45%;
+    --border: 295 20% 82%;
+    --input: 285 20% 88%;
+    --ring: 160 45% 65%;
   }
 
   .monochrome {
+    /* Monochrome theme: Rich blacks and whites with blue accent */
     --background: 0 0% 97%;
     --foreground: 0 0% 8%;
     --primary: 0 0% 15%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 90%;
+    --secondary: 0 0% 88%;
     --secondary-foreground: 0 0% 8%;
     --muted: 0 0% 94%;
     --muted-foreground: 0 0% 40%;
-    --accent: 0 0% 85%;
-    --accent-foreground: 0 0% 8%;
+    --accent: 210 100% 50%;
+    --accent-foreground: 0 0% 100%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 8%;
     --border: 0 0% 80%;
     --input: 0 0% 88%;
-    --ring: 0 0% 15%;
+    --ring: 210 100% 50%;
   }
 }
 
@@ -150,7 +156,7 @@
   }
 
   body {
-    @apply text-foreground;
+    @apply bg-background text-foreground;
     transition: background-color 0.3s ease, color 0.3s ease, font-family 0.3s ease;
     font-family: 'Poppins', sans-serif;
   }
@@ -222,7 +228,7 @@
   
   .skin-textured #root {
     background-image: 
-      url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.02'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E");
+      url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.02'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     background-size: 40px 40px;
     min-height: 100vh;
   }
@@ -534,7 +540,7 @@
   /* Theme-aware components */
   .theme-card {
     border-radius: var(--radius);
-    @apply border text-card-foreground;
+    @apply bg-card border text-card-foreground;
     box-shadow: var(--shadow);
   }
 

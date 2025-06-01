@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Settings, Palette, Type, Image, Layout, Brush, Layers } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -18,11 +19,11 @@ export const ThemeSelector: React.FC = () => {
   const { theme, updateTheme, resetTheme } = useTheme();
 
   const colorThemes = [
-    { key: 'ocean', label: 'Ocean Blue', description: 'Deep blues and teals' },
-    { key: 'sunset', label: 'Sunset Orange', description: 'Warm oranges and reds' },
-    { key: 'forest', label: 'Forest Green', description: 'Natural greens and earth tones' },
-    { key: 'lavender', label: 'Lavender Purple', description: 'Soft purples and pinks' },
-    { key: 'monochrome', label: 'Monochrome', description: 'Pure blacks, whites, and grays' }
+    { key: 'ocean', label: 'Ocean Depths', description: 'Deep blues with coral and teal accents' },
+    { key: 'sunset', label: 'Golden Sunset', description: 'Warm oranges with purple highlights' },
+    { key: 'forest', label: 'Forest Grove', description: 'Rich greens with golden earth tones' },
+    { key: 'lavender', label: 'Lavender Fields', description: 'Soft purples with mint and rose' },
+    { key: 'monochrome', label: 'Classic Mono', description: 'Timeless blacks and whites with blue' }
   ];
 
   const skinOptions = [
