@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 import { Settings, Palette, Type, Image, Layout, Brush, Layers, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -45,6 +46,11 @@ export const ThemeSelector: React.FC = () => {
     handleThemeChange(themeUpdate);
   };
 
+  const handleSubMenuClick = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
@@ -68,11 +74,15 @@ export const ThemeSelector: React.FC = () => {
         <DropdownMenuSeparator />
         
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="flex items-center gap-2">
+          <DropdownMenuSubTrigger 
+            className="flex items-center gap-2"
+            onSelect={(e) => e.preventDefault()}
+            onClick={handleSubMenuClick}
+          >
             <Palette className="w-4 h-4" />
             Color Palette
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="w-64">
+          <DropdownMenuSubContent className="w-64" onCloseAutoFocus={(e) => e.preventDefault()}>
             {colorThemes.map((color) => (
               <DropdownMenuItem
                 key={color.key}
@@ -88,11 +98,15 @@ export const ThemeSelector: React.FC = () => {
         </DropdownMenuSub>
 
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="flex items-center gap-2">
+          <DropdownMenuSubTrigger 
+            className="flex items-center gap-2"
+            onSelect={(e) => e.preventDefault()}
+            onClick={handleSubMenuClick}
+          >
             <Type className="w-4 h-4" />
             Typography
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
+          <DropdownMenuSubContent onCloseAutoFocus={(e) => e.preventDefault()}>
             {['technical', 'professional', 'elegant', 'modern', 'playful'].map((typography) => (
               <DropdownMenuItem
                 key={typography}
@@ -107,11 +121,15 @@ export const ThemeSelector: React.FC = () => {
         </DropdownMenuSub>
 
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="flex items-center gap-2">
+          <DropdownMenuSubTrigger 
+            className="flex items-center gap-2"
+            onSelect={(e) => e.preventDefault()}
+            onClick={handleSubMenuClick}
+          >
             <Image className="w-4 h-4" />
             Icon Scheme
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
+          <DropdownMenuSubContent onCloseAutoFocus={(e) => e.preventDefault()}>
             {['normal', 'cartoon', 'emoji', 'avatars'].map((iconScheme) => (
               <DropdownMenuItem
                 key={iconScheme}
@@ -126,11 +144,15 @@ export const ThemeSelector: React.FC = () => {
         </DropdownMenuSub>
 
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="flex items-center gap-2">
+          <DropdownMenuSubTrigger 
+            className="flex items-center gap-2"
+            onSelect={(e) => e.preventDefault()}
+            onClick={handleSubMenuClick}
+          >
             <Layers className="w-4 h-4" />
             Design System
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
+          <DropdownMenuSubContent onCloseAutoFocus={(e) => e.preventDefault()}>
             {[
               { key: 'tailwind', label: 'Tailwind CSS' },
               { key: 'material', label: 'Material Design' },
@@ -156,11 +178,15 @@ export const ThemeSelector: React.FC = () => {
         </DropdownMenuSub>
 
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="flex items-center gap-2">
+          <DropdownMenuSubTrigger 
+            className="flex items-center gap-2"
+            onSelect={(e) => e.preventDefault()}
+            onClick={handleSubMenuClick}
+          >
             <Layout className="w-4 h-4" />
             Layout
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
+          <DropdownMenuSubContent onCloseAutoFocus={(e) => e.preventDefault()}>
             {['default', 'compact', 'spacious', 'modern'].map((layout) => (
               <DropdownMenuItem
                 key={layout}
@@ -175,11 +201,15 @@ export const ThemeSelector: React.FC = () => {
         </DropdownMenuSub>
 
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="flex items-center gap-2">
+          <DropdownMenuSubTrigger 
+            className="flex items-center gap-2"
+            onSelect={(e) => e.preventDefault()}
+            onClick={handleSubMenuClick}
+          >
             <Brush className="w-4 h-4" />
             Skin Style
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="w-64">
+          <DropdownMenuSubContent className="w-64" onCloseAutoFocus={(e) => e.preventDefault()}>
             {skinOptions.map((skin) => (
               <DropdownMenuItem
                 key={skin.key}
@@ -202,3 +232,4 @@ export const ThemeSelector: React.FC = () => {
     </DropdownMenu>
   );
 };
+
