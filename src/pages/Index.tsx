@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -27,6 +28,19 @@ import { usps } from '@/data/usps';
 
 const Index = () => {
   const { theme } = useTheme();
+
+  const getIconComponent = (iconName: string, className: string) => {
+    const iconProps = { className };
+    switch (iconName) {
+      case 'Zap': return <Zap {...iconProps} />;
+      case 'Clock': return <Clock {...iconProps} />;
+      case 'Target': return <Target {...iconProps} />;
+      case 'Calendar': return <Calendar {...iconProps} />;
+      case 'DollarSign': return <DollarSign {...iconProps} />;
+      case 'Globe': return <Globe {...iconProps} />;
+      default: return <Star {...iconProps} />;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -107,7 +121,7 @@ const Index = () => {
                     <div className="mx-auto mb-4 relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-blue-600/10 rounded-full blur-xl group-hover:blur-2xl transition-all"></div>
                       <div className="relative z-10">
-                        {usp.icon}
+                        {getIconComponent(usp.iconName, `w-8 h-8 ${usp.iconColor}`)}
                       </div>
                     </div>
                     <CardTitle className="text-xl group-hover:text-primary transition-colors">{usp.title}</CardTitle>
