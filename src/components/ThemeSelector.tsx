@@ -42,7 +42,7 @@ export const ThemeSelector: React.FC = () => {
           <Palette className="w-4 h-4" />
           Color Palette
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="w-64 bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
+        <DropdownMenuSubContent className="w-64 bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl z-[60]">
           {colorThemes.map((color) => (
             <DropdownMenuItem
               key={color.key}
@@ -65,7 +65,7 @@ export const ThemeSelector: React.FC = () => {
           <Type className="w-4 h-4" />
           Typography
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
+        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl z-[60]">
           {['technical', 'professional', 'elegant', 'modern', 'playful'].map((typography) => (
             <DropdownMenuItem
               key={typography}
@@ -87,7 +87,7 @@ export const ThemeSelector: React.FC = () => {
           <Image className="w-4 h-4" />
           Icon Scheme
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
+        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl z-[60]">
           {['normal', 'cartoon', 'emoji', 'avatars'].map((iconScheme) => (
             <DropdownMenuItem
               key={iconScheme}
@@ -109,7 +109,7 @@ export const ThemeSelector: React.FC = () => {
           <Layers className="w-4 h-4" />
           Design System
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
+        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl z-[60]">
           {[
             { key: 'tailwind', label: 'Tailwind CSS' },
             { key: 'material', label: 'Material Design' },
@@ -142,7 +142,7 @@ export const ThemeSelector: React.FC = () => {
           <Layout className="w-4 h-4" />
           Layout
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
+        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl z-[60]">
           {['default', 'compact', 'spacious', 'modern'].map((layout) => (
             <DropdownMenuItem
               key={layout}
@@ -164,7 +164,7 @@ export const ThemeSelector: React.FC = () => {
           <Brush className="w-4 h-4" />
           Skin Style
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="w-64 bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
+        <DropdownMenuSubContent className="w-64 bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl z-[60]">
           {skinOptions.map((skin) => (
             <DropdownMenuItem
               key={skin.key}
