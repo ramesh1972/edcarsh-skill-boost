@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export interface ThemeConfig {
@@ -117,10 +116,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     
     // Apply theme classes to document
     const root = document.documentElement;
+    const body = document.body;
     
     // Remove all theme classes
     root.classList.remove('light', 'dark', 'vibrant', 'vivid', 'minimal', 'grayscale');
-    root.classList.remove('font-inter', 'font-poppins', 'font-roboto', 'font-playfair', 'font-comic');
+    body.classList.remove('font-technical', 'font-professional', 'font-elegant', 'font-modern', 'font-playful');
     root.classList.remove('material-design', 'human-interface', 'fluent-design', 'ant-design', 'carbon-design', 'atlassian-design', 'bootstrap-design', 'polaris-design', 'lightning-design', 'tailwind-design');
     root.classList.remove('layout-compact', 'layout-spacious', 'layout-modern');
     
@@ -129,24 +129,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.classList.add(`${theme.designSystem}-design`);
     root.classList.add(`layout-${theme.layout}`);
     
-    // Apply typography
-    switch (theme.typography) {
-      case 'technical':
-        root.classList.add('font-roboto');
-        break;
-      case 'professional':
-        root.classList.add('font-inter');
-        break;
-      case 'elegant':
-        root.classList.add('font-playfair');
-        break;
-      case 'modern':
-        root.classList.add('font-poppins');
-        break;
-      case 'playful':
-        root.classList.add('font-comic');
-        break;
-    }
+    // Apply typography to body
+    body.classList.add(`font-${theme.typography}`);
     
     // Apply color theme variables
     applyColorTheme(theme.colorTheme);

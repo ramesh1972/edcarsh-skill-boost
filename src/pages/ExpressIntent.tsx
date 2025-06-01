@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Header } from '@/components/Header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,24 +5,35 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Target, Lightbulb, Clock } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const ExpressIntent = () => {
+  const { theme, getIcon, getBackground } = useTheme();
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`min-h-screen bg-background ${getBackground()}`}>
       <Header />
-      <div className="container mx-auto px-4 py-8">
+      <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Express Your Learning Intent</h1>
+          <h1 className={`text-4xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
+            {getIcon('course')} Express Your Learning Intent
+          </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Tell us what you want to learn, and we'll create a custom crash course just for you
           </p>
         </div>
 
         <div className="max-w-2xl mx-auto">
-          <Card>
+          <Card className={`${
+            theme.designSystem === 'material' ? 'shadow-md' : 
+            theme.designSystem === 'fluent' ? 'border-2' : 
+            'hover:shadow-lg'
+          } ${
+            theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
+          }`}>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Target className="w-5 h-5" />
+              <CardTitle className={`flex items-center gap-2 ${theme.designSystem === 'material' ? 'text-lg font-medium' : 'text-xl'}`}>
+                {theme.iconScheme === 'normal' ? <Target className="w-5 h-5" /> : <span>{getIcon('course')}</span>}
                 Course Request Form
               </CardTitle>
               <CardDescription>
@@ -86,8 +96,16 @@ const ExpressIntent = () => {
                 </div>
               </div>
 
-              <Button className="w-full" size="lg">
-                <Lightbulb className="w-4 h-4 mr-2" />
+              <Button 
+                className={`w-full ${
+                  theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' :
+                  theme.designSystem === 'human' ? 'rounded-lg' :
+                  theme.designSystem === 'fluent' ? 'rounded-sm' :
+                  ''
+                }`} 
+                size="lg"
+              >
+                {theme.iconScheme === 'normal' ? <Lightbulb className="w-4 h-4 mr-2" /> : <span className="mr-2">{getIcon('course')}</span>}
                 Submit Course Request
               </Button>
             </CardContent>

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -149,29 +155,39 @@
   }
 
   body {
-    @apply bg-background text-foreground font-poppins;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease, font-family 0.3s ease;
+    font-family: 'Poppins', sans-serif; /* Default font */
   }
 
   /* Typography Theme Classes */
   .font-technical {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
   }
 
   .font-professional {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif !important;
   }
 
   .font-elegant {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display', serif !important;
   }
 
   .font-modern {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
   }
 
   .font-playful {
-    font-family: 'Comic Neue', cursive;
+    font-family: 'Comic Neue', cursive !important;
+  }
+
+  /* Ensure typography applies to all text elements */
+  .font-technical *,
+  .font-professional *,
+  .font-elegant *,
+  .font-modern *,
+  .font-playful * {
+    font-family: inherit !important;
   }
 
   /* Design System Variations */
