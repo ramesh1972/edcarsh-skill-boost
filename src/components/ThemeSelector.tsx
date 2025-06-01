@@ -35,22 +35,22 @@ export const ThemeSelector: React.FC = () => {
 
   return (
     <div className="space-y-1">
-      <DropdownMenuLabel className="text-base font-semibold border-b border-border/30 pb-2 mb-2">Customize Theme</DropdownMenuLabel>
+      <DropdownMenuLabel className="text-base font-semibold border-b border-secondary/30 pb-2 mb-2">Customize Theme</DropdownMenuLabel>
       
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground border border-transparent hover:border-accent/50 transition-all">
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
           <Palette className="w-4 h-4" />
           Color Palette
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="w-64 bg-background border-2 border-accent/40 shadow-lg">
+        <DropdownMenuSubContent className="w-64 bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
           {colorThemes.map((color) => (
             <DropdownMenuItem
               key={color.key}
               onClick={() => updateTheme({ colorTheme: color.key as any })}
-              className={`flex flex-col items-start gap-1 p-3 border-b border-border/20 last:border-b-0 cursor-pointer transition-all ${
+              className={`flex flex-col items-start gap-1 p-3 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.colorTheme === color.key 
-                  ? 'bg-accent text-accent-foreground border-l-4 border-l-accent' 
-                  : 'hover:bg-accent/50'
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
+                  : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
               <div className="font-medium">{color.label}</div>
@@ -61,19 +61,19 @@ export const ThemeSelector: React.FC = () => {
       </DropdownMenuSub>
 
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground border border-transparent hover:border-accent/50 transition-all">
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
           <Type className="w-4 h-4" />
           Typography
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="bg-background border-2 border-accent/40 shadow-lg">
+        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
           {['technical', 'professional', 'elegant', 'modern', 'playful'].map((typography) => (
             <DropdownMenuItem
               key={typography}
               onClick={() => updateTheme({ typography: typography as any })}
-              className={`px-3 py-2 border-b border-border/20 last:border-b-0 cursor-pointer transition-all ${
+              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.typography === typography 
-                  ? 'bg-accent text-accent-foreground border-l-4 border-l-accent' 
-                  : 'hover:bg-accent/50'
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
+                  : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
               {typography.charAt(0).toUpperCase() + typography.slice(1)}
@@ -83,19 +83,19 @@ export const ThemeSelector: React.FC = () => {
       </DropdownMenuSub>
 
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground border border-transparent hover:border-accent/50 transition-all">
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
           <Image className="w-4 h-4" />
           Icon Scheme
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="bg-background border-2 border-accent/40 shadow-lg">
+        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
           {['normal', 'cartoon', 'emoji', 'avatars'].map((iconScheme) => (
             <DropdownMenuItem
               key={iconScheme}
               onClick={() => updateTheme({ iconScheme: iconScheme as any })}
-              className={`px-3 py-2 border-b border-border/20 last:border-b-0 cursor-pointer transition-all ${
+              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.iconScheme === iconScheme 
-                  ? 'bg-accent text-accent-foreground border-l-4 border-l-accent' 
-                  : 'hover:bg-accent/50'
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
+                  : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
               {iconScheme.charAt(0).toUpperCase() + iconScheme.slice(1)}
@@ -105,11 +105,11 @@ export const ThemeSelector: React.FC = () => {
       </DropdownMenuSub>
 
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground border border-transparent hover:border-accent/50 transition-all">
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
           <Layers className="w-4 h-4" />
           Design System
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="bg-background border-2 border-accent/40 shadow-lg">
+        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
           {[
             { key: 'tailwind', label: 'Tailwind CSS' },
             { key: 'material', label: 'Material Design' },
@@ -125,10 +125,10 @@ export const ThemeSelector: React.FC = () => {
             <DropdownMenuItem
               key={designSystem.key}
               onClick={() => updateTheme({ designSystem: designSystem.key as any })}
-              className={`px-3 py-2 border-b border-border/20 last:border-b-0 cursor-pointer transition-all ${
+              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.designSystem === designSystem.key 
-                  ? 'bg-accent text-accent-foreground border-l-4 border-l-accent' 
-                  : 'hover:bg-accent/50'
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
+                  : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
               {designSystem.label}
@@ -138,19 +138,19 @@ export const ThemeSelector: React.FC = () => {
       </DropdownMenuSub>
 
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground border border-transparent hover:border-accent/50 transition-all">
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
           <Layout className="w-4 h-4" />
           Layout
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="bg-background border-2 border-accent/40 shadow-lg">
+        <DropdownMenuSubContent className="bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
           {['default', 'compact', 'spacious', 'modern'].map((layout) => (
             <DropdownMenuItem
               key={layout}
               onClick={() => updateTheme({ layout: layout as any })}
-              className={`px-3 py-2 border-b border-border/20 last:border-b-0 cursor-pointer transition-all ${
+              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.layout === layout 
-                  ? 'bg-accent text-accent-foreground border-l-4 border-l-accent' 
-                  : 'hover:bg-accent/50'
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
+                  : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
               {layout.charAt(0).toUpperCase() + layout.slice(1)}
@@ -160,19 +160,19 @@ export const ThemeSelector: React.FC = () => {
       </DropdownMenuSub>
 
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground border border-transparent hover:border-accent/50 transition-all">
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
           <Brush className="w-4 h-4" />
           Skin Style
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="w-64 bg-background border-2 border-accent/40 shadow-lg">
+        <DropdownMenuSubContent className="w-64 bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl">
           {skinOptions.map((skin) => (
             <DropdownMenuItem
               key={skin.key}
               onClick={() => updateTheme({ skin: skin.key as any })}
-              className={`flex flex-col items-start gap-1 p-3 border-b border-border/20 last:border-b-0 cursor-pointer transition-all ${
+              className={`flex flex-col items-start gap-1 p-3 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.skin === skin.key 
-                  ? 'bg-accent text-accent-foreground border-l-4 border-l-accent' 
-                  : 'hover:bg-accent/50'
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
+                  : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
               <div className="font-medium">{skin.label}</div>
@@ -185,7 +185,7 @@ export const ThemeSelector: React.FC = () => {
       <DropdownMenuSeparator className="my-2" />
       <DropdownMenuItem 
         onClick={resetTheme}
-        className="px-3 py-2 rounded-md hover:bg-accent hover:text-accent-foreground border border-transparent hover:border-accent/50 transition-all cursor-pointer"
+        className="px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all cursor-pointer"
       >
         <Settings className="w-4 h-4 mr-2" />
         Reset to Default

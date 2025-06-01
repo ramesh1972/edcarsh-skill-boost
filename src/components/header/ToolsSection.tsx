@@ -23,14 +23,14 @@ export const ToolsSection: React.FC = () => {
             <span className="hidden sm:inline">My Dashboard</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-56 bg-background border-2 border-accent/40 shadow-lg">
-          <DropdownMenuItem asChild className="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground border-b border-border/20 last:border-b-0">
+        <DropdownMenuContent align="end" className="w-56 bg-card/95 backdrop-blur-md border-2 border-accent/60 shadow-xl">
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-accent/30 last:border-b-0 transition-colors">
             <Link to="/dashboard/learning-path" className="w-full">My Learning Path</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground border-b border-border/20 last:border-b-0">
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-accent/30 last:border-b-0 transition-colors">
             <Link to="/dashboard/performance" className="w-full">My Performance</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground border-b border-border/20 last:border-b-0">
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-accent/30 last:border-b-0 transition-colors">
             <Link to="/dashboard/analytics" className="w-full">My Analytics</Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -44,17 +44,17 @@ export const ToolsSection: React.FC = () => {
             <span className="hidden sm:inline">EdTools</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-48 bg-background border-2 border-primary/40 shadow-lg">
-          <DropdownMenuItem asChild className="hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground border-b border-border/20 last:border-b-0">
+        <DropdownMenuContent align="end" className="w-48 bg-card/95 backdrop-blur-md border-2 border-primary/60 shadow-xl">
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors">
             <Link to="/tools/editor" className="w-full">Course Editor</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground border-b border-border/20 last:border-b-0">
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors">
             <Link to="/tools/quiz-builder" className="w-full">Quiz Builder</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground border-b border-border/20 last:border-b-0">
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors">
             <Link to="/tools/analytics" className="w-full">Analytics</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground border-b border-border/20 last:border-b-0">
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors">
             <Link to="/tools/reports" className="w-full">Reports</Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -68,7 +68,7 @@ export const ToolsSection: React.FC = () => {
             <span className="hidden sm:inline">Theme</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-64 bg-background border-2 border-secondary/50 shadow-lg p-2">
+        <DropdownMenuContent align="end" className="w-64 bg-card/95 backdrop-blur-md border-2 border-secondary/60 shadow-xl p-2">
           <ThemeSelector />
         </DropdownMenuContent>
       </DropdownMenu>
