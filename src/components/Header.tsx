@@ -4,20 +4,7 @@ import { Link } from 'react-router-dom';
 import { 
   Menu, 
   X, 
-  Home, 
-  BookOpen, 
-  Target, 
-  Users, 
-  MessageSquare, 
-  HelpCircle, 
-  Mail, 
-  Info,
-  User,
-  Building2,
-  ChevronDown,
-  Video,
-  Wrench,
-  Play
+  ChevronDown
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeSelector } from './ThemeSelector';
@@ -31,24 +18,24 @@ import {
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, getSkinClasses } = useTheme();
+  const { theme, getSkinClasses, getIcon } = useTheme();
 
   const mainNavItems = [
-    { name: 'Home', href: '/', icon: Home },
-    { name: 'My Dashboard', href: '/dashboard', icon: User },
-    { name: 'All Courses', href: '/courses', icon: BookOpen },
-    { name: 'Express Intent', href: '/express-intent', icon: Target },
-    { name: 'Corporate', href: '/corporate', icon: Building2 },
-    { name: 'About Instructors', href: '/instructors', icon: Users }
+    { name: 'Home', href: '/', icon: 'home' },
+    { name: 'My Dashboard', href: '/dashboard', icon: 'student' },
+    { name: 'All Courses', href: '/courses', icon: 'course' },
+    { name: 'Express Intent', href: '/express-intent', icon: 'target' },
+    { name: 'Corporate', href: '/corporate', icon: 'building' },
+    { name: 'About Instructors', href: '/instructors', icon: 'instructor' }
   ];
 
   const moreMenuItems = [
-    { name: 'Testimonials', href: '/testimonials', icon: MessageSquare },
-    { name: 'FAQ', href: '/faq', icon: HelpCircle },
-    { name: 'Contact', href: '/contact', icon: Mail },
-    { name: 'About', href: '/about', icon: Info },
-    { name: 'Help', href: '/help', icon: HelpCircle },
-    { name: 'Demo', href: '/demo', icon: Play }
+    { name: 'Testimonials', href: '/testimonials', icon: 'testimonial' },
+    { name: 'FAQ', href: '/faq', icon: 'help' },
+    { name: 'Contact', href: '/contact', icon: 'contact' },
+    { name: 'About', href: '/about', icon: 'about' },
+    { name: 'Help', href: '/help', icon: 'help' },
+    { name: 'Demo', href: '/demo', icon: 'live' }
   ];
 
   // Get skin-specific header background classes
@@ -89,7 +76,7 @@ export const Header: React.FC = () => {
               to={item.href}
               className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-all duration-200 hover:shadow-sm whitespace-nowrap"
             >
-              <item.icon className="w-4 h-4" />
+              {getIcon(item.icon)}
               {item.name}
             </Link>
           ))}
@@ -106,7 +93,7 @@ export const Header: React.FC = () => {
               {moreMenuItems.map((item) => (
                 <DropdownMenuItem key={item.name} asChild>
                   <Link to={item.href} className="flex items-center gap-2 w-full">
-                    <item.icon className="w-4 h-4" />
+                    {getIcon(item.icon)}
                     {item.name}
                   </Link>
                 </DropdownMenuItem>
@@ -123,7 +110,7 @@ export const Header: React.FC = () => {
             size="lg" 
             className="hidden md:flex items-center gap-3 px-6 py-3 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 hover:border-purple-300 shadow-sm font-semibold text-sm"
           >
-            <Wrench className="w-5 h-5" />
+            {getIcon('tools')}
             <span className="hidden lg:inline">EdTools</span>
             <span className="lg:hidden">Tools</span>
           </Button>
@@ -133,7 +120,7 @@ export const Header: React.FC = () => {
             size="lg" 
             className="hidden md:flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg font-semibold text-sm"
           >
-            <Video className="w-5 h-5" />
+            {getIcon('live')}
             <span className="hidden lg:inline">Live Session in 2h</span>
             <span className="lg:hidden">Live 2h</span>
           </Button>
@@ -163,13 +150,13 @@ export const Header: React.FC = () => {
                 variant="outline" 
                 className="flex-1 items-center gap-2 bg-purple-50 text-purple-700 border-purple-200 py-3"
               >
-                <Wrench className="w-4 h-4" />
+                {getIcon('tools')}
                 EdTools
               </Button>
               <Button 
                 className="flex-1 items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 py-3"
               >
-                <Video className="w-4 h-4" />
+                {getIcon('live')}
                 Live 2h
               </Button>
             </div>
@@ -182,7 +169,7 @@ export const Header: React.FC = () => {
                 className="flex items-center gap-3 px-4 py-4 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <item.icon className="w-5 h-5" />
+                {getIcon(item.icon)}
                 {item.name}
               </Link>
             ))}
@@ -197,7 +184,7 @@ export const Header: React.FC = () => {
                   className="flex items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <item.icon className="w-4 h-4" />
+                  {getIcon(item.icon)}
                   {item.name}
                 </Link>
               ))}
