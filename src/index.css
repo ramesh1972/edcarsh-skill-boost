@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
@@ -200,22 +199,6 @@
     box-shadow: var(--shadow, 0 2px 4px rgba(0,0,0,0.1));
   }
 
-  .material-design h1,
-  .material-design h2,
-  .material-design h3,
-  .material-design h4,
-  .material-design h5,
-  .material-design h6 {
-    box-shadow: var(--shadow, 0 2px 4px rgba(0,0,0,0.1));
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    margin-bottom: var(--elevation, 4px);
-  }
-
-  .material-design p {
-    box-shadow: var(--shadow, 0 1px 2px rgba(0,0,0,0.05));
-    margin-bottom: var(--elevation, 4px);
-  }
-
   .material-design .card,
   .material-design [class*="card"] {
     box-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
@@ -234,22 +217,6 @@
   .human-interface * {
     border-radius: 12px;
     box-shadow: var(--shadow, 0 4px 16px rgba(0,0,0,0.1));
-  }
-
-  .human-interface h1,
-  .human-interface h2,
-  .human-interface h3,
-  .human-interface h4,
-  .human-interface h5,
-  .human-interface h6 {
-    box-shadow: var(--shadow, 0 4px 16px rgba(0,0,0,0.1));
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: var(--elevation, 8px);
-  }
-
-  .human-interface p {
-    box-shadow: var(--shadow, 0 2px 8px rgba(0,0,0,0.05));
-    margin-bottom: var(--elevation, 8px);
   }
 
   .human-interface .card,
@@ -271,22 +238,6 @@
     box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,0.1));
   }
 
-  .fluent-design h1,
-  .fluent-design h2,
-  .fluent-design h3,
-  .fluent-design h4,
-  .fluent-design h5,
-  .fluent-design h6 {
-    box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,0.1));
-    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    margin-bottom: var(--elevation, 2px);
-  }
-
-  .fluent-design p {
-    box-shadow: var(--shadow, 0 1px 2px rgba(0,0,0,0.05));
-    margin-bottom: var(--elevation, 2px);
-  }
-
   .fluent-design .card,
   .fluent-design [class*="card"] {
     border: 2px solid hsl(var(--border));
@@ -299,22 +250,6 @@
     box-shadow: var(--shadow, 0 2px 8px rgba(0,0,0,0.1));
   }
 
-  .ant-design h1,
-  .ant-design h2,
-  .ant-design h3,
-  .ant-design h4,
-  .ant-design h5,
-  .ant-design h6 {
-    box-shadow: var(--shadow, 0 2px 8px rgba(0,0,0,0.1));
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    margin-bottom: var(--elevation, 4px);
-  }
-
-  .ant-design p {
-    box-shadow: var(--shadow, 0 1px 4px rgba(0,0,0,0.05));
-    margin-bottom: var(--elevation, 4px);
-  }
-
   .ant-design .card,
   .ant-design [class*="card"] {
     border: 1px solid hsl(var(--border));
@@ -324,22 +259,6 @@
   .carbon-design * {
     border-radius: 0px;
     box-shadow: var(--shadow, 0 1px 2px rgba(0,0,0,0.1));
-  }
-
-  .carbon-design h1,
-  .carbon-design h2,
-  .carbon-design h3,
-  .carbon-design h4,
-  .carbon-design h5,
-  .carbon-design h6 {
-    box-shadow: var(--shadow, 0 1px 2px rgba(0,0,0,0.1));
-    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    margin-bottom: var(--elevation, 1px);
-  }
-
-  .carbon-design p {
-    box-shadow: var(--shadow, 0 1px 1px rgba(0,0,0,0.05));
-    margin-bottom: var(--elevation, 1px);
   }
 
   .carbon-design .card,
@@ -359,41 +278,9 @@
     box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,0.1));
   }
 
-  .atlassian-design h1,
-  .atlassian-design h2,
-  .atlassian-design h3,
-  .atlassian-design h4,
-  .atlassian-design h5,
-  .atlassian-design h6 {
-    box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,0.1));
-    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    margin-bottom: var(--elevation, 2px);
-  }
-
-  .atlassian-design p {
-    box-shadow: var(--shadow, 0 1px 2px rgba(0,0,0,0.05));
-    margin-bottom: var(--elevation, 2px);
-  }
-
   .bootstrap-design * {
     border-radius: 0.375rem;
     box-shadow: var(--shadow, 0 0.125rem 0.25rem rgba(0,0,0,0.075));
-  }
-
-  .bootstrap-design h1,
-  .bootstrap-design h2,
-  .bootstrap-design h3,
-  .bootstrap-design h4,
-  .bootstrap-design h5,
-  .bootstrap-design h6 {
-    box-shadow: var(--shadow, 0 0.125rem 0.25rem rgba(0,0,0,0.075));
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    margin-bottom: var(--elevation, 2px);
-  }
-
-  .bootstrap-design p {
-    box-shadow: var(--shadow, 0 0.125rem 0.125rem rgba(0,0,0,0.05));
-    margin-bottom: var(--elevation, 2px);
   }
 
   .bootstrap-design .card,
@@ -405,22 +292,6 @@
   .polaris-design * {
     border-radius: 8px;
     box-shadow: var(--shadow, 0 1px 0 rgba(0,0,0,0.05));
-  }
-
-  .polaris-design h1,
-  .polaris-design h2,
-  .polaris-design h3,
-  .polaris-design h4,
-  .polaris-design h5,
-  .polaris-design h6 {
-    box-shadow: var(--shadow, 0 1px 0 rgba(0,0,0,0.05));
-    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    margin-bottom: var(--elevation, 2px);
-  }
-
-  .polaris-design p {
-    box-shadow: var(--shadow, 0 1px 0 rgba(0,0,0,0.03));
-    margin-bottom: var(--elevation, 2px);
   }
 
   .polaris-design .card,
@@ -435,22 +306,6 @@
     box-shadow: var(--shadow, 0 2px 2px rgba(0,0,0,0.1));
   }
 
-  .lightning-design h1,
-  .lightning-design h2,
-  .lightning-design h3,
-  .lightning-design h4,
-  .lightning-design h5,
-  .lightning-design h6 {
-    box-shadow: var(--shadow, 0 2px 2px rgba(0,0,0,0.1));
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    margin-bottom: var(--elevation, 2px);
-  }
-
-  .lightning-design p {
-    box-shadow: var(--shadow, 0 1px 1px rgba(0,0,0,0.05));
-    margin-bottom: var(--elevation, 2px);
-  }
-
   .lightning-design button,
   .lightning-design [class*="button"] {
     border-radius: 0.25rem;
@@ -460,22 +315,6 @@
   .tailwind-design * {
     border-radius: 0.5rem;
     box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,0.1));
-  }
-
-  .tailwind-design h1,
-  .tailwind-design h2,
-  .tailwind-design h3,
-  .tailwind-design h4,
-  .tailwind-design h5,
-  .tailwind-design h6 {
-    box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,0.1));
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    margin-bottom: var(--elevation, 2px);
-  }
-
-  .tailwind-design p {
-    box-shadow: var(--shadow, 0 1px 2px rgba(0,0,0,0.05));
-    margin-bottom: var(--elevation, 2px);
   }
 
   /* Layout Variations */
