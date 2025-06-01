@@ -44,18 +44,27 @@ export const ToolsSection: React.FC = () => {
             <span className="hidden sm:inline">EdTools</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-48 bg-card/95 backdrop-blur-md border-2 border-primary/60 shadow-xl">
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors">
-            <Link to="/tools/editor" className="w-full">Course Editor</Link>
+        <DropdownMenuContent align="end" className="w-60 bg-card/95 backdrop-blur-md border-2 border-primary/60 shadow-xl">
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/classroom" className="w-full text-left">Your Classroom</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors">
-            <Link to="/tools/quiz-builder" className="w-full">Quiz Builder</Link>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/truth-ai" className="w-full text-left">Truth AI</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors">
-            <Link to="/tools/analytics" className="w-full">Analytics</Link>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/instructor-qa" className="w-full text-left">Instructor Q&A</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors">
-            <Link to="/tools/reports" className="w-full">Reports</Link>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/community-discussion" className="w-full text-left">Community Discussion</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/calculators" className="w-full text-left">Calculators</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground border-b border-primary/30 last:border-b-0 transition-colors justify-start">
+            <Link to="/tools/guides" className="w-full text-left">Guides</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild className="hover:bg-card hover:text-card-foreground focus:bg-card focus:text-card-foreground transition-colors justify-start">
+            <Link to="/tools/articles" className="w-full text-left">Articles</Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
