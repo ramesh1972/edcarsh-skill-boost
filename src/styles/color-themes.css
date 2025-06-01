@@ -2,97 +2,97 @@
 @layer base {
   /* Color Theme Definitions */
   .ocean {
-    /* Ocean theme: Deep blues with coral and teal accents */
-    --background: 210 45% 96%;
-    --foreground: 220 40% 18%;
-    --primary: 210 85% 40%;
+    /* Ocean theme: Deep blues with coral and teal accents - Enhanced contrast */
+    --background: 210 50% 98%;
+    --foreground: 220 60% 12%;
+    --primary: 210 100% 35%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 180 45% 85%;
-    --secondary-foreground: 220 40% 18%;
-    --muted: 210 25% 92%;
-    --muted-foreground: 210 25% 45%;
-    --accent: 14 80% 65%;
+    --secondary: 180 30% 90%;
+    --secondary-foreground: 220 60% 12%;
+    --muted: 210 30% 95%;
+    --muted-foreground: 210 40% 35%;
+    --accent: 14 90% 55%;
     --accent-foreground: 0 0% 100%;
-    --card: 205 40% 99%;
-    --card-foreground: 220 40% 18%;
-    --border: 180 25% 82%;
-    --input: 210 25% 90%;
-    --ring: 14 80% 65%;
+    --card: 205 50% 99%;
+    --card-foreground: 220 60% 12%;
+    --border: 180 30% 75%;
+    --input: 210 30% 88%;
+    --ring: 14 90% 55%;
   }
 
   .sunset {
-    /* Sunset theme: Warm oranges with purple and pink accents */
-    --background: 30 60% 95%;
-    --foreground: 25 40% 18%;
-    --primary: 20 85% 55%;
+    /* Sunset theme: Warm oranges with purple and pink accents - Enhanced contrast */
+    --background: 30 80% 97%;
+    --foreground: 25 60% 10%;
+    --primary: 20 100% 45%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 45 70% 88%;
-    --secondary-foreground: 25 40% 18%;
-    --muted: 35 45% 90%;
-    --muted-foreground: 25 35% 40%;
-    --accent: 290 70% 65%;
+    --secondary: 45 50% 85%;
+    --secondary-foreground: 25 60% 10%;
+    --muted: 35 60% 92%;
+    --muted-foreground: 25 50% 30%;
+    --accent: 290 80% 50%;
     --accent-foreground: 0 0% 100%;
-    --card: 35 80% 98%;
-    --card-foreground: 25 40% 18%;
-    --border: 45 40% 80%;
-    --input: 35 40% 88%;
-    --ring: 290 70% 65%;
+    --card: 35 90% 98%;
+    --card-foreground: 25 60% 10%;
+    --border: 45 50% 70%;
+    --input: 35 50% 85%;
+    --ring: 290 80% 50%;
   }
 
   .forest {
-    /* Forest theme: Rich greens with earth browns and golden accents */
-    --background: 125 30% 94%;
-    --foreground: 125 35% 16%;
-    --primary: 140 60% 35%;
+    /* Forest theme: Rich greens with earth browns and golden accents - Enhanced contrast */
+    --background: 125 40% 96%;
+    --foreground: 125 50% 8%;
+    --primary: 140 70% 25%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 115 25% 86%;
-    --secondary-foreground: 125 35% 16%;
-    --muted: 120 20% 91%;
-    --muted-foreground: 120 18% 42%;
-    --accent: 45 75% 55%;
-    --accent-foreground: 25 40% 15%;
-    --card: 120 35% 97%;
-    --card-foreground: 125 35% 16%;
-    --border: 115 18% 80%;
-    --input: 120 18% 87%;
-    --ring: 45 75% 55%;
+    --secondary: 115 30% 88%;
+    --secondary-foreground: 125 50% 8%;
+    --muted: 120 25% 93%;
+    --muted-foreground: 120 30% 30%;
+    --accent: 45 90% 45%;
+    --accent-foreground: 25 50% 10%;
+    --card: 120 45% 98%;
+    --card-foreground: 125 50% 8%;
+    --border: 115 25% 75%;
+    --input: 120 25% 85%;
+    --ring: 45 90% 45%;
   }
 
   .lavender {
-    /* Lavender theme: Soft purples with mint green and rose accents */
-    --background: 285 40% 95%;
-    --foreground: 270 25% 18%;
-    --primary: 275 65% 50%;
+    /* Lavender theme: Soft purples with mint green and rose accents - Enhanced contrast */
+    --background: 285 50% 97%;
+    --foreground: 270 40% 10%;
+    --primary: 275 80% 40%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 295 35% 86%;
-    --secondary-foreground: 270 25% 18%;
-    --muted: 280 22% 90%;
-    --muted-foreground: 270 18% 45%;
-    --accent: 160 45% 65%;
-    --accent-foreground: 160 50% 15%;
-    --card: 290 50% 97%;
-    --card-foreground: 270 25% 18%;
-    --border: 295 20% 82%;
-    --input: 285 20% 88%;
-    --ring: 160 45% 65%;
+    --secondary: 295 40% 88%;
+    --secondary-foreground: 270 40% 10%;
+    --muted: 280 30% 92%;
+    --muted-foreground: 270 30% 35%;
+    --accent: 160 60% 45%;
+    --accent-foreground: 160 80% 10%;
+    --card: 290 60% 98%;
+    --card-foreground: 270 40% 10%;
+    --border: 295 30% 75%;
+    --input: 285 30% 85%;
+    --ring: 160 60% 45%;
   }
 
   .monochrome {
-    /* Monochrome theme: Rich blacks and whites with blue accent */
-    --background: 0 0% 97%;
-    --foreground: 0 0% 8%;
-    --primary: 0 0% 15%;
+    /* Monochrome theme: Rich blacks and whites with blue accent - Enhanced contrast */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 5%;
+    --primary: 0 0% 10%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 88%;
-    --secondary-foreground: 0 0% 8%;
-    --muted: 0 0% 94%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 210 100% 50%;
+    --secondary: 0 0% 92%;
+    --secondary-foreground: 0 0% 5%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 30%;
+    --accent: 210 100% 40%;
     --accent-foreground: 0 0% 100%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 8%;
-    --border: 0 0% 80%;
-    --input: 0 0% 88%;
-    --ring: 210 100% 50%;
+    --card-foreground: 0 0% 5%;
+    --border: 0 0% 75%;
+    --input: 0 0% 85%;
+    --ring: 210 100% 40%;
   }
 }
