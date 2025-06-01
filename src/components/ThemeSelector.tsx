@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Settings, Palette, Type, Image, Layout, Brush, Layers } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -24,6 +23,13 @@ export const ThemeSelector: React.FC = () => {
     { key: 'forest', label: 'Forest Green', description: 'Natural greens and earth tones' },
     { key: 'lavender', label: 'Lavender Purple', description: 'Soft purples and pinks' },
     { key: 'monochrome', label: 'Monochrome', description: 'Pure blacks, whites, and grays' }
+  ];
+
+  const skinOptions = [
+    { key: 'default', label: 'Default', description: 'Clean, minimal appearance' },
+    { key: 'gradient', label: 'Gradient', description: 'Smooth gradient backgrounds' },
+    { key: 'textured', label: 'Textured', description: 'Subtle pattern textures' },
+    { key: 'glassmorphism', label: 'Glass', description: 'Frosted glass effect' }
   ];
 
   return (
@@ -143,16 +149,17 @@ export const ThemeSelector: React.FC = () => {
         <DropdownMenuSub>
           <DropdownMenuSubTrigger className="flex items-center gap-2">
             <Brush className="w-4 h-4" />
-            Skin
+            Skin Style
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            {['default', 'gradient', 'solid', 'pattern'].map((skin) => (
+          <DropdownMenuSubContent className="w-64">
+            {skinOptions.map((skin) => (
               <DropdownMenuItem
-                key={skin}
-                onClick={() => updateTheme({ skin: skin as any })}
-                className={theme.skin === skin ? 'bg-primary text-primary-foreground' : ''}
+                key={skin.key}
+                onClick={() => updateTheme({ skin: skin.key as any })}
+                className={`flex flex-col items-start gap-1 p-3 ${theme.skin === skin.key ? 'bg-primary text-primary-foreground' : ''}`}
               >
-                {skin.charAt(0).toUpperCase() + skin.slice(1)}
+                <div className="font-medium">{skin.label}</div>
+                <div className="text-xs opacity-75">{skin.description}</div>
               </DropdownMenuItem>
             ))}
           </DropdownMenuSubContent>

@@ -481,6 +481,81 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow);
   }
+
+  /* Skin-specific styles */
+  .skin-default {
+    /* Default skin uses standard backgrounds */
+  }
+
+  .skin-gradient * {
+    transition: all 0.3s ease;
+  }
+
+  .skin-gradient .theme-card,
+  .skin-gradient [class*="card"] {
+    background: linear-gradient(135deg, hsl(var(--card))/0.9, hsl(var(--card))/0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid hsl(var(--primary))/0.2;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+
+  .skin-gradient .theme-button,
+  .skin-gradient button:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary))/0.8);
+    transition: all 0.3s ease;
+  }
+
+  .skin-gradient .theme-button:hover,
+  .skin-gradient button:not(.variant-outline):not(.variant-ghost):not(.variant-link):hover {
+    background: linear-gradient(135deg, hsl(var(--primary))/0.9, hsl(var(--primary))/0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px hsl(var(--primary))/0.3;
+  }
+
+  .skin-textured {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpath d='M30 30c0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12 12-5.373 12-12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .skin-textured .theme-card,
+  .skin-textured [class*="card"] {
+    background: hsl(var(--card))/0.95;
+    border: 2px solid hsl(var(--border))/0.5;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    backdrop-filter: blur(4px);
+  }
+
+  .skin-textured .theme-button,
+  .skin-textured button:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
+    background: hsl(var(--primary))/0.9;
+    border: 1px solid hsl(var(--primary-foreground))/0.2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .skin-glassmorphism {
+    background: linear-gradient(135deg, hsl(var(--primary))/0.1, hsl(var(--background)), hsl(var(--secondary))/0.1);
+  }
+
+  .skin-glassmorphism .theme-card,
+  .skin-glassmorphism [class*="card"] {
+    background: hsl(var(--card))/0.2;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+
+  .skin-glassmorphism .theme-button,
+  .skin-glassmorphism button:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
+    background: hsl(var(--primary))/0.8;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+
+  .skin-glassmorphism .theme-button:hover,
+  .skin-glassmorphism button:not(.variant-outline):not(.variant-ghost):not(.variant-link):hover {
+    background: hsl(var(--primary))/0.9;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
 }
 
 /* Custom scrollbar */
