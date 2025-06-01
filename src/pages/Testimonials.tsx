@@ -13,41 +13,46 @@ const Testimonials = () => {
     <div className={`min-h-screen bg-background ${getBackground()}`}>
       <Header />
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
-        <div className="mb-8 text-center">
-          <h1 className={`text-4xl font-bold mb-4 flex items-center justify-center gap-3 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
-            {getIcon('student')} Student Success Stories
+        <div className="mb-8 text-center animate-slide-in-up">
+          <h1 className={`text-4xl font-bold mb-4 flex items-center justify-center gap-3 hover-color-shift ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
+            <span className="hover-scale">{getIcon('student')}</span> Student Success Stories
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto animate-slide-in-up animate-delay-200">
             Hear from professionals who've transformed their careers with our crash courses
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="hover:shadow-lg transition-shadow">
+          {testimonials.map((testimonial, index) => (
+            <Card 
+              key={testimonial.id} 
+              className={`hover:shadow-lg transition-all duration-300 hover-lift hover-glow hover-border-glow ${
+                index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'
+              } animate-delay-${(index % 6 + 1) * 100}`}
+            >
               <CardHeader>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-bold hover-scale">
                     {testimonial.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   <div>
-                    <CardTitle className="text-lg">{testimonial.name}</CardTitle>
+                    <CardTitle className="text-lg hover-color-shift">{testimonial.name}</CardTitle>
                     <CardDescription>{testimonial.role}</CardDescription>
                   </div>
                 </div>
                 <div className="flex items-center gap-1 text-yellow-500">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
+                    <Star key={i} className="w-4 h-4 fill-current hover-scale" />
                   ))}
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="relative">
-                  <Quote className="w-6 h-6 text-primary mb-2 opacity-50" />
+                  <Quote className="w-6 h-6 text-primary mb-2 opacity-50 hover-scale" />
                   <p className="text-sm text-muted-foreground mb-3">
                     "{testimonial.text}"
                   </p>
-                  <p className="text-xs font-medium text-primary">
+                  <p className="text-xs font-medium text-primary hover-color-shift">
                     Course: {testimonial.course}
                   </p>
                 </div>
@@ -56,8 +61,8 @@ const Testimonials = () => {
           ))}
         </div>
 
-        <div className="text-center">
-          <Card className={`max-w-4xl mx-auto ${
+        <div className="text-center animate-slide-in-up animate-delay-500">
+          <Card className={`max-w-4xl mx-auto hover-lift hover-glow ${
             theme.designSystem === 'material' ? 'shadow-md' : 
             theme.designSystem === 'fluent' ? 'border-2' : 
             'hover:shadow-lg'
@@ -65,7 +70,7 @@ const Testimonials = () => {
             theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
           }`}>
             <CardHeader>
-              <CardTitle className={`text-2xl ${theme.designSystem === 'material' ? 'font-medium' : 'font-bold'}`}>
+              <CardTitle className={`text-2xl hover-color-shift ${theme.designSystem === 'material' ? 'font-medium' : 'font-bold'}`}>
                 Join Thousands of Successful Students
               </CardTitle>
               <CardDescription className="text-lg">
@@ -73,34 +78,29 @@ const Testimonials = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-6">
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  {getIcon('student')}
+              {[
+                { icon: 'student', value: '5,000+', label: 'Students Enrolled' },
+                { icon: 'star', value: '4.9★', label: 'Average Rating' },
+                { icon: 'course', value: '95%', label: 'Completion Rate' },
+                { icon: 'price', value: '$25', label: 'Average Cost' }
+              ].map((stat, index) => (
+                <div 
+                  key={index}
+                  className={`text-center hover-scale ${
+                    index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'
+                  } animate-delay-${(index + 1) * 100}`}
+                >
+                  <div className="flex items-center justify-center mb-2">
+                    {stat.icon === 'star' ? (
+                      <Star className="w-6 h-6 fill-current text-yellow-500 hover-scale" />
+                    ) : (
+                      <span className="hover-scale">{getIcon(stat.icon)}</span>
+                    )}
+                  </div>
+                  <div className="text-3xl font-bold text-primary mb-2 hover-color-shift">{stat.value}</div>
+                  <p className="text-sm text-muted-foreground">{stat.label}</p>
                 </div>
-                <div className="text-3xl font-bold text-primary mb-2">5,000+</div>
-                <p className="text-sm text-muted-foreground">Students Enrolled</p>
-              </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2 text-yellow-500">
-                  <Star className="w-6 h-6 fill-current" />
-                </div>
-                <div className="text-3xl font-bold text-primary mb-2">4.9★</div>
-                <p className="text-sm text-muted-foreground">Average Rating</p>
-              </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  {getIcon('course')}
-                </div>
-                <div className="text-3xl font-bold text-primary mb-2">95%</div>
-                <p className="text-sm text-muted-foreground">Completion Rate</p>
-              </div>
-              <div className="text-center">
-                <div className="flex items-center justify-center mb-2">
-                  {getIcon('price')}
-                </div>
-                <div className="text-3xl font-bold text-primary mb-2">$25</div>
-                <p className="text-sm text-muted-foreground">Average Cost</p>
-              </div>
+              ))}
             </CardContent>
           </Card>
         </div>

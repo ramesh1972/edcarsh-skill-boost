@@ -1,0 +1,271 @@
+
+@layer base {
+  /* Design System Variations - Updated to properly apply styles to interactive elements */
+  
+  /* Material Design */
+  .material-design button,
+  .material-design [class*="button"],
+  .material-design input,
+  .material-design [class*="input"],
+  .material-design select,
+  .material-design [class*="select"],
+  .material-design .card,
+  .material-design [class*="card"],
+  .material-design [role="button"],
+  .material-design [class*="dropdown"],
+  .material-design [class*="menu"],
+  .material-design [class*="popover"] {
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition-normal) !important;
+  }
+
+  .material-design .card,
+  .material-design [class*="card"] {
+    box-shadow: var(--shadow-raised) !important;
+    border-radius: var(--radius) !important;
+  }
+
+  .material-design button,
+  .material-design [class*="button"] {
+    text-transform: var(--text-transform);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: var(--letter-spacing);
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow-raised) !important;
+    transition: var(--transition-normal) !important;
+  }
+
+  /* Human Interface */
+  .human-interface button,
+  .human-interface [class*="button"],
+  .human-interface input,
+  .human-interface [class*="input"],
+  .human-interface select,
+  .human-interface [class*="select"],
+  .human-interface .card,
+  .human-interface [class*="card"],
+  .human-interface [role="button"],
+  .human-interface [class*="dropdown"],
+  .human-interface [class*="menu"],
+  .human-interface [class*="popover"] {
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition-normal) !important;
+  }
+
+  .human-interface .card,
+  .human-interface [class*="card"] {
+    border: none !important;
+    box-shadow: var(--shadow-raised) !important;
+    border-radius: var(--radius-large) !important;
+  }
+
+  .human-interface button,
+  .human-interface [class*="button"] {
+    border-radius: var(--radius) !important;
+    font-weight: var(--font-weight-medium);
+    padding: var(--spacing-normal) calc(var(--spacing-normal) * 2);
+    transition: var(--transition-normal) !important;
+  }
+
+  /* Fluent Design */
+  .fluent-design button,
+  .fluent-design [class*="button"],
+  .fluent-design input,
+  .fluent-design [class*="input"],
+  .fluent-design select,
+  .fluent-design [class*="select"],
+  .fluent-design .card,
+  .fluent-design [class*="card"],
+  .fluent-design [role="button"],
+  .fluent-design [class*="dropdown"],
+  .fluent-design [class*="menu"],
+  .fluent-design [class*="popover"] {
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition-normal) !important;
+  }
+
+  .fluent-design .card,
+  .fluent-design [class*="card"] {
+    border: var(--border-width-thick) solid hsl(var(--border)) !important;
+    background: rgba(255,255,255,var(--acrylic-opacity));
+    backdrop-filter: blur(var(--blur));
+  }
+
+  /* Ant Design */
+  .ant-design button,
+  .ant-design [class*="button"],
+  .ant-design input,
+  .ant-design [class*="input"],
+  .ant-design select,
+  .ant-design [class*="select"],
+  .ant-design .card,
+  .ant-design [class*="card"],
+  .ant-design [role="button"],
+  .ant-design [class*="dropdown"],
+  .ant-design [class*="menu"],
+  .ant-design [class*="popover"] {
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition-normal) !important;
+  }
+
+  .ant-design .card,
+  .ant-design [class*="card"] {
+    border: var(--border-width) solid hsl(var(--border)) !important;
+    border-radius: var(--radius) !important;
+  }
+
+  /* Carbon Design */
+  .carbon-design button,
+  .carbon-design [class*="button"],
+  .carbon-design input,
+  .carbon-design [class*="input"],
+  .carbon-design select,
+  .carbon-design [class*="select"],
+  .carbon-design .card,
+  .carbon-design [class*="card"],
+  .carbon-design [role="button"],
+  .carbon-design [class*="dropdown"],
+  .carbon-design [class*="menu"],
+  .carbon-design [class*="popover"] {
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition-normal) !important;
+  }
+
+  .carbon-design .card,
+  .carbon-design [class*="card"] {
+    border: var(--border-width) solid hsl(var(--border)) !important;
+    border-radius: var(--radius) !important;
+  }
+
+  .carbon-design button,
+  .carbon-design [class*="button"] {
+    border-radius: var(--radius) !important;
+    border: var(--border-width) solid hsl(var(--border)) !important;
+    font-weight: var(--font-weight-semibold);
+    transition: var(--transition-normal) !important;
+  }
+
+  /* Atlassian Design */
+  .atlassian-design button,
+  .atlassian-design [class*="button"],
+  .atlassian-design input,
+  .atlassian-design [class*="input"],
+  .atlassian-design select,
+  .atlassian-design [class*="select"],
+  .atlassian-design .card,
+  .atlassian-design [class*="card"],
+  .atlassian-design [role="button"],
+  .atlassian-design [class*="dropdown"],
+  .atlassian-design [class*="menu"],
+  .atlassian-design [class*="popover"] {
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition-normal) !important;
+  }
+
+  /* Bootstrap Design */
+  .bootstrap-design button,
+  .bootstrap-design [class*="button"],
+  .bootstrap-design input,
+  .bootstrap-design [class*="input"],
+  .bootstrap-design select,
+  .bootstrap-design [class*="select"],
+  .bootstrap-design .card,
+  .bootstrap-design [class*="card"],
+  .bootstrap-design [role="button"],
+  .bootstrap-design [class*="dropdown"],
+  .bootstrap-design [class*="menu"],
+  .bootstrap-design [class*="popover"] {
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition-fast) !important;
+  }
+
+  .bootstrap-design .card,
+  .bootstrap-design [class*="card"] {
+    border: var(--border-width) solid rgba(0,0,0,0.125) !important;
+    border-radius: var(--radius) !important;
+  }
+
+  /* Polaris Design */
+  .polaris-design button,
+  .polaris-design [class*="button"],
+  .polaris-design input,
+  .polaris-design [class*="input"],
+  .polaris-design select,
+  .polaris-design [class*="select"],
+  .polaris-design .card,
+  .polaris-design [class*="card"],
+  .polaris-design [role="button"],
+  .polaris-design [class*="dropdown"],
+  .polaris-design [class*="menu"],
+  .polaris-design [class*="popover"] {
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition-normal) !important;
+  }
+
+  .polaris-design .card,
+  .polaris-design [class*="card"] {
+    border: var(--border-width) solid hsl(var(--border)) !important;
+    border-radius: var(--radius) !important;
+    background: hsl(var(--card));
+  }
+
+  /* Lightning Design */
+  .lightning-design button,
+  .lightning-design [class*="button"],
+  .lightning-design input,
+  .lightning-design [class*="input"],
+  .lightning-design select,
+  .lightning-design [class*="select"],
+  .lightning-design .card,
+  .lightning-design [class*="card"],
+  .lightning-design [role="button"],
+  .lightning-design [class*="dropdown"],
+  .lightning-design [class*="menu"],
+  .lightning-design [class*="popover"] {
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition-normal) !important;
+  }
+
+  .lightning-design button,
+  .lightning-design [class*="button"] {
+    border-radius: var(--radius) !important;
+    border: var(--border-width) solid hsl(var(--border)) !important;
+    font-weight: var(--font-weight-regular);
+    transition: var(--transition-normal) !important;
+  }
+
+  /* Tailwind Design */
+  .tailwind-design button,
+  .tailwind-design [class*="button"],
+  .tailwind-design input,
+  .tailwind-design [class*="input"],
+  .tailwind-design select,
+  .tailwind-design [class*="select"],
+  .tailwind-design .card,
+  .tailwind-design [class*="card"],
+  .tailwind-design [role="button"],
+  .tailwind-design [class*="dropdown"],
+  .tailwind-design [class*="menu"],
+  .tailwind-design [class*="popover"] {
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow) !important;
+    transition: var(--transition-normal) !important;
+  }
+
+  /* Ensure text elements NEVER have shadows or borders - keeping this for all design systems */
+  h1, h2, h3, h4, h5, h6, p, span, label, div:not([class*="card"]):not([class*="button"]):not([role="button"]):not([class*="dropdown"]):not([class*="menu"]):not([class*="popover"]), 
+  a:not(.button):not([class*="button"]):not([role="button"]), li, ul, ol, blockquote, pre, code {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+}
