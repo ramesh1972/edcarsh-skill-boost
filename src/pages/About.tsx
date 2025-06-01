@@ -3,48 +3,52 @@ import React from 'react';
 import { Header } from '@/components/Header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Target, Clock, DollarSign, Users, Globe, Zap } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const About = () => {
+  const { theme, getIcon, getBackground } = useTheme();
+
   const values = [
     {
-      icon: Target,
+      iconName: "course",
       title: "Focused Learning",
       description: "Short, intensive courses that get straight to the point"
     },
     {
-      icon: Clock,
+      iconName: "time",
       title: "Time Efficient",
       description: "Learn valuable skills in hours, not months"
     },
     {
-      icon: DollarSign,
+      iconName: "price",
       title: "Affordable Access",
       description: "Quality education at just $25 per course"
     },
     {
-      icon: Users,
+      iconName: "instructor",
       title: "Expert Instructors",
       description: "Learn from industry professionals with real experience"
     },
     {
-      icon: Globe,
+      iconName: "student",
       title: "Global Accessibility",
       description: "Multi-lingual courses available worldwide"
     },
     {
-      icon: Zap,
+      iconName: "live",
       title: "Live & Interactive",
       description: "Real-time learning with immediate feedback"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`min-h-screen bg-background ${getBackground()}`}>
       <Header />
-      <div className="container mx-auto px-4 py-8">
+      <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-12 text-center">
-          <h1 className="text-4xl font-bold mb-4">About EdCrash</h1>
+          <h1 className={`text-4xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
+            About EdCrash
+          </h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             We're revolutionizing professional education with focused, affordable crash courses 
             designed for busy professionals who want to learn new skills quickly and effectively.
@@ -52,9 +56,15 @@ const About = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <Card>
+          <Card className={`${
+            theme.designSystem === 'material' ? 'shadow-md' : 
+            theme.designSystem === 'fluent' ? 'border-2' : 
+            'hover:shadow-lg'
+          } ${
+            theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
+          }`}>
             <CardHeader>
-              <CardTitle className="text-2xl">Our Mission</CardTitle>
+              <CardTitle className={`text-2xl ${theme.designSystem === 'material' ? 'font-medium' : 'font-bold'}`}>Our Mission</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">
@@ -74,33 +84,39 @@ const About = () => {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className={`${
+            theme.designSystem === 'material' ? 'shadow-md' : 
+            theme.designSystem === 'fluent' ? 'border-2' : 
+            'hover:shadow-lg'
+          } ${
+            theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
+          }`}>
             <CardHeader>
-              <CardTitle className="text-2xl">Why Choose EdCrash?</CardTitle>
+              <CardTitle className={`text-2xl ${theme.designSystem === 'material' ? 'font-medium' : 'font-bold'}`}>Why Choose EdCrash?</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Clock className="w-4 h-4 text-primary" />
+                    {getIcon('time')}
                   </div>
                   <span className="text-sm">Courses range from 8-30 hours, not months</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                    <DollarSign className="w-4 h-4 text-primary" />
+                    {getIcon('price')}
                   </div>
                   <span className="text-sm">Affordable at just $25 per course</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Users className="w-4 h-4 text-primary" />
+                    {getIcon('instructor')}
                   </div>
                   <span className="text-sm">Live sessions with expert instructors</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Globe className="w-4 h-4 text-primary" />
+                    {getIcon('student')}
                   </div>
                   <span className="text-sm">Multi-lingual support</span>
                 </div>
@@ -110,15 +126,21 @@ const About = () => {
         </div>
 
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-center mb-8">Our Core Values</h2>
+          <h2 className={`text-3xl font-bold text-center mb-8 ${theme.designSystem === 'material' ? 'font-medium' : 'font-bold'}`}>Our Core Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map((value, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+              <Card key={index} className={`text-center hover:shadow-lg transition-shadow ${
+                theme.designSystem === 'material' ? 'shadow-md' : 
+                theme.designSystem === 'fluent' ? 'border-2' : 
+                'hover:shadow-lg'
+              } ${
+                theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
+              }`}>
                 <CardHeader>
                   <div className="w-12 h-12 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                    <value.icon className="w-6 h-6 text-primary" />
+                    {getIcon(value.iconName)}
                   </div>
-                  <CardTitle className="text-lg">{value.title}</CardTitle>
+                  <CardTitle className={`text-lg ${theme.designSystem === 'material' ? 'font-medium' : 'font-bold'}`}>{value.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">{value.description}</p>
@@ -128,9 +150,15 @@ const About = () => {
           </div>
         </div>
 
-        <Card className="max-w-4xl mx-auto">
+        <Card className={`max-w-4xl mx-auto ${
+          theme.designSystem === 'material' ? 'shadow-md' : 
+          theme.designSystem === 'fluent' ? 'border-2' : 
+          'hover:shadow-lg'
+        } ${
+          theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
+        }`}>
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Ready to Crash Your Learning Goals?</CardTitle>
+            <CardTitle className={`text-2xl ${theme.designSystem === 'material' ? 'font-medium' : 'font-bold'}`}>Ready to Crash Your Learning Goals?</CardTitle>
             <CardDescription className="text-lg">
               Join thousands of professionals who've accelerated their careers with EdCrash
             </CardDescription>
