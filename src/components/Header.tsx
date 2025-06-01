@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   Menu, 
   X, 
@@ -18,6 +18,7 @@ import {
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, getSkinClasses, getIcon } = useTheme();
+  const location = useLocation();
 
   const mainNavItems = [
     { name: 'Home', href: '/', icon: 'home' },
@@ -36,6 +37,16 @@ export const Header: React.FC = () => {
     { name: 'Help', href: '/help', icon: 'help' },
     { name: 'Demo', href: '/demo', icon: 'live' }
   ];
+
+  // Check if a menu item is active
+  const isActiveRoute = (href: string) => {
+    return location.pathname === href;
+  };
+
+  // Check if any more menu item is active
+  const isMoreMenuActive = () => {
+    return moreMenuItems.some(item => location.pathname === item.href);
+  };
 
   // Get skin-specific header background classes - remove shadows and borders
   const getHeaderBackground = () => {
@@ -74,7 +85,11 @@ export const Header: React.FC = () => {
             <Link
               key={item.name}
               to={item.href}
-              className="flex items-center gap-2 px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors duration-200 whitespace-nowrap"
+              className={`flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap ${
+                isActiveRoute(item.href)
+                  ? 'bg-primary/10 text-primary font-semibold'
+                  : 'hover:bg-accent hover:text-accent-foreground'
+              }`}
             >
               {getIcon(item.icon)}
               {item.name}
@@ -84,7 +99,14 @@ export const Header: React.FC = () => {
           {/* More Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center gap-1 px-3 py-2 text-sm font-medium whitespace-nowrap">
+              <Button 
+                variant="ghost" 
+                className={`flex items-center gap-1 px-3 py-2 text-sm font-medium whitespace-nowrap ${
+                  isMoreMenuActive()
+                    ? 'bg-primary/10 text-primary font-semibold'
+                    : ''
+                }`}
+              >
                 More
                 <ChevronDown className="w-4 h-4" />
               </Button>
@@ -92,7 +114,14 @@ export const Header: React.FC = () => {
             <DropdownMenuContent align="end" className="w-48">
               {moreMenuItems.map((item) => (
                 <DropdownMenuItem key={item.name} asChild>
-                  <Link to={item.href} className="flex items-center gap-2 w-full">
+                  <Link 
+                    to={item.href} 
+                    className={`flex items-center gap-2 w-full ${
+                      isActiveRoute(item.href)
+                        ? 'bg-primary/10 text-primary font-semibold'
+                        : ''
+                    }`}
+                  >
                     {getIcon(item.icon)}
                     {item.name}
                   </Link>
@@ -169,7 +198,11 @@ export const Header: React.FC = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="flex items-center gap-3 px-4 py-4 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors"
+                className={`flex items-center gap-3 px-4 py-4 text-sm font-medium rounded-lg transition-colors ${
+                  isActiveRoute(item.href)
+                    ? 'bg-primary/10 text-primary font-semibold'
+                    : 'hover:bg-accent hover:text-accent-foreground'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {getIcon(item.icon)}
@@ -184,7 +217,11 @@ export const Header: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="flex items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className={`flex items-center gap-3 px-4 py-3 text-sm rounded-lg transition-colors ${
+                    isActiveRoute(item.href)
+                      ? 'bg-primary/10 text-primary font-semibold'
+                      : 'hover:bg-accent hover:text-accent-foreground'
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {getIcon(item.icon)}
