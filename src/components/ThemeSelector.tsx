@@ -1,4 +1,4 @@
-[]
+
 import React from 'react';
 import { Settings, Palette, Type, Image, Layout, Brush, Layers } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
