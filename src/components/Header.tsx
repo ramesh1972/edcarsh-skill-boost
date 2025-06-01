@@ -38,15 +38,15 @@ export const Header: React.FC = () => {
     { name: 'Demo', href: '/demo', icon: 'live' }
   ];
 
-  // Get skin-specific header background classes
+  // Get skin-specific header background classes - remove shadows
   const getHeaderBackground = () => {
     switch (theme.skin) {
       case 'gradient':
         return 'bg-gradient-to-r from-background/95 via-background/98 to-background/95 backdrop-blur-xl border-border/50';
       case 'textured':
-        return 'bg-background/98 backdrop-blur-sm border-2 border-border/60 shadow-lg';
+        return 'bg-background/98 backdrop-blur-sm border-2 border-border/60';
       case 'glassmorphism':
-        return 'bg-background/20 backdrop-blur-2xl border border-white/20 shadow-2xl';
+        return 'bg-background/20 backdrop-blur-2xl border border-white/20';
       default:
         return 'bg-background/95 backdrop-blur';
     }
@@ -58,7 +58,7 @@ export const Header: React.FC = () => {
       <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
-          <div className="bg-gradient-to-br from-primary to-blue-600 text-primary-foreground rounded-xl p-2 shadow-lg">
+          <div className="bg-gradient-to-br from-primary to-blue-600 text-primary-foreground rounded-xl p-2">
             <span className="text-lg font-bold">EC</span>
           </div>
           <div>
@@ -75,7 +75,7 @@ export const Header: React.FC = () => {
             <Link
               key={item.name}
               to={item.href}
-              className="flex items-center gap-2 px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-all duration-200 whitespace-nowrap"
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors duration-200 whitespace-nowrap"
             >
               {getIcon(item.icon)}
               {item.name}
@@ -109,7 +109,7 @@ export const Header: React.FC = () => {
           <Button 
             variant="outline" 
             size="sm" 
-            className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 hover:border-purple-300 shadow-sm font-semibold text-xs"
+            className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 hover:border-purple-300 font-semibold text-xs"
           >
             {getIcon('tools')}
             EdTools
@@ -118,7 +118,7 @@ export const Header: React.FC = () => {
           {/* Upcoming Live Session Button */}
           <Button 
             size="sm" 
-            className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg font-semibold text-xs"
+            className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 font-semibold text-xs"
           >
             {getIcon('live')}
             Live Session in 2h
