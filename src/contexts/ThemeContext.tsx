@@ -1,9 +1,153 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { ThemeConfig, ThemeContextType } from '@/types/theme';
-import { defaultTheme, avatarCollections } from '@/constants/themeConstants';
-import { iconLibraries } from '@/utils/iconLibraries';
-import { applyDesignSystemStyles, applyColorTheme } from '@/utils/themeStyler';
+import * as LucideIcons from 'lucide-react';
+
+export interface ThemeConfig {
+  colorTheme: 'ocean' | 'sunset' | 'forest' | 'lavender' | 'monochrome';
+  typography: 'technical' | 'professional' | 'elegant' | 'modern' | 'playful';
+  iconScheme: 'normal' | 'cartoon' | 'emoji' | 'avatars';
+  designSystem: 'material' | 'human' | 'fluent' | 'ant' | 'carbon' | 'atlassian' | 'bootstrap' | 'polaris' | 'lightning' | 'tailwind';
+  layout: 'default' | 'compact' | 'spacious' | 'modern';
+  skin: 'default' | 'gradient' | 'textured' | 'glassmorphism';
+}
+
+interface ThemeContextType {
+  theme: ThemeConfig;
+  updateTheme: (updates: Partial<ThemeConfig>) => void;
+  resetTheme: () => void;
+  getIcon: (iconName: string) => React.ReactNode;
+  getAvatar: (avatarName: string) => string;
+  getBackground: () => string;
+  getSkinClasses: () => string;
+}
+
+const defaultTheme: ThemeConfig = {
+  colorTheme: 'ocean',
+  typography: 'modern',
+  iconScheme: 'normal',
+  designSystem: 'tailwind',
+  layout: 'default',
+  skin: 'default'
+};
+
+// Updated icon libraries with only Lucide icons
+const iconLibraries = {
+  normal: {
+    course: () => <LucideIcons.BookOpen className="w-5 h-5" />,
+    instructor: () => <LucideIcons.User className="w-5 h-5" />,
+    student: () => <LucideIcons.Users className="w-5 h-5" />,
+    time: () => <LucideIcons.Clock className="w-5 h-5" />,
+    price: () => <LucideIcons.DollarSign className="w-5 h-5" />,
+    live: () => <LucideIcons.Play className="w-5 h-5" />,
+    home: () => <LucideIcons.Home className="w-4 h-4" />,
+    target: () => <LucideIcons.Target className="w-4 h-4" />,
+    building: () => <LucideIcons.Building2 className="w-4 h-4" />,
+    testimonial: () => <LucideIcons.MessageSquare className="w-4 h-4" />,
+    help: () => <LucideIcons.HelpCircle className="w-4 h-4" />,
+    contact: () => <LucideIcons.Mail className="w-4 h-4" />,
+    about: () => <LucideIcons.Info className="w-4 h-4" />,
+    tools: () => <LucideIcons.Wrench className="w-5 h-5" />
+  },
+  cartoon: {
+    course: () => <LucideIcons.BookOpenCheck className="w-5 h-5" />,
+    instructor: () => <LucideIcons.UserCheck className="w-5 h-5" />,
+    student: () => <LucideIcons.GraduationCap className="w-5 h-5" />,
+    time: () => <LucideIcons.Timer className="w-5 h-5" />,
+    price: () => <LucideIcons.Coins className="w-5 h-5" />,
+    live: () => <LucideIcons.Video className="w-5 h-5" />,
+    home: () => <LucideIcons.House className="w-4 h-4" />,
+    target: () => <LucideIcons.Crosshair className="w-4 h-4" />,
+    building: () => <LucideIcons.Building className="w-4 h-4" />,
+    testimonial: () => <LucideIcons.MessageCircle className="w-4 h-4" />,
+    help: () => <LucideIcons.CircleHelp className="w-4 h-4" />,
+    contact: () => <LucideIcons.MailOpen className="w-4 h-4" />,
+    about: () => <LucideIcons.InfoIcon className="w-4 h-4" />,
+    tools: () => <LucideIcons.Settings className="w-5 h-5" />
+  },
+  emoji: {
+    course: () => <span className="text-lg">📚</span>,
+    instructor: () => <span className="text-lg">👩‍🏫</span>,
+    student: () => <span className="text-lg">👩‍🎓</span>,
+    time: () => <span className="text-lg">🕐</span>,
+    price: () => <span className="text-lg">💵</span>,
+    live: () => <span className="text-lg">📹</span>,
+    home: () => <span className="text-lg">🏠</span>,
+    target: () => <span className="text-lg">🎯</span>,
+    building: () => <span className="text-lg">🏢</span>,
+    testimonial: () => <span className="text-lg">💬</span>,
+    help: () => <span className="text-lg">❓</span>,
+    contact: () => <span className="text-lg">📧</span>,
+    about: () => <span className="text-lg">ℹ️</span>,
+    tools: () => <span className="text-lg">🔧</span>
+  },
+  avatars: {
+    course: () => <LucideIcons.Library className="w-5 h-5" />,
+    instructor: () => <LucideIcons.UserSquare className="w-5 h-5" />,
+    student: () => <LucideIcons.UsersRound className="w-5 h-5" />,
+    time: () => <LucideIcons.AlarmClock className="w-5 h-5" />,
+    price: () => <LucideIcons.CreditCard className="w-5 h-5" />,
+    live: () => <LucideIcons.PlayCircle className="w-5 h-5" />,
+    home: () => <LucideIcons.HomeIcon className="w-4 h-4" />,
+    target: () => <LucideIcons.Focus className="w-4 h-4" />,
+    building: () => <LucideIcons.Building2 className="w-4 h-4" />,
+    testimonial: () => <LucideIcons.Quote className="w-4 h-4" />,
+    help: () => <LucideIcons.LifeBuoy className="w-4 h-4" />,
+    contact: () => <LucideIcons.AtSign className="w-4 h-4" />,
+    about: () => <LucideIcons.FileText className="w-4 h-4" />,
+    tools: () => <LucideIcons.Hammer className="w-5 h-5" />
+  }
+};
+
+// Avatar collections
+const avatarCollections = {
+  normal: [
+    'https://api.dicebear.com/7.x/avataaars/svg?seed=1',
+    'https://api.dicebear.com/7.x/avataaars/svg?seed=2',
+    'https://api.dicebear.com/7.x/avataaars/svg?seed=3'
+  ],
+  cartoon: [
+    'https://api.dicebear.com/7.x/bottts/svg?seed=1',
+    'https://api.dicebear.com/7.x/bottts/svg?seed=2',
+    'https://api.dicebear.com/7.x/bottts/svg?seed=3'
+  ],
+  emoji: [
+    'https://api.dicebear.com/7.x/fun-emoji/svg?seed=1',
+    'https://api.dicebear.com/7.x/fun-emoji/svg?seed=2',
+    'https://api.dicebear.com/7.x/fun-emoji/svg?seed=3'
+  ],
+  avatars: [
+    'https://api.dicebear.com/7.x/personas/svg?seed=1',
+    'https://api.dicebear.com/7.x/personas/svg?seed=2',
+    'https://api.dicebear.com/7.x/personas/svg?seed=3'
+  ]
+};
+
+// Skin background patterns and styles
+const skinStyles = {
+  default: {
+    pageBackground: '',
+    cardBackground: '',
+    controlBackground: '',
+    classes: 'skin-default'
+  },
+  gradient: {
+    pageBackground: 'bg-gradient-to-br from-primary/5 via-secondary/10 to-accent/5',
+    cardBackground: 'bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-sm border-primary/20',
+    controlBackground: 'bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70',
+    classes: 'skin-gradient'
+  },
+  textured: {
+    pageBackground: 'bg-[url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23000000" fill-opacity="0.03"%3E%3Cpath d="M30 30c0-6.627-5.373-12-12-12s-12 5.373-12 12 5.373 12 12 12 12-5.373 12-12z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")] bg-background',
+    cardBackground: 'bg-card/95 border-2 border-border/50 shadow-lg backdrop-blur-sm',
+    controlBackground: 'bg-primary/90 hover:bg-primary border border-primary-foreground/20 shadow-md',
+    classes: 'skin-textured'
+  },
+  glassmorphism: {
+    pageBackground: 'bg-gradient-to-br from-primary/10 via-background to-secondary/10',
+    cardBackground: 'bg-card/20 backdrop-blur-xl border border-white/20 shadow-xl',
+    controlBackground: 'bg-primary/80 backdrop-blur-md border border-white/30 hover:bg-primary/90 shadow-lg',
+    classes: 'skin-glassmorphism'
+  }
+};
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
@@ -50,6 +194,161 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     // Apply color theme variables
     applyColorTheme(theme.colorTheme);
   }, [theme]);
+
+  const applyDesignSystemStyles = (designSystem: string) => {
+    const root = document.documentElement;
+    
+    // Apply design system specific CSS custom properties
+    switch (designSystem) {
+      case 'material':
+        root.style.setProperty('--radius', '4px');
+        root.style.setProperty('--shadow', '0 2px 4px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '4px');
+        break;
+      case 'human':
+        root.style.setProperty('--radius', '12px');
+        root.style.setProperty('--shadow', '0 4px 16px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '8px');
+        break;
+      case 'fluent':
+        root.style.setProperty('--radius', '2px');
+        root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+      case 'ant':
+        root.style.setProperty('--radius', '6px');
+        root.style.setProperty('--shadow', '0 2px 8px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '4px');
+        break;
+      case 'carbon':
+        root.style.setProperty('--radius', '0px');
+        root.style.setProperty('--shadow', '0 1px 2px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '1px');
+        break;
+      case 'atlassian':
+        root.style.setProperty('--radius', '3px');
+        root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+      case 'bootstrap':
+        root.style.setProperty('--radius', '0.375rem');
+        root.style.setProperty('--shadow', '0 0.125rem 0.25rem rgba(0,0,0,0.075)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+      case 'polaris':
+        root.style.setProperty('--radius', '8px');
+        root.style.setProperty('--shadow', '0 1px 0 rgba(0,0,0,0.05)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+      case 'lightning':
+        root.style.setProperty('--radius', '0.25rem');
+        root.style.setProperty('--shadow', '0 2px 2px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+      default: // tailwind
+        root.style.setProperty('--radius', '0.5rem');
+        root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+    }
+  };
+
+  const applyColorTheme = (colorTheme: string) => {
+    const root = document.documentElement;
+    
+    switch (colorTheme) {
+      case 'ocean':
+        // Ocean theme: Deep blues with coral and teal accents
+        root.style.setProperty('--background', '210 45% 96%');
+        root.style.setProperty('--foreground', '220 40% 18%');
+        root.style.setProperty('--primary', '210 85% 40%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '180 45% 85%');
+        root.style.setProperty('--secondary-foreground', '220 40% 18%');
+        root.style.setProperty('--muted', '210 25% 92%');
+        root.style.setProperty('--muted-foreground', '210 25% 45%');
+        root.style.setProperty('--card', '205 40% 99%');
+        root.style.setProperty('--card-foreground', '220 40% 18%');
+        root.style.setProperty('--accent', '14 80% 65%');
+        root.style.setProperty('--accent-foreground', '0 0% 100%');
+        root.style.setProperty('--border', '180 25% 82%');
+        root.style.setProperty('--input', '210 25% 90%');
+        root.style.setProperty('--ring', '14 80% 65%');
+        break;
+      case 'sunset':
+        // Sunset theme: Warm oranges with purple and pink accents
+        root.style.setProperty('--background', '30 60% 95%');
+        root.style.setProperty('--foreground', '25 40% 18%');
+        root.style.setProperty('--primary', '20 85% 55%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '45 70% 88%');
+        root.style.setProperty('--secondary-foreground', '25 40% 18%');
+        root.style.setProperty('--muted', '35 45% 90%');
+        root.style.setProperty('--muted-foreground', '25 35% 40%');
+        root.style.setProperty('--card', '35 80% 98%');
+        root.style.setProperty('--card-foreground', '25 40% 18%');
+        root.style.setProperty('--accent', '290 70% 65%');
+        root.style.setProperty('--accent-foreground', '0 0% 100%');
+        root.style.setProperty('--border', '45 40% 80%');
+        root.style.setProperty('--input', '35 40% 88%');
+        root.style.setProperty('--ring', '290 70% 65%');
+        break;
+      case 'forest':
+        // Forest theme: Rich greens with earth browns and golden accents
+        root.style.setProperty('--background', '125 30% 94%');
+        root.style.setProperty('--foreground', '125 35% 16%');
+        root.style.setProperty('--primary', '140 60% 35%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '115 25% 86%');
+        root.style.setProperty('--secondary-foreground', '125 35% 16%');
+        root.style.setProperty('--muted', '120 20% 91%');
+        root.style.setProperty('--muted-foreground', '120 18% 42%');
+        root.style.setProperty('--card', '120 35% 97%');
+        root.style.setProperty('--card-foreground', '125 35% 16%');
+        root.style.setProperty('--accent', '45 75% 55%');
+        root.style.setProperty('--accent-foreground', '25 40% 15%');
+        root.style.setProperty('--border', '115 18% 80%');
+        root.style.setProperty('--input', '120 18% 87%');
+        root.style.setProperty('--ring', '45 75% 55%');
+        break;
+      case 'lavender':
+        // Lavender theme: Soft purples with mint green and rose accents
+        root.style.setProperty('--background', '285 40% 95%');
+        root.style.setProperty('--foreground', '270 25% 18%');
+        root.style.setProperty('--primary', '275 65% 50%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '295 35% 86%');
+        root.style.setProperty('--secondary-foreground', '270 25% 18%');
+        root.style.setProperty('--muted', '280 22% 90%');
+        root.style.setProperty('--muted-foreground', '270 18% 45%');
+        root.style.setProperty('--card', '290 50% 97%');
+        root.style.setProperty('--card-foreground', '270 25% 18%');
+        root.style.setProperty('--accent', '160 45% 65%');
+        root.style.setProperty('--accent-foreground', '160 50% 15%');
+        root.style.setProperty('--border', '295 20% 82%');
+        root.style.setProperty('--input', '285 20% 88%');
+        root.style.setProperty('--ring', '160 45% 65%');
+        break;
+      case 'monochrome':
+        // Monochrome theme: Rich blacks and whites with blue accent
+        root.style.setProperty('--background', '0 0% 97%');
+        root.style.setProperty('--foreground', '0 0% 8%');
+        root.style.setProperty('--primary', '0 0% 15%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '0 0% 88%');
+        root.style.setProperty('--secondary-foreground', '0 0% 8%');
+        root.style.setProperty('--muted', '0 0% 94%');
+        root.style.setProperty('--muted-foreground', '0 0% 40%');
+        root.style.setProperty('--card', '0 0% 100%');
+        root.style.setProperty('--card-foreground', '0 0% 8%');
+        root.style.setProperty('--accent', '210 100% 50%');
+        root.style.setProperty('--accent-foreground', '0 0% 100%');
+        root.style.setProperty('--border', '0 0% 80%');
+        root.style.setProperty('--input', '0 0% 88%');
+        root.style.setProperty('--ring', '210 100% 50%');
+        break;
+    }
+  };
 
   const getIcon = (iconName: string): React.ReactNode => {
     const IconComponent = iconLibraries[theme.iconScheme]?.[iconName] || iconLibraries.normal[iconName];
