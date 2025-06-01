@@ -31,7 +31,7 @@ import {
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme } = useTheme();
+  const { theme, getSkinClasses } = useTheme();
 
   const mainNavItems = [
     { name: 'Home', href: '/', icon: Home },
@@ -51,12 +51,26 @@ export const Header: React.FC = () => {
     { name: 'Demo', href: '/demo', icon: Play }
   ];
 
+  // Get skin-specific header background classes
+  const getHeaderBackground = () => {
+    switch (theme.skin) {
+      case 'gradient':
+        return 'bg-gradient-to-r from-background/95 via-background/98 to-background/95 backdrop-blur-xl border-border/50';
+      case 'textured':
+        return 'bg-background/98 backdrop-blur-sm border-2 border-border/60 shadow-lg';
+      case 'glassmorphism':
+        return 'bg-background/20 backdrop-blur-2xl border border-white/20 shadow-2xl';
+      default:
+        return 'bg-background/95 backdrop-blur';
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-20 items-center justify-between px-4">
+    <header className={`sticky top-0 z-50 w-full border-b supports-[backdrop-filter]:bg-background/60 ${getHeaderBackground()} ${getSkinClasses()}`}>
+      <div className="w-full max-w-none flex h-24 items-center justify-between px-6 lg:px-8">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-3">
-          <div className="bg-gradient-to-br from-primary to-blue-600 text-primary-foreground rounded-xl p-3 shadow-lg">
+        <Link to="/" className="flex items-center space-x-4 flex-shrink-0">
+          <div className="bg-gradient-to-br from-primary to-blue-600 text-primary-foreground rounded-xl p-4 shadow-lg">
             <span className="text-2xl font-bold">EC</span>
           </div>
           <div>
@@ -67,13 +81,13 @@ export const Header: React.FC = () => {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-1">
+        {/* Desktop Navigation - Expanded to take more space */}
+        <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-center max-w-4xl mx-8">
           {mainNavItems.map((item) => (
             <Link
               key={item.name}
               to={item.href}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-all duration-200 hover:shadow-sm"
+              className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-all duration-200 hover:shadow-sm whitespace-nowrap"
             >
               <item.icon className="w-4 h-4" />
               {item.name}
@@ -83,7 +97,7 @@ export const Header: React.FC = () => {
           {/* More Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg">
+              <Button variant="ghost" className="flex items-center gap-1 px-4 py-3 text-sm font-medium rounded-lg whitespace-nowrap">
                 More
                 <ChevronDown className="w-4 h-4" />
               </Button>
@@ -102,12 +116,12 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Right side items */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-4 flex-shrink-0">
           {/* EdTools Button */}
           <Button 
             variant="outline" 
             size="lg" 
-            className="hidden md:flex items-center gap-2 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 hover:border-purple-300 shadow-sm font-semibold"
+            className="hidden md:flex items-center gap-3 px-6 py-3 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 hover:border-purple-300 shadow-sm font-semibold text-sm"
           >
             <Wrench className="w-5 h-5" />
             <span className="hidden lg:inline">EdTools</span>
@@ -117,7 +131,7 @@ export const Header: React.FC = () => {
           {/* Upcoming Live Session Button */}
           <Button 
             size="lg" 
-            className="hidden md:flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg font-semibold"
+            className="hidden md:flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg font-semibold text-sm"
           >
             <Video className="w-5 h-5" />
             <span className="hidden lg:inline">Live Session in 2h</span>
@@ -141,19 +155,19 @@ export const Header: React.FC = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden border-t bg-background/95 backdrop-blur">
-          <div className="container px-4 py-4 space-y-2">
+        <div className={`lg:hidden border-t ${getHeaderBackground()}`}>
+          <div className="w-full px-6 py-6 space-y-3">
             {/* Mobile EdTools and Live Session buttons */}
-            <div className="flex gap-2 mb-4">
+            <div className="flex gap-3 mb-6">
               <Button 
                 variant="outline" 
-                className="flex-1 items-center gap-2 bg-purple-50 text-purple-700 border-purple-200"
+                className="flex-1 items-center gap-2 bg-purple-50 text-purple-700 border-purple-200 py-3"
               >
                 <Wrench className="w-4 h-4" />
                 EdTools
               </Button>
               <Button 
-                className="flex-1 items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600"
+                className="flex-1 items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 py-3"
               >
                 <Video className="w-4 h-4" />
                 Live 2h
@@ -165,7 +179,7 @@ export const Header: React.FC = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="flex items-center gap-3 px-3 py-3 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors"
+                className="flex items-center gap-3 px-4 py-4 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <item.icon className="w-5 h-5" />
@@ -174,13 +188,13 @@ export const Header: React.FC = () => {
             ))}
             
             {/* More menu items */}
-            <div className="border-t pt-3 mt-3">
-              <p className="text-xs font-semibold text-muted-foreground mb-2 px-3">More</p>
+            <div className="border-t pt-4 mt-4">
+              <p className="text-xs font-semibold text-muted-foreground mb-3 px-4">More</p>
               {moreMenuItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="flex items-center gap-3 px-3 py-2 text-sm rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <item.icon className="w-4 h-4" />
