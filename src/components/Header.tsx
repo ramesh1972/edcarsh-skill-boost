@@ -14,10 +14,9 @@ export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, getSkinClasses } = useTheme();
 
-  // All navigation items
+  // Navigation items without dashboard (now in tools section)
   const allNavItems = [
     { name: 'Home', href: '/', icon: 'home' },
-    { name: 'My Dashboard', href: '/dashboard', icon: 'student' },
     { name: 'All Courses', href: '/courses', icon: 'course' },
     { name: 'Express Intent', href: '/express-intent', icon: 'target' },
     { name: 'Corporate', href: '/corporate', icon: 'building' },
