@@ -44,28 +44,20 @@ const FAQ = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8 text-center animate-slide-in-up">
-          <h1 className="text-4xl font-bold mb-4 hover-color-shift">Frequently Asked Questions</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto animate-slide-in-up animate-delay-200">
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Everything you need to know about EdCrash crash courses
           </p>
         </div>
 
         <div className="max-w-3xl mx-auto">
-          <Card className="animate-slide-in-left hover-lift hover-glow">
+          <Card>
             <CardContent className="pt-6">
               <Accordion type="single" collapsible className="w-full">
                 {faqs.map((faq, index) => (
-                  <AccordionItem 
-                    key={index} 
-                    value={`item-${index}`}
-                    className={`${
-                      index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'
-                    } animate-delay-${(index + 1) * 100}`}
-                  >
-                    <AccordionTrigger className="text-left hover:text-primary transition-colors hover-color-shift">
-                      {faq.question}
-                    </AccordionTrigger>
+                  <AccordionItem key={index} value={`item-${index}`}>
+                    <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
                     <AccordionContent className="text-muted-foreground">
                       {faq.answer}
                     </AccordionContent>
@@ -75,10 +67,10 @@ const FAQ = () => {
             </CardContent>
           </Card>
 
-          <div className="mt-8 text-center animate-slide-in-up animate-delay-500">
-            <Card className="hover-lift hover-glow">
+          <div className="mt-8 text-center">
+            <Card>
               <CardHeader>
-                <CardTitle className="hover-color-shift">Still have questions?</CardTitle>
+                <CardTitle>Still have questions?</CardTitle>
                 <CardDescription>
                   Our support team is here to help you succeed
                 </CardDescription>

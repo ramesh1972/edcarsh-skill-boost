@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -37,25 +36,25 @@ const Index = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32">
         <div className="container px-4 mx-auto">
           <div className="text-center">
-            <Badge className="mb-4 animate-slide-in-down hover-scale" variant="secondary">
+            <Badge className="mb-4" variant="secondary">
               🚀 Launch Your Skills in Hours, Not Months
             </Badge>
-            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6 animate-slide-in-left hover-color-shift">
+            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
               Master Skills Fast with{' '}
-              <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent animate-float">
+              <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
                 Crash Courses
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto animate-slide-in-right animate-delay-200">
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in-up animate-delay-300">
-              <Button size="lg" className="gap-2 hover-lift hover-glow">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="gap-2">
                 <Play className="w-5 h-5" />
                 Start Learning Now
               </Button>
-              <Button size="lg" variant="outline" className="gap-2 hover-border-glow">
+              <Button size="lg" variant="outline" className="gap-2">
                 <Calendar className="w-5 h-5" />
                 View Upcoming Sessions
               </Button>
@@ -67,8 +66,8 @@ const Index = () => {
       {/* USPs Section */}
       <section className="py-20 bg-muted/50 relative overflow-hidden">
         <div className="container px-4 mx-auto">
-          <div className="text-center mb-16 animate-slide-in-up">
-            <h2 className="text-3xl font-bold mb-4 hover-color-shift">Why Choose EdCrash?</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">Why Choose EdCrash?</h2>
             <p className="text-xl text-muted-foreground">
               We're revolutionizing online education with our unique approach
             </p>
@@ -96,9 +95,7 @@ const Index = () => {
               {usps.map((usp, index) => (
                 <Card 
                   key={index} 
-                  className={`text-center hover:shadow-lg transition-all duration-300 hover:scale-105 hover:border-primary/50 group relative bg-background/80 backdrop-blur-sm hover-lift hover-glow ${
-                    index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'
-                  } animate-delay-${(index + 1) * 100}`}
+                  className="text-center hover:shadow-lg transition-all duration-300 hover:scale-105 hover:border-primary/50 group relative bg-background/80 backdrop-blur-sm"
                 >
                   {/* Connection dots */}
                   <div className="hidden lg:block absolute -top-2 -left-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
@@ -107,9 +104,9 @@ const Index = () => {
                   <div className="hidden lg:block absolute -bottom-2 -right-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
                   
                   <CardHeader>
-                    <div className="mx-auto mb-4 relative hover-scale">
+                    <div className="mx-auto mb-4 relative">
                       <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-blue-600/10 rounded-full blur-xl group-hover:blur-2xl transition-all"></div>
-                      <div className={`relative z-10 ${usp.iconColor} transition-all duration-300 group-hover:text-primary`}>
+                      <div className={`relative z-10 ${usp.iconColor}`}>
                         {getIcon(usp.iconName)}
                       </div>
                     </div>
@@ -125,7 +122,7 @@ const Index = () => {
             </div>
 
             {/* Central connecting element */}
-            <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-r from-primary to-blue-600 rounded-full opacity-30 animate-pulse-glow"></div>
+            <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-r from-primary to-blue-600 rounded-full opacity-30 animate-pulse"></div>
           </div>
         </div>
       </section>
@@ -133,15 +130,15 @@ const Index = () => {
       {/* Featured Courses */}
       <section className="py-20">
         <div className="container px-4 mx-auto">
-          <div className="flex justify-between items-center mb-12 animate-slide-in-left">
+          <div className="flex justify-between items-center mb-12">
             <div>
-              <h2 className="text-3xl font-bold mb-4 hover-color-shift">Upcoming Courses</h2>
+              <h2 className="text-3xl font-bold mb-4">Upcoming Courses</h2>
               <p className="text-xl text-muted-foreground">
                 Start your learning journey with these popular courses
               </p>
             </div>
             <Link to="/courses">
-              <Button variant="outline" className="gap-2 hover-border-glow hover-scale">
+              <Button variant="outline" className="gap-2">
                 View All Courses
                 <ArrowRight className="w-4 h-4" />
               </Button>
@@ -149,48 +146,43 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredCourses.map((course, index) => (
-              <Card 
-                key={index} 
-                className={`hover:shadow-lg transition-all duration-300 hover-lift hover-glow ${
-                  index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'
-                } animate-delay-${(index + 1) * 100}`}
-              >
+              <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex gap-2">
                       {course.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="text-xs hover-scale-small">
+                        <Badge key={tag} variant="secondary" className="text-xs">
                           {tag}
                         </Badge>
                       ))}
                     </div>
-                    <div className="flex items-center gap-1 hover-scale">
+                    <div className="flex items-center gap-1">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       <span className="text-sm font-medium">{course.rating}</span>
                     </div>
                   </div>
-                  <CardTitle className="text-xl hover-color-shift">{course.title}</CardTitle>
+                  <CardTitle className="text-xl">{course.title}</CardTitle>
                   <CardDescription>by {course.instructor}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-2 hover-color-shift">
+                      <div className="flex items-center gap-2">
                         {getIcon('time')}
                         {course.duration}
                       </div>
-                      <div className="flex items-center gap-2 hover-color-shift">
+                      <div className="flex items-center gap-2">
                         {getIcon('student')}
                         {course.students.toLocaleString()} students
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-primary hover-scale">{course.price}</span>
+                      <span className="text-2xl font-bold text-primary">{course.price}</span>
                       <div className="text-sm text-muted-foreground">
                         Next: {course.nextSession}
                       </div>
                     </div>
-                    <Button className="w-full gap-2 hover-lift hover-glow">
+                    <Button className="w-full gap-2">
                       {getIcon('course')}
                       Enroll Now
                     </Button>
@@ -206,22 +198,22 @@ const Index = () => {
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container px-4 mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { value: "50K+", label: "Active Students" },
-              { value: "500+", label: "Courses Available" },
-              { value: "95%", label: "Success Rate" },
-              { value: "24/7", label: "Support Available" }
-            ].map((stat, index) => (
-              <div 
-                key={index}
-                className={`hover-scale hover-glow ${
-                  index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'
-                } animate-delay-${(index + 1) * 100}`}
-              >
-                <div className="text-4xl font-bold mb-2">{stat.value}</div>
-                <div className="text-sm opacity-90">{stat.label}</div>
-              </div>
-            ))}
+            <div>
+              <div className="text-4xl font-bold mb-2">50K+</div>
+              <div className="text-sm opacity-90">Active Students</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">500+</div>
+              <div className="text-sm opacity-90">Courses Available</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">95%</div>
+              <div className="text-sm opacity-90">Success Rate</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">24/7</div>
+              <div className="text-sm opacity-90">Support Available</div>
+            </div>
           </div>
         </div>
       </section>
@@ -229,27 +221,22 @@ const Index = () => {
       {/* Testimonials */}
       <section className="py-20 bg-muted/50">
         <div className="container px-4 mx-auto">
-          <div className="text-center mb-16 animate-slide-in-up">
-            <h2 className="text-3xl font-bold mb-4 hover-color-shift">What Our Students Say</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">What Our Students Say</h2>
             <p className="text-xl text-muted-foreground">
               Real success stories from our learning community
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {homeTestimonials.map((testimonial, index) => (
-              <Card 
-                key={index}
-                className={`hover-lift hover-glow ${
-                  index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'
-                } animate-delay-${(index + 1) * 100}`}
-              >
+              <Card key={index}>
                 <CardHeader>
                   <div className="flex items-center gap-1 mb-2">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400 hover-scale" />
+                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <CardTitle className="text-lg hover-color-shift">{testimonial.name}</CardTitle>
+                  <CardTitle className="text-lg">{testimonial.name}</CardTitle>
                   <CardDescription>{testimonial.role}</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -264,16 +251,16 @@ const Index = () => {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-blue-600 text-white">
         <div className="container px-4 mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4 animate-slide-in-up hover-scale">Ready to Crash Your Way to Success?</h2>
-          <p className="text-xl mb-8 opacity-90 animate-slide-in-up animate-delay-200">
+          <h2 className="text-3xl font-bold mb-4">Ready to Crash Your Way to Success?</h2>
+          <p className="text-xl mb-8 opacity-90">
             Join thousands of professionals who've accelerated their careers with EdCrash
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in-up animate-delay-300">
-            <Button size="lg" variant="secondary" className="gap-2 hover-lift hover-glow">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" variant="secondary" className="gap-2">
               <Target className="w-5 h-5" />
               Express Your Learning Intent
             </Button>
-            <Button size="lg" variant="outline" className="gap-2 text-white border-white hover:bg-white hover:text-primary hover-border-glow">
+            <Button size="lg" variant="outline" className="gap-2 text-white border-white hover:bg-white hover:text-primary">
               <Calendar className="w-5 h-5" />
               View Course Calendar
             </Button>
@@ -282,11 +269,11 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-background border-t animate-slide-in-up">
+      <footer className="py-12 bg-background border-t">
         <div className="container px-4 mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="animate-slide-in-left">
-              <div className="flex items-center space-x-2 mb-4 hover-scale">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
                 <div className="bg-primary text-primary-foreground rounded-lg p-2">
                   <span className="text-xl font-bold">EC</span>
                 </div>
@@ -296,32 +283,32 @@ const Index = () => {
                 Accelerating careers through focused, practical education.
               </p>
             </div>
-            <div className="animate-slide-in-right animate-delay-100">
-              <h3 className="font-semibold mb-4 hover-color-shift">Courses</h3>
+            <div>
+              <h3 className="font-semibold mb-4">Courses</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link to="/courses" className="hover:text-foreground hover-color-shift">Browse All</Link></li>
-                <li><Link to="/express-intent" className="hover:text-foreground hover-color-shift">Express Intent</Link></li>
-                <li><Link to="/calendar" className="hover:text-foreground hover-color-shift">Course Calendar</Link></li>
+                <li><Link to="/courses" className="hover:text-foreground">Browse All</Link></li>
+                <li><Link to="/express-intent" className="hover:text-foreground">Express Intent</Link></li>
+                <li><Link to="/calendar" className="hover:text-foreground">Course Calendar</Link></li>
               </ul>
             </div>
-            <div className="animate-slide-in-left animate-delay-200">
-              <h3 className="font-semibold mb-4 hover-color-shift">Community</h3>
+            <div>
+              <h3 className="font-semibold mb-4">Community</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link to="/instructors" className="hover:text-foreground hover-color-shift">Instructors</Link></li>
-                <li><Link to="/testimonials" className="hover:text-foreground hover-color-shift">Testimonials</Link></li>
-                <li><Link to="/community" className="hover:text-foreground hover-color-shift">Discussion</Link></li>
+                <li><Link to="/instructors" className="hover:text-foreground">Instructors</Link></li>
+                <li><Link to="/testimonials" className="hover:text-foreground">Testimonials</Link></li>
+                <li><Link to="/community" className="hover:text-foreground">Discussion</Link></li>
               </ul>
             </div>
-            <div className="animate-slide-in-right animate-delay-300">
-              <h3 className="font-semibold mb-4 hover-color-shift">Support</h3>
+            <div>
+              <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li><Link to="/faq" className="hover:text-foreground hover-color-shift">FAQ</Link></li>
-                <li><Link to="/contact" className="hover:text-foreground hover-color-shift">Contact</Link></li>
-                <li><Link to="/about" className="hover:text-foreground hover-color-shift">About Us</Link></li>
+                <li><Link to="/faq" className="hover:text-foreground">FAQ</Link></li>
+                <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
+                <li><Link to="/about" className="hover:text-foreground">About Us</Link></li>
               </ul>
             </div>
           </div>
-          <div className="border-t mt-8 pt-8 text-center text-muted-foreground animate-slide-in-up animate-delay-500">
+          <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
             <p>&copy; 2024 EdCrash. All rights reserved.</p>
           </div>
         </div>

@@ -44,73 +44,68 @@ const Instructors = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8 animate-slide-in-left">
-          <h1 className="text-4xl font-bold mb-4 hover-color-shift">Expert Instructors</h1>
-          <p className="text-lg text-muted-foreground animate-slide-in-right animate-delay-200">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold mb-4">Expert Instructors</h1>
+          <p className="text-lg text-muted-foreground">
             Learn from industry professionals with real-world experience
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {instructors.map((instructor, index) => (
-            <Card 
-              key={instructor.id} 
-              className={`hover:shadow-lg transition-all duration-300 hover-lift hover-glow ${
-                index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'
-              } animate-delay-${(index + 1) * 200}`}
-            >
+          {instructors.map((instructor) => (
+            <Card key={instructor.id} className="hover:shadow-lg transition-shadow">
               <CardHeader className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold hover-scale">
+                <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
                   {instructor.name.split(' ').map(n => n[0]).join('')}
                 </div>
-                <CardTitle className="text-xl hover-color-shift">{instructor.name}</CardTitle>
+                <CardTitle className="text-xl">{instructor.name}</CardTitle>
                 <CardDescription>{instructor.expertise}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-center gap-1 text-yellow-500">
-                  <Star className="w-4 h-4 fill-current hover-scale" />
+                  <Star className="w-4 h-4 fill-current" />
                   <span className="font-medium">{instructor.rating}</span>
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 text-center text-sm">
-                  <div className="hover-color-shift">
+                  <div>
                     <div className="flex items-center justify-center gap-1 text-muted-foreground">
-                      <Users className="w-3 h-3 hover-scale" />
+                      <Users className="w-3 h-3" />
                     </div>
                     <p className="font-medium">{instructor.students}</p>
                     <p className="text-xs text-muted-foreground">Students</p>
                   </div>
-                  <div className="hover-color-shift">
+                  <div>
                     <div className="flex items-center justify-center gap-1 text-muted-foreground">
-                      <BookOpen className="w-3 h-3 hover-scale" />
+                      <BookOpen className="w-3 h-3" />
                     </div>
                     <p className="font-medium">{instructor.courses}</p>
                     <p className="text-xs text-muted-foreground">Courses</p>
                   </div>
-                  <div className="hover-color-shift">
+                  <div>
                     <div className="flex items-center justify-center gap-1 text-muted-foreground">
-                      <Award className="w-3 h-3 hover-scale" />
+                      <Award className="w-3 h-3" />
                     </div>
                     <p className="font-medium text-xs">{instructor.experience}</p>
                   </div>
                 </div>
 
-                <Button className="w-full hover-lift hover-glow" variant="outline">View Profile</Button>
+                <Button className="w-full" variant="outline">View Profile</Button>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="mt-12 text-center animate-slide-in-up animate-delay-700">
-          <Card className="max-w-2xl mx-auto hover-lift hover-glow">
+        <div className="mt-12 text-center">
+          <Card className="max-w-2xl mx-auto">
             <CardHeader>
-              <CardTitle className="hover-color-shift">Want to Become an Instructor?</CardTitle>
+              <CardTitle>Want to Become an Instructor?</CardTitle>
               <CardDescription>
                 Share your expertise and earn up to $100/hour teaching crash courses
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button size="lg" className="hover-lift hover-glow">Apply to Teach</Button>
+              <Button size="lg">Apply to Teach</Button>
             </CardContent>
           </Card>
         </div>
