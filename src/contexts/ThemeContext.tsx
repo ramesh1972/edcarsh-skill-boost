@@ -145,18 +145,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     body.classList.remove('font-technical', 'font-professional', 'font-elegant', 'font-modern', 'font-playful');
     root.classList.remove('material-design', 'human-interface', 'fluent-design', 'ant-design', 'carbon-design', 'atlassian-design', 'bootstrap-design', 'polaris-design', 'lightning-design', 'tailwind-design');
     root.classList.remove('layout-compact', 'layout-spacious', 'layout-modern', 'layout-default');
-    
-    // Remove all skin classes from both root and body
     root.classList.remove('skin-default', 'skin-gradient', 'skin-textured', 'skin-glassmorphism');
-    body.classList.remove('skin-default', 'skin-gradient', 'skin-textured', 'skin-glassmorphism');
     
     // Apply current theme classes
     root.classList.add(theme.colorTheme);
     root.classList.add(`${theme.designSystem}-design`);
     root.classList.add(`layout-${theme.layout}`);
-    
-    // Apply skin classes to body for better effect
-    body.classList.add(`skin-${theme.skin}`);
+    root.classList.add(`skin-${theme.skin}`);
     
     // Apply typography to body
     body.classList.add(`font-${theme.typography}`);
