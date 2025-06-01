@@ -4,7 +4,6 @@ import { Header } from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Users, DollarSign, Calendar } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
 
@@ -45,21 +44,21 @@ const Courses = () => {
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-1">
-                    {theme.iconScheme === 'normal' ? <Clock className="w-4 h-4" /> : <span>{getIcon('time')}</span>}
+                    {getIcon('time')}
                     {course.duration}
                   </div>
                   <div className="flex items-center gap-1">
-                    {theme.iconScheme === 'normal' ? <Users className="w-4 h-4" /> : <span>{getIcon('student')}</span>}
+                    {getIcon('student')}
                     {course.students} enrolled
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
                   <Badge variant="secondary" className="flex items-center gap-1">
-                    {theme.iconScheme === 'normal' ? <DollarSign className="w-3 h-3" /> : <span>{getIcon('price')}</span>}
+                    {getIcon('price')}
                     {course.price}
                   </Badge>
                   <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                    {theme.iconScheme === 'normal' ? <Calendar className="w-4 h-4" /> : <span>📅</span>}
+                    📅
                     {course.nextSession}
                   </div>
                 </div>
