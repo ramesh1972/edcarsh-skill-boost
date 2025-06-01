@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Settings, Palette, Type, Image, Layout, Brush } from 'lucide-react';
+import { Settings, Palette, Type, Image, Layout, Brush, Layers } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import {
   DropdownMenu,
@@ -26,7 +26,7 @@ export const ThemeSelector: React.FC = () => {
           <span className="hidden sm:inline">Theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-64 bg-white border border-gray-200 shadow-lg z-50">
+      <DropdownMenuContent className="w-64">
         <DropdownMenuLabel>Customize Theme</DropdownMenuLabel>
         <DropdownMenuSeparator />
         
@@ -35,7 +35,7 @@ export const ThemeSelector: React.FC = () => {
             <Palette className="w-4 h-4" />
             Color Theme
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="bg-white border border-gray-200 shadow-lg z-50">
+          <DropdownMenuSubContent>
             {['light', 'dark', 'vibrant', 'vivid', 'minimal', 'grayscale'].map((color) => (
               <DropdownMenuItem
                 key={color}
@@ -53,7 +53,7 @@ export const ThemeSelector: React.FC = () => {
             <Type className="w-4 h-4" />
             Typography
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="bg-white border border-gray-200 shadow-lg z-50">
+          <DropdownMenuSubContent>
             {['technical', 'professional', 'elegant', 'modern', 'playful'].map((typography) => (
               <DropdownMenuItem
                 key={typography}
@@ -71,7 +71,7 @@ export const ThemeSelector: React.FC = () => {
             <Image className="w-4 h-4" />
             Icon Scheme
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="bg-white border border-gray-200 shadow-lg z-50">
+          <DropdownMenuSubContent>
             {['normal', 'cartoon', 'emoji', 'avatars'].map((iconScheme) => (
               <DropdownMenuItem
                 key={iconScheme}
@@ -86,10 +86,39 @@ export const ThemeSelector: React.FC = () => {
 
         <DropdownMenuSub>
           <DropdownMenuSubTrigger className="flex items-center gap-2">
+            <Layers className="w-4 h-4" />
+            Design System
+          </DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            {[
+              { key: 'tailwind', label: 'Tailwind CSS' },
+              { key: 'material', label: 'Material Design' },
+              { key: 'human', label: 'Human Interface' },
+              { key: 'fluent', label: 'Fluent Design' },
+              { key: 'ant', label: 'Ant Design' },
+              { key: 'carbon', label: 'Carbon Design' },
+              { key: 'atlassian', label: 'Atlassian' },
+              { key: 'bootstrap', label: 'Bootstrap' },
+              { key: 'polaris', label: 'Polaris' },
+              { key: 'lightning', label: 'Lightning' }
+            ].map((designSystem) => (
+              <DropdownMenuItem
+                key={designSystem.key}
+                onClick={() => updateTheme({ designSystem: designSystem.key as any })}
+                className={theme.designSystem === designSystem.key ? 'bg-primary text-primary-foreground' : ''}
+              >
+                {designSystem.label}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger className="flex items-center gap-2">
             <Layout className="w-4 h-4" />
             Layout
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="bg-white border border-gray-200 shadow-lg z-50">
+          <DropdownMenuSubContent>
             {['default', 'compact', 'spacious', 'modern'].map((layout) => (
               <DropdownMenuItem
                 key={layout}
@@ -107,7 +136,7 @@ export const ThemeSelector: React.FC = () => {
             <Brush className="w-4 h-4" />
             Skin
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="bg-white border border-gray-200 shadow-lg z-50">
+          <DropdownMenuSubContent>
             {['default', 'gradient', 'solid', 'pattern'].map((skin) => (
               <DropdownMenuItem
                 key={skin}
