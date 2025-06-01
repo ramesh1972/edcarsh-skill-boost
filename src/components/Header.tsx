@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
@@ -20,15 +21,13 @@ export const Header: React.FC = () => {
   const { theme, getSkinClasses, getIcon } = useTheme();
   const location = useLocation();
 
-  const mainNavItems = [
+  // All navigation items
+  const allNavItems = [
     { name: 'Home', href: '/', icon: 'home' },
     { name: 'My Dashboard', href: '/dashboard', icon: 'student' },
     { name: 'All Courses', href: '/courses', icon: 'course' },
     { name: 'Express Intent', href: '/express-intent', icon: 'target' },
-    { name: 'Corporate', href: '/corporate', icon: 'building' }
-  ];
-
-  const moreMenuItems = [
+    { name: 'Corporate', href: '/corporate', icon: 'building' },
     { name: 'About Instructors', href: '/instructors', icon: 'instructor' },
     { name: 'Testimonials', href: '/testimonials', icon: 'testimonial' },
     { name: 'FAQ', href: '/faq', icon: 'help' },
@@ -37,6 +36,10 @@ export const Header: React.FC = () => {
     { name: 'Help', href: '/help', icon: 'help' },
     { name: 'Demo', href: '/demo', icon: 'live' }
   ];
+
+  // Split items: first 5 in main nav, rest in more menu
+  const mainNavItems = allNavItems.slice(0, 5);
+  const moreMenuItems = allNavItems.slice(5);
 
   // Check if a menu item is active
   const isActiveRoute = (href: string) => {
@@ -111,7 +114,7 @@ export const Header: React.FC = () => {
                 <ChevronDown className="w-4 h-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
+            <DropdownMenuContent align="end" className="w-48 bg-background border shadow-lg">
               {moreMenuItems.map((item) => (
                 <DropdownMenuItem key={item.name} asChild>
                   <Link 
@@ -193,8 +196,8 @@ export const Header: React.FC = () => {
               <ThemeSelector />
             </div>
 
-            {/* Main nav items */}
-            {mainNavItems.map((item) => (
+            {/* All nav items for mobile - no separation */}
+            {allNavItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
@@ -209,26 +212,6 @@ export const Header: React.FC = () => {
                 {item.name}
               </Link>
             ))}
-            
-            {/* More menu items */}
-            <div className="border-t pt-4 mt-4">
-              <p className="text-xs font-semibold text-muted-foreground mb-3 px-4">More</p>
-              {moreMenuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`flex items-center gap-3 px-4 py-3 text-sm rounded-lg transition-colors ${
-                    isActiveRoute(item.href)
-                      ? 'bg-primary/10 text-primary font-semibold'
-                      : 'hover:bg-accent hover:text-accent-foreground'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {getIcon(item.icon)}
-                  {item.name}
-                </Link>
-              ))}
-            </div>
           </div>
         </div>
       )}
