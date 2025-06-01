@@ -149,7 +149,7 @@ const Index = () => {
       </section>
 
       {/* USPs Section */}
-      <section className="py-20 bg-muted/50">
+      <section className="py-20 bg-muted/50 relative overflow-hidden">
         <div className="container px-4 mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Why Choose EdCrash?</h2>
@@ -157,22 +157,57 @@ const Index = () => {
               We're revolutionizing online education with our unique approach
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {usps.map((usp, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="mx-auto mb-4">
-                    {usp.icon}
-                  </div>
-                  <CardTitle className="text-xl">{usp.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base">
-                    {usp.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
+          
+          {/* Connected Cards Grid */}
+          <div className="relative">
+            {/* Connection Lines - Hidden on mobile, visible on larger screens */}
+            <div className="hidden lg:block absolute inset-0 pointer-events-none">
+              {/* Horizontal lines */}
+              <div className="absolute top-1/3 left-1/3 w-1/3 h-0.5 bg-gradient-to-r from-primary/30 to-blue-500/30"></div>
+              <div className="absolute top-2/3 left-1/3 w-1/3 h-0.5 bg-gradient-to-r from-green-500/30 to-purple-500/30"></div>
+              
+              {/* Vertical lines */}
+              <div className="absolute left-1/3 top-1/3 w-0.5 h-1/3 bg-gradient-to-b from-yellow-500/30 to-green-500/30"></div>
+              <div className="absolute right-1/3 top-1/3 w-0.5 h-1/3 bg-gradient-to-b from-blue-500/30 to-red-500/30"></div>
+              
+              {/* Diagonal connections */}
+              <div className="absolute top-1/3 left-1/3 w-0.5 h-8 bg-primary/20 transform rotate-45 origin-bottom"></div>
+              <div className="absolute top-2/3 right-1/3 w-0.5 h-8 bg-primary/20 transform -rotate-45 origin-top"></div>
+            </div>
+
+            {/* Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+              {usps.map((usp, index) => (
+                <Card 
+                  key={index} 
+                  className="text-center hover:shadow-lg transition-all duration-300 hover:scale-105 hover:border-primary/50 group relative bg-background/80 backdrop-blur-sm"
+                >
+                  {/* Connection dots */}
+                  <div className="hidden lg:block absolute -top-2 -left-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
+                  <div className="hidden lg:block absolute -top-2 -right-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
+                  <div className="hidden lg:block absolute -bottom-2 -left-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
+                  <div className="hidden lg:block absolute -bottom-2 -right-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
+                  
+                  <CardHeader>
+                    <div className="mx-auto mb-4 relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-blue-600/10 rounded-full blur-xl group-hover:blur-2xl transition-all"></div>
+                      <div className="relative z-10">
+                        {usp.icon}
+                      </div>
+                    </div>
+                    <CardTitle className="text-xl group-hover:text-primary transition-colors">{usp.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-base">
+                      {usp.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Central connecting element */}
+            <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-r from-primary to-blue-600 rounded-full opacity-30 animate-pulse"></div>
           </div>
         </div>
       </section>
