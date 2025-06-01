@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -22,96 +21,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Header } from '@/components/Header';
 import { useTheme } from '@/contexts/ThemeContext';
+import { featuredCourses } from '@/data/courses';
+import { homeTestimonials } from '@/data/testimonials';
+import { usps } from '@/data/usps';
 
 const Index = () => {
   const { theme } = useTheme();
-
-  const featuredCourses = [
-    {
-      title: "React Crash Course",
-      instructor: "Sarah Chen",
-      duration: "12 hours",
-      price: "$25",
-      rating: 4.9,
-      students: 2847,
-      nextSession: "Tomorrow 7PM",
-      tags: ["Beginner", "Live Session"]
-    },
-    {
-      title: "Python for Data Science",
-      instructor: "Dr. Mike Rodriguez",
-      duration: "16 hours",
-      price: "$25",
-      rating: 4.8,
-      students: 1923,
-      nextSession: "Friday 8PM",
-      tags: ["Intermediate", "Tools-focused"]
-    },
-    {
-      title: "Digital Marketing Fundamentals",
-      instructor: "Emma Wilson",
-      duration: "8 hours",
-      price: "$25",
-      rating: 4.9,
-      students: 3102,
-      nextSession: "Saturday 6PM",
-      tags: ["Beginner", "Multi-lingual"]
-    }
-  ];
-
-  const usps = [
-    {
-      icon: <Zap className="w-8 h-8 text-yellow-500" />,
-      title: "Crash Course Focus",
-      description: "Short, intense courses designed for rapid upskilling - no lengthy lectures, just practical knowledge"
-    },
-    {
-      icon: <Clock className="w-8 h-8 text-blue-500" />,
-      title: "Short & Terse Format",
-      description: "8-30 hour courses that get straight to the point, perfect for busy professionals"
-    },
-    {
-      icon: <Target className="w-8 h-8 text-green-500" />,
-      title: "Tools-Oriented Learning",
-      description: "Learn using industry-appropriate tools and real-world applications"
-    },
-    {
-      icon: <Calendar className="w-8 h-8 text-purple-500" />,
-      title: "Live Sessions",
-      description: "2-8 hours daily live sessions outside office hours for working professionals"
-    },
-    {
-      icon: <DollarSign className="w-8 h-8 text-green-600" />,
-      title: "Super Affordable",
-      description: "Premium quality education starting at just $25 per course"
-    },
-    {
-      icon: <Globe className="w-8 h-8 text-red-500" />,
-      title: "Multi-lingual Support",
-      description: "Courses available in multiple languages to reach global learners"
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: "Alex Thompson",
-      role: "Software Developer",
-      content: "EdCrash's React course helped me land my dream job in just 2 weeks! The live sessions were incredibly engaging.",
-      rating: 5
-    },
-    {
-      name: "Maria Garcia",
-      role: "Marketing Manager",
-      content: "Perfect for my busy schedule. The $25 price point is unbeatable for the quality of content provided.",
-      rating: 5
-    },
-    {
-      name: "David Kim",
-      role: "Data Analyst",
-      content: "Tools-focused approach made all the difference. I was implementing what I learned immediately at work.",
-      rating: 5
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -313,7 +228,7 @@ const Index = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+            {homeTestimonials.map((testimonial, index) => (
               <Card key={index}>
                 <CardHeader>
                   <div className="flex items-center gap-1 mb-2">

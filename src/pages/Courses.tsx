@@ -6,39 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Clock, Users, DollarSign, Calendar } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { courses } from '@/data/courses';
 
 const Courses = () => {
   const { theme, getIcon, getBackground } = useTheme();
-
-  const courses = [
-    {
-      id: 1,
-      title: "React Development Crash Course",
-      description: "Master React in just 16 hours with hands-on projects",
-      duration: "16 hours",
-      price: "$25",
-      students: 250,
-      nextSession: "Dec 15, 2024"
-    },
-    {
-      id: 2,
-      title: "Python for Data Science",
-      description: "Learn Python data analysis tools and techniques",
-      duration: "20 hours",
-      price: "$25",
-      students: 180,
-      nextSession: "Dec 18, 2024"
-    },
-    {
-      id: 3,
-      title: "Digital Marketing Essentials",
-      description: "Complete digital marketing strategy in 12 hours",
-      duration: "12 hours",
-      price: "$25",
-      students: 320,
-      nextSession: "Dec 20, 2024"
-    }
-  ];
 
   return (
     <div className={`min-h-screen bg-background ${getBackground()}`}>

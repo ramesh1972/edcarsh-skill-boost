@@ -1,42 +1,12 @@
-
 import React from 'react';
 import { Header } from '@/components/Header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Star, Quote } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { testimonials } from '@/data/testimonials';
 
 const Testimonials = () => {
   const { theme, getIcon, getBackground } = useTheme();
-
-  const testimonials = [
-    {
-      id: 1,
-      name: "Alex Thompson",
-      role: "Software Developer",
-      course: "React Development Crash Course",
-      rating: 5,
-      text: "Absolutely amazing! I went from zero React knowledge to building my first app in just 16 hours. The instructor was fantastic and the pace was perfect.",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      name: "Maria Garcia",
-      role: "Marketing Manager",
-      course: "Digital Marketing Essentials",
-      rating: 5,
-      text: "This course transformed my marketing approach. In just 12 hours, I learned more practical skills than in months of traditional courses. Highly recommended!",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      name: "David Kim",
-      role: "Data Analyst",
-      course: "Python for Data Science",
-      rating: 5,
-      text: "The perfect crash course for busy professionals. Live sessions were interactive and the $25 price point is unbeatable for the quality of instruction.",
-      image: "/placeholder.svg"
-    }
-  ];
 
   return (
     <div className={`min-h-screen bg-background ${getBackground()}`}>
