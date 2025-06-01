@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Settings, Palette, Type, Image, Layout, Brush, Layers, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -38,6 +39,12 @@ export const ThemeSelector: React.FC = () => {
     // Don't close the menu, keep it open for multiple changes
   };
 
+  const handleItemClick = (themeUpdate: any, event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    handleThemeChange(themeUpdate);
+  };
+
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
@@ -69,7 +76,8 @@ export const ThemeSelector: React.FC = () => {
             {colorThemes.map((color) => (
               <DropdownMenuItem
                 key={color.key}
-                onClick={() => handleThemeChange({ colorTheme: color.key as any })}
+                onSelect={(e) => e.preventDefault()}
+                onClick={(e) => handleItemClick({ colorTheme: color.key as any }, e)}
                 className={`flex flex-col items-start gap-1 p-3 ${theme.colorTheme === color.key ? 'bg-primary text-primary-foreground' : ''}`}
               >
                 <div className="font-medium">{color.label}</div>
@@ -88,7 +96,8 @@ export const ThemeSelector: React.FC = () => {
             {['technical', 'professional', 'elegant', 'modern', 'playful'].map((typography) => (
               <DropdownMenuItem
                 key={typography}
-                onClick={() => handleThemeChange({ typography: typography as any })}
+                onSelect={(e) => e.preventDefault()}
+                onClick={(e) => handleItemClick({ typography: typography as any }, e)}
                 className={theme.typography === typography ? 'bg-primary text-primary-foreground' : ''}
               >
                 {typography.charAt(0).toUpperCase() + typography.slice(1)}
@@ -106,7 +115,8 @@ export const ThemeSelector: React.FC = () => {
             {['normal', 'cartoon', 'emoji', 'avatars'].map((iconScheme) => (
               <DropdownMenuItem
                 key={iconScheme}
-                onClick={() => handleThemeChange({ iconScheme: iconScheme as any })}
+                onSelect={(e) => e.preventDefault()}
+                onClick={(e) => handleItemClick({ iconScheme: iconScheme as any }, e)}
                 className={theme.iconScheme === iconScheme ? 'bg-primary text-primary-foreground' : ''}
               >
                 {iconScheme.charAt(0).toUpperCase() + iconScheme.slice(1)}
@@ -135,7 +145,8 @@ export const ThemeSelector: React.FC = () => {
             ].map((designSystem) => (
               <DropdownMenuItem
                 key={designSystem.key}
-                onClick={() => handleThemeChange({ designSystem: designSystem.key as any })}
+                onSelect={(e) => e.preventDefault()}
+                onClick={(e) => handleItemClick({ designSystem: designSystem.key as any }, e)}
                 className={theme.designSystem === designSystem.key ? 'bg-primary text-primary-foreground' : ''}
               >
                 {designSystem.label}
@@ -153,7 +164,8 @@ export const ThemeSelector: React.FC = () => {
             {['default', 'compact', 'spacious', 'modern'].map((layout) => (
               <DropdownMenuItem
                 key={layout}
-                onClick={() => handleThemeChange({ layout: layout as any })}
+                onSelect={(e) => e.preventDefault()}
+                onClick={(e) => handleItemClick({ layout: layout as any }, e)}
                 className={theme.layout === layout ? 'bg-primary text-primary-foreground' : ''}
               >
                 {layout.charAt(0).toUpperCase() + layout.slice(1)}
@@ -171,7 +183,8 @@ export const ThemeSelector: React.FC = () => {
             {skinOptions.map((skin) => (
               <DropdownMenuItem
                 key={skin.key}
-                onClick={() => handleThemeChange({ skin: skin.key as any })}
+                onSelect={(e) => e.preventDefault()}
+                onClick={(e) => handleItemClick({ skin: skin.key as any }, e)}
                 className={`flex flex-col items-start gap-1 p-3 ${theme.skin === skin.key ? 'bg-primary text-primary-foreground' : ''}`}
               >
                 <div className="font-medium">{skin.label}</div>
@@ -182,7 +195,7 @@ export const ThemeSelector: React.FC = () => {
         </DropdownMenuSub>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={resetTheme}>
+        <DropdownMenuItem onSelect={(e) => e.preventDefault()} onClick={resetTheme}>
           Reset to Default
         </DropdownMenuItem>
       </DropdownMenuContent>
