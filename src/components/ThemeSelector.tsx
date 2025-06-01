@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Settings, Palette, Type, Image, Layout, Brush, Layers, X, ChevronLeft } from 'lucide-react';
+import { Settings, Palette, Type, Image, Layout, Brush, Layers } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import {
   DropdownMenu,
@@ -33,40 +33,23 @@ export const ThemeSelector: React.FC = () => {
     { key: 'glassmorphism', label: 'Glass', description: 'Frosted glass effect' }
   ];
 
-  const handleThemeUpdate = (updates: any) => {
-    updateTheme(updates);
-  };
-
   return (
     <div className="space-y-1">
       <DropdownMenuLabel className="text-base font-semibold border-b border-secondary/30 pb-2 mb-2">Customize Theme</DropdownMenuLabel>
       
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center justify-between px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
-          <ChevronLeft className="w-4 h-4" />
-          <div className="flex items-center gap-2">
-            <span>Color Palette</span>
-            <Palette className="w-4 h-4" />
-          </div>
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
+          <Palette className="w-4 h-4" />
+          Color Palette
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent className="w-64 bg-card border-2 border-secondary/60 shadow-xl z-[200]">
-          <DropdownMenuItem
-            onSelect={(e) => e.preventDefault()}
-            className="flex items-center justify-between p-3 border-b border-secondary/30 cursor-pointer transition-all hover:bg-card/50 hover:text-card-foreground"
-          >
-            <X className="w-4 h-4" />
-            <span>Close Sub-Menu</span>
-          </DropdownMenuItem>
           {colorThemes.map((color) => (
             <DropdownMenuItem
               key={color.key}
-              onSelect={(e) => {
-                e.preventDefault();
-                handleThemeUpdate({ colorTheme: color.key as any });
-              }}
-              className={`flex flex-col items-end gap-1 p-3 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all text-right ${
+              onClick={() => updateTheme({ colorTheme: color.key as any })}
+              className={`flex flex-col items-start gap-1 p-3 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.colorTheme === color.key 
-                  ? 'bg-card text-card-foreground border-r-4 border-r-secondary' 
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
                   : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
@@ -78,31 +61,18 @@ export const ThemeSelector: React.FC = () => {
       </DropdownMenuSub>
 
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center justify-between px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
-          <ChevronLeft className="w-4 h-4" />
-          <div className="flex items-center gap-2">
-            <span>Typography</span>
-            <Type className="w-4 h-4" />
-          </div>
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
+          <Type className="w-4 h-4" />
+          Typography
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent className="bg-card border-2 border-secondary/60 shadow-xl z-[200]">
-          <DropdownMenuItem
-            onSelect={(e) => e.preventDefault()}
-            className="flex items-center justify-between p-3 border-b border-secondary/30 cursor-pointer transition-all hover:bg-card/50 hover:text-card-foreground"
-          >
-            <X className="w-4 h-4" />
-            <span>Close Sub-Menu</span>
-          </DropdownMenuItem>
           {['technical', 'professional', 'elegant', 'modern', 'playful'].map((typography) => (
             <DropdownMenuItem
               key={typography}
-              onSelect={(e) => {
-                e.preventDefault();
-                handleThemeUpdate({ typography: typography as any });
-              }}
-              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all text-right ${
+              onClick={() => updateTheme({ typography: typography as any })}
+              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.typography === typography 
-                  ? 'bg-card text-card-foreground border-r-4 border-r-secondary' 
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
                   : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
@@ -113,31 +83,18 @@ export const ThemeSelector: React.FC = () => {
       </DropdownMenuSub>
 
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center justify-between px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
-          <ChevronLeft className="w-4 h-4" />
-          <div className="flex items-center gap-2">
-            <span>Icon Scheme</span>
-            <Image className="w-4 h-4" />
-          </div>
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
+          <Image className="w-4 h-4" />
+          Icon Scheme
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent className="bg-card border-2 border-secondary/60 shadow-xl z-[200]">
-          <DropdownMenuItem
-            onSelect={(e) => e.preventDefault()}
-            className="flex items-center justify-between p-3 border-b border-secondary/30 cursor-pointer transition-all hover:bg-card/50 hover:text-card-foreground"
-          >
-            <X className="w-4 h-4" />
-            <span>Close Sub-Menu</span>
-          </DropdownMenuItem>
           {['normal', 'cartoon', 'emoji', 'avatars'].map((iconScheme) => (
             <DropdownMenuItem
               key={iconScheme}
-              onSelect={(e) => {
-                e.preventDefault();
-                handleThemeUpdate({ iconScheme: iconScheme as any });
-              }}
-              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all text-right ${
+              onClick={() => updateTheme({ iconScheme: iconScheme as any })}
+              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.iconScheme === iconScheme 
-                  ? 'bg-card text-card-foreground border-r-4 border-r-secondary' 
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
                   : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
@@ -148,21 +105,11 @@ export const ThemeSelector: React.FC = () => {
       </DropdownMenuSub>
 
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center justify-between px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
-          <ChevronLeft className="w-4 h-4" />
-          <div className="flex items-center gap-2">
-            <span>Design System</span>
-            <Layers className="w-4 h-4" />
-          </div>
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
+          <Layers className="w-4 h-4" />
+          Design System
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent className="bg-card border-2 border-secondary/60 shadow-xl z-[200]">
-          <DropdownMenuItem
-            onSelect={(e) => e.preventDefault()}
-            className="flex items-center justify-between p-3 border-b border-secondary/30 cursor-pointer transition-all hover:bg-card/50 hover:text-card-foreground"
-          >
-            <X className="w-4 h-4" />
-            <span>Close Sub-Menu</span>
-          </DropdownMenuItem>
           {[
             { key: 'tailwind', label: 'Tailwind CSS' },
             { key: 'material', label: 'Material Design' },
@@ -177,13 +124,10 @@ export const ThemeSelector: React.FC = () => {
           ].map((designSystem) => (
             <DropdownMenuItem
               key={designSystem.key}
-              onSelect={(e) => {
-                e.preventDefault();
-                handleThemeUpdate({ designSystem: designSystem.key as any });
-              }}
-              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all text-right ${
+              onClick={() => updateTheme({ designSystem: designSystem.key as any })}
+              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.designSystem === designSystem.key 
-                  ? 'bg-card text-card-foreground border-r-4 border-r-secondary' 
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
                   : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
@@ -194,31 +138,18 @@ export const ThemeSelector: React.FC = () => {
       </DropdownMenuSub>
 
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center justify-between px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
-          <ChevronLeft className="w-4 h-4" />
-          <div className="flex items-center gap-2">
-            <span>Layout</span>
-            <Layout className="w-4 h-4" />
-          </div>
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
+          <Layout className="w-4 h-4" />
+          Layout
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent className="bg-card border-2 border-secondary/60 shadow-xl z-[200]">
-          <DropdownMenuItem
-            onSelect={(e) => e.preventDefault()}
-            className="flex items-center justify-between p-3 border-b border-secondary/30 cursor-pointer transition-all hover:bg-card/50 hover:text-card-foreground"
-          >
-            <X className="w-4 h-4" />
-            <span>Close Sub-Menu</span>
-          </DropdownMenuItem>
           {['default', 'compact', 'spacious', 'modern'].map((layout) => (
             <DropdownMenuItem
               key={layout}
-              onSelect={(e) => {
-                e.preventDefault();
-                handleThemeUpdate({ layout: layout as any });
-              }}
-              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all text-right ${
+              onClick={() => updateTheme({ layout: layout as any })}
+              className={`px-3 py-2 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.layout === layout 
-                  ? 'bg-card text-card-foreground border-r-4 border-r-secondary' 
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
                   : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
@@ -229,31 +160,18 @@ export const ThemeSelector: React.FC = () => {
       </DropdownMenuSub>
 
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center justify-between px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
-          <ChevronLeft className="w-4 h-4" />
-          <div className="flex items-center gap-2">
-            <span>Skin Style</span>
-            <Brush className="w-4 h-4" />
-          </div>
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
+          <Brush className="w-4 h-4" />
+          Skin Style
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent className="w-64 bg-card border-2 border-secondary/60 shadow-xl z-[200]">
-          <DropdownMenuItem
-            onSelect={(e) => e.preventDefault()}
-            className="flex items-center justify-between p-3 border-b border-secondary/30 cursor-pointer transition-all hover:bg-card/50 hover:text-card-foreground"
-          >
-            <X className="w-4 h-4" />
-            <span>Close Sub-Menu</span>
-          </DropdownMenuItem>
           {skinOptions.map((skin) => (
             <DropdownMenuItem
               key={skin.key}
-              onSelect={(e) => {
-                e.preventDefault();
-                handleThemeUpdate({ skin: skin.key as any });
-              }}
-              className={`flex flex-col items-end gap-1 p-3 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all text-right ${
+              onClick={() => updateTheme({ skin: skin.key as any })}
+              className={`flex flex-col items-start gap-1 p-3 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
                 theme.skin === skin.key 
-                  ? 'bg-card text-card-foreground border-r-4 border-r-secondary' 
+                  ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
                   : 'hover:bg-card/50 hover:text-card-foreground'
               }`}
             >
