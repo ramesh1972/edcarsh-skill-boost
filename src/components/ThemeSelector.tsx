@@ -18,6 +18,14 @@ import { Button } from '@/components/ui/button';
 export const ThemeSelector: React.FC = () => {
   const { theme, updateTheme, resetTheme } = useTheme();
 
+  const colorThemes = [
+    { key: 'ocean', label: 'Ocean Blue', description: 'Deep blues and teals' },
+    { key: 'sunset', label: 'Sunset Orange', description: 'Warm oranges and reds' },
+    { key: 'forest', label: 'Forest Green', description: 'Natural greens and earth tones' },
+    { key: 'lavender', label: 'Lavender Purple', description: 'Soft purples and pinks' },
+    { key: 'monochrome', label: 'Monochrome', description: 'Pure blacks, whites, and grays' }
+  ];
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -26,23 +34,24 @@ export const ThemeSelector: React.FC = () => {
           <span className="hidden sm:inline">Theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-64">
+      <DropdownMenuContent className="w-72">
         <DropdownMenuLabel>Customize Theme</DropdownMenuLabel>
         <DropdownMenuSeparator />
         
         <DropdownMenuSub>
           <DropdownMenuSubTrigger className="flex items-center gap-2">
             <Palette className="w-4 h-4" />
-            Color Theme
+            Color Palette
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            {['light', 'dark', 'vibrant', 'vivid', 'minimal', 'grayscale'].map((color) => (
+          <DropdownMenuSubContent className="w-64">
+            {colorThemes.map((color) => (
               <DropdownMenuItem
-                key={color}
-                onClick={() => updateTheme({ colorTheme: color as any })}
-                className={theme.colorTheme === color ? 'bg-primary text-primary-foreground' : ''}
+                key={color.key}
+                onClick={() => updateTheme({ colorTheme: color.key as any })}
+                className={`flex flex-col items-start gap-1 p-3 ${theme.colorTheme === color.key ? 'bg-primary text-primary-foreground' : ''}`}
               >
-                {color.charAt(0).toUpperCase() + color.slice(1)}
+                <div className="font-medium">{color.label}</div>
+                <div className="text-xs opacity-75">{color.description}</div>
               </DropdownMenuItem>
             ))}
           </DropdownMenuSubContent>

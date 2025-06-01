@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
 
 export interface ThemeConfig {
-  colorTheme: 'light' | 'dark' | 'vibrant' | 'vivid' | 'minimal' | 'grayscale';
+  colorTheme: 'ocean' | 'sunset' | 'forest' | 'lavender' | 'monochrome';
   typography: 'technical' | 'professional' | 'elegant' | 'modern' | 'playful';
   iconScheme: 'normal' | 'cartoon' | 'emoji' | 'avatars';
   designSystem: 'material' | 'human' | 'fluent' | 'ant' | 'carbon' | 'atlassian' | 'bootstrap' | 'polaris' | 'lightning' | 'tailwind';
@@ -21,7 +21,7 @@ interface ThemeContextType {
 }
 
 const defaultTheme: ThemeConfig = {
-  colorTheme: 'light',
+  colorTheme: 'ocean',
   typography: 'modern',
   iconScheme: 'normal',
   designSystem: 'tailwind',
@@ -121,7 +121,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const body = document.body;
     
     // Remove all existing theme classes
-    root.classList.remove('light', 'dark', 'vibrant', 'vivid', 'minimal', 'grayscale');
+    root.classList.remove('ocean', 'sunset', 'forest', 'lavender', 'monochrome');
     body.classList.remove('font-technical', 'font-professional', 'font-elegant', 'font-modern', 'font-playful');
     root.classList.remove('material-design', 'human-interface', 'fluent-design', 'ant-design', 'carbon-design', 'atlassian-design', 'bootstrap-design', 'polaris-design', 'lightning-design', 'tailwind-design');
     root.classList.remove('layout-compact', 'layout-spacious', 'layout-modern', 'layout-default');
@@ -203,77 +203,85 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const root = document.documentElement;
     
     switch (colorTheme) {
-      case 'dark':
-        root.style.setProperty('--background', '222.2 84% 4.9%');
-        root.style.setProperty('--foreground', '210 40% 98%');
-        root.style.setProperty('--primary', '210 40% 98%');
-        root.style.setProperty('--primary-foreground', '222.2 47.4% 11.2%');
-        root.style.setProperty('--secondary', '217.2 32.6% 17.5%');
-        root.style.setProperty('--secondary-foreground', '210 40% 98%');
-        root.style.setProperty('--muted', '217.2 32.6% 17.5%');
-        root.style.setProperty('--muted-foreground', '215 20.2% 65.1%');
-        root.style.setProperty('--card', '222.2 84% 4.9%');
-        root.style.setProperty('--card-foreground', '210 40% 98%');
-        break;
-      case 'vibrant':
-        root.style.setProperty('--background', '340 100% 97%');
-        root.style.setProperty('--foreground', '340 10% 10%');
-        root.style.setProperty('--primary', '340 75% 55%');
+      case 'ocean':
+        // Deep blues and teals with white backgrounds
+        root.style.setProperty('--background', '210 40% 98%');
+        root.style.setProperty('--foreground', '210 40% 15%');
+        root.style.setProperty('--primary', '210 100% 45%');
         root.style.setProperty('--primary-foreground', '0 0% 100%');
-        root.style.setProperty('--secondary', '340 50% 90%');
-        root.style.setProperty('--secondary-foreground', '340 10% 10%');
-        root.style.setProperty('--muted', '340 30% 85%');
-        root.style.setProperty('--muted-foreground', '340 10% 40%');
-        root.style.setProperty('--card', '340 100% 98%');
-        root.style.setProperty('--card-foreground', '340 10% 10%');
+        root.style.setProperty('--secondary', '190 40% 92%');
+        root.style.setProperty('--secondary-foreground', '210 40% 15%');
+        root.style.setProperty('--muted', '210 30% 95%');
+        root.style.setProperty('--muted-foreground', '210 20% 50%');
+        root.style.setProperty('--card', '0 0% 100%');
+        root.style.setProperty('--card-foreground', '210 40% 15%');
+        root.style.setProperty('--accent', '190 50% 85%');
+        root.style.setProperty('--accent-foreground', '210 40% 15%');
+        root.style.setProperty('--border', '210 30% 85%');
         break;
-      case 'vivid':
-        root.style.setProperty('--background', '270 100% 97%');
-        root.style.setProperty('--foreground', '270 10% 10%');
-        root.style.setProperty('--primary', '270 100% 60%');
+      case 'sunset':
+        // Warm oranges and reds with cream backgrounds
+        root.style.setProperty('--background', '30 40% 98%');
+        root.style.setProperty('--foreground', '20 30% 20%');
+        root.style.setProperty('--primary', '15 85% 55%');
         root.style.setProperty('--primary-foreground', '0 0% 100%');
-        root.style.setProperty('--secondary', '270 60% 90%');
-        root.style.setProperty('--secondary-foreground', '270 10% 10%');
-        root.style.setProperty('--muted', '270 40% 85%');
-        root.style.setProperty('--muted-foreground', '270 10% 40%');
-        root.style.setProperty('--card', '270 100% 98%');
-        root.style.setProperty('--card-foreground', '270 10% 10%');
+        root.style.setProperty('--secondary', '35 50% 92%');
+        root.style.setProperty('--secondary-foreground', '20 30% 20%');
+        root.style.setProperty('--muted', '30 30% 95%');
+        root.style.setProperty('--muted-foreground', '20 20% 50%');
+        root.style.setProperty('--card', '40 50% 99%');
+        root.style.setProperty('--card-foreground', '20 30% 20%');
+        root.style.setProperty('--accent', '25 60% 88%');
+        root.style.setProperty('--accent-foreground', '20 30% 20%');
+        root.style.setProperty('--border', '30 30% 85%');
         break;
-      case 'minimal':
-        root.style.setProperty('--background', '0 0% 99%');
-        root.style.setProperty('--foreground', '0 0% 15%');
-        root.style.setProperty('--primary', '0 0% 25%');
-        root.style.setProperty('--primary-foreground', '0 0% 98%');
+      case 'forest':
+        // Deep greens with natural tones
+        root.style.setProperty('--background', '120 20% 97%');
+        root.style.setProperty('--foreground', '120 30% 15%');
+        root.style.setProperty('--primary', '140 60% 35%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '110 30% 90%');
+        root.style.setProperty('--secondary-foreground', '120 30% 15%');
+        root.style.setProperty('--muted', '120 20% 94%');
+        root.style.setProperty('--muted-foreground', '120 15% 45%');
+        root.style.setProperty('--card', '120 40% 99%');
+        root.style.setProperty('--card-foreground', '120 30% 15%');
+        root.style.setProperty('--accent', '130 40% 85%');
+        root.style.setProperty('--accent-foreground', '120 30% 15%');
+        root.style.setProperty('--border', '120 20% 85%');
+        break;
+      case 'lavender':
+        // Soft purples and pinks
+        root.style.setProperty('--background', '280 30% 98%');
+        root.style.setProperty('--foreground', '270 20% 20%');
+        root.style.setProperty('--primary', '270 70% 50%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '290 40% 92%');
+        root.style.setProperty('--secondary-foreground', '270 20% 20%');
+        root.style.setProperty('--muted', '280 25% 95%');
+        root.style.setProperty('--muted-foreground', '270 15% 50%');
+        root.style.setProperty('--card', '285 40% 99%');
+        root.style.setProperty('--card-foreground', '270 20% 20%');
+        root.style.setProperty('--accent', '280 50% 88%');
+        root.style.setProperty('--accent-foreground', '270 20% 20%');
+        root.style.setProperty('--border', '280 25% 85%');
+        break;
+      case 'monochrome':
+        // Pure blacks, whites, and grays
+        root.style.setProperty('--background', '0 0% 100%');
+        root.style.setProperty('--foreground', '0 0% 10%');
+        root.style.setProperty('--primary', '0 0% 20%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
         root.style.setProperty('--secondary', '0 0% 95%');
-        root.style.setProperty('--secondary-foreground', '0 0% 15%');
-        root.style.setProperty('--muted', '0 0% 90%');
+        root.style.setProperty('--secondary-foreground', '0 0% 10%');
+        root.style.setProperty('--muted', '0 0% 97%');
         root.style.setProperty('--muted-foreground', '0 0% 45%');
         root.style.setProperty('--card', '0 0% 100%');
-        root.style.setProperty('--card-foreground', '0 0% 15%');
-        break;
-      case 'grayscale':
-        root.style.setProperty('--background', '0 0% 95%');
-        root.style.setProperty('--foreground', '0 0% 20%');
-        root.style.setProperty('--primary', '0 0% 40%');
-        root.style.setProperty('--primary-foreground', '0 0% 95%');
-        root.style.setProperty('--secondary', '0 0% 85%');
-        root.style.setProperty('--secondary-foreground', '0 0% 20%');
-        root.style.setProperty('--muted', '0 0% 80%');
-        root.style.setProperty('--muted-foreground', '0 0% 50%');
-        root.style.setProperty('--card', '0 0% 92%');
-        root.style.setProperty('--card-foreground', '0 0% 20%');
-        break;
-      default: // light
-        root.style.setProperty('--background', '0 0% 100%');
-        root.style.setProperty('--foreground', '222.2 84% 4.9%');
-        root.style.setProperty('--primary', '222.2 47.4% 11.2%');
-        root.style.setProperty('--primary-foreground', '210 40% 98%');
-        root.style.setProperty('--secondary', '210 40% 96.1%');
-        root.style.setProperty('--secondary-foreground', '222.2 47.4% 11.2%');
-        root.style.setProperty('--muted', '210 40% 96.1%');
-        root.style.setProperty('--muted-foreground', '215.4 16.3% 46.9%');
-        root.style.setProperty('--card', '0 0% 100%');
-        root.style.setProperty('--card-foreground', '222.2 84% 4.9%');
+        root.style.setProperty('--card-foreground', '0 0% 10%');
+        root.style.setProperty('--accent', '0 0% 90%');
+        root.style.setProperty('--accent-foreground', '0 0% 10%');
+        root.style.setProperty('--border', '0 0% 85%');
         break;
     }
   };
