@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { Settings, Palette, Type, Image, Layout, Brush, Layers, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -37,6 +35,7 @@ export const ThemeSelector: React.FC = () => {
 
   const handleThemeChange = (themeUpdate: any) => {
     updateTheme(themeUpdate);
+    console.log('Theme updated:', themeUpdate);
     // Don't close the menu, keep it open for multiple changes
   };
 
@@ -82,7 +81,7 @@ export const ThemeSelector: React.FC = () => {
             <Palette className="w-4 h-4" />
             Color Palette
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="w-64" onCloseAutoFocus={(e) => e.preventDefault()}>
+          <DropdownMenuSubContent className="w-64">
             {colorThemes.map((color) => (
               <DropdownMenuItem
                 key={color.key}
@@ -106,7 +105,7 @@ export const ThemeSelector: React.FC = () => {
             <Type className="w-4 h-4" />
             Typography
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent onCloseAutoFocus={(e) => e.preventDefault()}>
+          <DropdownMenuSubContent>
             {['technical', 'professional', 'elegant', 'modern', 'playful'].map((typography) => (
               <DropdownMenuItem
                 key={typography}
@@ -129,7 +128,7 @@ export const ThemeSelector: React.FC = () => {
             <Image className="w-4 h-4" />
             Icon Scheme
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent onCloseAutoFocus={(e) => e.preventDefault()}>
+          <DropdownMenuSubContent>
             {['normal', 'cartoon', 'emoji', 'avatars'].map((iconScheme) => (
               <DropdownMenuItem
                 key={iconScheme}
@@ -152,7 +151,7 @@ export const ThemeSelector: React.FC = () => {
             <Layers className="w-4 h-4" />
             Design System
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent onCloseAutoFocus={(e) => e.preventDefault()}>
+          <DropdownMenuSubContent>
             {[
               { key: 'tailwind', label: 'Tailwind CSS' },
               { key: 'material', label: 'Material Design' },
@@ -186,7 +185,7 @@ export const ThemeSelector: React.FC = () => {
             <Layout className="w-4 h-4" />
             Layout
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent onCloseAutoFocus={(e) => e.preventDefault()}>
+          <DropdownMenuSubContent>
             {['default', 'compact', 'spacious', 'modern'].map((layout) => (
               <DropdownMenuItem
                 key={layout}
@@ -209,7 +208,7 @@ export const ThemeSelector: React.FC = () => {
             <Brush className="w-4 h-4" />
             Skin Style
           </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent className="w-64" onCloseAutoFocus={(e) => e.preventDefault()}>
+          <DropdownMenuSubContent className="w-64">
             {skinOptions.map((skin) => (
               <DropdownMenuItem
                 key={skin.key}
@@ -232,4 +231,3 @@ export const ThemeSelector: React.FC = () => {
     </DropdownMenu>
   );
 };
-
