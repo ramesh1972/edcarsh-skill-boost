@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
 
@@ -204,84 +203,89 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     
     switch (colorTheme) {
       case 'ocean':
-        // Deep blues and teals with white backgrounds
-        root.style.setProperty('--background', '210 40% 98%');
-        root.style.setProperty('--foreground', '210 40% 15%');
-        root.style.setProperty('--primary', '210 100% 45%');
+        root.style.setProperty('--background', '210 45% 96%');
+        root.style.setProperty('--foreground', '210 50% 12%');
+        root.style.setProperty('--primary', '210 85% 40%');
         root.style.setProperty('--primary-foreground', '0 0% 100%');
-        root.style.setProperty('--secondary', '190 40% 92%');
-        root.style.setProperty('--secondary-foreground', '210 40% 15%');
-        root.style.setProperty('--muted', '210 30% 95%');
-        root.style.setProperty('--muted-foreground', '210 20% 50%');
-        root.style.setProperty('--card', '0 0% 100%');
-        root.style.setProperty('--card-foreground', '210 40% 15%');
-        root.style.setProperty('--accent', '190 50% 85%');
-        root.style.setProperty('--accent-foreground', '210 40% 15%');
-        root.style.setProperty('--border', '210 30% 85%');
+        root.style.setProperty('--secondary', '195 35% 88%');
+        root.style.setProperty('--secondary-foreground', '210 50% 12%');
+        root.style.setProperty('--muted', '210 25% 92%');
+        root.style.setProperty('--muted-foreground', '210 25% 45%');
+        root.style.setProperty('--card', '205 40% 99%');
+        root.style.setProperty('--card-foreground', '210 50% 12%');
+        root.style.setProperty('--accent', '185 45% 82%');
+        root.style.setProperty('--accent-foreground', '210 50% 12%');
+        root.style.setProperty('--border', '210 25% 82%');
+        root.style.setProperty('--input', '210 25% 90%');
+        root.style.setProperty('--ring', '210 85% 40%');
         break;
       case 'sunset':
-        // Warm oranges and reds with cream backgrounds
-        root.style.setProperty('--background', '30 40% 98%');
-        root.style.setProperty('--foreground', '20 30% 20%');
-        root.style.setProperty('--primary', '15 85% 55%');
+        root.style.setProperty('--background', '25 50% 95%');
+        root.style.setProperty('--foreground', '15 40% 18%');
+        root.style.setProperty('--primary', '20 80% 50%');
         root.style.setProperty('--primary-foreground', '0 0% 100%');
-        root.style.setProperty('--secondary', '35 50% 92%');
-        root.style.setProperty('--secondary-foreground', '20 30% 20%');
-        root.style.setProperty('--muted', '30 30% 95%');
-        root.style.setProperty('--muted-foreground', '20 20% 50%');
-        root.style.setProperty('--card', '40 50% 99%');
-        root.style.setProperty('--card-foreground', '20 30% 20%');
-        root.style.setProperty('--accent', '25 60% 88%');
-        root.style.setProperty('--accent-foreground', '20 30% 20%');
-        root.style.setProperty('--border', '30 30% 85%');
+        root.style.setProperty('--secondary', '40 45% 85%');
+        root.style.setProperty('--secondary-foreground', '15 40% 18%');
+        root.style.setProperty('--muted', '30 35% 90%');
+        root.style.setProperty('--muted-foreground', '20 25% 40%');
+        root.style.setProperty('--card', '30 60% 98%');
+        root.style.setProperty('--card-foreground', '15 40% 18%');
+        root.style.setProperty('--accent', '35 55% 80%');
+        root.style.setProperty('--accent-foreground', '15 40% 18%');
+        root.style.setProperty('--border', '30 30% 80%');
+        root.style.setProperty('--input', '30 30% 88%');
+        root.style.setProperty('--ring', '20 80% 50%');
         break;
       case 'forest':
-        // Deep greens with natural tones
-        root.style.setProperty('--background', '120 20% 97%');
-        root.style.setProperty('--foreground', '120 30% 15%');
-        root.style.setProperty('--primary', '140 60% 35%');
+        root.style.setProperty('--background', '125 25% 94%');
+        root.style.setProperty('--foreground', '125 35% 16%');
+        root.style.setProperty('--primary', '140 55% 32%');
         root.style.setProperty('--primary-foreground', '0 0% 100%');
-        root.style.setProperty('--secondary', '110 30% 90%');
-        root.style.setProperty('--secondary-foreground', '120 30% 15%');
-        root.style.setProperty('--muted', '120 20% 94%');
-        root.style.setProperty('--muted-foreground', '120 15% 45%');
-        root.style.setProperty('--card', '120 40% 99%');
-        root.style.setProperty('--card-foreground', '120 30% 15%');
-        root.style.setProperty('--accent', '130 40% 85%');
-        root.style.setProperty('--accent-foreground', '120 30% 15%');
-        root.style.setProperty('--border', '120 20% 85%');
+        root.style.setProperty('--secondary', '115 25% 86%');
+        root.style.setProperty('--secondary-foreground', '125 35% 16%');
+        root.style.setProperty('--muted', '120 20% 91%');
+        root.style.setProperty('--muted-foreground', '120 18% 42%');
+        root.style.setProperty('--card', '120 35% 97%');
+        root.style.setProperty('--card-foreground', '125 35% 16%');
+        root.style.setProperty('--accent', '130 35% 78%');
+        root.style.setProperty('--accent-foreground', '125 35% 16%');
+        root.style.setProperty('--border', '120 18% 80%');
+        root.style.setProperty('--input', '120 18% 87%');
+        root.style.setProperty('--ring', '140 55% 32%');
         break;
       case 'lavender':
-        // Soft purples and pinks
-        root.style.setProperty('--background', '280 30% 98%');
-        root.style.setProperty('--foreground', '270 20% 20%');
-        root.style.setProperty('--primary', '270 70% 50%');
+        root.style.setProperty('--background', '285 35% 95%');
+        root.style.setProperty('--foreground', '270 25% 18%');
+        root.style.setProperty('--primary', '275 65% 45%');
         root.style.setProperty('--primary-foreground', '0 0% 100%');
-        root.style.setProperty('--secondary', '290 40% 92%');
-        root.style.setProperty('--secondary-foreground', '270 20% 20%');
-        root.style.setProperty('--muted', '280 25% 95%');
-        root.style.setProperty('--muted-foreground', '270 15% 50%');
-        root.style.setProperty('--card', '285 40% 99%');
-        root.style.setProperty('--card-foreground', '270 20% 20%');
-        root.style.setProperty('--accent', '280 50% 88%');
-        root.style.setProperty('--accent-foreground', '270 20% 20%');
-        root.style.setProperty('--border', '280 25% 85%');
+        root.style.setProperty('--secondary', '295 35% 86%');
+        root.style.setProperty('--secondary-foreground', '270 25% 18%');
+        root.style.setProperty('--muted', '280 22% 90%');
+        root.style.setProperty('--muted-foreground', '270 18% 45%');
+        root.style.setProperty('--card', '290 40% 97%');
+        root.style.setProperty('--card-foreground', '270 25% 18%');
+        root.style.setProperty('--accent', '285 45% 82%');
+        root.style.setProperty('--accent-foreground', '270 25% 18%');
+        root.style.setProperty('--border', '280 20% 82%');
+        root.style.setProperty('--input', '280 20% 88%');
+        root.style.setProperty('--ring', '275 65% 45%');
         break;
       case 'monochrome':
-        // Pure blacks, whites, and grays
-        root.style.setProperty('--background', '0 0% 100%');
-        root.style.setProperty('--foreground', '0 0% 10%');
-        root.style.setProperty('--primary', '0 0% 20%');
+        root.style.setProperty('--background', '0 0% 97%');
+        root.style.setProperty('--foreground', '0 0% 8%');
+        root.style.setProperty('--primary', '0 0% 15%');
         root.style.setProperty('--primary-foreground', '0 0% 100%');
-        root.style.setProperty('--secondary', '0 0% 95%');
-        root.style.setProperty('--secondary-foreground', '0 0% 10%');
-        root.style.setProperty('--muted', '0 0% 97%');
-        root.style.setProperty('--muted-foreground', '0 0% 45%');
+        root.style.setProperty('--secondary', '0 0% 90%');
+        root.style.setProperty('--secondary-foreground', '0 0% 8%');
+        root.style.setProperty('--muted', '0 0% 94%');
+        root.style.setProperty('--muted-foreground', '0 0% 40%');
         root.style.setProperty('--card', '0 0% 100%');
-        root.style.setProperty('--card-foreground', '0 0% 10%');
-        root.style.setProperty('--accent', '0 0% 90%');
-        root.style.setProperty('--accent-foreground', '0 0% 10%');
-        root.style.setProperty('--border', '0 0% 85%');
+        root.style.setProperty('--card-foreground', '0 0% 8%');
+        root.style.setProperty('--accent', '0 0% 85%');
+        root.style.setProperty('--accent-foreground', '0 0% 8%');
+        root.style.setProperty('--border', '0 0% 80%');
+        root.style.setProperty('--input', '0 0% 88%');
+        root.style.setProperty('--ring', '0 0% 15%');
         break;
     }
   };
