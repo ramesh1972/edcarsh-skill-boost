@@ -1,4 +1,25 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import * as LucideIcons from 'lucide-react';
+import * as HeroIcons from '@heroicons/react/24/outline';
+import { 
+  FaGraduationCap, 
+  FaChalkboardTeacher, 
+  FaUserGraduate, 
+  FaClock, 
+  FaDollarSign, 
+  FaCircle,
+  FaBook,
+  FaUser,
+  FaUsers,
+  FaPlay
+} from 'react-icons/fa';
+import { 
+  GiTeacher, 
+  GiBookshelf, 
+  GiAlarmClock, 
+  GiTakeMyMoney, 
+  GiRadialBalance 
+} from 'react-icons/gi';
 
 export interface ThemeConfig {
   colorTheme: 'light' | 'dark' | 'vibrant' | 'vivid' | 'minimal' | 'grayscale';
@@ -13,7 +34,7 @@ interface ThemeContextType {
   theme: ThemeConfig;
   updateTheme: (updates: Partial<ThemeConfig>) => void;
   resetTheme: () => void;
-  getIcon: (iconName: string) => string;
+  getIcon: (iconName: string) => React.ReactNode;
   getAvatar: (avatarName: string) => string;
   getBackground: () => string;
 }
@@ -27,39 +48,39 @@ const defaultTheme: ThemeConfig = {
   skin: 'default'
 };
 
-// Icon libraries for different schemes
+// Updated icon libraries with actual React components
 const iconLibraries = {
   normal: {
-    course: '📚',
-    instructor: '👨‍🏫',
-    student: '👨‍🎓',
-    time: '⏰',
-    price: '💰',
-    live: '🔴'
+    course: () => <LucideIcons.BookOpen className="w-5 h-5" />,
+    instructor: () => <LucideIcons.User className="w-5 h-5" />,
+    student: () => <LucideIcons.Users className="w-5 h-5" />,
+    time: () => <LucideIcons.Clock className="w-5 h-5" />,
+    price: () => <LucideIcons.DollarSign className="w-5 h-5" />,
+    live: () => <LucideIcons.Play className="w-5 h-5" />
   },
   cartoon: {
-    course: '📖',
-    instructor: '🧑‍🏫',
-    student: '🧑‍🎓',
-    time: '⏱️',
-    price: '💸',
-    live: '📺'
+    course: () => <GiBookshelf className="w-5 h-5" />,
+    instructor: () => <GiTeacher className="w-5 h-5" />,
+    student: () => <FaUserGraduate className="w-5 h-5" />,
+    time: () => <GiAlarmClock className="w-5 h-5" />,
+    price: () => <GiTakeMyMoney className="w-5 h-5" />,
+    live: () => <GiRadialBalance className="w-5 h-5" />
   },
   emoji: {
-    course: '📚',
-    instructor: '👩‍🏫',
-    student: '👩‍🎓',
-    time: '🕐',
-    price: '💵',
-    live: '📹'
+    course: () => <span className="text-lg">📚</span>,
+    instructor: () => <span className="text-lg">👩‍🏫</span>,
+    student: () => <span className="text-lg">👩‍🎓</span>,
+    time: () => <span className="text-lg">🕐</span>,
+    price: () => <span className="text-lg">💵</span>,
+    live: () => <span className="text-lg">📹</span>
   },
   avatars: {
-    course: '👤',
-    instructor: '👥',
-    student: '👤',
-    time: '⌚',
-    price: '💳',
-    live: '📱'
+    course: () => <FaBook className="w-5 h-5" />,
+    instructor: () => <FaChalkboardTeacher className="w-5 h-5" />,
+    student: () => <FaUsers className="w-5 h-5" />,
+    time: () => <FaClock className="w-5 h-5" />,
+    price: () => <FaDollarSign className="w-5 h-5" />,
+    live: () => <FaPlay className="w-5 h-5" />
   }
 };
 
@@ -244,8 +265,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
-  const getIcon = (iconName: string): string => {
-    return iconLibraries[theme.iconScheme]?.[iconName] || iconLibraries.normal[iconName] || '•';
+  const getIcon = (iconName: string): React.ReactNode => {
+    const IconComponent = iconLibraries[theme.iconScheme]?.[iconName] || iconLibraries.normal[iconName];
+    return IconComponent ? IconComponent() : <span>•</span>;
   };
 
   const getAvatar = (avatarName: string): string => {

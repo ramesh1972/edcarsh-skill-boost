@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Header } from '@/components/Header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,7 +16,7 @@ const ExpressIntent = () => {
       <Header />
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-8 text-center">
-          <h1 className={`text-4xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
+          <h1 className={`text-4xl font-bold mb-4 flex items-center justify-center gap-3 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
             {getIcon('course')} Express Your Learning Intent
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -33,7 +34,7 @@ const ExpressIntent = () => {
           }`}>
             <CardHeader>
               <CardTitle className={`flex items-center gap-2 ${theme.designSystem === 'material' ? 'text-lg font-medium' : 'text-xl'}`}>
-                {theme.iconScheme === 'normal' ? <Target className="w-5 h-5" /> : <span>{getIcon('course')}</span>}
+                {getIcon('course')}
                 Course Request Form
               </CardTitle>
               <CardDescription>
@@ -105,7 +106,7 @@ const ExpressIntent = () => {
                 }`} 
                 size="lg"
               >
-                {theme.iconScheme === 'normal' ? <Lightbulb className="w-4 h-4 mr-2" /> : <span className="mr-2">{getIcon('course')}</span>}
+                <span className="mr-2">{getIcon('course')}</span>
                 Submit Course Request
               </Button>
             </CardContent>
@@ -114,21 +115,27 @@ const ExpressIntent = () => {
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card className="text-center">
               <CardContent className="pt-6">
-                <Clock className="w-8 h-8 mx-auto mb-2 text-primary" />
+                <div className="w-8 h-8 mx-auto mb-2 text-primary flex items-center justify-center">
+                  {getIcon('time')}
+                </div>
                 <h3 className="font-semibold mb-1">Quick Response</h3>
                 <p className="text-sm text-muted-foreground">We'll respond within 24 hours</p>
               </CardContent>
             </Card>
             <Card className="text-center">
               <CardContent className="pt-6">
-                <Target className="w-8 h-8 mx-auto mb-2 text-primary" />
+                <div className="w-8 h-8 mx-auto mb-2 text-primary flex items-center justify-center">
+                  {getIcon('course')}
+                </div>
                 <h3 className="font-semibold mb-1">Custom Designed</h3>
                 <p className="text-sm text-muted-foreground">Tailored to your specific needs</p>
               </CardContent>
             </Card>
             <Card className="text-center">
               <CardContent className="pt-6">
-                <Lightbulb className="w-8 h-8 mx-auto mb-2 text-primary" />
+                <div className="w-8 h-8 mx-auto mb-2 text-primary flex items-center justify-center">
+                  {getIcon('instructor')}
+                </div>
                 <h3 className="font-semibold mb-1">Expert Instructors</h3>
                 <p className="text-sm text-muted-foreground">Industry professionals teach</p>
               </CardContent>

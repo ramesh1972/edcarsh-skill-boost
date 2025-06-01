@@ -3,8 +3,11 @@ import React from 'react';
 import { Header } from '@/components/Header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Star, Quote } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Testimonials = () => {
+  const { theme, getIcon, getBackground } = useTheme();
+
   const testimonials = [
     {
       id: 1,
@@ -36,11 +39,13 @@ const Testimonials = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`min-h-screen bg-background ${getBackground()}`}>
       <Header />
-      <div className="container mx-auto px-4 py-8">
+      <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Student Success Stories</h1>
+          <h1 className={`text-4xl font-bold mb-4 flex items-center justify-center gap-3 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
+            {getIcon('student')} Student Success Stories
+          </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Hear from professionals who've transformed their careers with our crash courses
           </p>
@@ -81,27 +86,47 @@ const Testimonials = () => {
         </div>
 
         <div className="text-center">
-          <Card className="max-w-4xl mx-auto">
+          <Card className={`max-w-4xl mx-auto ${
+            theme.designSystem === 'material' ? 'shadow-md' : 
+            theme.designSystem === 'fluent' ? 'border-2' : 
+            'hover:shadow-lg'
+          } ${
+            theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
+          }`}>
             <CardHeader>
-              <CardTitle className="text-2xl">Join Thousands of Successful Students</CardTitle>
+              <CardTitle className={`text-2xl ${theme.designSystem === 'material' ? 'font-medium' : 'font-bold'}`}>
+                Join Thousands of Successful Students
+              </CardTitle>
               <CardDescription className="text-lg">
                 Start your learning journey today with our affordable crash courses
               </CardDescription>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-6">
               <div className="text-center">
+                <div className="flex items-center justify-center mb-2">
+                  {getIcon('student')}
+                </div>
                 <div className="text-3xl font-bold text-primary mb-2">5,000+</div>
                 <p className="text-sm text-muted-foreground">Students Enrolled</p>
               </div>
               <div className="text-center">
+                <div className="flex items-center justify-center mb-2 text-yellow-500">
+                  <Star className="w-6 h-6 fill-current" />
+                </div>
                 <div className="text-3xl font-bold text-primary mb-2">4.9★</div>
                 <p className="text-sm text-muted-foreground">Average Rating</p>
               </div>
               <div className="text-center">
+                <div className="flex items-center justify-center mb-2">
+                  {getIcon('course')}
+                </div>
                 <div className="text-3xl font-bold text-primary mb-2">95%</div>
                 <p className="text-sm text-muted-foreground">Completion Rate</p>
               </div>
               <div className="text-center">
+                <div className="flex items-center justify-center mb-2">
+                  {getIcon('price')}
+                </div>
                 <div className="text-3xl font-bold text-primary mb-2">$25</div>
                 <p className="text-sm text-muted-foreground">Average Cost</p>
               </div>
