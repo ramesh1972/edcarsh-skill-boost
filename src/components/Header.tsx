@@ -54,27 +54,28 @@ export const Header: React.FC = () => {
 
   return (
     <header className={`sticky top-0 z-50 w-full border-b supports-[backdrop-filter]:bg-background/60 ${getHeaderBackground()} ${getSkinClasses()}`}>
-      <div className="w-full max-w-none flex h-24 items-center justify-between px-6 lg:px-8">
+      {/* First line - Logo and main navigation */}
+      <div className="w-full max-w-none flex h-16 items-center justify-between px-6 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-4 flex-shrink-0">
-          <div className="bg-gradient-to-br from-primary to-blue-600 text-primary-foreground rounded-xl p-4 shadow-lg">
-            <span className="text-2xl font-bold">EC</span>
+          <div className="bg-gradient-to-br from-primary to-blue-600 text-primary-foreground rounded-xl p-3 shadow-lg">
+            <span className="text-xl font-bold">EC</span>
           </div>
           <div>
-            <span className="text-3xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               EdCrash
             </span>
             <div className="text-xs text-muted-foreground -mt-1">Learn Fast. Succeed Faster.</div>
           </div>
         </Link>
 
-        {/* Desktop Navigation - Expanded to take more space */}
+        {/* Desktop Navigation - Main nav items only */}
         <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-center max-w-4xl mx-8">
           {mainNavItems.map((item) => (
             <Link
               key={item.name}
               to={item.href}
-              className="flex items-center gap-2 px-4 py-3 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-all duration-200 hover:shadow-sm whitespace-nowrap"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-all duration-200 hover:shadow-sm whitespace-nowrap"
             >
               {getIcon(item.icon)}
               {item.name}
@@ -84,7 +85,7 @@ export const Header: React.FC = () => {
           {/* More Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center gap-1 px-4 py-3 text-sm font-medium rounded-lg whitespace-nowrap">
+              <Button variant="ghost" className="flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap">
                 More
                 <ChevronDown className="w-4 h-4" />
               </Button>
@@ -102,41 +103,41 @@ export const Header: React.FC = () => {
           </DropdownMenu>
         </nav>
 
-        {/* Right side items */}
-        <div className="flex items-center space-x-4 flex-shrink-0">
+        {/* Mobile menu button */}
+        <Button
+          variant="outline"
+          size="sm"
+          className="lg:hidden"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+        </Button>
+      </div>
+
+      {/* Second line - EdTools, Live Session, and Theme selector (right-aligned) */}
+      <div className="hidden lg:flex w-full max-w-none h-12 items-center justify-end px-6 lg:px-8 border-t border-border/30">
+        <div className="flex items-center space-x-4">
           {/* EdTools Button */}
           <Button 
             variant="outline" 
-            size="lg" 
-            className="hidden md:flex items-center gap-3 px-6 py-3 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 hover:border-purple-300 shadow-sm font-semibold text-sm"
+            size="sm" 
+            className="flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 hover:border-purple-300 shadow-sm font-semibold text-sm"
           >
             {getIcon('tools')}
-            <span className="hidden lg:inline">EdTools</span>
-            <span className="lg:hidden">Tools</span>
+            EdTools
           </Button>
 
           {/* Upcoming Live Session Button */}
           <Button 
-            size="lg" 
-            className="hidden md:flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg font-semibold text-sm"
+            size="sm" 
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg font-semibold text-sm"
           >
             {getIcon('live')}
-            <span className="hidden lg:inline">Live Session in 2h</span>
-            <span className="lg:hidden">Live 2h</span>
+            Live Session in 2h
           </Button>
 
           {/* Theme Selector */}
           <ThemeSelector />
-
-          {/* Mobile menu button */}
-          <Button
-            variant="outline"
-            size="sm"
-            className="lg:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-          </Button>
         </div>
       </div>
 
@@ -159,6 +160,11 @@ export const Header: React.FC = () => {
                 {getIcon('live')}
                 Live 2h
               </Button>
+            </div>
+
+            {/* Theme Selector for mobile */}
+            <div className="mb-6">
+              <ThemeSelector />
             </div>
 
             {/* Main nav items */}
