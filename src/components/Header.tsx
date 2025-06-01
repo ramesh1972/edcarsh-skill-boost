@@ -55,7 +55,7 @@ export const Header: React.FC = () => {
   return (
     <header className={`sticky top-0 z-50 w-full border-b supports-[backdrop-filter]:bg-background/60 ${getHeaderBackground()} ${getSkinClasses()}`}>
       {/* Single line - Logo, main navigation, and right-aligned tools */}
-      <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-8">
+      <div className="w-full max-w-none flex h-14 items-center justify-between px-6 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
           <div className="bg-gradient-to-br from-primary to-blue-600 text-primary-foreground rounded-xl p-2 shadow-lg">
@@ -69,13 +69,13 @@ export const Header: React.FC = () => {
           </div>
         </Link>
 
-        {/* Desktop Navigation - Left aligned after logo */}
-        <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-start ml-8">
+        {/* Desktop Navigation - Main nav items only */}
+        <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-center max-w-3xl mx-6">
           {mainNavItems.map((item) => (
             <Link
               key={item.name}
               to={item.href}
-              className="flex items-center gap-2 px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-all duration-200 whitespace-nowrap"
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-all duration-200 hover:shadow-sm whitespace-nowrap"
             >
               {getIcon(item.icon)}
               {item.name}
@@ -85,7 +85,7 @@ export const Header: React.FC = () => {
           {/* More Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center gap-1 px-3 py-2 text-sm font-medium whitespace-nowrap">
+              <Button variant="ghost" className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg whitespace-nowrap">
                 More
                 <ChevronDown className="w-4 h-4" />
               </Button>
