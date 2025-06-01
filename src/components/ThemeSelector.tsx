@@ -1,6 +1,5 @@
-
-import React from 'react';
-import { Settings, Palette, Type, Image, Layout, Brush, Layers } from 'lucide-react';
+import React, { useState } from 'react';
+import { Settings, Palette, Type, Image, Layout, Brush, Layers, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import {
   DropdownMenu,
@@ -17,6 +16,7 @@ import { Button } from '@/components/ui/button';
 
 export const ThemeSelector: React.FC = () => {
   const { theme, updateTheme, resetTheme } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
 
   const colorThemes = [
     { key: 'ocean', label: 'Ocean Depths', description: 'Deep blues with coral and teal accents' },
@@ -33,8 +33,13 @@ export const ThemeSelector: React.FC = () => {
     { key: 'glassmorphism', label: 'Glass', description: 'Frosted glass effect' }
   ];
 
+  const handleThemeChange = (themeUpdate: any) => {
+    updateTheme(themeUpdate);
+    // Don't close the menu, keep it open for multiple changes
+  };
+
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm" className="gap-2">
           <Settings className="w-4 h-4" />
@@ -42,7 +47,17 @@ export const ThemeSelector: React.FC = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-72">
-        <DropdownMenuLabel>Customize Theme</DropdownMenuLabel>
+        <div className="flex items-center justify-between px-2 py-1.5">
+          <DropdownMenuLabel className="p-0">Customize Theme</DropdownMenuLabel>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="h-6 w-6 p-0 hover:bg-accent"
+            onClick={() => setIsOpen(false)}
+          >
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
         <DropdownMenuSeparator />
         
         <DropdownMenuSub>
@@ -54,7 +69,7 @@ export const ThemeSelector: React.FC = () => {
             {colorThemes.map((color) => (
               <DropdownMenuItem
                 key={color.key}
-                onClick={() => updateTheme({ colorTheme: color.key as any })}
+                onClick={() => handleThemeChange({ colorTheme: color.key as any })}
                 className={`flex flex-col items-start gap-1 p-3 ${theme.colorTheme === color.key ? 'bg-primary text-primary-foreground' : ''}`}
               >
                 <div className="font-medium">{color.label}</div>
@@ -73,7 +88,7 @@ export const ThemeSelector: React.FC = () => {
             {['technical', 'professional', 'elegant', 'modern', 'playful'].map((typography) => (
               <DropdownMenuItem
                 key={typography}
-                onClick={() => updateTheme({ typography: typography as any })}
+                onClick={() => handleThemeChange({ typography: typography as any })}
                 className={theme.typography === typography ? 'bg-primary text-primary-foreground' : ''}
               >
                 {typography.charAt(0).toUpperCase() + typography.slice(1)}
@@ -91,7 +106,7 @@ export const ThemeSelector: React.FC = () => {
             {['normal', 'cartoon', 'emoji', 'avatars'].map((iconScheme) => (
               <DropdownMenuItem
                 key={iconScheme}
-                onClick={() => updateTheme({ iconScheme: iconScheme as any })}
+                onClick={() => handleThemeChange({ iconScheme: iconScheme as any })}
                 className={theme.iconScheme === iconScheme ? 'bg-primary text-primary-foreground' : ''}
               >
                 {iconScheme.charAt(0).toUpperCase() + iconScheme.slice(1)}
@@ -120,7 +135,7 @@ export const ThemeSelector: React.FC = () => {
             ].map((designSystem) => (
               <DropdownMenuItem
                 key={designSystem.key}
-                onClick={() => updateTheme({ designSystem: designSystem.key as any })}
+                onClick={() => handleThemeChange({ designSystem: designSystem.key as any })}
                 className={theme.designSystem === designSystem.key ? 'bg-primary text-primary-foreground' : ''}
               >
                 {designSystem.label}
@@ -138,7 +153,7 @@ export const ThemeSelector: React.FC = () => {
             {['default', 'compact', 'spacious', 'modern'].map((layout) => (
               <DropdownMenuItem
                 key={layout}
-                onClick={() => updateTheme({ layout: layout as any })}
+                onClick={() => handleThemeChange({ layout: layout as any })}
                 className={theme.layout === layout ? 'bg-primary text-primary-foreground' : ''}
               >
                 {layout.charAt(0).toUpperCase() + layout.slice(1)}
@@ -156,7 +171,7 @@ export const ThemeSelector: React.FC = () => {
             {skinOptions.map((skin) => (
               <DropdownMenuItem
                 key={skin.key}
-                onClick={() => updateTheme({ skin: skin.key as any })}
+                onClick={() => handleThemeChange({ skin: skin.key as any })}
                 className={`flex flex-col items-start gap-1 p-3 ${theme.skin === skin.key ? 'bg-primary text-primary-foreground' : ''}`}
               >
                 <div className="font-medium">{skin.label}</div>
