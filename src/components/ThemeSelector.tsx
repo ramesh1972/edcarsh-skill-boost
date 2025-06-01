@@ -42,7 +42,7 @@ export const ThemeSelector: React.FC = () => {
           <Palette className="w-4 h-4" />
           Color Palette
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="w-64 bg-card border-2 border-secondary/60 shadow-xl z-[200]">
+        <DropdownMenuSubContent className="w-64 bg-card border-2 border-secondary/60 shadow-xl z+[200]">
           {colorThemes.map((color) => (
             <DropdownMenuItem
               key={color.key}
