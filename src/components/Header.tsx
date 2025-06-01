@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Menu, 
@@ -18,6 +17,7 @@ import {
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedMoreItem, setSelectedMoreItem] = useState<any>(null);
   const { theme, getSkinClasses, getIcon } = useTheme();
   const location = useLocation();
 
@@ -37,9 +37,38 @@ export const Header: React.FC = () => {
     { name: 'Demo', href: '/demo', icon: 'live' }
   ];
 
-  // Split items: first 5 in main nav, rest in more menu
-  const mainNavItems = allNavItems.slice(0, 5);
-  const moreMenuItems = allNavItems.slice(5);
+  // Dynamic menu calculation
+  const getMenuItems = () => {
+    const baseMainItems = allNavItems.slice(0, 5);
+    let mainItems = [...baseMainItems];
+    let moreItems = allNavItems.slice(5);
+
+    if (selectedMoreItem) {
+      // Add selected item as 6th item
+      mainItems.push(selectedMoreItem);
+      // Remove it from more items
+      moreItems = moreItems.filter(item => item.href !== selectedMoreItem.href);
+    }
+
+    return { mainItems, moreItems };
+  };
+
+  const { mainItems, moreItems } = getMenuItems();
+
+  // Handle more menu item selection
+  const handleMoreItemClick = (item: any) => {
+    setSelectedMoreItem(item);
+  };
+
+  // Check if current route is in more menu originally and set it as selected
+  useEffect(() => {
+    const currentItem = allNavItems.find(item => item.href === location.pathname);
+    const isInMoreMenu = allNavItems.slice(5).some(item => item.href === location.pathname);
+    
+    if (currentItem && isInMoreMenu) {
+      setSelectedMoreItem(currentItem);
+    }
+  }, [location.pathname]);
 
   // Check if a menu item is active
   const isActiveRoute = (href: string) => {
@@ -48,7 +77,7 @@ export const Header: React.FC = () => {
 
   // Check if any more menu item is active
   const isMoreMenuActive = () => {
-    return moreMenuItems.some(item => location.pathname === item.href);
+    return moreItems.some(item => location.pathname === item.href);
   };
 
   // Get skin-specific header background classes - remove shadows and borders
@@ -84,7 +113,7 @@ export const Header: React.FC = () => {
 
         {/* Desktop Navigation - Left aligned after logo */}
         <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-start ml-8">
-          {mainNavItems.map((item) => (
+          {mainItems.map((item) => (
             <Link
               key={item.name}
               to={item.href}
@@ -99,39 +128,42 @@ export const Header: React.FC = () => {
             </Link>
           ))}
           
-          {/* More Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button 
-                variant="ghost" 
-                className={`flex items-center gap-1 px-3 py-2 text-sm font-medium whitespace-nowrap ${
-                  isMoreMenuActive()
-                    ? 'bg-primary/10 text-primary font-semibold'
-                    : ''
-                }`}
-              >
-                More
-                <ChevronDown className="w-4 h-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 bg-background border shadow-lg">
-              {moreMenuItems.map((item) => (
-                <DropdownMenuItem key={item.name} asChild>
-                  <Link 
-                    to={item.href} 
-                    className={`flex items-center gap-2 w-full ${
-                      isActiveRoute(item.href)
-                        ? 'bg-primary/10 text-primary font-semibold'
-                        : ''
-                    }`}
-                  >
-                    {getIcon(item.icon)}
-                    {item.name}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {/* More Dropdown - only show if there are items */}
+          {moreItems.length > 0 && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  className={`flex items-center gap-1 px-3 py-2 text-sm font-medium whitespace-nowrap ${
+                    isMoreMenuActive()
+                      ? 'bg-primary/10 text-primary font-semibold'
+                      : ''
+                  }`}
+                >
+                  More
+                  <ChevronDown className="w-4 h-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48 bg-background border shadow-lg">
+                {moreItems.map((item) => (
+                  <DropdownMenuItem key={item.name} asChild>
+                    <Link 
+                      to={item.href} 
+                      className={`flex items-center gap-2 w-full ${
+                        isActiveRoute(item.href)
+                          ? 'bg-primary/10 text-primary font-semibold'
+                          : ''
+                      }`}
+                      onClick={() => handleMoreItemClick(item)}
+                    >
+                      {getIcon(item.icon)}
+                      {item.name}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </nav>
 
         {/* Right-aligned tools */}
