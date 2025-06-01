@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
@@ -191,6 +190,21 @@
     font-family: inherit !important;
   }
 
+  /* IMPORTANT: Remove borders and shadows from ALL text elements - overrides ALL themes */
+  h1, h2, h3, h4, h5, h6, p, span, label, div, a, li, ul, ol, blockquote, pre, code {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Additional text element selectors to ensure complete coverage */
+  .text, [class*="text"], .title, [class*="title"], .heading, [class*="heading"],
+  .label, [class*="label"], .caption, [class*="caption"], .description, [class*="description"] {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
   /* Skin Styles - Applied to body and main containers */
   
   /* Default Skin */
@@ -253,18 +267,19 @@
     min-height: 100vh;
   }
 
-  /* Design System Variations - All components inherit these styles */
+  /* Design System Variations - Updated to exclude text elements from shadows/borders */
   .material-design * {
     border-radius: 4px;
     box-shadow: var(--shadow, 0 2px 4px rgba(0,0,0,0.1));
   }
 
-  /* Remove shadows from text elements */
+  /* Ensure text elements NEVER have shadows or borders in Material Design */
   .material-design h1, .material-design h2, .material-design h3, 
   .material-design h4, .material-design h5, .material-design h6,
   .material-design p, .material-design span, .material-design label,
-  .material-design a:not(.button):not([class*="button"]) {
+  .material-design div, .material-design a:not(.button):not([class*="button"]) {
     box-shadow: none !important;
+    border: none !important;
     border-radius: 0 !important;
   }
 
@@ -288,12 +303,13 @@
     box-shadow: var(--shadow, 0 4px 16px rgba(0,0,0,0.1));
   }
 
-  /* Remove shadows from text elements */
+  /* Ensure text elements NEVER have shadows or borders in Human Interface */
   .human-interface h1, .human-interface h2, .human-interface h3, 
   .human-interface h4, .human-interface h5, .human-interface h6,
   .human-interface p, .human-interface span, .human-interface label,
-  .human-interface a:not(.button):not([class*="button"]) {
+  .human-interface div, .human-interface a:not(.button):not([class*="button"]) {
     box-shadow: none !important;
+    border: none !important;
     border-radius: 0 !important;
   }
 
@@ -316,12 +332,13 @@
     box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,0.1));
   }
 
-  /* Remove shadows from text elements */
+  /* Ensure text elements NEVER have shadows or borders in Fluent Design */
   .fluent-design h1, .fluent-design h2, .fluent-design h3, 
   .fluent-design h4, .fluent-design h5, .fluent-design h6,
   .fluent-design p, .fluent-design span, .fluent-design label,
-  .fluent-design a:not(.button):not([class*="button"]) {
+  .fluent-design div, .fluent-design a:not(.button):not([class*="button"]) {
     box-shadow: none !important;
+    border: none !important;
     border-radius: 0 !important;
   }
 
@@ -337,12 +354,13 @@
     box-shadow: var(--shadow, 0 2px 8px rgba(0,0,0,0.1));
   }
 
-  /* Remove shadows from text elements */
+  /* Ensure text elements NEVER have shadows or borders in Ant Design */
   .ant-design h1, .ant-design h2, .ant-design h3, 
   .ant-design h4, .ant-design h5, .ant-design h6,
   .ant-design p, .ant-design span, .ant-design label,
-  .ant-design a:not(.button):not([class*="button"]) {
+  .ant-design div, .ant-design a:not(.button):not([class*="button"]) {
     box-shadow: none !important;
+    border: none !important;
     border-radius: 0 !important;
   }
 
@@ -357,12 +375,13 @@
     box-shadow: var(--shadow, 0 1px 2px rgba(0,0,0,0.1));
   }
 
-  /* Remove shadows from text elements */
+  /* Ensure text elements NEVER have shadows or borders in Carbon Design */
   .carbon-design h1, .carbon-design h2, .carbon-design h3, 
   .carbon-design h4, .carbon-design h5, .carbon-design h6,
   .carbon-design p, .carbon-design span, .carbon-design label,
-  .carbon-design a:not(.button):not([class*="button"]) {
+  .carbon-design div, .carbon-design a:not(.button):not([class*="button"]) {
     box-shadow: none !important;
+    border: none !important;
     border-radius: 0 !important;
   }
 
@@ -383,12 +402,13 @@
     box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,0.1));
   }
 
-  /* Remove shadows from text elements */
+  /* Ensure text elements NEVER have shadows or borders in Atlassian Design */
   .atlassian-design h1, .atlassian-design h2, .atlassian-design h3, 
   .atlassian-design h4, .atlassian-design h5, .atlassian-design h6,
   .atlassian-design p, .atlassian-design span, .atlassian-design label,
-  .atlassian-design a:not(.button):not([class*="button"]) {
+  .atlassian-design div, .atlassian-design a:not(.button):not([class*="button"]) {
     box-shadow: none !important;
+    border: none !important;
     border-radius: 0 !important;
   }
 
@@ -397,12 +417,13 @@
     box-shadow: var(--shadow, 0 0.125rem 0.25rem rgba(0,0,0,0.075));
   }
 
-  /* Remove shadows from text elements */
+  /* Ensure text elements NEVER have shadows or borders in Bootstrap Design */
   .bootstrap-design h1, .bootstrap-design h2, .bootstrap-design h3, 
   .bootstrap-design h4, .bootstrap-design h5, .bootstrap-design h6,
   .bootstrap-design p, .bootstrap-design span, .bootstrap-design label,
-  .bootstrap-design a:not(.button):not([class*="button"]) {
+  .bootstrap-design div, .bootstrap-design a:not(.button):not([class*="button"]) {
     box-shadow: none !important;
+    border: none !important;
     border-radius: 0 !important;
   }
 
@@ -417,12 +438,13 @@
     box-shadow: var(--shadow, 0 1px 0 rgba(0,0,0,0.05));
   }
 
-  /* Remove shadows from text elements */
+  /* Ensure text elements NEVER have shadows or borders in Polaris Design */
   .polaris-design h1, .polaris-design h2, .polaris-design h3, 
   .polaris-design h4, .polaris-design h5, .polaris-design h6,
   .polaris-design p, .polaris-design span, .polaris-design label,
-  .polaris-design a:not(.button):not([class*="button"]) {
+  .polaris-design div, .polaris-design a:not(.button):not([class*="button"]) {
     box-shadow: none !important;
+    border: none !important;
     border-radius: 0 !important;
   }
 
@@ -438,12 +460,13 @@
     box-shadow: var(--shadow, 0 2px 2px rgba(0,0,0,0.1));
   }
 
-  /* Remove shadows from text elements */
+  /* Ensure text elements NEVER have shadows or borders in Lightning Design */
   .lightning-design h1, .lightning-design h2, .lightning-design h3, 
   .lightning-design h4, .lightning-design h5, .lightning-design h6,
   .lightning-design p, .lightning-design span, .lightning-design label,
-  .lightning-design a:not(.button):not([class*="button"]) {
+  .lightning-design div, .lightning-design a:not(.button):not([class*="button"]) {
     box-shadow: none !important;
+    border: none !important;
     border-radius: 0 !important;
   }
 
@@ -458,14 +481,17 @@
     box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,0.1));
   }
 
-  /* Remove shadows from text elements */
+  /* Ensure text elements NEVER have shadows or borders in Tailwind Design */
   .tailwind-design h1, .tailwind-design h2, .tailwind-design h3, 
   .tailwind-design h4, .tailwind-design h5, .tailwind-design h6,
   .tailwind-design p, .tailwind-design span, .tailwind-design label,
-  .tailwind-design a:not(.button):not([class*="button"]) {
+  .tailwind-design div, .tailwind-design a:not(.button):not([class*="button"]) {
     box-shadow: none !important;
+    border: none !important;
     border-radius: 0 !important;
   }
+
+  // ... keep existing code (layout variations from .layout-compact to .layout-default)
 
   /* Layout Variations */
   .layout-compact {
