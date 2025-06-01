@@ -1,5 +1,6 @@
 
 @layer components {
+  /* Animation classes */
   .animate-fade-in {
     animation: fade-in 0.3s ease-out;
   }
@@ -8,8 +9,82 @@
     animation: scale-in 0.2s ease-out;
   }
 
+  .animate-slide-in-left {
+    animation: slide-in-left 0.6s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.6s ease-out;
+  }
+
+  .animate-slide-in-up {
+    animation: slide-in-up 0.5s ease-out;
+  }
+
+  .animate-slide-in-down {
+    animation: slide-in-down 0.5s ease-out;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Staggered animation delays */
+  .animate-delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .animate-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animate-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animate-delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .animate-delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  .animate-delay-700 {
+    animation-delay: 0.7s;
+  }
+
+  /* Hover effects */
   .hover-scale {
-    @apply transition-transform duration-200 hover:scale-105;
+    @apply transition-all duration-300 hover:scale-105;
+  }
+
+  .hover-scale-small {
+    @apply transition-all duration-200 hover:scale-102;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/25;
+  }
+
+  .hover-color-shift {
+    @apply transition-all duration-300 hover:text-primary hover:bg-primary/5;
+  }
+
+  .hover-border-glow {
+    @apply transition-all duration-300 hover:border-primary hover:shadow-md hover:shadow-primary/20;
+  }
+
+  .hover-bg-shift {
+    @apply transition-all duration-300 hover:bg-gradient-to-r hover:from-primary/10 hover:to-blue-600/10;
   }
 
   /* Responsive utilities */
@@ -20,12 +95,12 @@
   /* Theme-aware components */
   .theme-card {
     border-radius: var(--radius);
-    @apply bg-card border text-card-foreground;
+    @apply bg-card border text-card-foreground transition-all duration-300;
     box-shadow: var(--shadow);
   }
 
   .theme-button {
-    @apply inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
   }
