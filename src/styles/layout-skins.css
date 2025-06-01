@@ -1,0 +1,115 @@
+
+@layer base {
+  /* Skin Styles - Applied to body and main containers */
+  
+  /* Default Skin */
+  .skin-default body {
+    @apply bg-background;
+  }
+  
+  /* Gradient Skin */
+  .skin-gradient body {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.05), 
+      hsl(var(--background)), 
+      hsl(var(--secondary) / 0.08), 
+      hsl(var(--accent) / 0.06)
+    );
+    min-height: 100vh;
+  }
+  
+  .skin-gradient #root {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.03), 
+      transparent, 
+      hsl(var(--accent) / 0.04)
+    );
+    min-height: 100vh;
+  }
+  
+  /* Textured Skin */
+  .skin-textured body {
+    background-color: hsl(var(--background));
+    background-image: 
+      radial-gradient(circle at 1px 1px, hsl(var(--foreground) / 0.15) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+  
+  .skin-textured #root {
+    background-image: 
+      url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.02'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-size: 40px 40px;
+    min-height: 100vh;
+  }
+  
+  /* Glassmorphism Skin */
+  .skin-glassmorphism body {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.1), 
+      hsl(var(--background)), 
+      hsl(var(--secondary) / 0.12)
+    );
+    min-height: 100vh;
+  }
+  
+  .skin-glassmorphism #root {
+    background: linear-gradient(135deg, 
+      rgba(255,255,255,0.1), 
+      transparent, 
+      rgba(255,255,255,0.05)
+    );
+    backdrop-filter: blur(10px);
+    min-height: 100vh;
+  }
+
+  /* Layout Variations */
+  .layout-compact {
+    --spacing: var(--spacing-sm);
+  }
+
+  .layout-compact .container,
+  .layout-compact [class*="container"] {
+    padding: var(--spacing);
+    gap: var(--spacing);
+  }
+
+  .layout-compact * {
+    padding: calc(var(--spacing) * 0.5);
+    margin: calc(var(--spacing) * 0.25);
+  }
+
+  .layout-spacious {
+    --spacing: var(--spacing-xl);
+  }
+
+  .layout-spacious .container,
+  .layout-spacious [class*="container"] {
+    padding: var(--spacing);
+    gap: var(--spacing);
+  }
+
+  .layout-spacious * {
+    padding: calc(var(--spacing) * 0.5);
+    margin: calc(var(--spacing) * 0.25);
+  }
+
+  .layout-modern {
+    --spacing: var(--spacing-lg);
+  }
+
+  .layout-modern .container,
+  .layout-modern [class*="container"] {
+    padding: var(--spacing);
+    gap: var(--spacing);
+  }
+
+  .layout-default {
+    --spacing: var(--spacing-md);
+  }
+
+  .layout-default .container,
+  .layout-default [class*="container"] {
+    padding: var(--spacing);
+    gap: var(--spacing);
+  }
+}

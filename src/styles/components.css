@@ -1,0 +1,110 @@
+
+@layer components {
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.2s ease-out;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  /* Responsive utilities */
+  .mobile-responsive {
+    @apply flex flex-col sm:flex-row gap-4;
+  }
+
+  /* Theme-aware components */
+  .theme-card {
+    border-radius: var(--radius);
+    @apply bg-card border text-card-foreground;
+    box-shadow: var(--shadow);
+  }
+
+  .theme-button {
+    @apply inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  /* Enhanced Skin-specific component styles */
+  
+  /* Default Skin */
+  .skin-default .theme-card,
+  .skin-default [class*="card"] {
+    @apply bg-card;
+  }
+  
+  /* Gradient Skin */
+  .skin-gradient .theme-card,
+  .skin-gradient [class*="card"] {
+    background: linear-gradient(135deg, 
+      hsl(var(--card) / 0.95), 
+      hsl(var(--card) / 0.85)
+    );
+    backdrop-filter: blur(8px);
+    border: 1px solid hsl(var(--border) / 0.8);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+  
+  .skin-gradient button,
+  .skin-gradient [class*="button"]:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary)), 
+      hsl(var(--primary) / 0.9)
+    );
+    transition: all 0.3s ease;
+  }
+  
+  .skin-gradient button:hover,
+  .skin-gradient [class*="button"]:not(.variant-outline):not(.variant-ghost):not(.variant-link):hover {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.95), 
+      hsl(var(--primary) / 0.85)
+    );
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px hsl(var(--primary) / 0.3);
+  }
+  
+  /* Textured Skin */
+  .skin-textured .theme-card,
+  .skin-textured [class*="card"] {
+    background: hsl(var(--card) / 0.98);
+    border: 2px solid hsl(var(--border) / 0.6);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    backdrop-filter: blur(2px);
+  }
+  
+  .skin-textured button,
+  .skin-textured [class*="button"]:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
+    background: hsl(var(--primary) / 0.95);
+    border: 1px solid hsl(var(--border) / 0.4);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+  
+  /* Glassmorphism Skin */
+  .skin-glassmorphism .theme-card,
+  .skin-glassmorphism [class*="card"] {
+    background: hsl(var(--card) / 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+  
+  .skin-glassmorphism button,
+  .skin-glassmorphism [class*="button"]:not(.variant-outline):not(.variant-ghost):not(.variant-link) {
+    background: hsl(var(--primary) / 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  
+  .skin-glassmorphism button:hover,
+  .skin-glassmorphism [class*="button"]:not(.variant-outline):not(.variant-ghost):not(.variant-link):hover {
+    background: hsl(var(--primary) / 0.9);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+}

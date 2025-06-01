@@ -1,0 +1,98 @@
+
+@layer base {
+  /* Color Theme Definitions */
+  .ocean {
+    /* Ocean theme: Deep blues with coral and teal accents */
+    --background: 210 45% 96%;
+    --foreground: 220 40% 18%;
+    --primary: 210 85% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 45% 85%;
+    --secondary-foreground: 220 40% 18%;
+    --muted: 210 25% 92%;
+    --muted-foreground: 210 25% 45%;
+    --accent: 14 80% 65%;
+    --accent-foreground: 0 0% 100%;
+    --card: 205 40% 99%;
+    --card-foreground: 220 40% 18%;
+    --border: 180 25% 82%;
+    --input: 210 25% 90%;
+    --ring: 14 80% 65%;
+  }
+
+  .sunset {
+    /* Sunset theme: Warm oranges with purple and pink accents */
+    --background: 30 60% 95%;
+    --foreground: 25 40% 18%;
+    --primary: 20 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 45 70% 88%;
+    --secondary-foreground: 25 40% 18%;
+    --muted: 35 45% 90%;
+    --muted-foreground: 25 35% 40%;
+    --accent: 290 70% 65%;
+    --accent-foreground: 0 0% 100%;
+    --card: 35 80% 98%;
+    --card-foreground: 25 40% 18%;
+    --border: 45 40% 80%;
+    --input: 35 40% 88%;
+    --ring: 290 70% 65%;
+  }
+
+  .forest {
+    /* Forest theme: Rich greens with earth browns and golden accents */
+    --background: 125 30% 94%;
+    --foreground: 125 35% 16%;
+    --primary: 140 60% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 115 25% 86%;
+    --secondary-foreground: 125 35% 16%;
+    --muted: 120 20% 91%;
+    --muted-foreground: 120 18% 42%;
+    --accent: 45 75% 55%;
+    --accent-foreground: 25 40% 15%;
+    --card: 120 35% 97%;
+    --card-foreground: 125 35% 16%;
+    --border: 115 18% 80%;
+    --input: 120 18% 87%;
+    --ring: 45 75% 55%;
+  }
+
+  .lavender {
+    /* Lavender theme: Soft purples with mint green and rose accents */
+    --background: 285 40% 95%;
+    --foreground: 270 25% 18%;
+    --primary: 275 65% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 295 35% 86%;
+    --secondary-foreground: 270 25% 18%;
+    --muted: 280 22% 90%;
+    --muted-foreground: 270 18% 45%;
+    --accent: 160 45% 65%;
+    --accent-foreground: 160 50% 15%;
+    --card: 290 50% 97%;
+    --card-foreground: 270 25% 18%;
+    --border: 295 20% 82%;
+    --input: 285 20% 88%;
+    --ring: 160 45% 65%;
+  }
+
+  .monochrome {
+    /* Monochrome theme: Rich blacks and whites with blue accent */
+    --background: 0 0% 97%;
+    --foreground: 0 0% 8%;
+    --primary: 0 0% 15%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 88%;
+    --secondary-foreground: 0 0% 8%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 210 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+    --border: 0 0% 80%;
+    --input: 0 0% 88%;
+    --ring: 210 100% 50%;
+  }
+}

@@ -1,0 +1,32 @@
+
+@layer base {
+  /* Typography Theme Classes */
+  .font-technical {
+    font-family: 'Roboto', sans-serif !important;
+  }
+
+  .font-professional {
+    font-family: 'Inter', sans-serif !important;
+  }
+
+  .font-elegant {
+    font-family: 'Playfair Display', serif !important;
+  }
+
+  .font-modern {
+    font-family: 'Poppins', sans-serif !important;
+  }
+
+  .font-playful {
+    font-family: 'Comic Neue', cursive !important;
+  }
+
+  /* Ensure typography applies to all text elements */
+  .font-technical *,
+  .font-professional *,
+  .font-elegant *,
+  .font-modern *,
+  .font-playful * {
+    font-family: inherit !important;
+  }
+}
