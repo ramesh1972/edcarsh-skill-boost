@@ -36,16 +36,16 @@ export const ThemeSelector: React.FC = () => {
   return (
     <div className="space-y-1">
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center gap-2px-3 py-2   px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
+        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
           <Palette className="w-4 h-4" />
           Color Palette
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="px-3 py-2  w-64 bg-card border-2 border-secondary/60 shadow-xl">
+        <DropdownMenuSubContent className="w-64 bg-card border-2 border-secondary/60 shadow-xl">
           {colorThemes.map((color) => (
             <DropdownMenuItem
               key={color.key}
               onClick={() => updateTheme({ colorTheme: color.key as any })}
-              className={`flex flex-col items-start gap-1 p-3 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all ${
+              className={`flex flex-col items-start gap-1 p-3 border-b border-secondary/30 last:border-b-0 cursor-pointer transition-all z-[200] ${
                 theme.colorTheme === color.key 
                   ? 'bg-card text-card-foreground border-l-4 border-l-secondary' 
                   : 'hover:bg-card/50 hover:text-card-foreground'
