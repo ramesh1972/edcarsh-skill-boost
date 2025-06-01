@@ -1,24 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
-import * as HeroIcons from '@heroicons/react/24/outline';
-import { 
-  FaGraduationCap, 
-  FaChalkboardTeacher, 
-  FaUserGraduate, 
-  FaClock, 
-  FaDollarSign,
-  FaBook,
-  FaUser,
-  FaUsers,
-  FaPlay
-} from 'react-icons/fa';
-import { 
-  GiTeacher, 
-  GiBookshelf, 
-  GiAlarmClock, 
-  GiTakeMyMoney, 
-  GiRadialBalance 
-} from 'react-icons/gi';
 
 export interface ThemeConfig {
   colorTheme: 'light' | 'dark' | 'vibrant' | 'vivid' | 'minimal' | 'grayscale';
@@ -47,7 +28,7 @@ const defaultTheme: ThemeConfig = {
   skin: 'default'
 };
 
-// Updated icon libraries with actual React components
+// Updated icon libraries with only Lucide icons
 const iconLibraries = {
   normal: {
     course: () => <LucideIcons.BookOpen className="w-5 h-5" />,
@@ -58,12 +39,12 @@ const iconLibraries = {
     live: () => <LucideIcons.Play className="w-5 h-5" />
   },
   cartoon: {
-    course: () => <GiBookshelf className="w-5 h-5" />,
-    instructor: () => <GiTeacher className="w-5 h-5" />,
-    student: () => <FaUserGraduate className="w-5 h-5" />,
-    time: () => <GiAlarmClock className="w-5 h-5" />,
-    price: () => <GiTakeMyMoney className="w-5 h-5" />,
-    live: () => <GiRadialBalance className="w-5 h-5" />
+    course: () => <LucideIcons.BookOpenCheck className="w-5 h-5" />,
+    instructor: () => <LucideIcons.UserCheck className="w-5 h-5" />,
+    student: () => <LucideIcons.GraduationCap className="w-5 h-5" />,
+    time: () => <LucideIcons.Timer className="w-5 h-5" />,
+    price: () => <LucideIcons.Coins className="w-5 h-5" />,
+    live: () => <LucideIcons.Video className="w-5 h-5" />
   },
   emoji: {
     course: () => <span className="text-lg">📚</span>,
@@ -74,12 +55,12 @@ const iconLibraries = {
     live: () => <span className="text-lg">📹</span>
   },
   avatars: {
-    course: () => <FaBook className="w-5 h-5" />,
-    instructor: () => <FaChalkboardTeacher className="w-5 h-5" />,
-    student: () => <FaUsers className="w-5 h-5" />,
-    time: () => <FaClock className="w-5 h-5" />,
-    price: () => <FaDollarSign className="w-5 h-5" />,
-    live: () => <FaPlay className="w-5 h-5" />
+    course: () => <LucideIcons.Library className="w-5 h-5" />,
+    instructor: () => <LucideIcons.UserSquare className="w-5 h-5" />,
+    student: () => <LucideIcons.UsersRound className="w-5 h-5" />,
+    time: () => <LucideIcons.AlarmClock className="w-5 h-5" />,
+    price: () => <LucideIcons.CreditCard className="w-5 h-5" />,
+    live: () => <LucideIcons.PlayCircle className="w-5 h-5" />
   }
 };
 
