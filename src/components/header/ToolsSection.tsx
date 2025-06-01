@@ -71,7 +71,7 @@ export const ToolsSection: React.FC = () => {
 
       {/* Theme Menu */}
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger>
           <Button variant="ghost" size="sm" className="flex items-center gap-1 border border-secondary/50 hover:border-secondary/80 transition-colors">
             <Palette className="w-4 h-4" />
             <span className="hidden sm:inline">Theme</span>
