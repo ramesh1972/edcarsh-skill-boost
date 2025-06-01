@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
 
@@ -119,11 +120,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const root = document.documentElement;
     const body = document.body;
     
-    // Remove all theme classes
+    // Remove all existing theme classes
     root.classList.remove('light', 'dark', 'vibrant', 'vivid', 'minimal', 'grayscale');
     body.classList.remove('font-technical', 'font-professional', 'font-elegant', 'font-modern', 'font-playful');
     root.classList.remove('material-design', 'human-interface', 'fluent-design', 'ant-design', 'carbon-design', 'atlassian-design', 'bootstrap-design', 'polaris-design', 'lightning-design', 'tailwind-design');
-    root.classList.remove('layout-compact', 'layout-spacious', 'layout-modern');
+    root.classList.remove('layout-compact', 'layout-spacious', 'layout-modern', 'layout-default');
     
     // Apply current theme classes
     root.classList.add(theme.colorTheme);
@@ -133,10 +134,70 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     // Apply typography to body
     body.classList.add(`font-${theme.typography}`);
     
+    // Apply design system specific styles
+    applyDesignSystemStyles(theme.designSystem);
+    
     // Apply color theme variables
     applyColorTheme(theme.colorTheme);
-    applyDesignSystem(theme.designSystem);
   }, [theme]);
+
+  const applyDesignSystemStyles = (designSystem: string) => {
+    const root = document.documentElement;
+    
+    // Apply design system specific CSS custom properties
+    switch (designSystem) {
+      case 'material':
+        root.style.setProperty('--radius', '4px');
+        root.style.setProperty('--shadow', '0 2px 4px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '4px');
+        break;
+      case 'human':
+        root.style.setProperty('--radius', '12px');
+        root.style.setProperty('--shadow', '0 4px 16px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '8px');
+        break;
+      case 'fluent':
+        root.style.setProperty('--radius', '2px');
+        root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+      case 'ant':
+        root.style.setProperty('--radius', '6px');
+        root.style.setProperty('--shadow', '0 2px 8px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '4px');
+        break;
+      case 'carbon':
+        root.style.setProperty('--radius', '0px');
+        root.style.setProperty('--shadow', '0 1px 2px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '1px');
+        break;
+      case 'atlassian':
+        root.style.setProperty('--radius', '3px');
+        root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+      case 'bootstrap':
+        root.style.setProperty('--radius', '0.375rem');
+        root.style.setProperty('--shadow', '0 0.125rem 0.25rem rgba(0,0,0,0.075)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+      case 'polaris':
+        root.style.setProperty('--radius', '8px');
+        root.style.setProperty('--shadow', '0 1px 0 rgba(0,0,0,0.05)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+      case 'lightning':
+        root.style.setProperty('--radius', '0.25rem');
+        root.style.setProperty('--shadow', '0 2px 2px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+      default: // tailwind
+        root.style.setProperty('--radius', '0.5rem');
+        root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
+        root.style.setProperty('--elevation', '2px');
+        break;
+    }
+  };
 
   const applyColorTheme = (colorTheme: string) => {
     const root = document.documentElement;
@@ -213,34 +274,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--muted-foreground', '215.4 16.3% 46.9%');
         root.style.setProperty('--card', '0 0% 100%');
         root.style.setProperty('--card-foreground', '222.2 84% 4.9%');
-        break;
-    }
-  };
-
-  const applyDesignSystem = (designSystem: string) => {
-    const root = document.documentElement;
-    
-    switch (designSystem) {
-      case 'material':
-        root.style.setProperty('--radius', '4px');
-        break;
-      case 'human':
-        root.style.setProperty('--radius', '8px');
-        break;
-      case 'fluent':
-        root.style.setProperty('--radius', '2px');
-        break;
-      case 'ant':
-        root.style.setProperty('--radius', '6px');
-        break;
-      case 'carbon':
-        root.style.setProperty('--radius', '0px');
-        break;
-      case 'bootstrap':
-        root.style.setProperty('--radius', '0.375rem');
-        break;
-      default:
-        root.style.setProperty('--radius', '0.5rem');
         break;
     }
   };
