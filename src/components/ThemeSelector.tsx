@@ -36,11 +36,11 @@ export const ThemeSelector: React.FC = () => {
   return (
     <div className="space-y-1">
       <DropdownMenuSub>
-        <DropdownMenuSubTrigger className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
+        <DropdownMenuSubTrigger className="flex items-center gap-2px-3 py-2   px-3 py-2 rounded-md hover:bg-card hover:text-card-foreground border border-transparent hover:border-secondary/50 transition-all">
           <Palette className="w-4 h-4" />
           Color Palette
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent className="w-64 bg-card border-2 border-secondary/60 shadow-xl">
+        <DropdownMenuSubContent className="px-3 py-2  w-64 bg-card border-2 border-secondary/60 shadow-xl">
           {colorThemes.map((color) => (
             <DropdownMenuItem
               key={color.key}
