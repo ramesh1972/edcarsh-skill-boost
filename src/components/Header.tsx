@@ -80,6 +80,8 @@ export const Header: React.FC = () => {
           bottom: -7px;
           width: 25px;
           height: 25px;
+          border-top-left-radius: 25px;
+          border-top-right-radius: 25px;
 
         background: hsl(var(--primary));
       }
@@ -87,8 +89,8 @@ export const Header: React.FC = () => {
     left: -15px;
     border-bottom-right-radius: 25px;
     border: 10px solid hsl(var(--background));
-    border-top: 2px solid hsl(var(--background));
-    border-left: 2px solid hsl(var(--background));
+    border-top: none;
+    border-left: none;
 
       }
       .tab-curved::after {
