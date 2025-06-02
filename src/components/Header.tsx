@@ -79,27 +79,27 @@ export const Header: React.FC = () => {
       .tab-curved::after {
         content: '';
         position: absolute;
-        bottom: -6px;
-        width: 12px;
-        height: 12px;
+        bottom: -10px;
+        width: 15px;
+        height: 15px;
         background: hsl(var(--primary));
       }
       .tab-curved::before {
-        left: -12px;
-        border-bottom-right-radius: 12px;
+        left: -15px;
+        border-bottom-right-radius: 15px;
         border: 2px solid hsl(var(--background));
         border-top: none;
         border-left: none;
       }
       .tab-curved::after {
-        right: -12px;
-        border-bottom-left-radius: 12px;
+        right: -15px;
+        border-bottom-left-radius: 15px;
         border: 2px solid hsl(var(--background));
         border-top: none;
         border-right: none;
       }
     `}</style>
-    <header className={`w-full bg-primary ${getSkinClasses()} relative z-10`} style={{ marginTop: '4px' }}>
+    <header className={`w-full bg-primary ${getSkinClasses()} relative z-10`} style={{ marginTop: '8px' }}>
       {/* Single line - Logo, main navigation, and right-aligned tools */}
       <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-[32px] my-[18px]">
         {/* Logo */}
@@ -117,9 +117,9 @@ export const Header: React.FC = () => {
 
         {/* Desktop Navigation - Left aligned after logo */}
         <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-start ml-8">
-          {mainNavItems.map(item => <Link key={item.name} to={item.href} className={`flex items-center gap-2 px-4 py-2 text-sm font-medium whitespace-nowrap rounded-t-lg transition-all duration-200 relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-lg tab-curved' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} style={isActiveRoute(item.href) ? {
-              marginBottom: '-6px',
-              paddingBottom: '8px',
+          {mainNavItems.map(item => <Link key={item.name} to={item.href} className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap rounded-t-lg transition-all duration-200 relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-lg tab-curved' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} style={isActiveRoute(item.href) ? {
+              marginBottom: '-10px',
+              paddingBottom: '12px',
               zIndex: 20
             } : {}}>
               {getIcon(item.icon)}
