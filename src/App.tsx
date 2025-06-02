@@ -22,8 +22,8 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <ThemeProvider>
-        <div className="min-h-screen w-full border-[5px] border-primary bg-primary">
-          <div className="min-h-[calc(100vh-10px)] w-full bg-background">
+        <div className="min-h-screen w-full border-[10px] border-primary bg-primary">
+          <div className="min-h-[calc(100vh-20px)] w-full bg-background">
             <Toaster />
             <Sonner />
             <BrowserRouter>
