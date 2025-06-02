@@ -22,28 +22,22 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <ThemeProvider>
+        <Toaster />
+        <Sonner />
         <BrowserRouter>
-          <div className="h-screen w-full bg-primary flex flex-col overflow-auto">
-            <div className="flex-1 flex items-center justify-center">
-              <div className="h-[calc(100vh-120px)] w-[calc(100vw-30px)] bg-background overflow-auto flex flex-col my-[60px] mx-[15px]">
-                <Toaster />
-                <Sonner />
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/courses" element={<Courses />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/express-intent" element={<ExpressIntent />} />
-                  <Route path="/instructors" element={<Instructors />} />
-                  <Route path="/testimonials" element={<Testimonials />} />
-                  <Route path="/faq" element={<FAQ />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/about" element={<About />} />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </div>
-            </div>
-          </div>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/express-intent" element={<ExpressIntent />} />
+            <Route path="/instructors" element={<Instructors />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </BrowserRouter>
       </ThemeProvider>
     </TooltipProvider>
