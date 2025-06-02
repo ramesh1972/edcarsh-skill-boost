@@ -78,21 +78,21 @@ export const Header: React.FC = () => {
         content: '';
         position: absolute;
         bottom: 0px;
-        width: 23px;
+        width: 25px;
         height: 20px;
         background: hsl(var(--primary));
       }
       .tab-curved::before {
         left: -22px;
         border-bottom-right-radius: 15px;
-        border: 6px solid hsl(var(--background));
+        border: 8px solid hsl(var(--background));
         border-top: none;
         border-left: none;
       }
       .tab-curved::after {
         right: -22px;
         border-bottom-left-radius: 15px;
-        border: 6px solid hsl(var(--background));
+        border: 8px solid hsl(var(--background));
         border-top: none;
         border-right: none;
       }
