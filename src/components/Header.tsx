@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   Menu, 
   X, 
@@ -26,6 +26,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, getSkinClasses, getIcon } = useTheme();
+  const location = useLocation();
 
   const mainNavItems = [
     { name: 'Home', href: '/', icon: 'home' },
@@ -44,6 +45,10 @@ export const Header: React.FC = () => {
     { name: 'Help', href: '/help', icon: 'help' },
     { name: 'Demo', href: '/demo', icon: 'live' }
   ];
+
+  const isActiveRoute = (href: string) => {
+    return location.pathname === href;
+  };
 
   return (
     <header className={`w-full bg-primary border-b border-primary-foreground/20 ${getSkinClasses()}`}>
@@ -68,7 +73,11 @@ export const Header: React.FC = () => {
             <Link
               key={item.name}
               to={item.href}
-              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary-foreground/10 transition-all duration-200 whitespace-nowrap rounded-md"
+              className={`flex items-center gap-2 px-3 py-2 text-sm font-medium whitespace-nowrap rounded-md transition-all duration-200 ${
+                isActiveRoute(item.href)
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-primary-foreground hover:bg-primary-foreground/10'
+              }`}
             >
               {getIcon(item.icon)}
               {item.name}
@@ -207,7 +216,11 @@ export const Header: React.FC = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="flex items-center gap-3 px-4 py-4 text-sm font-medium rounded-lg text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
+                className={`flex items-center gap-3 px-4 py-4 text-sm font-medium rounded-lg transition-colors ${
+                  isActiveRoute(item.href)
+                    ? 'bg-background text-foreground'
+                    : 'text-primary-foreground hover:bg-primary-foreground/10'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {getIcon(item.icon)}
