@@ -22,8 +22,8 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <ThemeProvider>
-        {/* Outer div - 100% viewport width and height with theme background */}
-        <div className="w-screen h-screen bg-background">
+        {/* Outer div - 100% viewport width and height with theme primary background */}
+        <div className="w-screen h-screen bg-primary">
           {/* Inner div - 15px left/right, 45px top/bottom */}
           <div className="h-full" style={{ margin: '45px 15px' }}>
             <Toaster />
