@@ -1,59 +1,75 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  Menu, 
-  X, 
-  ChevronDown,
-  Bell,
-  Calendar,
-  User,
-  Settings,
-  LogOut
-} from 'lucide-react';
+import { Menu, X, ChevronDown, Bell, Calendar, User, Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeSelector } from './ThemeSelector';
 import { useTheme } from '@/contexts/ThemeContext';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { theme, getSkinClasses, getIcon } = useTheme();
+  const {
+    theme,
+    getSkinClasses,
+    getIcon
+  } = useTheme();
   const location = useLocation();
-
-  const mainNavItems = [
-    { name: 'Home', href: '/', icon: 'home' },
-    { name: 'My Dashboard', href: '/dashboard', icon: 'student' },
-    { name: 'All Courses', href: '/courses', icon: 'course' },
-    { name: 'Express Intent', href: '/express-intent', icon: 'target' },
-    { name: 'Corporate', href: '/corporate', icon: 'building' }
-  ];
-
-  const moreMenuItems = [
-    { name: 'About Instructors', href: '/instructors', icon: 'instructor' },
-    { name: 'Testimonials', href: '/testimonials', icon: 'testimonial' },
-    { name: 'FAQ', href: '/faq', icon: 'help' },
-    { name: 'Contact', href: '/contact', icon: 'contact' },
-    { name: 'About', href: '/about', icon: 'about' },
-    { name: 'Help', href: '/help', icon: 'help' },
-    { name: 'Demo', href: '/demo', icon: 'live' }
-  ];
-
+  const mainNavItems = [{
+    name: 'Home',
+    href: '/',
+    icon: 'home'
+  }, {
+    name: 'My Dashboard',
+    href: '/dashboard',
+    icon: 'student'
+  }, {
+    name: 'All Courses',
+    href: '/courses',
+    icon: 'course'
+  }, {
+    name: 'Express Intent',
+    href: '/express-intent',
+    icon: 'target'
+  }, {
+    name: 'Corporate',
+    href: '/corporate',
+    icon: 'building'
+  }];
+  const moreMenuItems = [{
+    name: 'About Instructors',
+    href: '/instructors',
+    icon: 'instructor'
+  }, {
+    name: 'Testimonials',
+    href: '/testimonials',
+    icon: 'testimonial'
+  }, {
+    name: 'FAQ',
+    href: '/faq',
+    icon: 'help'
+  }, {
+    name: 'Contact',
+    href: '/contact',
+    icon: 'contact'
+  }, {
+    name: 'About',
+    href: '/about',
+    icon: 'about'
+  }, {
+    name: 'Help',
+    href: '/help',
+    icon: 'help'
+  }, {
+    name: 'Demo',
+    href: '/demo',
+    icon: 'live'
+  }];
   const isActiveRoute = (href: string) => {
     return location.pathname === href;
   };
-
-  return (
-    <header className={`w-full bg-primary border-b border-primary-foreground/20 ${getSkinClasses()}`}>
+  return <header className={`w-full bg-primary border-b border-primary-foreground/20 ${getSkinClasses()}`}>
       {/* Single line - Logo, main navigation, and right-aligned tools */}
-      <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-8">
+      <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-[32px] my-[18px]">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
           <div className="bg-gradient-to-br from-primary-foreground to-primary-foreground/80 text-primary rounded-xl p-2 shadow-lg">
@@ -69,20 +85,10 @@ export const Header: React.FC = () => {
 
         {/* Desktop Navigation - Left aligned after logo */}
         <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-start ml-8">
-          {mainNavItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              className={`flex items-center gap-2 px-3 py-2 text-sm font-medium whitespace-nowrap rounded-md transition-all duration-200 ${
-                isActiveRoute(item.href)
-                  ? 'bg-background text-foreground shadow-sm'
-                  : 'text-primary-foreground hover:bg-primary-foreground/10'
-              }`}
-            >
+          {mainNavItems.map(item => <Link key={item.name} to={item.href} className={`flex items-center gap-2 px-3 py-2 text-sm font-medium whitespace-nowrap rounded-md transition-all duration-200 ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-sm' : 'text-primary-foreground hover:bg-primary-foreground/10'}`}>
               {getIcon(item.icon)}
               {item.name}
-            </Link>
-          ))}
+            </Link>)}
           
           {/* More Dropdown */}
           <DropdownMenu>
@@ -93,14 +99,12 @@ export const Header: React.FC = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
-              {moreMenuItems.map((item) => (
-                <DropdownMenuItem key={item.name} asChild>
+              {moreMenuItems.map(item => <DropdownMenuItem key={item.name} asChild>
                   <Link to={item.href} className="flex items-center gap-2 w-full">
                     {getIcon(item.icon)}
                     {item.name}
                   </Link>
-                </DropdownMenuItem>
-              ))}
+                </DropdownMenuItem>)}
             </DropdownMenuContent>
           </DropdownMenu>
         </nav>
@@ -111,20 +115,13 @@ export const Header: React.FC = () => {
           <ThemeSelector />
 
           {/* Live Session Button */}
-          <Button 
-            size="sm" 
-            className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg font-semibold text-xs"
-          >
+          <Button size="sm" className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg font-semibold text-xs">
             <Calendar className="w-4 h-4" />
             Live Session in 2h
           </Button>
 
           {/* Inbox Button */}
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="flex items-center gap-2 px-3 py-1.5 text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10"
-          >
+          <Button variant="outline" size="sm" className="flex items-center gap-2 px-3 py-1.5 text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10">
             <Bell className="w-4 h-4" />
             Inbox
           </Button>
@@ -161,32 +158,21 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Mobile menu button */}
-        <Button
-          variant="outline"
-          size="sm"
-          className="lg:hidden text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
+        <Button variant="outline" size="sm" className="lg:hidden text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
         </Button>
       </div>
 
       {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="lg:hidden border-t border-primary-foreground/20 bg-primary">
+      {isMenuOpen && <div className="lg:hidden border-t border-primary-foreground/20 bg-primary">
           <div className="w-full px-6 py-6 space-y-3">
             {/* Mobile Theme, Live Session, Inbox and Profile buttons */}
             <div className="grid grid-cols-2 gap-3 mb-6">
-              <Button 
-                className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 py-3"
-              >
+              <Button className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 py-3">
                 <Calendar className="w-4 h-4" />
                 Live 2h
               </Button>
-              <Button 
-                variant="outline" 
-                className="flex items-center gap-2 text-primary-foreground border-primary-foreground/30 py-3"
-              >
+              <Button variant="outline" className="flex items-center gap-2 text-primary-foreground border-primary-foreground/30 py-3">
                 <Bell className="w-4 h-4" />
                 Inbox
               </Button>
@@ -212,40 +198,20 @@ export const Header: React.FC = () => {
             </div>
 
             {/* Main nav items */}
-            {mainNavItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`flex items-center gap-3 px-4 py-4 text-sm font-medium rounded-lg transition-colors ${
-                  isActiveRoute(item.href)
-                    ? 'bg-background text-foreground'
-                    : 'text-primary-foreground hover:bg-primary-foreground/10'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
+            {mainNavItems.map(item => <Link key={item.name} to={item.href} className={`flex items-center gap-3 px-4 py-4 text-sm font-medium rounded-lg transition-colors ${isActiveRoute(item.href) ? 'bg-background text-foreground' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} onClick={() => setIsMenuOpen(false)}>
                 {getIcon(item.icon)}
                 {item.name}
-              </Link>
-            ))}
+              </Link>)}
             
             {/* More menu items */}
             <div className="border-t border-primary-foreground/20 pt-4 mt-4">
               <p className="text-xs font-semibold text-primary-foreground/70 mb-3 px-4">More</p>
-              {moreMenuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="flex items-center gap-3 px-4 py-3 text-sm rounded-lg text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
+              {moreMenuItems.map(item => <Link key={item.name} to={item.href} className="flex items-center gap-3 px-4 py-3 text-sm rounded-lg text-primary-foreground hover:bg-primary-foreground/10 transition-colors" onClick={() => setIsMenuOpen(false)}>
                   {getIcon(item.icon)}
                   {item.name}
-                </Link>
-              ))}
+                </Link>)}
             </div>
           </div>
-        </div>
-      )}
-    </header>
-  );
+        </div>}
+    </header>;
 };
