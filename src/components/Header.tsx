@@ -78,7 +78,7 @@ export const Header: React.FC = () => {
         content: '';
         position: absolute;
         bottom: 0px;
-        width: 25px;
+        width: 30px;
         height: 25px;
         background: hsl(var(--primary));
       }
