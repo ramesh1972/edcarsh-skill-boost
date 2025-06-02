@@ -22,8 +22,8 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <ThemeProvider>
-        <div className="min-h-screen w-full bg-primary p-[10px]">
-          <div className="min-h-[calc(100vh-20px)] w-full bg-background">
+        <div className="h-screen w-full bg-primary flex items-center justify-center overflow-auto">
+          <div className="h-[90%] w-[90%] bg-background overflow-auto">
             <Toaster />
             <Sonner />
             <BrowserRouter>
