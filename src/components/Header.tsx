@@ -80,8 +80,6 @@ export const Header: React.FC = () => {
           bottom: -7px;
           width: 25px;
           height: 25px;
-          border-top-left-radius: 25px;
-          border-top-right-radius: 25px;
 
         background: hsl(var(--primary));
       }
