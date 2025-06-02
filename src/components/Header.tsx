@@ -4,7 +4,12 @@ import { Link } from 'react-router-dom';
 import { 
   Menu, 
   X, 
-  ChevronDown
+  ChevronDown,
+  Bell,
+  Calendar,
+  User,
+  Settings,
+  LogOut
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeSelector } from './ThemeSelector';
@@ -14,7 +19,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -91,27 +98,57 @@ export const Header: React.FC = () => {
 
         {/* Right-aligned tools */}
         <div className="hidden lg:flex items-center space-x-3 flex-shrink-0">
-          {/* EdTools Button */}
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100 hover:border-purple-300 shadow-sm font-semibold text-xs"
-          >
-            {getIcon('tools')}
-            EdTools
-          </Button>
+          {/* Theme Selector */}
+          <ThemeSelector />
 
-          {/* Upcoming Live Session Button */}
+          {/* Live Session Button */}
           <Button 
             size="sm" 
             className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg font-semibold text-xs"
           >
-            {getIcon('live')}
+            <Calendar className="w-4 h-4" />
             Live Session in 2h
           </Button>
 
-          {/* Theme Selector */}
-          <ThemeSelector />
+          {/* Inbox Button */}
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="flex items-center gap-2 px-3 py-1.5 text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10"
+          >
+            <Bell className="w-4 h-4" />
+            Inbox
+          </Button>
+
+          {/* Profile Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="flex items-center gap-2 px-2 py-2 text-primary-foreground hover:bg-primary-foreground/10">
+                <Avatar className="w-6 h-6">
+                  <AvatarImage src="" alt="Profile" />
+                  <AvatarFallback className="bg-primary-foreground/20 text-primary-foreground text-xs">
+                    <User className="w-3 h-3" />
+                  </AvatarFallback>
+                </Avatar>
+                <ChevronDown className="w-4 h-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem>
+                <User className="w-4 h-4 mr-2" />
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings className="w-4 h-4 mr-2" />
+                Settings
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <LogOut className="w-4 h-4 mr-2" />
+                Sign Out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* Mobile menu button */}
@@ -129,26 +166,40 @@ export const Header: React.FC = () => {
       {isMenuOpen && (
         <div className="lg:hidden border-t border-primary-foreground/20 bg-primary">
           <div className="w-full px-6 py-6 space-y-3">
-            {/* Mobile EdTools and Live Session buttons */}
-            <div className="flex gap-3 mb-6">
+            {/* Mobile Theme, Live Session, Inbox and Profile buttons */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
               <Button 
-                variant="outline" 
-                className="flex-1 items-center gap-2 bg-purple-50 text-purple-700 border-purple-200 py-3"
+                className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 py-3"
               >
-                {getIcon('tools')}
-                EdTools
+                <Calendar className="w-4 h-4" />
+                Live 2h
               </Button>
               <Button 
-                className="flex-1 items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 py-3"
+                variant="outline" 
+                className="flex items-center gap-2 text-primary-foreground border-primary-foreground/30 py-3"
               >
-                {getIcon('live')}
-                Live 2h
+                <Bell className="w-4 h-4" />
+                Inbox
               </Button>
             </div>
 
             {/* Theme Selector for mobile */}
             <div className="mb-6">
               <ThemeSelector />
+            </div>
+
+            {/* Profile Section for mobile */}
+            <div className="flex items-center gap-3 px-4 py-4 border border-primary-foreground/20 rounded-lg mb-6">
+              <Avatar className="w-8 h-8">
+                <AvatarImage src="" alt="Profile" />
+                <AvatarFallback className="bg-primary-foreground/20 text-primary-foreground">
+                  <User className="w-4 h-4" />
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-primary-foreground">User Profile</p>
+                <p className="text-xs text-primary-foreground/70">View settings</p>
+              </div>
             </div>
 
             {/* Main nav items */}
