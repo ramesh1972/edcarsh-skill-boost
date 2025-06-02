@@ -72,27 +72,29 @@ export const Header: React.FC = () => {
     <style>{`
       .tab-curved {
         position: relative;
-        overflow: visible;
       }
       .tab-curved::before,
       .tab-curved::after {
         content: '';
         position: absolute;
-        bottom: -2px;
-        width: 16px;
-        height: 16px;
+        bottom: 0;
+        width: 12px;
+        height: 12px;
         background: hsl(var(--primary));
-        z-index: 1;
       }
       .tab-curved::before {
-        left: -16px;
-        border-bottom-right-radius: 16px;
-        box-shadow: 0 8px 0 0 hsl(var(--background));
+        left: -12px;
+        border-bottom-right-radius: 12px;
+        border: 2px solid hsl(var(--background));
+        border-top: none;
+        border-left: none;
       }
       .tab-curved::after {
-        right: -16px;
-        border-bottom-left-radius: 16px;
-        box-shadow: 0 8px 0 0 hsl(var(--background));
+        right: -12px;
+        border-bottom-left-radius: 12px;
+        border: 2px solid hsl(var(--background));
+        border-top: none;
+        border-right: none;
       }
     `}</style>
     <header className={`w-full bg-primary ${getSkinClasses()} relative z-10`}>

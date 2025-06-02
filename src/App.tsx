@@ -29,14 +29,14 @@ const App = () => (
             {/* Header positioned at the top with same background */}
             <Header />
             
-            {/* Inner div - absolute positioned with 15px left/right, 77px top/60px bottom */}
+            {/* Inner div - absolute positioned with 15px left/right, 60px top/bottom */}
             <div className="absolute overflow-y-auto w-full h-full" style={{ 
               left: '15px', 
               right: '15px', 
-              top: '77px', 
+              top: '60px', 
               bottom: '60px',
               width: 'calc(100vw - 30px)',
-              height: 'calc(100vh - 137px)'
+              height: 'calc(100vh - 120px)'
             }}>
               <Toaster />
               <Sonner />
