@@ -22,10 +22,17 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <ThemeProvider>
-        {/* Outer div - 100% viewport width and height with theme primary background */}
-        <div className="w-screen h-screen bg-primary">
-          {/* Inner div - 15px left/right, 45px top/bottom */}
-          <div className="h-full" style={{ margin: '45px 15px' }}>
+        {/* Outer div - exactly 100vw and 100vh with theme primary background */}
+        <div className="w-screen h-screen bg-primary" style={{ width: '100vw', height: '100vh' }}>
+          {/* Inner div - absolute positioned with 15px left/right, 45px top/bottom */}
+          <div className="absolute overflow-y-auto w-full h-full" style={{ 
+            left: '15px', 
+            right: '15px', 
+            top: '45px', 
+            bottom: '45px',
+            width: 'calc(100vw - 30px)',
+            height: 'calc(100vh - 90px)'
+          }}>
             <Toaster />
             <Sonner />
             <BrowserRouter>
