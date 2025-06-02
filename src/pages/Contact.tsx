@@ -1,6 +1,4 @@
-
 import React from 'react';
-import { Header } from '@/components/Header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,7 +8,6 @@ import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold mb-4">Contact Us</h1>

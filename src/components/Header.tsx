@@ -38,34 +38,20 @@ export const Header: React.FC = () => {
     { name: 'Demo', href: '/demo', icon: 'live' }
   ];
 
-  // Get skin-specific header background classes
-  const getHeaderBackground = () => {
-    switch (theme.skin) {
-      case 'gradient':
-        return 'bg-gradient-to-r from-background/95 via-background/98 to-background/95 backdrop-blur-xl border-border/50';
-      case 'textured':
-        return 'bg-background/98 backdrop-blur-sm border-2 border-border/60 shadow-lg';
-      case 'glassmorphism':
-        return 'bg-background/20 backdrop-blur-2xl border border-white/20 shadow-2xl';
-      default:
-        return 'bg-background/95 backdrop-blur';
-    }
-  };
-
   return (
-    <header className={`sticky top-0 z-50 w-full border-b supports-[backdrop-filter]:bg-background/60 ${getHeaderBackground()} ${getSkinClasses()}`}>
+    <header className={`w-full bg-primary border-b border-primary-foreground/20 ${getSkinClasses()}`}>
       {/* Single line - Logo, main navigation, and right-aligned tools */}
       <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
-          <div className="bg-gradient-to-br from-primary to-blue-600 text-primary-foreground rounded-xl p-2 shadow-lg">
+          <div className="bg-gradient-to-br from-primary-foreground to-primary-foreground/80 text-primary rounded-xl p-2 shadow-lg">
             <span className="text-lg font-bold">EC</span>
           </div>
           <div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+            <span className="text-xl font-bold text-primary-foreground">
               EdCrash
             </span>
-            <div className="text-xs text-muted-foreground -mt-1">Learn Fast. Succeed Faster.</div>
+            <div className="text-xs text-primary-foreground/70 -mt-1">Learn Fast. Succeed Faster.</div>
           </div>
         </Link>
 
@@ -75,7 +61,7 @@ export const Header: React.FC = () => {
             <Link
               key={item.name}
               to={item.href}
-              className="flex items-center gap-2 px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-all duration-200 whitespace-nowrap"
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary-foreground/10 transition-all duration-200 whitespace-nowrap rounded-md"
             >
               {getIcon(item.icon)}
               {item.name}
@@ -85,7 +71,7 @@ export const Header: React.FC = () => {
           {/* More Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center gap-1 px-3 py-2 text-sm font-medium whitespace-nowrap">
+              <Button variant="ghost" className="flex items-center gap-1 px-3 py-2 text-sm font-medium whitespace-nowrap text-primary-foreground hover:bg-primary-foreground/10">
                 More
                 <ChevronDown className="w-4 h-4" />
               </Button>
@@ -132,7 +118,7 @@ export const Header: React.FC = () => {
         <Button
           variant="outline"
           size="sm"
-          className="lg:hidden"
+          className="lg:hidden text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -141,7 +127,7 @@ export const Header: React.FC = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className={`lg:hidden border-t ${getHeaderBackground()}`}>
+        <div className="lg:hidden border-t border-primary-foreground/20 bg-primary">
           <div className="w-full px-6 py-6 space-y-3">
             {/* Mobile EdTools and Live Session buttons */}
             <div className="flex gap-3 mb-6">
@@ -170,7 +156,7 @@ export const Header: React.FC = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="flex items-center gap-3 px-4 py-4 text-sm font-medium rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors"
+                className="flex items-center gap-3 px-4 py-4 text-sm font-medium rounded-lg text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {getIcon(item.icon)}
@@ -179,13 +165,13 @@ export const Header: React.FC = () => {
             ))}
             
             {/* More menu items */}
-            <div className="border-t pt-4 mt-4">
-              <p className="text-xs font-semibold text-muted-foreground mb-3 px-4">More</p>
+            <div className="border-t border-primary-foreground/20 pt-4 mt-4">
+              <p className="text-xs font-semibold text-primary-foreground/70 mb-3 px-4">More</p>
               {moreMenuItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="flex items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className="flex items-center gap-3 px-4 py-3 text-sm rounded-lg text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {getIcon(item.icon)}
