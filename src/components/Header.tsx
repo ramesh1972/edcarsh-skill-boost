@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Bell, Calendar, User, Settings, LogOut } from 'lucide-react';
@@ -253,3 +254,4 @@ export const Header: React.FC = () => {
     </header>
   </>;
 };
+
