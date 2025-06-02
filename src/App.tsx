@@ -23,24 +23,26 @@ const App = () => (
     <TooltipProvider>
       <ThemeProvider>
         <div className="h-screen w-full bg-primary flex items-center justify-center overflow-auto">
-          <div className="h-[90%] w-[90%] bg-background overflow-auto">
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/courses" element={<Courses />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/express-intent" element={<ExpressIntent />} />
-                <Route path="/instructors" element={<Instructors />} />
-                <Route path="/testimonials" element={<Testimonials />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/about" element={<About />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
+          <div className="h-[95%] w-[95%] bg-background overflow-auto">
+            <div className="w-full h-full">
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/courses" element={<Courses />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/express-intent" element={<ExpressIntent />} />
+                  <Route path="/instructors" element={<Instructors />} />
+                  <Route path="/testimonials" element={<Testimonials />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/about" element={<About />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </div>
           </div>
         </div>
       </ThemeProvider>
