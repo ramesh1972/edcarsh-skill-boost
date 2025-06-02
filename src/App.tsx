@@ -24,8 +24,8 @@ const App = () => (
       <ThemeProvider>
         <div className="h-screen w-full bg-primary flex items-center justify-center overflow-auto">
           <div className="h-[95%] w-[95%] bg-background overflow-auto flex flex-col">
-            <div className="h-[15%] w-full bg-background border-b">
-              {/* Top section - 15% of outer div height */}
+            <div className="h-[15.79%] w-full bg-background border-b">
+              {/* Top section - 15% of outer div height (15/95 = 15.79%) */}
             </div>
             <div className="flex-1 w-full overflow-auto">
               <Toaster />
