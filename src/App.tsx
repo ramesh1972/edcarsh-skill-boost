@@ -23,8 +23,11 @@ const App = () => (
     <TooltipProvider>
       <ThemeProvider>
         <div className="h-screen w-full bg-primary flex items-center justify-center overflow-auto">
-          <div className="h-[95%] w-[95%] bg-background overflow-auto">
-            <div className="w-full h-full">
+          <div className="h-[95%] w-[95%] bg-background overflow-auto flex flex-col">
+            <div className="h-[15%] w-full bg-background border-b">
+              {/* Top section - 15% of outer div height */}
+            </div>
+            <div className="flex-1 w-full overflow-auto">
               <Toaster />
               <Sonner />
               <BrowserRouter>
