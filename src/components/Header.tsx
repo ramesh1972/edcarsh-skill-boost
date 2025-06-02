@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Bell, Calendar, User, Settings, LogOut } from 'lucide-react';
@@ -79,7 +77,7 @@ export const Header: React.FC = () => {
       .tab-curved::after {
         content: '';
         position: absolute;
-        bottom: -10px;
+        bottom: 0px;
         width: 15px;
         height: 15px;
         background: hsl(var(--primary));
@@ -252,4 +250,3 @@ export const Header: React.FC = () => {
     </header>
   </>;
 };
-
