@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Bell, Calendar, User, Settings, LogOut } from 'lucide-react';
@@ -95,7 +96,7 @@ export const Header: React.FC = () => {
         box-shadow: 0 8px 0 0 hsl(var(--background));
       }
     `}</style>
-    <header className={`w-full bg-primary ${getSkinClasses()} relative z-10`}>
+    <header className={`w-full bg-primary ${getSkinClasses()} relative z-10`} style={{ paddingBottom: '20px' }}>
       {/* Single line - Logo, main navigation, and right-aligned tools */}
       <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-[32px] my-[18px]">
         {/* Logo */}
@@ -114,8 +115,8 @@ export const Header: React.FC = () => {
         {/* Desktop Navigation - Left aligned after logo */}
         <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-start ml-8">
           {mainNavItems.map(item => <Link key={item.name} to={item.href} className={`flex items-center gap-2 px-4 py-2 text-sm font-medium whitespace-nowrap rounded-t-lg transition-all duration-200 relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-lg tab-curved' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} style={isActiveRoute(item.href) ? {
-              marginBottom: '-19px',
-              paddingBottom: '21px',
+              marginBottom: '-20px',
+              paddingBottom: '22px',
               zIndex: 20
             } : {}}>
               {getIcon(item.icon)}
