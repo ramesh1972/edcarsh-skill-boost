@@ -22,23 +22,27 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <ThemeProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/express-intent" element={<ExpressIntent />} />
-            <Route path="/instructors" element={<Instructors />} />
-            <Route path="/testimonials" element={<Testimonials />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <div className="min-h-screen w-full border-[5px] border-primary bg-primary">
+          <div className="min-h-[calc(100vh-10px)] w-full bg-background">
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/courses" element={<Courses />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/express-intent" element={<ExpressIntent />} />
+                <Route path="/instructors" element={<Instructors />} />
+                <Route path="/testimonials" element={<Testimonials />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/about" element={<About />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </div>
+        </div>
       </ThemeProvider>
     </TooltipProvider>
   </QueryClientProvider>
