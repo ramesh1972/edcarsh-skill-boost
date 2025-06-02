@@ -23,7 +23,7 @@ const App = () => (
     <TooltipProvider>
       <ThemeProvider>
         <div className="h-screen w-full bg-primary flex items-center justify-center overflow-auto">
-          <div className="h-[95%] w-[95%] bg-background overflow-auto flex flex-col">
+          <div className="h-[calc(100vh-30px)] w-[calc(100vw-10px)] bg-background overflow-auto flex flex-col my-[15px] mx-[5px]">
             <div className="h-0 w-full bg-background border-b">
               {/* Top section - hidden (0 height) */}
             </div>
