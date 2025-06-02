@@ -83,14 +83,14 @@ export const Header: React.FC = () => {
         background: hsl(var(--primary));
       }
       .tab-curved::before {
-        left: -22px;
+        left: -25px;
         border-bottom-right-radius: 15px;
         border: 8px solid hsl(var(--background));
         border-top: none;
         border-left: none;
       }
       .tab-curved::after {
-        right: -22px;
+        right: -25px;
         border-bottom-left-radius: 15px;
         border: 8px solid hsl(var(--background));
         border-top: none;
