@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Bell, Calendar, User, Settings, LogOut } from 'lucide-react';
@@ -6,6 +7,7 @@ import { ThemeSelector } from './ThemeSelector';
 import { useTheme } from '@/contexts/ThemeContext';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {
@@ -67,7 +69,7 @@ export const Header: React.FC = () => {
   const isActiveRoute = (href: string) => {
     return location.pathname === href;
   };
-  return <header className={`w-full bg-primary border-b border-primary-foreground/20 ${getSkinClasses()}`}>
+  return <header className={`w-full bg-primary ${getSkinClasses()} relative z-10`}>
       {/* Single line - Logo, main navigation, and right-aligned tools */}
       <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-[32px] my-[18px]">
         {/* Logo */}
@@ -85,7 +87,10 @@ export const Header: React.FC = () => {
 
         {/* Desktop Navigation - Left aligned after logo */}
         <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-start ml-8">
-          {mainNavItems.map(item => <Link key={item.name} to={item.href} className={`flex items-center gap-2 px-3 py-2 text-sm font-medium whitespace-nowrap rounded-md transition-all duration-200 ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-sm' : 'text-primary-foreground hover:bg-primary-foreground/10'}`}>
+          {mainNavItems.map(item => <Link key={item.name} to={item.href} className={`flex items-center gap-2 px-3 py-2 text-sm font-medium whitespace-nowrap rounded-t-md transition-all duration-200 relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-sm border-b-0' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} style={isActiveRoute(item.href) ? {
+              marginBottom: '-1px',
+              borderBottom: '1px solid transparent'
+            } : {}}>
               {getIcon(item.icon)}
               {item.name}
             </Link>)}
