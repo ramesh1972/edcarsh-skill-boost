@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -23,7 +22,7 @@ const App = () => (
     <TooltipProvider>
       <ThemeProvider>
         <div className="h-screen w-full bg-primary flex items-center justify-center overflow-auto">
-          <div className="h-[calc(100vh-30px)] w-[calc(100vw-10px)] bg-background overflow-auto flex flex-col my-[15px] mx-[5px]">
+          <div className="h-[calc(100vh-120px)] w-[calc(100vw-30px)] bg-background overflow-auto flex flex-col my-[60px] mx-[15px]">
             <div className="h-0 w-full bg-background border-b">
               {/* Top section - hidden (0 height) */}
             </div>
