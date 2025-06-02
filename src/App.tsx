@@ -23,17 +23,17 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <ThemeProvider>
-        <div className="h-screen w-full bg-primary flex flex-col overflow-auto">
-          <Header />
-          <div className="flex-1 flex items-center justify-center">
-            <div className="h-[calc(100vh-120px)] w-[calc(100vw-30px)] bg-background overflow-auto flex flex-col my-[60px] mx-[15px]">
-              <div className="h-0 w-full bg-background border-b">
-                {/* Top section - hidden (0 height) */}
-              </div>
-              <div className="flex-1 w-full overflow-auto">
-                <Toaster />
-                <Sonner />
-                <BrowserRouter>
+        <BrowserRouter>
+          <div className="h-screen w-full bg-primary flex flex-col overflow-auto">
+            <Header />
+            <div className="flex-1 flex items-center justify-center">
+              <div className="h-[calc(100vh-120px)] w-[calc(100vw-30px)] bg-background overflow-auto flex flex-col my-[60px] mx-[15px]">
+                <div className="h-0 w-full bg-background border-b">
+                  {/* Top section - hidden (0 height) */}
+                </div>
+                <div className="flex-1 w-full overflow-auto">
+                  <Toaster />
+                  <Sonner />
                   <Routes>
                     <Route path="/" element={<Index />} />
                     <Route path="/courses" element={<Courses />} />
@@ -47,11 +47,11 @@ const App = () => (
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>
-                </BrowserRouter>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </BrowserRouter>
       </ThemeProvider>
     </TooltipProvider>
   </QueryClientProvider>
