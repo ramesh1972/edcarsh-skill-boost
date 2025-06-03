@@ -21,6 +21,8 @@ export const courses = [
     level: "Beginner",
     subject: "Frontend",
     industry: "Software",
+    mode: "live",
+    tools: true,
     instructor: {
       name: "Sarah Chen",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=100&h=100&fit=crop&crop=face",
@@ -53,6 +55,8 @@ export const courses = [
     level: "Intermediate",
     subject: "Data Science",
     industry: "Software",
+    mode: "live",
+    tools: true,
     instructor: {
       name: "Dr. Mike Rodriguez",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=face",
@@ -85,6 +89,8 @@ export const courses = [
     level: "Beginner",
     subject: "Marketing",
     industry: "Marketing",
+    mode: "offline",
+    tools: false,
     instructor: {
       name: "Emma Wilson",
       image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=100&h=100&fit=crop&crop=face",
@@ -117,6 +123,8 @@ export const courses = [
     level: "Intermediate",
     subject: "Backend",
     industry: "Software",
+    mode: "live",
+    tools: true,
     instructor: {
       name: "Alex Johnson",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=100&h=100&fit=crop&crop=face",
@@ -149,6 +157,8 @@ export const courses = [
     level: "Beginner",
     subject: "Design",
     industry: "Software",
+    mode: "offline",
+    tools: true,
     instructor: {
       name: "Lisa Park",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=face",
@@ -181,6 +191,8 @@ export const courses = [
     level: "Advanced",
     subject: "Data Science",
     industry: "Software",
+    mode: "live",
+    tools: true,
     instructor: {
       name: "Dr. James Wu",
       image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=100&h=100&fit=crop&crop=face",
@@ -213,6 +225,8 @@ export const courses = [
     level: "Intermediate",
     subject: "Mobile",
     industry: "Software",
+    mode: "offline",
+    tools: false,
     instructor: {
       name: "Maria Garcia",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=100&h=100&fit=crop&crop=face",
@@ -245,6 +259,8 @@ export const courses = [
     level: "Advanced",
     subject: "DevOps",
     industry: "Software",
+    mode: "live",
+    tools: true,
     instructor: {
       name: "David Kim",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=face",

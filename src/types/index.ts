@@ -31,5 +31,7 @@ export interface Course {
   level: string;
   subject: string; // This is the category
   industry: string;
+  mode: 'live' | 'offline';
+  tools: boolean;
   instructor: Instructor;
 }

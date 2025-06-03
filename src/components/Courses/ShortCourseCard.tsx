@@ -7,6 +7,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { getSubjectColor } from '@/data/masterData';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
+import { Wifi, WifiOff, Wrench } from 'lucide-react';
 
 interface Course {
   id: number;
@@ -21,6 +22,8 @@ interface Course {
   level: string;
   subject: string;
   industry: string;
+  mode: 'live' | 'offline';
+  tools: boolean;
   instructor: {
     name: string;
     image: string;
@@ -47,18 +50,28 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
       {/* Course Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-none">
         <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-none" />
-        <div className="absolute top-2 left-2">
-          <Badge variant="outline" className="bg-white/90 text-black">
+        <div className="absolute top-2 left-2 flex flex-col gap-1">
+          <Badge variant="outline" className="bg-white/90 text-black text-xs">
             {course.industry}
           </Badge>
-        </div>
-        <div className="absolute top-2 right-2 flex gap-1 flex-col">
           <Badge customColor={getSubjectColor(course.subject)} className="text-white text-xs">
             {course.subject}
           </Badge>
+        </div>
+        <div className="absolute top-2 right-2 flex gap-1 flex-col">
           <Badge variant="secondary" className="bg-white/90 text-black text-xs">
             {course.level}
           </Badge>
+          <Badge variant="outline" className={`text-xs ${course.mode === 'live' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
+            {course.mode === 'live' ? <Wifi className="w-3 h-3 mr-1" /> : <WifiOff className="w-3 h-3 mr-1" />}
+            {course.mode}
+          </Badge>
+          {course.tools && (
+            <Badge variant="outline" className="bg-blue-100 text-blue-800 text-xs">
+              <Wrench className="w-3 h-3 mr-1" />
+              Tools
+            </Badge>
+          )}
         </div>
       </div>
 
