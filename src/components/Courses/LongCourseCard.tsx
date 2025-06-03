@@ -96,7 +96,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
             </div>
 
             {/* Column 2: Topics - max 8 topics */}
-            <div className="col-span-1">
+            <div className="col-span-1" style={{maxWidth: '280px'}}>
               <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
               <ul className="text-sm space-y-1">
                 {course.longTopics.slice(0, 8).map((topic, index) => (
@@ -109,7 +109,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
             </div>
 
             {/* Column 3: About Instructor - increased width by 20px */}
-            <div className="col-span-1 flex flex-col" style={{marginLeft: '-50px'}}>
+            <div className="col-span-1 flex flex-col" style={{marginLeft: '-20px'}}>
               <div className="flex items-start gap-3 mb-4 flex-1">
                 <img src={course.instructor.image} alt={course.instructor.name} className="w-12 h-12 rounded-full object-cover" />
                 <div className="text-sm text-muted-foreground flex-1">
