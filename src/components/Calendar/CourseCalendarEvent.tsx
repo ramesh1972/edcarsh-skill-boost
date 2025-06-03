@@ -3,8 +3,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Clock, Users, DollarSign, UserPlus } from 'lucide-react';
-import { parseISO, addDays, isSameDay, parse, addMinutes, subMinutes, isWithinInterval, addHours, isAfter } from 'date-fns';
+import { Clock, Users, DollarSign, UserPlus, Eye } from 'lucide-react';
+import { parseISO, addDays, isSameDay, parse, addMinutes, subMinutes, isWithinInterval, addHours, isAfter, isBefore } from 'date-fns';
 import ActionButtons from '@/components/Courses/ActionButtons';
 
 interface Course {
@@ -115,6 +115,16 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
     return isSameDay(currentDay, today) || isAfter(currentDay, today);
   };
 
+  // Check if session is in the past
+  const isPastSession = () => {
+    if (!currentDay) return false;
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    return isBefore(currentDay, today);
+  };
+
   // Calculate card height based on daily session duration
   const getCardHeight = () => {
     const baseHeight = 60; // Base height in pixels
@@ -126,17 +136,20 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   const joinButtonState = getJoinButtonState();
   const showJoinAsGuest = isCurrentOrFutureSession();
   const cardHeight = getCardHeight();
+  const isSessionPast = isPastSession();
 
   if (viewMode === 'month') {
     return (
       <div 
-        className={`text-xs p-1 rounded border-l-2 ${getCategoryColor(course.category)}`}
+        className={`text-xs p-1 rounded border-l-2 ${getCategoryColor(course.category)} ${
+          isSessionPast ? 'opacity-50 bg-gray-100' : ''
+        }`}
         style={{ minHeight: `${Math.max(40, cardHeight / 3)}px` }}
       >
         <div className="font-medium truncate">{course.title}</div>
         <div className="text-xs opacity-75">{course.startTime}</div>
         <div className="text-xs opacity-75">{course.dailySessionDuration}h</div>
-        <div className="text-xs font-semibold text-red-600 mt-1">
+        <div className={`text-xs font-semibold mt-1 ${isSessionPast ? 'text-gray-500' : 'text-red-600'}`}>
           Session - {sessionNumber}
         </div>
         <div className="flex gap-1 mt-1">
@@ -144,7 +157,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
             <Button 
               size="sm" 
               className="text-xs h-5 px-2"
-              disabled={!joinButtonState.enabled}
+              disabled={!joinButtonState.enabled || isSessionPast}
             >
               Join Now
             </Button>
@@ -154,11 +167,20 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
               variant="outline" 
               size="sm" 
               className="text-xs h-5 px-1 flex items-center gap-1"
+              disabled={isSessionPast}
             >
               <UserPlus className="h-2 w-2" />
               Guest
             </Button>
           )}
+          <Button 
+            variant="secondary" 
+            size="sm" 
+            className="text-xs h-5 px-1 flex items-center gap-1"
+            disabled={isSessionPast}
+          >
+            <Eye className="h-2 w-2" />
+          </Button>
         </div>
       </div>
     );
@@ -167,7 +189,9 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   if (viewMode === 'week') {
     return (
       <div 
-        className={`text-xs p-2 rounded border ${getCategoryColor(course.category)}`}
+        className={`text-xs p-2 rounded border ${getCategoryColor(course.category)} ${
+          isSessionPast ? 'opacity-50 bg-gray-100' : ''
+        }`}
         style={{ minHeight: `${Math.max(80, cardHeight / 2)}px` }}
       >
         <div className="font-medium text-xs mb-1 line-clamp-2">{course.title}</div>
@@ -185,29 +209,40 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         <Badge variant="outline" className="text-xs mt-1">
           {course.level}
         </Badge>
-        <div className="text-xs font-semibold text-red-600 mt-1 bg-red-50 px-1 py-0.5 rounded">
+        <div className={`text-xs font-semibold mt-1 px-1 py-0.5 rounded ${
+          isSessionPast ? 'text-gray-500 bg-gray-50' : 'text-red-600 bg-red-50'
+        }`}>
           Session - {sessionNumber}
         </div>
         <div className="flex gap-1 mt-1">
           {joinButtonState.show && (
             <Button 
               size="sm" 
-              className="text-xs h-6 px-2 flex-1"
-              disabled={!joinButtonState.enabled}
+              className="text-xs h-6 px-1 flex-1"
+              disabled={!joinButtonState.enabled || isSessionPast}
             >
-              Join Now
+              Join
             </Button>
           )}
           {showJoinAsGuest && (
             <Button 
               variant="outline" 
               size="sm" 
-              className="text-xs h-6 px-2 flex-1 flex items-center gap-1"
+              className="text-xs h-6 px-1 flex-1 flex items-center gap-1"
+              disabled={isSessionPast}
             >
-              <UserPlus className="h-3 w-3" />
+              <UserPlus className="h-2 w-2" />
               Guest
             </Button>
           )}
+          <Button 
+            variant="secondary" 
+            size="sm" 
+            className="text-xs h-6 px-1 flex items-center gap-1"
+            disabled={isSessionPast}
+          >
+            <Eye className="h-2 w-2" />
+          </Button>
         </div>
       </div>
     );
@@ -215,13 +250,15 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
 
   // Day view - full detail
   return (
-    <Card className="w-full" style={{ minHeight: `${cardHeight}px` }}>
+    <Card className={`w-full ${isSessionPast ? 'opacity-60 bg-gray-50' : ''}`} style={{ minHeight: `${cardHeight}px` }}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <CardTitle className="text-lg leading-tight">{course.title}</CardTitle>
           <div className="flex flex-col gap-1">
             <Badge variant="secondary">{course.level}</Badge>
-            <Badge className="bg-red-100 text-red-800 border-red-200 font-semibold">
+            <Badge className={`font-semibold ${
+              isSessionPast ? 'bg-gray-100 text-gray-600 border-gray-200' : 'bg-red-100 text-red-800 border-red-200'
+            }`}>
               Session - {sessionNumber}
             </Badge>
           </div>
@@ -271,8 +308,9 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         <div className="mt-3">
           <ActionButtons 
             showJoinNow={joinButtonState.show}
-            joinNowEnabled={joinButtonState.enabled}
+            joinNowEnabled={joinButtonState.enabled && !isSessionPast}
             showJoinAsGuest={showJoinAsGuest}
+            isDisabled={isSessionPast}
           />
         </div>
       </CardContent>
