@@ -101,8 +101,8 @@ const Index = () => {
         <div className="container px-4 mx-auto relative">
           {/* Corner Images */}
           <div 
-            className={`absolute top-0 left-0 hidden lg:block transition-all duration-700 delay-200 ${
-              uspsAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
+            className={`absolute top-0 left-0 hidden lg:block transition-all duration-1000 delay-300 ${
+              uspsAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-full'
             }`} 
             style={{marginTop: '-90px'}}
           >
@@ -110,8 +110,8 @@ const Index = () => {
           </div>
           
           <div 
-            className={`absolute top-0 right-0 hidden lg:block transition-all duration-700 delay-400 ${
-              uspsAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-10'
+            className={`absolute top-0 right-0 hidden lg:block transition-all duration-1000 delay-500 ${
+              uspsAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-full'
             }`} 
             style={{marginTop: '-90px'}}
           >
