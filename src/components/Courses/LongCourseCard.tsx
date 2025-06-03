@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
 import { Heart, Eye, UserPlus } from 'lucide-react';
@@ -82,11 +83,11 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
           </div>
         </div>
 
-        {/* Right side - 2 columns structure */}
+        {/* Right side - 3 columns structure */}
         <div className="flex-1 p-6 flex flex-col">
-          {/* Top row - 2 columns now */}
-          <div className="grid grid-cols-2 gap-6 flex-1">
-            {/* Column 1: Title and Description - increased height */}
+          {/* Top row - 3 columns now */}
+          <div className="grid grid-cols-3 gap-6 flex-1">
+            {/* Column 1: Title and Description */}
             <div className="col-span-1">
               <div className="flex items-center gap-2 mb-2">
                 <h3 className={`text-xl font-semibold ${theme.designSystem === 'material' ? 'text-lg font-medium' : 'text-xl'}`}>
@@ -105,6 +106,26 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
                     {topic}
                   </Badge>
                 ))}
+              </div>
+            </div>
+
+            {/* Column 3: Instructor Details */}
+            <div className="col-span-1">
+              <h4 className="text-sm font-medium mb-3">Instructor:</h4>
+              <div className="flex items-start gap-3">
+                <Avatar className="h-12 w-12">
+                  <AvatarImage src={course.instructor.image} alt={course.instructor.name} />
+                  <AvatarFallback>{course.instructor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <div className="flex items-center gap-1 mb-1">
+                    <h5 className="font-medium text-sm">{course.instructor.name}</h5>
+                    <span className="text-xs">{course.instructor.flag}</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-1">{course.instructor.specialty}</p>
+                  <p className="text-xs text-muted-foreground mb-1">{course.instructor.experience} • {course.instructor.city}, {course.instructor.country}</p>
+                  <p className="text-xs text-muted-foreground line-clamp-3">{course.instructor.description}</p>
+                </div>
               </div>
             </div>
           </div>
