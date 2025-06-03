@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -44,8 +45,8 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
       <div className="flex">
         {/* Left side - Image and stats */}
         <div className="w-64 flex-shrink-0 flex flex-col">
-          <div className="relative h-48 overflow-hidden">
-            <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+          <div className="relative h-48 overflow-hidden rounded-b-none">
+            <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-none" />
             <div className="absolute top-2 left-2">
               <Badge variant="outline" className="bg-white/90 text-black">
                 {course.category}
