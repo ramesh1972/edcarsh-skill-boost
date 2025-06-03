@@ -77,18 +77,19 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
               Payments
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
-              <KeyRound className="w-4 h-4 mr-2" />
-              Reset Password
+              <Settings className="w-4 h-4 mr-2" />
+              Settings
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
               <MessageCircle className="w-4 h-4 mr-2" />
               Contact
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
-              <Settings className="w-4 h-4 mr-2" />
-              Settings
+              <KeyRound className="w-4 h-4 mr-2" />
+              Reset Password
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
+
             <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
               <LogOut className="w-4 h-4 mr-2" />
               Sign Out
