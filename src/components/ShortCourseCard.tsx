@@ -107,14 +107,14 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
               Join as Guest
             </Button>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
+              <Button variant="primary" size="sm" className="flex items-center gap-1">
                 <Eye className="h-3 w-3" />
                 View
               </Button>
               <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
                 Enroll Now
               </Button>
-              <Button variant="outline" size="sm" className="px-2 border-2">
+              <Button variant="primary" size="sm" className="px-2">
                 <Heart className="h-3 w-3" />
               </Button>
             </div>
