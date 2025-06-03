@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -5,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
-import { Heart, Eye, UserPlus } from 'lucide-react';
+
 interface Course {
   id: number;
   title: string;
@@ -29,17 +30,18 @@ interface Course {
     description: string;
   };
 }
+
 interface ShortCourseCardProps {
   course: Course;
 }
+
 const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
   course
 }) => {
-  const {
-    theme,
-    getIcon
-  } = useTheme();
-  return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+  const { theme } = useTheme();
+  
+  return (
+    <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       {/* Course Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-none">
         <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-none" />
@@ -69,9 +71,11 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         <div className="flex-shrink-0 p-0 mb-2">
           <h4 className="text-xs font-medium mb-1">Topics Covered:</h4>
           <div className="flex flex-wrap mb-2 gap-1 h-[50px] content-start overflow-hidden">
-            {course.topics.slice(0, 6).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+            {course.topics.slice(0, 6).map((topic, index) => (
+              <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                 {topic}
-              </Badge>)}
+              </Badge>
+            ))}
           </div>
         </div>
 
@@ -85,6 +89,8 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
           <ActionButtons />
         </div>
       </CardContent>
-    </Card>;
+    </Card>
+  );
 };
+
 export default ShortCourseCard;
