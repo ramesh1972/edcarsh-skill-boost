@@ -57,7 +57,24 @@ const Index = () => {
 
       {/* USPs Section */}
       <section className="py-20 bg-muted/50 relative overflow-hidden">
-        <div className="container px-4 mx-auto">
+        <div className="container px-4 mx-auto relative">
+          {/* Corner Images */}
+          <div className="absolute top-0 left-0 hidden lg:block">
+            <img 
+              src="/lovable-uploads/14c1d102-af1f-4765-be76-42b00c50c8e3.png" 
+              alt="100% Quality Badge" 
+              className="w-48 h-48 object-contain"
+            />
+          </div>
+          
+          <div className="absolute top-0 right-0 hidden lg:block">
+            <img 
+              src="/lovable-uploads/7aa0ba35-0c3f-47dc-a574-f6ff47194b94.png" 
+              alt="Success Key Illustration" 
+              className="w-48 h-48 object-contain"
+            />
+          </div>
+
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-8 mb-4">
               {/* Left Image */}
@@ -232,7 +249,7 @@ const Index = () => {
 
       {/* Testimonials */}
       <section 
-        className="py-20 bg-muted/50 round-[10px]"
+        className="py-20 bg-muted/50 round-[10px] border-[10px] border-primary"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.6)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
           backgroundSize: 'fill',
