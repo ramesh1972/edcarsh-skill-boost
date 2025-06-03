@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Palette, Type, Image, Layout, Brush, Layers, X } from 'lucide-react';
+import { Settings, Palette, Type, Image, Layout, Brush, Layers } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import {
   DropdownMenu,
@@ -59,17 +59,7 @@ export const ThemeSelector: React.FC = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-72">
-        <div className="flex items-center justify-between px-2 py-1.5">
-          <DropdownMenuLabel className="p-0">Customize Theme</DropdownMenuLabel>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            className="h-6 w-6 p-0 hover:bg-accent"
-            onClick={() => setIsOpen(false)}
-          >
-            <X className="w-4 h-4" />
-          </Button>
-        </div>
+        <DropdownMenuLabel>Customize Theme</DropdownMenuLabel>
         <DropdownMenuSeparator />
         
         <DropdownMenuSub>
