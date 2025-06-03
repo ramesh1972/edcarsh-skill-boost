@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, DollarSign, Globe, Calendar, Target, Users, Star, ArrowRight, CheckCircle, Play, Zap, Award, BookOpen, TrendingUp } from 'lucide-react';
@@ -8,20 +9,23 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { featuredCourses } from '@/data/courses';
 import { homeTestimonials } from '@/data/testimonials';
 import { usps } from '@/data/usps';
+
 const Index = () => {
   const {
     theme,
     getIcon,
     getPageLayoutClasses
   } = useTheme();
-  return <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
+
+  return (
+    <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px]" style={{
-      backgroundImage: `radial-gradient(circle at center, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0.4) 50%, rgba(155,155,155,0.2) 70%), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat'
-    }}>
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px] animate-fade-in" style={{
+        backgroundImage: `radial-gradient(circle at center, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0.4) 50%, rgba(155,155,155,0.2) 70%), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
         <div className="container px-4 mx-auto rounded-[20px]">
           <div className="text-center">
             <Badge className="mb-4 animate-fade-in" variant="secondary" style={{fontSize: '12px', animationDelay: '0.1s'}}>
@@ -34,10 +38,10 @@ const Index = () => {
               </span>
             </h1>
             <p style={{
-            color: 'orange',
-            fontSize: '30px',
-            animationDelay: '0.5s'
-          }} className="mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 mt-[20px] animate-fade-in-left">
+              color: 'orange',
+              fontSize: '30px',
+              animationDelay: '0.5s'
+            }} className="mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 mt-[20px] animate-fade-in-left">
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
@@ -60,16 +64,16 @@ const Index = () => {
         <div className="container px-4 mx-auto relative">
           {/* Corner Images */}
           <div className="absolute top-0 left-0 hidden lg:block animate-fade-in-left" style={{
-          marginTop: '-90px',
-          animationDelay: '0.2s'
-        }}>
+            marginTop: '-90px',
+            animationDelay: '0.2s'
+          }}>
             <img src="/lovable-uploads/14c1d102-af1f-4765-be76-42b00c50c8e3.png" alt="100% Quality Badge" className="w-48 h-48 object-contain" />
           </div>
           
           <div className="absolute top-0 right-0 hidden lg:block animate-fade-in-right" style={{
-          marginTop: '-90px',
-          animationDelay: '0.4s'
-        }}>
+            marginTop: '-90px',
+            animationDelay: '0.4s'
+          }}>
             <img src="/lovable-uploads/7aa0ba35-0c3f-47dc-a574-f6ff47194b94.png" alt="Success Key Illustration" className="w-48 h-48 object-contain" />
           </div>
 
@@ -102,12 +106,13 @@ const Index = () => {
 
             {/* Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-              {usps.map((usp, index) => <Card key={index} 
-                className={`text-center hover:shadow-lg transition-all duration-300 hover:scale-105 hover:border-primary/50 group relative bg-background/80 backdrop-blur-sm ${
-                  index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'
-                }`}
-                style={{animationDelay: `${0.5 + index * 0.1}s`}}
-              >
+              {usps.map((usp, index) => (
+                <Card key={index} 
+                  className={`text-center hover:shadow-lg transition-all duration-300 hover:scale-105 hover:border-primary/50 group relative bg-background/80 backdrop-blur-sm ${
+                    index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'
+                  }`}
+                  style={{animationDelay: `${0.5 + index * 0.1}s`}}
+                >
                   {/* Connection dots */}
                   <div className="hidden lg:block absolute -top-2 -left-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
                   <div className="hidden lg:block absolute -top-2 -right-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
@@ -128,7 +133,8 @@ const Index = () => {
                       {usp.description}
                     </CardDescription>
                   </CardContent>
-                </Card>)}
+                </Card>
+              ))}
             </div>
 
             {/* Central connecting element */}
@@ -139,11 +145,11 @@ const Index = () => {
 
       {/* Featured Courses */}
       <section className="py-20 round-b-[20px] border-[10px] border-secondary" style={{
-      backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.8)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat'
-    }}>
+        backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.8)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
         <div className="container px-4 mx-auto round-b-[20px]">
           <div className="flex justify-between items-center mb-12 animate-fade-in-left" style={{animationDelay: '0.2s'}}>
             <div>
@@ -160,19 +166,22 @@ const Index = () => {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredCourses.map((course, index) => <Card key={index} 
-              className={`hover:shadow-lg transition-shadow ${
-                index % 3 === 0 ? 'animate-fade-in-left' : 
-                index % 3 === 1 ? 'animate-zoom-in' : 'animate-fade-in-right'
-              }`}
-              style={{animationDelay: `${0.4 + index * 0.15}s`}}
-            >
+            {featuredCourses.map((course, index) => (
+              <Card key={index} 
+                className={`hover:shadow-lg transition-shadow ${
+                  index % 3 === 0 ? 'animate-fade-in-left' : 
+                  index % 3 === 1 ? 'animate-zoom-in' : 'animate-fade-in-right'
+                }`}
+                style={{animationDelay: `${0.4 + index * 0.15}s`}}
+              >
                 <CardHeader>
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex gap-2">
-                      {course.tags.map(tag => <Badge key={tag} variant="secondary" className="text-xs">
+                      {course.tags.map(tag => (
+                        <Badge key={tag} variant="secondary" className="text-xs">
                           {tag}
-                        </Badge>)}
+                        </Badge>
+                      ))}
                     </div>
                     <div className="flex items-center gap-1">
                       <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
@@ -206,7 +215,8 @@ const Index = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -237,11 +247,11 @@ const Index = () => {
 
       {/* Testimonials */}
       <section className="py-20 bg-muted/50 round-[10px] border-[10px] border-secondary" style={{
-      backgroundImage: `linear-gradient(rgba(255, 255, 255,0.4), rgba(255, 255, 255,.8)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
-      backgroundSize: '150px auto',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'repeat'
-    }}>
+        backgroundImage: `linear-gradient(rgba(255, 255, 255,0.4), rgba(255, 255, 255,.8)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
+        backgroundSize: '150px auto',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'repeat'
+      }}>
         <div className="container px-4 mx-auto">
           <div className="text-center mb-16 animate-zoom-in" style={{animationDelay: '0.2s'}}>
             <h2 className="text-3xl font-bold mb-4">What Our Students Say</h2>
@@ -250,16 +260,19 @@ const Index = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {homeTestimonials.map((testimonial, index) => <Card key={index}
-              className={`${
-                index % 3 === 0 ? 'animate-fade-in-left' : 
-                index % 3 === 1 ? 'animate-zoom-in' : 'animate-fade-in-right'
-              }`}
-              style={{animationDelay: `${0.4 + index * 0.2}s`}}
-            >
+            {homeTestimonials.map((testimonial, index) => (
+              <Card key={index}
+                className={`${
+                  index % 3 === 0 ? 'animate-fade-in-left' : 
+                  index % 3 === 1 ? 'animate-zoom-in' : 'animate-fade-in-right'
+                }`}
+                style={{animationDelay: `${0.4 + index * 0.2}s`}}
+              >
                 <CardHeader>
                   <div className="flex items-center gap-1 mb-2">
-                    {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    ))}
                   </div>
                   <CardTitle className="text-lg">{testimonial.name}</CardTitle>
                   <CardDescription>{testimonial.role}</CardDescription>
@@ -267,7 +280,8 @@ const Index = () => {
                 <CardContent>
                   <p className="text-muted-foreground">"{testimonial.content}"</p>
                 </CardContent>
-              </Card>)}
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -337,6 +351,8 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
