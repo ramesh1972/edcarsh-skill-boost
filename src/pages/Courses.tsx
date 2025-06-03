@@ -254,31 +254,9 @@ const Courses = () => {
                   </div>
 
                   
+                  
                   {/* Course Content */}
                   <div className="flex-1 p-6">
-                    {/* Course Details - moved below image section */}
-                    <div className="flex items-center justify-between text-sm mb-3 pb-3 border-b">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-1">
-                          {getIcon('time')}
-                          {course.duration}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          {getIcon('student')}
-                          {course.students} enrolled
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <Badge variant="secondary" className="flex items-center gap-1">
-                          {getIcon('price')}
-                          {course.price}
-                        </Badge>
-                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                          📅
-                          {course.nextSession}
-                        </div>
-                      </div>
-                    </div>
 
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex-1">
