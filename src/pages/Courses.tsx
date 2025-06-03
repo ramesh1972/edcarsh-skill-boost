@@ -168,7 +168,7 @@ const Courses = () => {
                 </div>
 
                 {/* Course Details - Fixed position */}
-                <div className="flex items-center justify-between text-sm mb-1 flex-shrink-0">
+                <div className="flex items-center justify-between text-sm mb-2 flex-shrink-0">
                   <div className="flex items-center gap-1">
                     {getIcon('time')}
                     {course.duration}
