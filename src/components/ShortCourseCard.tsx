@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -108,14 +109,14 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
               Join as Guest
             </Button>
             <div className="flex gap-2">
-              <Button variant="default" size="sm" className="flex items-center gap-1">
+              <Button variant="secondary" size="sm" className="flex items-center gap-1">
                 <Eye className="h-3 w-3" />
                 View
               </Button>
               <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
                 Enroll Now
               </Button>
-              <Button variant="default" size="sm" className="px-2">
+              <Button variant="secondary" size="sm" className="px-2">
                 <Heart className="h-3 w-3" />
               </Button>
             </div>
@@ -127,3 +128,4 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
 };
 
 export default ShortCourseCard;
+
