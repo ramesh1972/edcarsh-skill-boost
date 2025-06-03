@@ -11,7 +11,7 @@ import { Course } from '@/types';
 interface CoursesCalendarViewProps {
   courses: Course[];
   industryFilter: string;
-  subjectFilter: string;
+  categoryFilter: string;
   levelFilter: string;
   calendarViewMode: string;
   setCalendarViewMode: (mode: string) => void;
@@ -22,7 +22,7 @@ interface CoursesCalendarViewProps {
 const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
   courses,
   industryFilter,
-  subjectFilter,
+  categoryFilter,
   levelFilter,
   calendarViewMode,
   setCalendarViewMode,
@@ -69,9 +69,9 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
     const coursesInPeriod = [];
     courses.forEach(course => {
       const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
-      const subjectMatch = subjectFilter === 'all' || course.subject === subjectFilter;
+      const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-      if (industryMatch && subjectMatch && levelMatch) {
+      if (industryMatch && categoryMatch && levelMatch) {
         const sessionDays = getCourseSessionDays(course);
         sessionDays.forEach(sessionDay => {
           if (calendarViewMode === 'day') {
@@ -93,7 +93,7 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
       }
     });
     return coursesInPeriod;
-  }, [calendarViewMode, currentDate, industryFilter, subjectFilter, levelFilter, courses]);
+  }, [calendarViewMode, currentDate, industryFilter, categoryFilter, levelFilter, courses]);
 
   const navigatePeriod = (direction: 'prev' | 'next') => {
     let newDate: Date;

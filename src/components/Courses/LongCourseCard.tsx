@@ -1,110 +1,118 @@
 
 import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Clock, Users, Star, Calendar, MapPin } from 'lucide-react';
-import { Course } from '@/types';
-import { industriesData } from '@/data/masterData';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { useTheme } from '@/contexts/ThemeContext';
+import ActionButtons from './ActionButtons';
+import CourseInfoCard from './CourseInfoCard';
+import InstructorCard from '@/components/instructors/InstructorCard';
+
+interface Course {
+  id: number;
+  title: string;
+  longDescription: string;
+  duration: string;
+  price: string;
+  students: number;
+  nextSession: string;
+  image: string;
+  longTopics: string[];
+  level: string;
+  category: string;
+  industry: string;
+  instructor: {
+    name: string;
+    image: string;
+    experience: string;
+    specialty: string;
+    city: string;
+    country: string;
+    flag: string;
+    description: string;
+  };
+}
 
 interface LongCourseCardProps {
   course: Course;
 }
 
 const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
-  const getIndustryDisplayName = (industryId: string) => {
-    const industry = industriesData.find(ind => ind.id === industryId);
-    return industry ? industry.name : industryId;
-  };
-
+  const { theme, getIcon } = useTheme();
+  
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-      <CardContent className="p-0">
-        <div className="flex">
-          {/* Image */}
-          <div className="relative w-48 h-32 flex-shrink-0">
-            <img 
-              src={course.image} 
-              alt={course.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-2 left-2 flex flex-col gap-1">
-              <Badge variant="default" className="text-xs">
-                ${course.price}
+    <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+      <div className="flex">
+        {/* Left side - Image and stats */}
+        <div className="w-64 flex-shrink-0 flex flex-col">
+          <div className="relative h-48 overflow-hidden rounded-b-none">
+            <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-none" />
+            <div className="absolute top-2 left-2">
+              <Badge variant="outline" className="bg-white/90 text-black">
+                {course.industry}
               </Badge>
-              {course.isLive && (
-                <Badge variant="destructive" className="text-xs">
-                  Live
-                </Badge>
-              )}
-              {course.hasTools && (
-                <Badge variant="outline" className="text-xs bg-green-50 border-green-200 text-green-700">
-                  Tools
-                </Badge>
-              )}
-              <Badge variant="outline" className="text-xs">
-                {course.expertLevel}
+            </div>
+            <div className="absolute top-2 right-2 flex gap-1 flex-col">
+              <Badge variant="secondary" className="bg-white/90 text-black text-xs">
+                {course.category}
+              </Badge>
+              <Badge variant="secondary" className="bg-white/90 text-black text-xs">
+                {course.level}
               </Badge>
             </div>
           </div>
           
-          {/* Content */}
+          {/* Spacer to push stats and price to bottom */}
           <div className="flex-1 p-4">
-            <div className="flex justify-between items-start mb-2">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <Badge variant="secondary" className="text-xs">
-                    {getIndustryDisplayName(course.industry)}
-                  </Badge>
-                  <Badge variant="outline" className="text-xs">
-                    {course.subject}
-                  </Badge>
-                  <Badge variant="outline" className="text-xs">
-                    {course.level}
-                  </Badge>
-                </div>
-                <h3 className="font-semibold text-lg mb-1">{course.title}</h3>
-                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{course.mediumDescription}</p>
-              </div>
+          
+          {/* Course Info Card - aligned to bottom */}
+          <CourseInfoCard 
+            duration={course.duration}
+            students={course.students}
+            price={course.price}
+            nextSession={course.nextSession}
+          />
             </div>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6 text-sm text-muted-foreground">
-                <div className="flex items-center gap-1">
-                  <Clock className="h-4 w-4" />
-                  {course.duration}
-                </div>
-                <div className="flex items-center gap-1">
-                  <Users className="h-4 w-4" />
-                  {course.students} students
-                </div>
-                <div className="flex items-center gap-1">
-                  <Calendar className="h-4 w-4" />
-                  Next: {course.nextSession}
-                </div>
-                <div className="flex items-center gap-1">
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span>4.8</span>
-                </div>
+        </div>
+
+        {/* Right side - 3 columns structure */}
+        <div className="flex-1 p-6 flex flex-col">
+          {/* Top row - 3 columns now */}
+          <div className="grid grid-cols-3 gap-6 flex-1">
+            {/* Column 1: Title and Description */}
+            <div className="col-span-1">
+              <div className="flex items-center gap-2 mb-2">
+                <h3 className={`text-xl font-semibold ${theme.designSystem === 'material' ? 'text-lg font-medium' : 'text-xl'}`}>
+                  {course.title}
+                </h3>
               </div>
-              
-              <div className="flex items-center gap-2">
-                <img 
-                  src={course.instructor.image} 
-                  alt={course.instructor.name}
-                  className="w-8 h-8 rounded-full object-cover"
-                />
-                <div className="text-right">
-                  <div className="text-sm font-medium">{course.instructor.name}</div>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <MapPin className="h-3 w-3" />
-                    {course.instructor.city} {course.instructor.flag}
-                  </div>
-                </div>
+              <p className="text-sm text-muted-foreground max-h-[165px] overflow-hidden">{course.longDescription}</p>
+            </div>
+
+            {/* Column 2: Topics as bulleted list - max 6 topics */}
+            <div className="col-span-1" style={{ maxWidth: '280px' }}>
+              <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                {course.longTopics.slice(0, 7).map((topic, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 3: Instructor Details */}
+            <div className="flex flex-col justify-between h-full -ml-[25px]">
+              <InstructorCard instructor={course.instructor} />
+              <div className="mt-auto">
+                <ActionButtons />
               </div>
             </div>
           </div>
         </div>
-      </CardContent>
+      </div>
     </Card>
   );
 };

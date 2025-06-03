@@ -29,10 +29,7 @@ export interface Course {
   topics: string[];
   longTopics: string[];
   level: string;
-  subject: string;
+  category: string;
   industry: string;
-  isLive: boolean;
-  hasTools: boolean;
-  expertLevel: 'Beginner' | 'Intermediate' | 'Expert';
   instructor: Instructor;
 }
