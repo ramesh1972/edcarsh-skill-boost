@@ -78,21 +78,21 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
         </div>
       </div>
 
-      <CardHeader className="pb-2 mb-1 h-32 flex flex-col justify-start flex-shrink-0">
+      <CardHeader className="pb-2 mb-1 h-20 flex flex-col justify-start flex-shrink-0">
         <div className="flex items-start justify-between">
-          <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
+          <CardTitle className={`text-base leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-sm font-medium' : 'text-base'}`}>
             {course.title}
           </CardTitle>
         </div>
-        <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start max-h-12 overflow-hidden">{course.description}</CardDescription>
+        <CardDescription className="text-xs line-clamp-1 flex-1 flex items-start max-h-4 overflow-hidden">{course.description}</CardDescription>
       </CardHeader>
 
       <CardContent className="flex-1 flex flex-col">
-        {/* Topics Covered - Fixed height for alignment, max 8 topics */}
+        {/* Topics Covered - Reduced height for alignment, max 6 topics */}
         <div className="flex-shrink-0 mb-4">
-          <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-          <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
-            {course.topics.slice(0, 8).map((topic, index) => (
+          <h4 className="text-xs font-medium mb-1">Topics Covered:</h4>
+          <div className="flex flex-wrap mb-2 gap-1 h-[40px] content-start overflow-hidden">
+            {course.topics.slice(0, 6).map((topic, index) => (
               <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                 {topic}
               </Badge>
