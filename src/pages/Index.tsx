@@ -234,10 +234,10 @@ const Index = () => {
 
       {/* Testimonials */}
       <section 
-        className="py-20 bg-muted/50 round-[10px] border-[10px] border-primary"
+        className="py-20 bg-muted/50 round-[10px] border-[10px] border-secondary"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.6)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
-          backgroundSize: '150px auto',
+          backgroundImage: `linear-gradient(rgba(155,155,255,0.7), rgba(155,155,255,.7)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
+          backgroundSize: '200px auto',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat'
         }}
