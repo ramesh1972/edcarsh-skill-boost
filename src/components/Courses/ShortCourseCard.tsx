@@ -54,6 +54,26 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
       </div>
 
+      <CardHeader className=" flex flex-col justify-start flex-shrink-0 pt-2 h-20">
+        <div className="flex items-start justify-between">
+          <CardTitle className={`text-base leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-sm font-medium' : 'text-base'}`}>
+            {course.title}
+          </CardTitle>
+        </div>
+        <CardDescription className="text-xs line-clamp-1 flex-1 flex items-start max-h-4 overflow-hidden">{course.description}</CardDescription>
+      </CardHeader>
+
+      <CardContent className="flex-1 flex flex-col">
+        {/* Topics Covered - Reduced height for alignment, max 6 topics */}
+        <div className="flex-shrink-0 mb-4">
+          <h4 className="text-xs font-medium mb-1">Topics Covered:</h4>
+          <div className="flex flex-wrap mb-2 gap-1 h-[50px] content-start overflow-hidden">
+            {course.topics.slice(0, 6).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+                {topic}
+              </Badge>)}
+          </div>
+        </div>
+
       {/* Course Details - moved below image */}
       <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
         <div className="flex items-center gap-1">
@@ -77,26 +97,6 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
           {course.nextSession}
         </div>
       </div>
-
-      <CardHeader className=" flex flex-col justify-start flex-shrink-0 pt-2 h-20">
-        <div className="flex items-start justify-between">
-          <CardTitle className={`text-base leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-sm font-medium' : 'text-base'}`}>
-            {course.title}
-          </CardTitle>
-        </div>
-        <CardDescription className="text-xs line-clamp-1 flex-1 flex items-start max-h-4 overflow-hidden">{course.description}</CardDescription>
-      </CardHeader>
-
-      <CardContent className="flex-1 flex flex-col">
-        {/* Topics Covered - Reduced height for alignment, max 6 topics */}
-        <div className="flex-shrink-0 mb-4">
-          <h4 className="text-xs font-medium mb-1">Topics Covered:</h4>
-          <div className="flex flex-wrap mb-2 gap-1 h-[50px] content-start overflow-hidden">
-            {course.topics.slice(0, 6).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
-                {topic}
-              </Badge>)}
-          </div>
-        </div>
 
         {/* Action Buttons aligned to bottom */}
         <div className="mt-auto">
