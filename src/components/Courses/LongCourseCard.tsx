@@ -101,11 +101,11 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
               <p className="text-sm text-muted-foreground max-h-[300px] overflow-hidden">{course.longDescription}</p>
             </div>
 
-            {/* Column 2: Topics as bulleted list - max 8 topics */}
+            {/* Column 2: Topics as bulleted list - max 6 topics */}
             <div className="col-span-1" style={{maxWidth: '280px'}}>
               <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                {course.longTopics.slice(0, 8).map((topic, index) => (
+                {course.longTopics.slice(0, 6).map((topic, index) => (
                   <li key={index} className="flex items-start gap-2">
                     <span className="text-primary mt-1">•</span>
                     <span>{topic}</span>
@@ -137,8 +137,8 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
                 </div>
               </div>
               
-              {/* Action Buttons aligned to bottom */}
-              <div className="mt-auto">
+              {/* Action Buttons aligned to bottom with left margin */}
+              <div className="mt-auto -ml-[25px]">
                 <ActionButtons />
               </div>
             </div>
