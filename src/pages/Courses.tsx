@@ -1,4 +1,5 @@
 
+
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
-import { Heart, Eye, Filter, LayoutGrid, List } from 'lucide-react';
+import { Heart, Eye, Filter, LayoutGrid, List, User } from 'lucide-react';
 
 const Courses = () => {
   const {
@@ -192,7 +193,7 @@ const Courses = () => {
 
                 <CardContent className="flex-1 flex flex-col">
                   {/* Topics Covered - Fixed height for alignment */}
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 mb-4">
                     <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                     <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
                       {course.topics.slice(0, 5).map((topic, index) => (
@@ -203,17 +204,38 @@ const Courses = () => {
                     </div>
                   </div>
 
-                  {/* Action Buttons - Always at bottom */}
-                  <div className="flex gap-2 mt-auto">
-                    <Button variant="outline" size="sm" className="flex-1 flex items-center gap-1 border-2">
-                      <Eye className="h-3 w-3" />
-                      View
-                    </Button>
-                    <Button size="sm" className={`flex-1 ${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
-                      Enroll Now
-                    </Button>
-                    <Button variant="outline" size="sm" className="px-2 border-2">
-                      <Heart className="h-3 w-3" />
+                  {/* Instructor Section with Buttons */}
+                  <div className="mt-auto">
+                    <h4 className="text-sm font-medium mb-2">Instructor:</h4>
+                    <div className="flex items-start gap-3 mb-4">
+                      <img 
+                        src={course.instructor.image} 
+                        alt={course.instructor.name}
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
+                      <div className="text-sm text-muted-foreground flex-1">
+                        <p className="font-medium text-foreground">{course.instructor.name}</p>
+                        <p className="text-xs">{course.instructor.experience} experience</p>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" className="flex-1 flex items-center gap-1 border-2">
+                        <Eye className="h-3 w-3" />
+                        View
+                      </Button>
+                      <Button size="sm" className={`flex-1 ${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
+                        Enroll Now
+                      </Button>
+                      <Button variant="outline" size="sm" className="px-2 border-2">
+                        <Heart className="h-3 w-3" />
+                      </Button>
+                    </div>
+                    
+                    <Button variant="ghost" size="sm" className="w-full mt-2 flex items-center gap-1 text-xs">
+                      <User className="h-3 w-3" />
+                      View Instructor Details
                     </Button>
                   </div>
                 </CardContent>
@@ -296,10 +318,10 @@ const Courses = () => {
                         </ul>
                       </div>
 
-                      {/* Column 3: About Instructor */}
+                      {/* Column 3: About Instructor with Buttons */}
                       <div className="col-span-1">
                         <h4 className="text-sm font-medium mb-2">About Instructor:</h4>
-                        <div className="flex items-start gap-3">
+                        <div className="flex items-start gap-3 mb-4">
                           <img 
                             src={course.instructor.image} 
                             alt={course.instructor.name}
@@ -312,21 +334,28 @@ const Courses = () => {
                             <p>Teaching for {course.instructor.experience}</p>
                           </div>
                         </div>
-                      </div>
-                    </div>
 
-                    {/* Bottom row - Right aligned buttons */}
-                    <div className="flex justify-end gap-2 mt-4 pt-4 border-t">
-                      <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
-                        <Eye className="h-3 w-3" />
-                        View
-                      </Button>
-                      <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
-                        Enroll Now
-                      </Button>
-                      <Button variant="outline" size="sm" className="px-2 border-2">
-                        <Heart className="h-3 w-3" />
-                      </Button>
+                        {/* Action Buttons in Instructor Section */}
+                        <div className="space-y-2">
+                          <div className="flex gap-2">
+                            <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
+                              <Eye className="h-3 w-3" />
+                              View
+                            </Button>
+                            <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
+                              Enroll Now
+                            </Button>
+                            <Button variant="outline" size="sm" className="px-2 border-2">
+                              <Heart className="h-3 w-3" />
+                            </Button>
+                          </div>
+                          
+                          <Button variant="ghost" size="sm" className="w-full flex items-center gap-1 text-xs">
+                            <User className="h-3 w-3" />
+                            View Instructor Details
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -340,3 +369,4 @@ const Courses = () => {
 };
 
 export default Courses;
+
