@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Clock, Users, DollarSign, UserPlus } from 'lucide-react';
 import { parseISO, addDays, isSameDay, parse, addMinutes, subMinutes, isWithinInterval, addHours, isAfter } from 'date-fns';
+import ActionButtons from '@/components/Courses/ActionButtons';
 
 interface Course {
   id: number;
@@ -261,32 +262,8 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
           </div>
         </div>
         
-        <div className="mt-3 flex gap-2">
-          {joinButtonState.show ? (
-            <Button 
-              size="sm" 
-              className="flex-1"
-              disabled={!joinButtonState.enabled}
-            >
-              Join Now
-            </Button>
-          ) : showJoinAsGuest ? (
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="flex-1 flex items-center gap-1"
-            >
-              <UserPlus className="h-4 w-4" />
-              Join as Guest
-            </Button>
-          ) : (
-            <Button size="sm" className="flex-1">
-              Enroll Now
-            </Button>
-          )}
-          <Button variant="outline" size="sm">
-            View Details
-          </Button>
+        <div className="mt-3">
+          <ActionButtons />
         </div>
       </CardContent>
     </Card>
