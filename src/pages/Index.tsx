@@ -36,7 +36,7 @@ const Index = () => {
             <p style={{
             color: 'orange',
             fontSize: '30px'
-          }} className="mb-8 mt-22 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200">
+          }} className="mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 my-[20px]">
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
