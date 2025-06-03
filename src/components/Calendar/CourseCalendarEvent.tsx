@@ -266,7 +266,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
           <ActionButtons 
             showJoinNow={joinButtonState.show}
             joinNowEnabled={joinButtonState.enabled}
-            showJoinAsGuest={showJoinAsGuest && !joinButtonState.show}
+            showJoinAsGuest={showJoinAsGuest}
           />
         </div>
       </CardContent>

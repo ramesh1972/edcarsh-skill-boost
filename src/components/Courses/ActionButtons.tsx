@@ -19,25 +19,23 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
   return (
     <div className="flex gap-2 justify-between items-center">
-      {showJoinNow ? (
-        <Button 
-          size="sm" 
-          className="flex items-center gap-1 border-2"
-          disabled={!joinNowEnabled}
-        >
-          Join Now
-        </Button>
-      ) : showJoinAsGuest ? (
-        <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
-          <UserPlus className="h-3 w-3" />
-          Join as Guest
-        </Button>
-      ) : (
-        <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
-          <UserPlus className="h-3 w-3" />
-          Join as Guest
-        </Button>
-      )}
+      <div className="flex gap-2">
+        {showJoinNow && (
+          <Button 
+            size="sm" 
+            className="flex items-center gap-1 border-2"
+            disabled={!joinNowEnabled}
+          >
+            Join Now
+          </Button>
+        )}
+        {showJoinAsGuest && (
+          <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
+            <UserPlus className="h-3 w-3" />
+            Join as Guest
+          </Button>
+        )}
+      </div>
       <div className="flex gap-2">
         <Button variant="secondary" size="sm" className="flex items-center gap-1">
           <Eye className="h-3 w-3" />
