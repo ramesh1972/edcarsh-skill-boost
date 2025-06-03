@@ -275,14 +275,14 @@ const Courses = () => {
                             {course.category}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground">{course.description}</p>
+                        <p className="text-sm text-muted-foreground">{course.longDescription}</p>
                       </div>
 
                       {/* Column 2: Topics */}
                       <div className="col-span-1">
                         <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                         <ul className="text-sm space-y-1">
-                          {course.topics.map((topic, index) => (
+                          {course.longTopics.slice(0, 10).map((topic, index) => (
                             <li key={index} className="flex items-center gap-2">
                               <span className="w-1 h-1 bg-current rounded-full flex-shrink-0"></span>
                               {topic}
@@ -294,10 +294,18 @@ const Courses = () => {
                       {/* Column 3: About Instructor */}
                       <div className="col-span-1">
                         <h4 className="text-sm font-medium mb-2">About Instructor:</h4>
-                        <div className="text-sm text-muted-foreground">
-                          <p className="mb-1">Expert in {course.category}</p>
-                          <p className="mb-1">{course.level} level specialist</p>
-                          <p>Teaching for 5+ years</p>
+                        <div className="flex items-start gap-3">
+                          <img 
+                            src={course.instructor.image} 
+                            alt={course.instructor.name}
+                            className="w-12 h-12 rounded-full object-cover"
+                          />
+                          <div className="text-sm text-muted-foreground">
+                            <p className="font-medium text-foreground mb-1">{course.instructor.name}</p>
+                            <p className="mb-1">Expert in {course.instructor.specialty}</p>
+                            <p className="mb-1">{course.level} level specialist</p>
+                            <p>Teaching for {course.instructor.experience}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
