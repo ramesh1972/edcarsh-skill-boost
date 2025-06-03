@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -20,7 +19,7 @@ interface Course {
   startDate: string;
   endDate: string;
   startTime: string;
-  category: string;
+  subject: string;
   level: string;
   instructor: {
     name: string;
@@ -38,7 +37,7 @@ interface CourseCalendarEventProps {
 const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewMode, currentDay }) => {
   const { getIcon } = useTheme();
 
-  const getCategoryColor = (category: string) => {
+  const getSubjectColor = (subject: string) => {
     const colors = {
       'Frontend': 'bg-blue-100 text-blue-800',
       'Backend': 'bg-green-100 text-green-800',
@@ -48,7 +47,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
       'Mobile': 'bg-cyan-100 text-cyan-800',
       'DevOps': 'bg-red-100 text-red-800',
     };
-    return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800';
+    return colors[subject as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
 
   // Calculate session number if currentDay is provided
@@ -141,7 +140,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   if (viewMode === 'month') {
     return (
       <div 
-        className={`text-xs p-1 !rounded !border-4 !border-black ${getCategoryColor(course.category)} ${
+        className={`text-xs p-1 !rounded !border-4 !border-black ${getSubjectColor(course.subject)} ${
           isSessionPast ? 'opacity-50 bg-gray-100' : ''
         }`}
         style={{ minHeight: `${Math.max(40, cardHeight / 3)}px`, border: '2px solid black !important' }}
@@ -189,7 +188,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   if (viewMode === 'week') {
     return (
       <div 
-        className={`text-xs p-2 rounded border-4 border-black ${getCategoryColor(course.category)} ${
+        className={`text-xs p-2 rounded border-4 border-black ${getSubjectColor(course.subject)} ${
           isSessionPast ? 'opacity-50 bg-gray-100' : ''
         }`}
         style={{ minHeight: `${Math.max(80, cardHeight / 2)}px` }}
@@ -287,8 +286,8 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Badge className={getCategoryColor(course.category)}>
-              {course.category}
+            <Badge className={getSubjectColor(course.subject)}>
+              {course.subject}
             </Badge>
             <span className="text-sm text-muted-foreground">
               {course.durationHours}h total duration
