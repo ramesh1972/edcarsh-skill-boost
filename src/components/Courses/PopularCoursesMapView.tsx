@@ -1,3 +1,4 @@
+
 import React, { useMemo } from 'react';
 import { Course } from '@/types';
 
@@ -135,7 +136,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 color: course.color,
                 fontWeight: course.studentRatio > 0.7 ? 'bold' : course.studentRatio > 0.4 ? 'semibold' : 'medium',
                 textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-                maxWidth: '42px',
+                maxWidth: '100px',
                 height: 'auto'
               }}
             >
