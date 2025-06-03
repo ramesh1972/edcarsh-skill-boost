@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
 
@@ -18,6 +19,7 @@ interface ThemeContextType {
   getAvatar: (avatarName: string) => string;
   getBackground: () => string;
   getSkinClasses: () => string;
+  getPageLayoutClasses: () => string;
 }
 
 const defaultTheme: ThemeConfig = {
@@ -176,13 +178,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.classList.remove('ocean', 'sunset', 'forest', 'lavender', 'monochrome');
     body.classList.remove('font-technical', 'font-professional', 'font-elegant', 'font-modern', 'font-playful');
     root.classList.remove('material-design', 'human-interface', 'fluent-design', 'ant-design', 'carbon-design', 'atlassian-design', 'bootstrap-design', 'polaris-design', 'lightning-design', 'tailwind-design');
-    root.classList.remove('layout-compact', 'layout-spacious', 'layout-modern', 'layout-default');
     root.classList.remove('skin-default', 'skin-gradient', 'skin-textured', 'skin-glassmorphism');
     
-    // Apply current theme classes
+    // Apply current theme classes (but NOT layout classes to root)
     root.classList.add(theme.colorTheme);
     root.classList.add(`${theme.designSystem}-design`);
-    root.classList.add(`layout-${theme.layout}`);
     root.classList.add(`skin-${theme.skin}`);
     
     // Apply typography to body
@@ -198,9 +198,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     console.log('Applied theme classes:', {
       colorTheme: theme.colorTheme,
       designSystem: `${theme.designSystem}-design`,
-      layout: `layout-${theme.layout}`,
       skin: `skin-${theme.skin}`,
-      typography: `font-${theme.typography}`
+      typography: `font-${theme.typography}`,
+      layout: `layout-${theme.layout} (for pages only)`
     });
   }, [theme]);
 
@@ -378,6 +378,19 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return `skin-${theme.skin}`;
   };
 
+  const getPageLayoutClasses = (): string => {
+    switch (theme.layout) {
+      case 'compact':
+        return 'space-y-2 p-2';
+      case 'spacious':
+        return 'space-y-12 p-12';
+      case 'modern':
+        return 'space-y-8 p-8';
+      default:
+        return 'space-y-6 p-6';
+    }
+  };
+
   const updateTheme = (updates: Partial<ThemeConfig>) => {
     setTheme(prev => ({ ...prev, ...updates }));
   };
@@ -394,7 +407,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       getIcon, 
       getAvatar, 
       getBackground,
-      getSkinClasses
+      getSkinClasses,
+      getPageLayoutClasses
     }}>
       {children}
     </ThemeContext.Provider>
