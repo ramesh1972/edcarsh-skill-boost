@@ -366,7 +366,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       </div>
       
       {/* Radial Map */}
-      <div className="flex justify-center items-center w-full h-full flex-1 relative w-full h-full min-h-[1000px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-gray-200 overflow-hidden">
+      <div className="flex justify-center items-center w-full h-full flex-1 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-6 border-gray-200 overflow-hidden">
+        <div className="relative w-full h-full min-h-[1000px]">
           <div 
             className="absolute inset-0 transition-transform duration-300 ease-out"
             style={{ 
@@ -381,7 +382,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
             </div>
             
             {/* Concentric circles - only show for courses view */}
-            {viewMode === 'courses' && (
+            (
               <>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] border-2 border-red-300 rounded-full opacity-30"></div>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border-2 border-orange-300 rounded-full opacity-30"></div>
@@ -389,7 +390,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] border-2 border-lime-300 rounded-full opacity-30"></div>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1400px] h-[1400px] border-2 border-emerald-300 rounded-full opacity-30"></div>
               </>
-            )}
+            )
             
             {/* Map items positioned radially */}
             {mapData.map((item) => (
@@ -419,6 +420,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
               </div>
             ))}
           </div>
+        </div>
       </div>
       
       {/* Summary stats */}
@@ -439,12 +441,6 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         {viewMode === 'subject' && (
           <>
             <p>Total Subjects: {mapData.length}</p>
-            <p>Total Students: {courses.reduce((sum, course) => sum + course.students, 0).toLocaleString()}</p>
-          </>
-        )}
-        {viewMode === 'topic' && (
-          <>
-            <p>Total Topics: {mapData.length}</p>
             <p>Total Students: {courses.reduce((sum, course) => sum + course.students, 0).toLocaleString()}</p>
           </>
         )}
