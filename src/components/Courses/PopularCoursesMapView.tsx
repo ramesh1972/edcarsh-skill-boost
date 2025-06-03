@@ -81,50 +81,52 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       </div>
       
       {/* Radial Course Map */}
-      <div className="relative w-full h-full bg-gradient-to-br from-blue-50 to-purple-50 rounded-full border-2 border-gray-200 overflow-hidden">
-        {/* Center point */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
-          Courses Center
-        </div>
-        
-        {/* Course titles positioned radially */}
-        {courseData.map((course) => (
-          <div
-            key={course.id}
-            className="absolute cursor-pointer hover:opacity-80 transition-opacity group"
-            style={{
-              left: `calc(50% + ${course.x}px)`,
-              top: `calc(50% + ${course.y}px)`,
-              transform: 'translate(-50%, -50%)',
-              fontSize: `${course.fontSize}px`,
-              color: course.color,
-              fontWeight: course.studentRatio > 0.7 ? 'bold' : course.studentRatio > 0.4 ? 'semibold' : 'medium',
-              textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
-            }}
-          >
-            <div className="text-center max-w-32">
-              <div className="font-inherit leading-tight mb-1">
-                {course.title}
-              </div>
-              <div className="text-xs opacity-80 font-normal">
-                {course.students} students
-              </div>
-            </div>
-            
-            {/* Tooltip on hover */}
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs rounded px-2 py-1 whitespace-nowrap z-20">
-              {course.title} - {course.students} students
-              <div className="text-xs opacity-75">{course.level} • {course.category}</div>
-            </div>
+      <div className="w-full max-w-2xl mx-auto">
+        <div className="relative w-full h-96 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full border-2 border-gray-200 overflow-hidden aspect-square">
+          {/* Center point */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
+            Courses Center
           </div>
-        ))}
-        
-        {/* Concentric circles for visual reference */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-gray-300 rounded-full opacity-20"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-gray-300 rounded-full opacity-20"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 border border-gray-300 rounded-full opacity-20"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-gray-300 rounded-full opacity-20"></div>
+          
+          {/* Course titles positioned radially */}
+          {courseData.map((course) => (
+            <div
+              key={course.id}
+              className="absolute cursor-pointer hover:opacity-80 transition-opacity group"
+              style={{
+                left: `calc(50% + ${course.x}px)`,
+                top: `calc(50% + ${course.y}px)`,
+                transform: 'translate(-50%, -50%)',
+                fontSize: `${course.fontSize}px`,
+                color: course.color,
+                fontWeight: course.studentRatio > 0.7 ? 'bold' : course.studentRatio > 0.4 ? 'semibold' : 'medium',
+                textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
+              }}
+            >
+              <div className="text-center max-w-32">
+                <div className="font-inherit leading-tight mb-1">
+                  {course.title}
+                </div>
+                <div className="text-xs opacity-80 font-normal">
+                  {course.students} students
+                </div>
+              </div>
+              
+              {/* Tooltip on hover */}
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs rounded px-2 py-1 whitespace-nowrap z-20">
+                {course.title} - {course.students} students
+                <div className="text-xs opacity-75">{course.level} • {course.category}</div>
+              </div>
+            </div>
+          ))}
+          
+          {/* Concentric circles for visual reference */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-gray-300 rounded-full opacity-20"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-gray-300 rounded-full opacity-20"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 border border-gray-300 rounded-full opacity-20"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-gray-300 rounded-full opacity-20"></div>
+        </div>
       </div>
       
       {/* Summary stats */}
