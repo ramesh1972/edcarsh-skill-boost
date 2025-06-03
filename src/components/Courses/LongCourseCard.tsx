@@ -5,7 +5,8 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
-import { Heart, Eye, UserPlus, Info } from 'lucide-react';
+import InstructorCard from '@/components/instructors/InstructorCard';
+
 interface Course {
   id: number;
   title: string;
@@ -113,33 +114,12 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
             </div>
 
             {/* Column 3: Instructor Details */}
-            <div className="col-span-1 flex flex-col">
-              <h4 className="text-sm font-medium mb-3">Instructor:</h4>
-              <div className="flex items-start gap-3 pb-2">
-                <Avatar className="h-12 w-12 rounded-full flex-shrink-0">
-                  <AvatarImage src={course.instructor.image} alt={course.instructor.name} />
-                  <AvatarFallback>{course.instructor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                </Avatar>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h5 className="font-medium text-sm">{course.instructor.name}</h5>
-                    <span className="text-xs">{course.instructor.flag}</span>
-                    <Button variant="outline" size="sm" className="h-6 px-2 text-xs">
-                      <Info className="h-3 w-3 mr-1" />
-                      About
-                    </Button>
-                  </div>
-                  <p className="text-xs text-muted-foreground mb-1">{course.instructor.specialty}</p>
-                  <p className="text-xs text-muted-foreground">{course.instructor.experience} • {course.instructor.city}, {course.instructor.country}</p>
-                </div>
-              </div>
-              <p className="text-xs text-muted-foreground line-clamp-4 mb-4">{course.instructor.description}</p>
-              
-              {/* Action Buttons aligned to bottom with left margin */}
-              <div className="mt-auto -ml-[25px]">
-                <ActionButtons />
-              </div>
-            </div>
+            <InstructorCard instructor={course.instructor} />
+          </div>
+          
+          {/* Action Buttons aligned to bottom with left margin */}
+          <div className="mt-auto -ml-[25px]">
+            <ActionButtons />
           </div>
         </div>
       </div>
