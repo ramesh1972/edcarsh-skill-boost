@@ -267,12 +267,18 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   const getDisplayContent = (item: any) => {
     if (viewMode === 'courses') {
       return (
-        <div className="text-center p-2 bg-white/90 border-2 border-gray-300 rounded-lg shadow-sm">
-          <div className="font-inherit leading-tight mb-1 break-words">
+        <div className="text-center p-3 bg-white/90 border-2 border-gray-300 rounded-lg shadow-sm max-w-[100px]">
+          <div className="font-bold leading-tight mb-1 break-words text-xs">
             {item.title}
           </div>
-          <div className="text-xs opacity-80 font-normal">
+          <div className="text-xs font-medium">
             {item.students} students
+          </div>
+          <div className="text-xs opacity-70">
+            {item.industry}
+          </div>
+          <div className="text-xs opacity-70">
+            {item.subject}
           </div>
         </div>
       );
@@ -280,8 +286,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
     if (viewMode === 'industry') {
       return (
-        <div className="text-center p-3 bg-blue-50/90 border-2 border-blue-300 rounded-lg shadow-sm">
-          <div className="font-bold leading-tight mb-1 break-words">
+        <div className="text-center p-3 bg-blue-50/90 border-2 border-blue-300 rounded-lg shadow-sm max-w-[100px]">
+          <div className="font-bold leading-tight mb-1 break-words text-xs">
             {item.title}
           </div>
           <div className="text-xs font-medium">
@@ -296,8 +302,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
     if (viewMode === 'subject') {
       return (
-        <div className="text-center p-3 bg-purple-50/90 border-2 border-purple-300 rounded-lg shadow-sm">
-          <div className="font-bold leading-tight mb-1 break-words">
+        <div className="text-center p-3 bg-purple-50/90 border-2 border-purple-300 rounded-lg shadow-sm max-w-[100px]">
+          <div className="font-bold leading-tight mb-1 break-words text-xs">
             {item.title}
           </div>
           <div className="text-xs font-medium mb-1">
@@ -315,8 +321,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
     if (viewMode === 'topic') {
       return (
-        <div className="text-center p-3 bg-green-50/90 border-2 border-green-300 rounded-lg shadow-sm">
-          <div className="font-bold leading-tight mb-1 break-words">
+        <div className="text-center p-3 bg-green-50/90 border-2 border-green-300 rounded-lg shadow-sm max-w-[100px]">
+          <div className="font-bold leading-tight mb-1 break-words text-xs">
             {item.title}
           </div>
           <div className="text-xs font-medium mb-1">
