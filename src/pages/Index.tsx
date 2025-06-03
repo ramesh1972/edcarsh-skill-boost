@@ -39,7 +39,7 @@ const Index = () => {
                 Crash Courses
               </span>
             </h1>
-            <p className="text-xl  mb-8 max-w-3xl mx-auto" style={{color:'orange'}}>
+            <p className="text-xl  mb-8 max-w-3xl mx-auto" style={{color:'orange', fontSize:'18px'}}>
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
@@ -61,7 +61,7 @@ const Index = () => {
       <section className="py-20 bg-muted/50 relative overflow-hidden">
         <div className="container px-4 mx-auto relative">
           {/* Corner Images */}
-          <div className="absolute top-0 left-0 hidden lg:block">
+          <div className="absolute top-0 left-0 hidden lg:block" style={{marginTop: '-20px'}}>
             <img 
               src="/lovable-uploads/14c1d102-af1f-4765-be76-42b00c50c8e3.png" 
               alt="100% Quality Badge" 
@@ -69,7 +69,7 @@ const Index = () => {
             />
           </div>
           
-          <div className="absolute top-0 right-0 hidden lg:block">
+          <div className="absolute top-0 right-0 hidden lg:block" style={{marginTop: '-20px'}}>
             <img 
               src="/lovable-uploads/7aa0ba35-0c3f-47dc-a574-f6ff47194b94.png" 
               alt="Success Key Illustration" 
@@ -236,7 +236,7 @@ const Index = () => {
         className="py-20 bg-muted/50 round-[10px] border-[6px] border-secondary"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.6)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
-          backgroundSize: '100px 100px',
+          backgroundSize: '240px auto',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat'
         }}
