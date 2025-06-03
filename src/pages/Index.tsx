@@ -18,7 +18,7 @@ const Index = () => {
   return <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
       {/* Hero Section */}
       <section 
-        className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-none"
+        className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[10px]"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
           backgroundSize: 'cover',
