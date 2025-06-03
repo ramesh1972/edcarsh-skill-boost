@@ -4,7 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
+import CourseInfoCard from './CourseInfoCard';
 import { Heart, Eye, UserPlus } from 'lucide-react';
+
 interface Course {
   id: number;
   title: string;
@@ -74,29 +76,13 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
           </div>
         </div>
 
-      {/* Course Details - moved below image */}
-      <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
-        <div className="flex items-center gap-1">
-          {getIcon('time')}
-          {course.duration}
-        </div>
-        <div className="flex items-center gap-1">
-          {getIcon('student')}
-          {course.students} enrolled
-        </div>
-      </div>
-
-      {/* Price and Session - moved below image */}
-      <div className="px-4 py-1 flex items-center justify-between border-b mb-4">
-        <Badge variant="secondary" className="flex items-center gap-1">
-          {getIcon('price')}
-          {course.price}
-        </Badge>
-        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-          📅
-          {course.nextSession}
-        </div>
-      </div>
+        {/* Course Info Card - moved below image */}
+        <CourseInfoCard 
+          duration={course.duration}
+          students={course.students}
+          price={course.price}
+          nextSession={course.nextSession}
+        />
 
         {/* Action Buttons aligned to bottom */}
         <div className="mt-auto">

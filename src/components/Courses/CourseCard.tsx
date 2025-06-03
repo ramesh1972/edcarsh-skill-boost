@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
+import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
 import { Heart, Eye, UserPlus } from 'lucide-react';
 
@@ -56,29 +57,13 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         </div>
       </div>
 
-      {/* Course Details - moved below image */}
-      <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
-        <div className="flex items-center gap-1">
-          {getIcon('time')}
-          {course.duration}
-        </div>
-        <div className="flex items-center gap-1">
-          {getIcon('student')}
-          {course.students} enrolled
-        </div>
-      </div>
-
-      {/* Price and Session - moved below image */}
-      <div className="px-4 py-2 flex items-center justify-between border-b">
-        <Badge variant="secondary" className="flex items-center gap-1">
-          {getIcon('price')}
-          {course.price}
-        </Badge>
-        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-          📅
-          {course.nextSession}
-        </div>
-      </div>
+      {/* Course Info Card - moved below image */}
+      <CourseInfoCard 
+        duration={course.duration}
+        students={course.students}
+        price={course.price}
+        nextSession={course.nextSession}
+      />
 
       <CardHeader className="pb-2 mb-1 h-32 flex flex-col justify-start flex-shrink-0">
         <div className="flex items-start justify-between">

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -6,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
+import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
 
 interface Course {
@@ -61,29 +61,13 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
           {/* Spacer to push stats and price to bottom */}
           <div className="flex-1"></div>
           
-          {/* Course Details - aligned to bottom */}
-          <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
-            <div className="flex items-center gap-1">
-              {getIcon('time')}
-              {course.duration}
-            </div>
-            <div className="flex items-center gap-1">
-              {getIcon('student')}
-              {course.students} enrolled
-            </div>
-          </div>
-      
-          {/* Price and Session - aligned to bottom */}
-          <div className="px-4 py-2 pb-4 flex items-center justify-between border-b">
-            <Badge variant="secondary" className="flex items-center gap-1">
-              {getIcon('price')}
-              {course.price}
-            </Badge>
-            <div className="flex items-center gap-1 text-sm text-muted-foreground">
-              📅
-              {course.nextSession}
-            </div>
-          </div>
+          {/* Course Info Card - aligned to bottom */}
+          <CourseInfoCard 
+            duration={course.duration}
+            students={course.students}
+            price={course.price}
+            nextSession={course.nextSession}
+          />
         </div>
 
         {/* Right side - 3 columns structure */}
