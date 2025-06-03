@@ -25,12 +25,12 @@ const App = () => (
       <ThemeProvider>
         <BrowserRouter>
           {/* Outer div - exactly 100vw and 100vh with theme primary background */}
-          <div className="w-screen h-screen bg-primary overflow-hidden" style={{ width: '100vw', height: '100vh' }}>
+          <div className="fixed inset-0 w-full h-full bg-primary overflow-hidden">
             {/* Header positioned at the top with same background */}
             <Header />
             
             {/* Inner div - absolute positioned with 15px left/right, 64px top/bottom */}
-            <div className="absolute w-full h-full" style={{ 
+            <div className="absolute w-full h-full overflow-hidden" style={{ 
               left: '15px', 
               right: '15px', 
               top: '64px', 
