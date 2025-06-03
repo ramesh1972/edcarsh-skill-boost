@@ -98,8 +98,8 @@ export const Header: React.FC = () => {
           border-right: none;
         }
       `}</style>
-      <header className={`w-full bg-primary ${getSkinClasses()} relative z-10 mt-4`}>
-        <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-[32px] my-3">
+      <header className={`w-full bg-primary ${getSkinClasses()} relative z-10 mt-4`} style={{ height: '80px' }}>
+        <div className="w-full max-w-none flex items-center justify-between px-6 lg:px-[32px] h-full">
           <HeaderLogo />
 
           <MainMenuNavigation 

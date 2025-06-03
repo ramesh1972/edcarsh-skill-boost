@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -46,10 +47,10 @@ const AppContent = () => {
         {/* Header positioned at the top with same background */}
         <Header />
         
-        {/* Inner div - absolute positioned with 15px left/right, 60px top, 60px bottom for tabs */}
+        {/* Inner div - absolute positioned with 15px left/right, adjusted for 80px header, 60px bottom for tabs */}
         <div className="relative overflow-auto !left-[15px] right-[15px] !rounded-l-[40px]" style={{ 
           width: 'calc(100vw - 30px)',
-          height: 'calc(100vh - 128px)'
+          height: 'calc(100vh - 156px)'
         }}>
           <Toaster />
           <Sonner />
