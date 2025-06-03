@@ -58,7 +58,7 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
         {/* Profile Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <div className="flex items-center gap-2 text-primary border-primary-foreground/30 border border-primary-foreground/20 rounded-lg cursor-pointer hover:bg-primary-foreground/10 transition-colors">
+            <div className="flex items-center gap-2 text-primary border-primary-foreground/30 border rounded-lg cursor-pointer hover:bg-primary-foreground/10">
               <Avatar className="w-6 h-6">
                 <AvatarImage src="" alt="Profile" />
                 <AvatarFallback className="bg-primary-foreground/20 text-primary-foreground">
