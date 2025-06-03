@@ -109,7 +109,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
             </div>
 
             {/* Column 3: About Instructor - increased width by 20px */}
-            <div className="col-span-1 flex flex-col" style={{marginLeft: '-20px'}}>
+            <div className="col-span-1 flex flex-col" style={{marginLeft: '-25px'}}>
               <div className="flex items-start gap-3 mb-4 flex-1">
                 <img src={course.instructor.image} alt={course.instructor.name} className="w-12 h-12 rounded-full object-cover" />
                 <div className="text-sm text-muted-foreground flex-1">
