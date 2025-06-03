@@ -142,6 +142,16 @@ export default {
 						transform: 'scale(1)',
 						opacity: '1'
 					}
+				},
+				'flash': {
+					'0%, 100%': {
+						backgroundColor: '#ef4444',
+						boxShadow: '0 0 5px #ef4444'
+					},
+					'50%': {
+						backgroundColor: '#dc2626',
+						boxShadow: '0 0 20px #ef4444, 0 0 30px #ef4444'
+					}
 				}
 			},
 			animation: {
@@ -152,6 +162,7 @@ export default {
 				'fade-in-right': 'fade-in-right 0.6s ease-out',
 				'scale-in': 'scale-in 0.2s ease-out',
 				'zoom-in': 'zoom-in 0.5s ease-out',
+				'flash': 'flash 1s ease-in-out infinite',
 			}
 		}
 	},
