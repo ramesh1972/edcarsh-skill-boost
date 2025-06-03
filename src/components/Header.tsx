@@ -114,13 +114,12 @@ export const Header: React.FC = () => {
             />
           </div>
 
-          {/* Secondary Menu Section - Right (Desktop Only) */}
-          <div className="flex-shrink-0 hidden lg:block">
-            <SecondaryMenuNavigation setIsMenuOpen={setIsMenuOpen} />
-          </div>
+          {/* Secondary Menu Section - Right */}
+          <div className="flex-shrink-0">
+            <div className="hidden lg:block">
+              <SecondaryMenuNavigation setIsMenuOpen={setIsMenuOpen} />
+            </div>
 
-          {/* Mobile Navigation - Right (Mobile Only) */}
-          <div className="flex-shrink-0 lg:hidden">
             <MobileNavigation 
               isMenuOpen={isMenuOpen}
               setIsMenuOpen={setIsMenuOpen}
