@@ -211,6 +211,13 @@
     box-shadow: none !important;
   }
 
+  /* UPDATED: Remove borders and shadows from container classes */
+  .container, [class*="container"]:not(header):not(nav):not([class*="header"]):not([class*="nav"]) {
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
   /* Add borders and shadows to interactive components */
   button, input, textarea, select, 
   .button, [class*="button"]:not([class*="menu"]):not([class*="nav"]):not([class*="header"]),
@@ -230,9 +237,8 @@
   .chip, [class*="chip"],
   .avatar, [class*="avatar"],
   .panel, [class*="panel"],
-  .container:not(header):not(nav):not([class*="header"]):not([class*="nav"]),
-  .wrapper:not(header):not(nav):not([class*="header"]):not([class*="nav"]),
-  .section:not(header):not(nav):not([class*="header"]):not([class*="nav"]) {
+  .wrapper:not(header):not(nav):not([class*="header"]):not([class*="nav"]):not([class*="container"]),
+  .section:not(header):not(nav):not([class*="header"]):not([class*="nav"]):not([class*="container"]) {
     border: 1px solid hsl(var(--border)) !important;
     box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,0.1)) !important;
     border-radius: var(--radius, 0.5rem) !important;
