@@ -32,7 +32,7 @@ const App = () => (
             <Header />
             
             {/* Inner div - absolute positioned with 15px left/right, 60px top, 60px bottom for tabs */}
-            <div className="absolute overflow-auto !rounded-[40px]" style={{ 
+            <div className="absolute overflow-auto !rounded-lt-[40px] rounded-lb-[40px]" style={{ 
               left: '15px', 
               right: '15px', 
               top: '60px', 
