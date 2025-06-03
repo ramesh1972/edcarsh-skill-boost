@@ -33,13 +33,13 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         // Calculate distance from center with further increased spacing
         let distance = 900; // outermost ring (increased by 30px)
         if (course.students >= 300) {
-          distance = 700; // innermost ring (increased by 30px)
+          distance = 100; // innermost ring (increased by 30px)
         } else if (course.students >= 200) {
-          distance = 500; // second ring (increased by 30px)
+          distance = 300; // second ring (increased by 30px)
         } else if (course.students >= 150) {
-          distance = 300; // third ring (increased by 30px)
+          distance = 500; // third ring (increased by 30px)
         } else if (course.students >= 100) {
-          distance = 100; // fourth ring (increased by 30px)
+          distance = 700; // fourth ring (increased by 30px)
         }
         
         // Calculate position
