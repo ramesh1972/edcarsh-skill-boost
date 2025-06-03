@@ -8,6 +8,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { featuredCourses } from '@/data/courses';
 import { homeTestimonials } from '@/data/testimonials';
 import { usps } from '@/data/usps';
+
 const Index = () => {
   const {
     theme,
@@ -16,19 +17,27 @@ const Index = () => {
   } = useTheme();
   return <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-none">
+      <section 
+        className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-none"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="container px-4 mx-auto rounded-[20px]">
           <div className="text-center">
             <Badge className="mb-4" variant="secondary">
               🚀 Launch Your Skills in Hours, Not Months
             </Badge>
-            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
+            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6 text-white">
               Master Skills Fast with{' '}
               <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
                 Crash Courses
               </span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
@@ -37,7 +46,7 @@ const Index = () => {
                 <Play className="w-5 h-5" />
                 Start Learning Now
               </Button>
-              <Button size="lg" variant="outline" className="gap-2">
+              <Button size="lg" variant="outline" className="gap-2 bg-white/10 border-white/30 text-white hover:bg-white/20">
                 <Calendar className="w-5 h-5" />
                 View Upcoming Sessions
               </Button>
@@ -47,7 +56,15 @@ const Index = () => {
       </section>
 
       {/* USPs Section */}
-      <section className="py-20 bg-muted/50 relative overflow-hidden">
+      <section 
+        className="py-20 bg-muted/50 relative overflow-hidden"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="container px-4 mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Why Choose EdCrash?</h2>
@@ -106,7 +123,15 @@ const Index = () => {
       </section>
 
       {/* Featured Courses */}
-      <section className="py-20">
+      <section 
+        className="py-20"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), url('/lovable-uploads/1a921246-68aa-4cc6-a586-1f5c0c89c6fc.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="container px-4 mx-auto">
           <div className="flex justify-between items-center mb-12">
             <div>
@@ -285,4 +310,5 @@ const Index = () => {
       </footer>
     </div>;
 };
+
 export default Index;
