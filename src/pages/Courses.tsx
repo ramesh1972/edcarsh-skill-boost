@@ -306,7 +306,7 @@ const Courses = () => {
                           <div className="text-sm text-muted-foreground flex-1">
                             <div className="flex items-center gap-2 mb-1">
                               <p className="font-medium text-foreground">{course.instructor.name}</p>
-                            <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium text-xs px-2 h-6' : theme.designSystem === 'human' ? 'rounded-lg text-xs px-2 h-6' : theme.designSystem === 'fluent' ? 'rounded-sm text-xs px-2 h-6' : 'text-xs px-2 h-6'}`}>
+                            <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium text-xs px-2 h-6 secondary' : theme.designSystem === 'human' ? 'rounded-lg text-xs px-2 h-6  secondary' : theme.designSystem === 'fluent' ? 'rounded-sm text-xs px-2 h-6  secondary' : 'text-xs px-2 h-6  secondary' }`}>
                               About
                             </Button>
                        
