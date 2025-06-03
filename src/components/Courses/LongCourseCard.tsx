@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -110,9 +111,9 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
             </div>
 
             {/* Column 3: Instructor Details */}
-            <div className="col-span-1">
+            <div className="col-span-1 flex flex-col">
               <h4 className="text-sm font-medium mb-3">Instructor:</h4>
-              <div className="flex items-start gap-3 mb-4">
+              <div className="flex items-start gap-3 mb-4 flex-1">
                 <Avatar className="h-12 w-12 rounded-full flex-shrink-0">
                   <AvatarImage src={course.instructor.image} alt={course.instructor.name} />
                   <AvatarFallback>{course.instructor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
@@ -132,8 +133,10 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
                 </div>
               </div>
               
-              {/* Action Buttons within instructor section */}
-              <ActionButtons />
+              {/* Action Buttons aligned to bottom */}
+              <div className="mt-auto">
+                <ActionButtons />
+              </div>
             </div>
           </div>
         </div>
