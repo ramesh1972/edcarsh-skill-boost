@@ -37,7 +37,7 @@ const Index = () => {
                 Crash Courses
               </span>
             </h1>
-            <p className="text-xl text-yellow/40 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl  mb-8 max-w-3xl mx-auto" style={{color:'orange'}}>
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
@@ -77,25 +77,10 @@ const Index = () => {
 
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-8 mb-4">
-              {/* Left Image */}
-              <div className="hidden md:block">
-                <img 
-                  src="/lovable-uploads/14c1d102-af1f-4765-be76-42b00c50c8e3.png" 
-                  alt="100% Quality Badge" 
-                  className="w-24 h-24 object-contain"
-                />
-              </div>
               
               {/* Center Text */}
               <h2 className="text-3xl font-bold">Why Choose EdCrash?</h2>
               
-              {/* Right Image */}
-              <div className="hidden md:block">
-                <img 
-                  src="/lovable-uploads/7aa0ba35-0c3f-47dc-a574-f6ff47194b94.png" 
-                  alt="Success Key Illustration" 
-                  className="w-24 h-24 object-contain"
-                />
               </div>
             </div>
             <p className="text-xl text-muted-foreground">
@@ -154,7 +139,7 @@ const Index = () => {
 
       {/* Featured Courses */}
       <section 
-        className="py-20 round-b-[20px] border-[10px] border-primary"
+        className="py-20 round-b-[20px] border-[6px] border-secondary"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.6)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
           backgroundSize: 'cover',
@@ -249,10 +234,10 @@ const Index = () => {
 
       {/* Testimonials */}
       <section 
-        className="py-20 bg-muted/50 round-[10px] border-[10px] border-primary"
+        className="py-20 bg-muted/50 round-[10px] border-[6px] border-secondary"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.6)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
-          backgroundSize: 'fill',
+          backgroundSize: '100px 100px',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat'
         }}
