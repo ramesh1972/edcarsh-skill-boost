@@ -18,7 +18,7 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
   } = useTheme();
   return <>
       {/* Course Details */}
-      <div className="p-0 pb-1 flex items-center justify-between text-sm border-b">
+      <div className="pl-2 pr-2 pb-1 flex items-center justify-between text-sm border-b">
         <div className="flex items-center gap-1">
           {getIcon('time')}
           {duration}
