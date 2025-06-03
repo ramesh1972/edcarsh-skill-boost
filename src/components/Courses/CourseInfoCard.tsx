@@ -19,7 +19,7 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
   return 
     <div className="flex grid-cols-1 grid-rows-2 gap-2 p-2">
       {/* Course Details */}
-      <div className="]flex items-center justify-between text-sm border-b">
+      <div className="flex items-center justify-between text-sm border-b">
         <div className="flex items-center gap-1">
           {getIcon('time')}
           {duration}
@@ -31,8 +31,8 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
       </div>
 
       {/* Price and Session */}
-      <div className="flex items-center justify-between border-b">
-        <Badge variant="secondary" className="flex items-center gap-1">
+      <div className="flex items-center justify-between text-sm border-b">
+        <Badge variant="primary" className="flex items-center gap-1">
           {getIcon('price')}
           {price}
         </Badge>
