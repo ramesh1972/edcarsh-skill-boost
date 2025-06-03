@@ -156,7 +156,7 @@ const Courses = () => {
 
               <CardContent className="flex-1 flex flex-col">
                 {/* Topics Covered - Fixed height for alignment */}
-                <div className="mb-1 flex-shrink-0">
+                <div className="flex-shrink-0">
                   <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                   <div className="flex flex-wrap gap-1 h-[80px] content-start overflow-hidden">
                     {course.topics.map((topic, index) => (
@@ -168,7 +168,7 @@ const Courses = () => {
                 </div>
 
                 {/* Course Details - Fixed position */}
-                <div className="flex items-center justify-between text-sm mb-2 flex-shrink-0">
+                <div className="flex items-center justify-between text-sm mb-1 flex-shrink-0">
                   <div className="flex items-center gap-1">
                     {getIcon('time')}
                     {course.duration}
