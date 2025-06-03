@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -75,7 +73,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
           </div>
       
           {/* Price and Session - aligned to bottom */}
-          <div className="px-4 py-2 flex items-center justify-between border-b">
+          <div className="px-4 py-2 pb-4 flex items-center justify-between border-b">
             <Badge variant="secondary" className="flex items-center gap-1">
               {getIcon('price')}
               {course.price}
@@ -150,4 +148,3 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
 };
 
 export default LongCourseCard;
-
