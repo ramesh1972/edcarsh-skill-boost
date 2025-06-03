@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -144,6 +145,11 @@ const Courses = () => {
                 {/* Course Image */}
                 <div className="relative h-48 overflow-hidden flex-shrink-0">
                   <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+                  <div className="absolute top-2 left-2">
+                    <Badge variant="outline" className="bg-white/90 text-black">
+                      {course.category}
+                    </Badge>
+                  </div>
                   <div className="absolute top-2 right-2">
                     <Badge variant="secondary" className="bg-white/90 text-black">
                       {course.level}
@@ -180,9 +186,6 @@ const Courses = () => {
                     <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
                       {course.title}
                     </CardTitle>
-                    <Badge variant="outline" className="ml-2 text-xs shrink-0">
-                      {course.category}
-                    </Badge>
                   </div>
                   <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start">{course.description}</CardDescription>
                 </CardHeader>
@@ -229,6 +232,11 @@ const Courses = () => {
                   <div className="w-64 flex-shrink-0">
                     <div className="relative h-48 overflow-hidden">
                       <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+                      <div className="absolute top-2 left-2">
+                        <Badge variant="outline" className="bg-white/90 text-black">
+                          {course.category}
+                        </Badge>
+                      </div>
                       <div className="absolute top-2 right-2">
                         <Badge variant="secondary" className="bg-white/90 text-black">
                           {course.level}
@@ -271,9 +279,6 @@ const Courses = () => {
                           <h3 className={`text-xl font-semibold ${theme.designSystem === 'material' ? 'text-lg font-medium' : 'text-xl'}`}>
                             {course.title}
                           </h3>
-                          <Badge variant="outline" className="text-xs">
-                            {course.category}
-                          </Badge>
                         </div>
                         <p className="text-sm text-muted-foreground">{course.longDescription}</p>
                       </div>
