@@ -126,7 +126,7 @@ const Index = () => {
       <section 
         className="py-20"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0..3), rgba(255,255,255,0.5)), url('/lovable-uploads/1a921246-68aa-4cc6-a586-1f5c0c89c6fc.png')`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.5)), url('/lovable-uploads/1a921246-68aa-4cc6-a586-1f5c0c89c6fc.png')`,
           backgroundSize: 'cover',
           backgroundPosition: 'top',
           backgroundRepeat: 'no-repeat'
