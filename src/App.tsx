@@ -48,39 +48,25 @@ const AppContent = () => {
         <Header />
         
         {/* Inner div - absolute positioned with 15px left/right, adjusted for 80px header, 60px bottom for tabs */}
-        <div 
-          className="relative overflow-auto !left-[15px] right-[15px] !rounded-l-[40px]" 
-          style={{ 
-            width: 'calc(100vw - 30px)',
-            height: 'calc(100vh - 132px)',
-            padding: 'var(--content-padding, 1rem)',
-            gap: 'var(--content-gap, 1rem)'
-          }}
-        >
+        <div className="relative overflow-auto !left-[15px] right-[15px] !rounded-l-[40px]" style={{ 
+          width: 'calc(100vw - 30px)',
+          height: 'calc(100vh - 132px)'
+        }}>
           <Toaster />
           <Sonner />
-          <div 
-            className="h-full" 
-            style={{ 
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 'var(--section-spacing, 2rem)'
-            }}
-          >
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/express-intent" element={<ExpressIntent />} />
-              <Route path="/instructors" element={<Instructors />} />
-              <Route path="/testimonials" element={<Testimonials />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/about" element={<About />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/express-intent" element={<ExpressIntent />} />
+            <Route path="/instructors" element={<Instructors />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </div>
         
         {/* Bottom Tabs */}
