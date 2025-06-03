@@ -51,6 +51,13 @@ export const ThemeSelector: React.FC = () => {
   };
 
   return (
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="sm" className="gap-2">
+          <Settings className="w-4 h-4" />
+          <span className="hidden sm:inline">Theme</span>
+        </Button>
+      </DropdownMenuTrigger>
       <DropdownMenuContent className="w-72">
         <div className="flex items-center justify-between px-2 py-1.5">
           <DropdownMenuLabel className="p-0">Customize Theme</DropdownMenuLabel>
@@ -221,5 +228,6 @@ export const ThemeSelector: React.FC = () => {
           Reset to Default
         </DropdownMenuItem>
       </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
