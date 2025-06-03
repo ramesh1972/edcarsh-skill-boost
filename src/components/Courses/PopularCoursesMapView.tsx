@@ -62,8 +62,11 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     return { x: newX, y: newY };
   };
 
-  // Calculate data based on view mode
+  // Calculate data based on view mode with zoom-responsive positioning
   const mapData = useMemo(() => {
+    // Zoom multiplier: higher zoom = more spread out
+    const zoomMultiplier = 0.5 + (zoomLevel * 0.8); // Range from 0.74 to 2.9
+
     if (viewMode === 'courses') {
       const studentCounts = courses.map(course => course.students).sort((a, b) => b - a);
       const maxStudents = Math.max(...studentCounts);
@@ -75,13 +78,13 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       const percentile60 = studentCounts[Math.floor(studentCounts.length * 0.6)];
       const percentile80 = studentCounts[Math.floor(studentCounts.length * 0.8)];
 
-      // Dynamic ranges based on data distribution
+      // Dynamic ranges with zoom-responsive distances
       const ranges = [
-        { name: `${percentile20}+`, min: percentile20, distance: 100, color: '#dc2626' },
-        { name: `${percentile40}-${percentile20-1}`, min: percentile40, max: percentile20-1, distance: 200, color: '#ea580c' },
-        { name: `${percentile60}-${percentile40-1}`, min: percentile60, max: percentile40-1, distance: 300, color: '#d97706' },
-        { name: `${percentile80}-${percentile60-1}`, min: percentile80, max: percentile60-1, distance: 400, color: '#65a30d' },
-        { name: `<${percentile80}`, max: percentile80-1, distance: 500, color: '#059669' }
+        { name: `${percentile20}+`, min: percentile20, distance: 100 * zoomMultiplier, color: '#dc2626' },
+        { name: `${percentile40}-${percentile20-1}`, min: percentile40, max: percentile20-1, distance: 200 * zoomMultiplier, color: '#ea580c' },
+        { name: `${percentile60}-${percentile40-1}`, min: percentile60, max: percentile40-1, distance: 300 * zoomMultiplier, color: '#d97706' },
+        { name: `${percentile80}-${percentile60-1}`, min: percentile80, max: percentile60-1, distance: 400 * zoomMultiplier, color: '#65a30d' },
+        { name: `<${percentile80}`, max: percentile80-1, distance: 500 * zoomMultiplier, color: '#059669' }
       ];
 
       const allCourseData: any[] = [];
@@ -148,7 +151,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
       const mappedData = industryData.map((item, index) => {
         const angle = (index / industryData.length) * 2 * Math.PI;
-        const distance = Math.max(150, 400 - (item.totalStudents / maxStudents) * 250);
+        const distance = Math.max(150, 400 - (item.totalStudents / maxStudents) * 250) * zoomMultiplier;
         
         const baseX = Math.cos(angle) * distance;
         const baseY = Math.sin(angle) * distance;
@@ -188,7 +191,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
       const mappedData = subjectData.map((item, index) => {
         const angle = (index / subjectData.length) * 2 * Math.PI;
-        const distance = Math.max(120, 350 - (item.totalStudents / maxStudents) * 200);
+        const distance = Math.max(120, 350 - (item.totalStudents / maxStudents) * 200) * zoomMultiplier;
         
         const baseX = Math.cos(angle) * distance;
         const baseY = Math.sin(angle) * distance;
@@ -231,7 +234,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
       const mappedData = topicData.map((item, index) => {
         const angle = (index / topicData.length) * 2 * Math.PI;
-        const distance = Math.max(100, 300 - (item.totalStudents / maxStudents) * 150);
+        const distance = Math.max(100, 300 - (item.totalStudents / maxStudents) * 150) * zoomMultiplier;
         
         const baseX = Math.cos(angle) * distance;
         const baseY = Math.sin(angle) * distance;
@@ -258,7 +261,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     }
 
     return { data: [], ranges: [] };
-  }, [courses, viewMode]);
+  }, [courses, viewMode, zoomLevel]);
 
   // Function to get display content based on view mode
   const getDisplayContent = (item: any) => {
@@ -428,13 +431,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       {/* Radial Map */}
       <div className="flex justify-center items-center w-full h-full flex-1">
         <div className="relative w-full h-full min-h-[1000px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-gray-200 overflow-hidden">
-          <div 
-            className="absolute inset-0 transition-transform duration-300 ease-out"
-            style={{ 
-              transform: `scale(${zoomLevel})`,
-              transformOrigin: 'center center'
-            }}
-          >
+          <div className="absolute inset-0">
             {/* Center point */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
