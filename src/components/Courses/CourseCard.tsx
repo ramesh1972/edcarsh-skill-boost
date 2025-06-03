@@ -84,7 +84,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             <InstructorCard instructor={course.instructor} hideDescription={true} />
           </div>
   {/* Course Info Card - moved below image */}
-      <CourseInfoCard duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
+      <CourseInfoCard className="mb-2" duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
 
           {/* Action Buttons - using ActionButtons component */}
           <div className="px-2.5">
