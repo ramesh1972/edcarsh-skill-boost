@@ -57,14 +57,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         </div>
       </div>
 
-      {/* Course Info Card - moved below image */}
-      <CourseInfoCard 
-        duration={course.duration}
-        students={course.students}
-        price={course.price}
-        nextSession={course.nextSession}
-      />
-
       <CardHeader className="pb-2 mb-1 h-32 flex flex-col justify-start flex-shrink-0">
         <div className="flex items-start justify-between">
           <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
@@ -92,6 +84,13 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           <div className="px-2.5 mb-4">
             <InstructorCard instructor={course.instructor} hideDescription={true} />
           </div>
+  {/* Course Info Card - moved below image */}
+      <CourseInfoCard 
+        duration={course.duration}
+        students={course.students}
+        price={course.price}
+        nextSession={course.nextSession}
+      />
 
           {/* Action Buttons - using ActionButtons component */}
           <div className="px-2.5">
