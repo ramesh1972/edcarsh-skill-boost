@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -262,11 +261,13 @@ const Courses = () => {
                     </div>
                   </div>
 
-                  {/* Right side - Course Content */}
-                  <div className="flex-1 p-6">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
+                  {/* Right side - 2 rows structure */}
+                  <div className="flex-1 p-6 flex flex-col">
+                    {/* Top row - 3 columns */}
+                    <div className="grid grid-cols-3 gap-6 flex-1">
+                      {/* Column 1: Title and Description */}
+                      <div className="col-span-1">
+                        <div className="flex items-center gap-2 mb-2">
                           <h3 className={`text-xl font-semibold ${theme.designSystem === 'material' ? 'text-lg font-medium' : 'text-xl'}`}>
                             {course.title}
                           </h3>
@@ -274,13 +275,11 @@ const Courses = () => {
                             {course.category}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-3">{course.description}</p>
+                        <p className="text-sm text-muted-foreground">{course.description}</p>
                       </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                      {/* Topics as bullet points */}
-                      <div>
+                      {/* Column 2: Topics */}
+                      <div className="col-span-1">
                         <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                         <ul className="text-sm space-y-1">
                           {course.topics.map((topic, index) => (
@@ -292,21 +291,29 @@ const Courses = () => {
                         </ul>
                       </div>
 
-                      {/* Course actions */}
-                      <div className="space-y-3">
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
-                            <Eye className="h-3 w-3" />
-                            View
-                          </Button>
-                          <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
-                            Enroll Now
-                          </Button>
-                          <Button variant="outline" size="sm" className="px-2 border-2">
-                            <Heart className="h-3 w-3" />
-                          </Button>
+                      {/* Column 3: About Instructor */}
+                      <div className="col-span-1">
+                        <h4 className="text-sm font-medium mb-2">About Instructor:</h4>
+                        <div className="text-sm text-muted-foreground">
+                          <p className="mb-1">Expert in {course.category}</p>
+                          <p className="mb-1">{course.level} level specialist</p>
+                          <p>Teaching for 5+ years</p>
                         </div>
                       </div>
+                    </div>
+
+                    {/* Bottom row - Right aligned buttons */}
+                    <div className="flex justify-end gap-2 mt-4 pt-4 border-t">
+                      <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
+                        <Eye className="h-3 w-3" />
+                        View
+                      </Button>
+                      <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
+                        Enroll Now
+                      </Button>
+                      <Button variant="outline" size="sm" className="px-2 border-2">
+                        <Heart className="h-3 w-3" />
+                      </Button>
                     </div>
                   </div>
                 </div>
