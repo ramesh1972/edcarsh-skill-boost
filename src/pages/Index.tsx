@@ -40,7 +40,7 @@ const Index = () => {
                 Crash Courses
               </span>
             </h1>
-            <p className="text-xl  mb-8 mt-13 max-w-3xl mx-auto" style={{color:'orange', fontSize:'22px'}}>
+            <p className="text-xl  mb-8 mt-15 max-w-3xl mx-auto" style={{color:'orange', fontSize:'30px'}}>
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
@@ -236,7 +236,7 @@ const Index = () => {
       <section 
         className="py-20 bg-muted/50 round-[10px] border-[10px] border-secondary"
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,.3)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
+          backgroundImage: `linear-gradient(rgba(255, 255, 255,0.4), rgba(255, 255, 255,.8)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
           backgroundSize: '260px auto',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat'
