@@ -30,7 +30,7 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
       {mainNavItems.map(item => 
         <div key={item.name} className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap !rounded-t-lg relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-lg tab-curved' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} style={isActiveRoute(item.href) ? {
           marginBottom: '-6px',
-          paddingBottom: '11px',
+          paddingBottom: '9px',
           zIndex: 20
         } : {}}>
           <Link to={item.href} className="flex items-center gap-2">
