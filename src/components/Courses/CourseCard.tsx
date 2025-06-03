@@ -1,9 +1,11 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getSubjectColor } from '@/data/masterData';
+import { useNavigate } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
@@ -39,15 +41,23 @@ interface Course {
 
 interface CourseCardProps {
   course: Course;
+  referrerRoute?: string;
+  referrerName?: string;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
-  course
+  course,
+  referrerRoute = '/courses',
+  referrerName = 'Courses'
 }) => {
-  const {
-    theme,
-    getIcon
-  } = useTheme();
+  const { theme, getIcon } = useTheme();
+  const navigate = useNavigate();
+
+  const handleViewClick = () => {
+    navigate(`/courses/${course.id}`, {
+      state: { from: referrerRoute, fromName: referrerName }
+    });
+  };
   
   return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       {/* Course Image */}
@@ -108,7 +118,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
           {/* Action Buttons - using ActionButtons component */}
           <div className="p-0 pt-3">
-            <ActionButtons courseId={course.id} />
+            <ActionButtons 
+              courseId={course.id} 
+              nextSession={course.nextSession}
+              onViewClick={handleViewClick}
+            />
           </div>
         </div>
       </CardContent>

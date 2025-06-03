@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getSubjectColor } from '@/data/masterData';
+import { useNavigate } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
@@ -40,10 +41,23 @@ interface Course {
 
 interface LongCourseCardProps {
   course: Course;
+  referrerRoute?: string;
+  referrerName?: string;
 }
 
-const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
+const LongCourseCard: React.FC<LongCourseCardProps> = ({ 
+  course,
+  referrerRoute = '/courses',
+  referrerName = 'Courses'
+}) => {
   const { theme, getIcon } = useTheme();
+  const navigate = useNavigate();
+
+  const handleViewClick = () => {
+    navigate(`/courses/${course.id}`, {
+      state: { from: referrerRoute, fromName: referrerName }
+    });
+  };
   
   return (
     <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
@@ -121,7 +135,11 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
             <div className="flex flex-col justify-between h-full -ml-[25px]">
               <InstructorCard instructor={course.instructor} />
               <div className="mt-auto">
-                <ActionButtons courseId={course.id} />
+                <ActionButtons 
+                  courseId={course.id} 
+                  nextSession={course.nextSession}
+                  onViewClick={handleViewClick}
+                />
               </div>
             </div>
           </div>
