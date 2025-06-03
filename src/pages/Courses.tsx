@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -6,7 +7,7 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
 import { getAllIndustries, getSubjectsByIndustry } from '@/data/masterData';
-import { Filter, ArrowUpDown, LayoutGrid, List, Calendar as CalendarIcon, MapPin } from 'lucide-react';
+import { Filter, ArrowUpDown, LayoutGrid, List, Calendar as CalendarIcon, MapPin, ArrowUp, ArrowDown } from 'lucide-react';
 import { isAfter, parseISO, isSameDay } from 'date-fns';
 import CourseCard from '@/components/Courses/CourseCard';
 import LongCourseCard from '@/components/Courses/LongCourseCard';
@@ -23,6 +24,7 @@ const Courses = () => {
   const [subjectFilter, setSubjectFilter] = useState('all');
   const [levelFilter, setLevelFilter] = useState('all');
   const [sortBy, setSortBy] = useState('title');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
   const [viewMode, setViewMode] = useState('card');
   const [calendarViewMode, setCalendarViewMode] = useState('month');
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -66,21 +68,31 @@ const Courses = () => {
 
     // Sort courses
     filtered.sort((a, b) => {
+      let comparison = 0;
       switch (sortBy) {
         case 'title':
-          return a.title.localeCompare(b.title);
+          comparison = a.title.localeCompare(b.title);
+          break;
         case 'price':
-          return parseInt(a.price.replace('$', '')) - parseInt(b.price.replace('$', ''));
+          comparison = parseInt(a.price.replace('$', '')) - parseInt(b.price.replace('$', ''));
+          break;
         case 'students':
-          return b.students - a.students;
+          comparison = b.students - a.students;
+          break;
         case 'duration':
-          return parseInt(a.duration) - parseInt(b.duration);
+          comparison = parseInt(a.duration) - parseInt(b.duration);
+          break;
         default:
-          return 0;
+          comparison = 0;
       }
+      return sortDirection === 'asc' ? comparison : -comparison;
     });
     return filtered;
-  }, [industryFilter, subjectFilter, levelFilter, sortBy]);
+  }, [industryFilter, subjectFilter, levelFilter, sortBy, sortDirection]);
+
+  const toggleSortDirection = () => {
+    setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
+  };
 
   return <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
@@ -94,7 +106,7 @@ const Courses = () => {
         </div>
 
         {/* Filters, Sort Controls and View Mode Toggle */}
-        <div className="flex flex-wrap gap-4 mb-6 p-4 bg-card rounded-lg border">
+        <div className="flex flex-wrap gap-4 mb-6 p-4 bg-card rounded-lg border relative">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4" />
             <span className="font-medium">Filters</span>
@@ -127,7 +139,6 @@ const Courses = () => {
               </Select>
             </div>
 
-
             <div className="min-w-[150px]">
               <Select value={levelFilter} onValueChange={setLevelFilter}>
                 <SelectTrigger>
@@ -141,24 +152,37 @@ const Courses = () => {
               </Select>
             </div>
 
-                      <div className="flex items-center gap-2">
-            <ArrowUpDown className="h-4 w-4" />
-            <span className="font-medium">Sort</span>
-          </div>
+            <div className="flex items-center gap-2">
+              <ArrowUpDown className="h-4 w-4" />
+              <span className="font-medium">Sort</span>
+            </div>
 
-            {viewMode !== 'calendar' && viewMode !== 'map' && <div className="min-w-[150px]">
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sort by" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="title">Title</SelectItem>
-                    <SelectItem value="price">Price</SelectItem>
-                    <SelectItem value="students">Students</SelectItem>
-                    <SelectItem value="duration">Duration</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>}
+            {viewMode !== 'calendar' && viewMode !== 'map' && (
+              <div className="flex items-center gap-2">
+                <div className="min-w-[150px]">
+                  <Select value={sortBy} onValueChange={setSortBy}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Sort by" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="title">Title</SelectItem>
+                      <SelectItem value="price">Price</SelectItem>
+                      <SelectItem value="students">Students</SelectItem>
+                      <SelectItem value="duration">Duration</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={toggleSortDirection}
+                  className="h-10 w-10"
+                  title={`Sort ${sortDirection === 'asc' ? 'ascending' : 'descending'}`}
+                >
+                  {sortDirection === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* View Mode Toggle - aligned to the right */}
@@ -185,7 +209,7 @@ const Courses = () => {
           </div>
 
           {/* Course count */}
-          <div className="w-full text-right text-sm text-muted-foreground">
+          <div className="absolute bottom-2 right-4 text-sm text-muted-foreground">
             {viewMode === 'calendar' || viewMode === 'map' ? '' : `${filteredAndSortedCourses.length} course${filteredAndSortedCourses.length !== 1 ? 's' : ''} found`}
           </div>
         </div>
