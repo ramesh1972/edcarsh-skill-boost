@@ -139,7 +139,7 @@ const Index = () => {
 
       {/* Featured Courses */}
       <section 
-        className="py-20 round-b-[20px] border-[6px] border-secondary"
+        className="py-20 round-b-[20px] border-[10px] border-secondary"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.6)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
           backgroundSize: 'cover',
@@ -237,7 +237,7 @@ const Index = () => {
         className="py-20 bg-muted/50 round-[10px] border-[10px] border-secondary"
         style={{
           backgroundImage: `linear-gradient(rgba(155,155,255,0.7), rgba(155,155,255,.7)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
-          backgroundSize: '200px auto',
+          backgroundSize: '260px auto',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat'
         }}
