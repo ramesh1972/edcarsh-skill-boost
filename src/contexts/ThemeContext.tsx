@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
 
@@ -180,7 +179,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.classList.remove('material-design', 'human-interface', 'fluent-design', 'ant-design', 'carbon-design', 'atlassian-design', 'bootstrap-design', 'polaris-design', 'lightning-design', 'tailwind-design');
     root.classList.remove('skin-default', 'skin-gradient', 'skin-textured', 'skin-glassmorphism');
     
-    // Apply current theme classes
+    // Apply current theme classes (excluding layout - that's handled per component now)
     root.classList.add(theme.colorTheme);
     root.classList.add(`${theme.designSystem}-design`);
     root.classList.add(`skin-${theme.skin}`);
@@ -194,35 +193,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     // Apply color theme variables
     applyColorTheme(theme.colorTheme);
     
-    // Remove any existing theme style tag and add new one
-    const existingThemeStyle = document.getElementById('theme-dropdown-styles');
-    if (existingThemeStyle) {
-      existingThemeStyle.remove();
-    }
-    
-    // Add dropdown z-index styles only once
-    const style = document.createElement('style');
-    style.id = 'theme-dropdown-styles';
-    style.textContent = `
-      [data-radix-popper-content-wrapper] {
-        z-index: 50 !important;
-        position: relative !important;
-      }
-      [data-radix-dropdown-menu-content] {
-        z-index: 50 !important;
-        position: relative !important;
-        pointer-events: auto !important;
-      }
-      [data-radix-dropdown-menu-item] {
-        pointer-events: auto !important;
-      }
-    `;
-    document.head.appendChild(style);
-    
     // Debug logging
     console.log('Applied theme classes:', {
       colorTheme: theme.colorTheme,
       designSystem: `${theme.designSystem}-design`,
+      layout: `layout-${theme.layout}`,
       skin: `skin-${theme.skin}`,
       typography: `font-${theme.typography}`
     });
