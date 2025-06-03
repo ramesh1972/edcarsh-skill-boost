@@ -30,7 +30,7 @@ const App = () => (
             <Header />
             
             {/* Inner div - absolute positioned with 15px left/right, 64px top/bottom */}
-            <div className="absolute overflow-y-auto w-full h-full" style={{ 
+            <div className="absolute w-full h-full" style={{ 
               left: '15px', 
               right: '15px', 
               top: '64px', 
