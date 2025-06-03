@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -112,6 +113,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                   About
                 </Button>
               </div>
+            </div>
           </div>
 
           {/* Action Buttons - using ActionButtons component */}
