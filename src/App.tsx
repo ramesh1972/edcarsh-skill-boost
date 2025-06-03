@@ -35,8 +35,8 @@ const App = () => (
             <div className="absolute overflow-auto" style={{ 
               left: '15px', 
               right: '15px', 
-              top: '80px', 
-              bottom: '40px',
+              top: '60px', 
+              bottom: '20px',
               width: 'calc(100vw - 30px)',
               height: 'calc(100vh - 150px)',
               borderTopLeftRadius: '40px',
