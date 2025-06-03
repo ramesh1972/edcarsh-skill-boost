@@ -48,7 +48,7 @@ const AppContent = () => {
         <Header />
         
         {/* Inner div - absolute positioned with 15px left/right, 60px top, 60px bottom for tabs */}
-        <div className="overflow-auto !rounded-l-[40px] rounded-lb-[40px]" style={{ 
+        <div className="overflow-auto !inset-[0px 15px 0px] !rounded-l-[40px] rounded-lb-[40px]" style={{ 
           left: '15px', 
           right: '15px', 
           top: '60px', 
@@ -56,8 +56,7 @@ const AppContent = () => {
           width: 'calc(100vw - 30px)',
           height: 'calc(100vh - 128px)',
           borderTopLeftRadius: '40px !important',
-          borderBottomLeftRadius: '40px !important',
-          inset: '0px 15px 0px !important'
+          borderBottomLeftRadius: '40px !important'
         }}>
           <Toaster />
           <Sonner />
