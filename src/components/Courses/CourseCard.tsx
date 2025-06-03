@@ -24,7 +24,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           alt={course.title}
           className="w-full h-48 object-cover"
         />
-        <div className="absolute top-2 left-2 flex gap-1">
+        <div className="absolute top-2 left-2 flex flex-col gap-1">
           <Badge variant="secondary" className="text-xs">
             {getIndustryDisplayName(course.industry)}
           </Badge>
@@ -32,9 +32,22 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             {course.subject}
           </Badge>
         </div>
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 right-2 flex flex-col gap-1">
           <Badge variant="default" className="text-xs">
             ${course.price}
+          </Badge>
+          {course.isLive && (
+            <Badge variant="destructive" className="text-xs">
+              Live
+            </Badge>
+          )}
+          {course.hasTools && (
+            <Badge variant="outline" className="text-xs bg-green-50 border-green-200 text-green-700">
+              Tools
+            </Badge>
+          )}
+          <Badge variant="outline" className="text-xs">
+            {course.expertLevel}
           </Badge>
         </div>
       </div>

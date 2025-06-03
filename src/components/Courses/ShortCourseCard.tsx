@@ -20,11 +20,25 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
     <Card className="overflow-hidden hover:shadow-md transition-shadow">
       <CardContent className="p-4">
         <div className="flex items-start gap-3">
-          <img 
-            src={course.image} 
-            alt={course.title}
-            className="w-16 h-16 rounded object-cover flex-shrink-0"
-          />
+          <div className="relative">
+            <img 
+              src={course.image} 
+              alt={course.title}
+              className="w-16 h-16 rounded object-cover flex-shrink-0"
+            />
+            <div className="absolute -top-1 -right-1 flex flex-col gap-1">
+              {course.isLive && (
+                <Badge variant="destructive" className="text-xs px-1 py-0">
+                  Live
+                </Badge>
+              )}
+              {course.hasTools && (
+                <Badge variant="outline" className="text-xs px-1 py-0 bg-green-50 border-green-200 text-green-700">
+                  Tools
+                </Badge>
+              )}
+            </div>
+          </div>
           
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1 mb-1">
@@ -33,6 +47,9 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
               </Badge>
               <Badge variant="outline" className="text-xs">
                 {course.subject}
+              </Badge>
+              <Badge variant="outline" className="text-xs">
+                {course.expertLevel}
               </Badge>
             </div>
             

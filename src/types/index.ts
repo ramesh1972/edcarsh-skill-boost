@@ -31,5 +31,8 @@ export interface Course {
   level: string;
   subject: string;
   industry: string;
+  isLive: boolean;
+  hasTools: boolean;
+  expertLevel: 'Beginner' | 'Intermediate' | 'Expert';
   instructor: Instructor;
 }

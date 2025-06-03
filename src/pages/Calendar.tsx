@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
+import { industriesData } from '@/data/masterData';
 import { Calendar as CalendarIcon, LayoutGrid, List, ChevronLeft, ChevronRight } from 'lucide-react';
 import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, addDays, addWeeks, addMonths, subDays, subWeeks, subMonths, isSameDay, isAfter, isBefore, parseISO } from 'date-fns';
 import CourseCalendarEvent from '@/components/Calendar/CourseCalendarEvent';
@@ -13,10 +14,10 @@ const Calendar = () => {
   const { theme, getIcon, getBackground } = useTheme();
   const [viewMode, setViewMode] = useState('month'); // 'day', 'week', 'month'
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [industryFilter, setIndustryFilter] = useState('all');
 
-  // Get unique categories for filter options
-  const categories = ['all', ...Array.from(new Set(courses.map(course => course.category)))];
+  // Get unique industries for filter options
+  const industries = ['all', ...industriesData.map(industry => industry.id)];
 
   // Filter courses that are today or in the future
   const futureCourses = useMemo(() => {
@@ -25,10 +26,10 @@ const Calendar = () => {
     
     return courses.filter(course => {
       const courseStartDate = parseISO(course.startDate);
-      const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
-      return categoryMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
+      const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
+      return industryMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
     });
-  }, [categoryFilter]);
+  }, [industryFilter]);
 
   // Get courses for current view period
   const getCoursesForPeriod = useMemo(() => {
@@ -88,6 +89,12 @@ const Calendar = () => {
     }
   };
 
+  const getIndustryDisplayName = (industryId: string) => {
+    if (industryId === 'all') return 'All Industries';
+    const industry = industriesData.find(ind => ind.id === industryId);
+    return industry ? industry.name : industryId;
+  };
+
   const renderDayView = () => {
     const daysCourses = getCoursesForPeriod;
     
@@ -115,7 +122,7 @@ const Calendar = () => {
         {weekDays.map(day => {
           const dayCourses = futureCourses.filter(course => 
             isSameDay(parseISO(course.startDate), day) &&
-            (categoryFilter === 'all' || course.category === categoryFilter)
+            (industryFilter === 'all' || course.industry === industryFilter)
           );
           
           return (
@@ -162,7 +169,7 @@ const Calendar = () => {
         {calendarDays.map(day => {
           const dayCourses = futureCourses.filter(course => 
             isSameDay(parseISO(course.startDate), day) &&
-            (categoryFilter === 'all' || course.category === categoryFilter)
+            (industryFilter === 'all' || course.industry === industryFilter)
           );
           
           const isCurrentMonth = day.getMonth() === currentDate.getMonth();
@@ -250,14 +257,14 @@ const Calendar = () => {
           </div>
           
           <div className="min-w-[150px]">
-            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+            <Select value={industryFilter} onValueChange={setIndustryFilter}>
               <SelectTrigger>
-                <SelectValue placeholder="Category" />
+                <SelectValue placeholder="Industry" />
               </SelectTrigger>
               <SelectContent>
-                {categories.map(category => (
-                  <SelectItem key={category} value={category}>
-                    {category === 'all' ? 'All Categories' : category}
+                {industries.map(industry => (
+                  <SelectItem key={industry} value={industry}>
+                    {getIndustryDisplayName(industry)}
                   </SelectItem>
                 ))}
               </SelectContent>
