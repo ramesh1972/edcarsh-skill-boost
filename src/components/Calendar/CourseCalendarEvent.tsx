@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Clock, Users, DollarSign } from 'lucide-react';
-import { parseISO, addDays, isSameDay, parse, addMinutes, subMinutes, isWithinInterval, addHours } from 'date-fns';
+import { Clock, Users, DollarSign, UserPlus } from 'lucide-react';
+import { parseISO, addDays, isSameDay, parse, addMinutes, subMinutes, isWithinInterval, addHours, isAfter } from 'date-fns';
 
 interface Course {
   id: number;
@@ -103,6 +102,18 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
     };
   };
 
+  // Check if session is current or future for Join as Guest button
+  const isCurrentOrFutureSession = () => {
+    if (!currentDay) return false;
+    
+    const now = new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // Show for today's sessions or future sessions
+    return isSameDay(currentDay, today) || isAfter(currentDay, today);
+  };
+
   // Calculate card height based on daily session duration
   const getCardHeight = () => {
     const baseHeight = 60; // Base height in pixels
@@ -112,6 +123,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
 
   const sessionNumber = getSessionNumber();
   const joinButtonState = getJoinButtonState();
+  const showJoinAsGuest = isCurrentOrFutureSession();
   const cardHeight = getCardHeight();
 
   if (viewMode === 'month') {
@@ -126,13 +138,22 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         <div className="text-xs font-semibold text-red-600 mt-1">
           Session - {sessionNumber}
         </div>
-        {joinButtonState.show && (
+        {joinButtonState.show ? (
           <Button 
             size="sm" 
             className="text-xs mt-1 h-5 px-2"
             disabled={!joinButtonState.enabled}
           >
             Join Now
+          </Button>
+        ) : showJoinAsGuest && (
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="text-xs mt-1 h-5 px-1 flex items-center gap-1"
+          >
+            <UserPlus className="h-2 w-2" />
+            Guest
           </Button>
         )}
       </div>
@@ -163,13 +184,22 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         <div className="text-xs font-semibold text-red-600 mt-1 bg-red-50 px-1 py-0.5 rounded">
           Session - {sessionNumber}
         </div>
-        {joinButtonState.show && (
+        {joinButtonState.show ? (
           <Button 
             size="sm" 
             className="text-xs mt-1 h-6 px-2 w-full"
             disabled={!joinButtonState.enabled}
           >
             Join Now
+          </Button>
+        ) : showJoinAsGuest && (
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="text-xs mt-1 h-6 px-2 w-full flex items-center gap-1"
+          >
+            <UserPlus className="h-3 w-3" />
+            Join as Guest
           </Button>
         )}
       </div>
@@ -239,6 +269,15 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
               disabled={!joinButtonState.enabled}
             >
               Join Now
+            </Button>
+          ) : showJoinAsGuest ? (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="flex-1 flex items-center gap-1"
+            >
+              <UserPlus className="h-4 w-4" />
+              Join as Guest
             </Button>
           ) : (
             <Button size="sm" className="flex-1">
