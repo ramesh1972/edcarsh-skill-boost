@@ -99,7 +99,7 @@ export const Header: React.FC = () => {
       `}</style>
       <header className={`w-full bg-primary ${getSkinClasses()} relative z-10`}>
         {/* Single line - Logo, main navigation, and right-aligned tools */}
-        <div className="w-full max-w-none flex h-8 items-center justify-between px-6 lg:px-[32px] my-4">
+        <div className="w-full max-w-none flex h-8 items-center justify-between px-6 lg:px-[32px] my-3">
           {/* Logo */}
           <HeaderLogo />
 
