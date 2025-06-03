@@ -39,8 +39,8 @@ const App = () => (
               bottom: '20px',
               width: 'calc(100vw - 30px)',
               height: 'calc(100vh - 104px)',
-              borderTopLeftRadius: '40px',
-              borderBottomLeftRadius: '40px'
+              borderTopLeftRadius: '40px !important',
+              borderBottomLeftRadius: '40px !important'
             }}>
               <Toaster />
               <Sonner />
