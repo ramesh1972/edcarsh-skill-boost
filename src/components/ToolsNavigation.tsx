@@ -28,6 +28,11 @@ const ToolsNavigation: React.FC = () => {
       icon: 'student'
     },
     {
+      name: 'Tools',
+      href: '/edutools',
+      icon: 'tools'
+    },
+    {
       name: 'Instructor Q&A',
       href: '/instructor-qa',
       icon: 'instructor'
@@ -36,11 +41,6 @@ const ToolsNavigation: React.FC = () => {
       name: 'Community Discussion',
       href: '/community',
       icon: 'testimonial'
-    },
-    {
-      name: 'Tools',
-      href: '/edutools',
-      icon: 'tools'
     },
     {
       name: 'Guides',
