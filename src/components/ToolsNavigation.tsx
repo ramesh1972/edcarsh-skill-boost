@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -71,25 +72,25 @@ const ToolsNavigation: React.FC = () => {
           top: -7px;
           width: 25px;
           height: 21px;
-          background: hsl(var(--primary));
+          background: hsl(var(--background));
         }
         .bottom-tab-curved::before {
           left: -15px;
           border-top-right-radius: 25px;
-          border: 10px solid hsl(var(--background));
+          border: 10px solid hsl(var(--primary));
           border-bottom: none;
           border-left: none;
         }
         .bottom-tab-curved::after {
           right: -15px;
           border-top-left-radius: 25px;
-          border: 10px solid hsl(var(--background));
+          border: 10px solid hsl(var(--primary));
           border-bottom: none;
           border-right: none;
         }
       `}</style>
       <div className="fixed bottom-0 left-0 right-0 bg-primary z-10 overflow-x-auto px-[15px]">
-        <nav className="flex items-stretch justify-end min-w-max px-4">
+        <nav className="flex items-stretch justify-between min-w-max px-4">
           {tabItems.map(item => (
             <div 
               key={item.name}
