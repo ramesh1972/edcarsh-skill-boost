@@ -59,10 +59,10 @@ const Index = () => {
       <section 
         className="py-20 bg-muted/50 relative overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.4)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
-          backgroundSize: 'cover',
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.7)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
+          backgroundSize: 'fill',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          backgroundRepeat: 'repeat'
         }}
       >
         <div className="container px-4 mx-auto">
