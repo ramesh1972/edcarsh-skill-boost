@@ -137,6 +137,7 @@ const Courses = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredAndSortedCourses.map(course => <Card key={course.id} className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
                 {/* Course Image */}
+              <div className="grid grid-cols-1 grid-rows-2 md:grid-cols-1 lg:grid-rows-2 gap-1">
                 <div className="relative h-48 overflow-hidden flex-shrink-0">
                   <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
                   <div className="absolute top-2 right-2">
@@ -146,6 +147,7 @@ const Courses = () => {
                   </div>
                 </div>
 
+                <div className="grid grid-cols-1 grid-rows-2 md:grid-cols-1 lg:grid-rows-2 gap-1">
                 {/* Course Details - moved below image */}
                 <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
                   <div className="flex items-center gap-1">
@@ -169,7 +171,8 @@ const Courses = () => {
                     {course.nextSession}
                   </div>
                 </div>
-
+                </div>
+              </div>
                 <CardHeader className="pb-2 mb-1 h-32 flex flex-col justify-start flex-shrink-0">
                   <div className="flex items-start justify-between">
                     <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
