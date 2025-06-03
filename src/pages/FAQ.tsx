@@ -40,46 +40,44 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to know about EdCrash crash courses
-          </p>
-        </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Everything you need to know about EdCrash crash courses
+        </p>
+      </div>
 
-        <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto">
+        <Card>
+          <CardContent className="pt-6">
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </CardContent>
+        </Card>
+
+        <div className="mt-8 text-center">
           <Card>
-            <CardContent className="pt-6">
-              <Accordion type="single" collapsible className="w-full">
-                {faqs.map((faq, index) => (
-                  <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+            <CardHeader>
+              <CardTitle>Still have questions?</CardTitle>
+              <CardDescription>
+                Our support team is here to help you succeed
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">
+                Contact us at support@edcrash.com or use our live chat
+              </p>
             </CardContent>
           </Card>
-
-          <div className="mt-8 text-center">
-            <Card>
-              <CardHeader>
-                <CardTitle>Still have questions?</CardTitle>
-                <CardDescription>
-                  Our support team is here to help you succeed
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Contact us at support@edcrash.com or use our live chat
-                </p>
-              </CardContent>
-            </Card>
-          </div>
         </div>
       </div>
     </div>
