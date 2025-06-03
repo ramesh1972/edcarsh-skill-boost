@@ -9,11 +9,6 @@ const ToolsNavigation: React.FC = () => {
 
   const tabItems = [
     {
-      name: 'Calendar',
-      href: '/calendar',
-      icon: 'course'
-    },
-    {
       name: 'Your Classroom',
       href: '/classroom',
       icon: 'course'
