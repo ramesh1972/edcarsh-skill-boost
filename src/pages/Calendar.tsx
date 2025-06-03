@@ -13,10 +13,10 @@ const Calendar = () => {
   const { theme, getIcon, getBackground } = useTheme();
   const [viewMode, setViewMode] = useState('month'); // 'day', 'week', 'month'
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [subjectFilter, setSubjectFilter] = useState('all');
 
-  // Get unique categories for filter options
-  const categories = ['all', ...Array.from(new Set(courses.map(course => course.category)))];
+  // Get unique subjects for filter options
+  const subjects = ['all', ...Array.from(new Set(courses.map(course => course.subject)))];
 
   // Filter courses that are today or in the future
   const futureCourses = useMemo(() => {
@@ -25,10 +25,10 @@ const Calendar = () => {
     
     return courses.filter(course => {
       const courseStartDate = parseISO(course.startDate);
-      const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
-      return categoryMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
+      const subjectMatch = subjectFilter === 'all' || course.subject === subjectFilter;
+      return subjectMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
     });
-  }, [categoryFilter]);
+  }, [subjectFilter]);
 
   // Get courses for current view period
   const getCoursesForPeriod = useMemo(() => {
@@ -115,7 +115,7 @@ const Calendar = () => {
         {weekDays.map(day => {
           const dayCourses = futureCourses.filter(course => 
             isSameDay(parseISO(course.startDate), day) &&
-            (categoryFilter === 'all' || course.category === categoryFilter)
+            (subjectFilter === 'all' || course.subject === subjectFilter)
           );
           
           return (
@@ -162,7 +162,7 @@ const Calendar = () => {
         {calendarDays.map(day => {
           const dayCourses = futureCourses.filter(course => 
             isSameDay(parseISO(course.startDate), day) &&
-            (categoryFilter === 'all' || course.category === categoryFilter)
+            (subjectFilter === 'all' || course.subject === subjectFilter)
           );
           
           const isCurrentMonth = day.getMonth() === currentDate.getMonth();
@@ -250,14 +250,14 @@ const Calendar = () => {
           </div>
           
           <div className="min-w-[150px]">
-            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+            <Select value={subjectFilter} onValueChange={setSubjectFilter}>
               <SelectTrigger>
-                <SelectValue placeholder="Category" />
+                <SelectValue placeholder="Subject" />
               </SelectTrigger>
               <SelectContent>
-                {categories.map(category => (
-                  <SelectItem key={category} value={category}>
-                    {category === 'all' ? 'All Categories' : category}
+                {subjects.map(subject => (
+                  <SelectItem key={subject} value={subject}>
+                    {subject === 'all' ? 'All Subjects' : subject}
                   </SelectItem>
                 ))}
               </SelectContent>
