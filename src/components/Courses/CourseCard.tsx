@@ -1,101 +1,90 @@
 
 import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useTheme } from '@/contexts/ThemeContext';
-import ActionButtons from './ActionButtons';
-import CourseInfoCard from './CourseInfoCard';
-import InstructorCard from '@/components/instructors/InstructorCard';
-import { Heart, Eye, UserPlus } from 'lucide-react';
-interface Course {
-  id: number;
-  title: string;
-  description: string;
-  mediumDescription: string;
-  duration: string;
-  price: string;
-  students: number;
-  nextSession: string;
-  image: string;
-  topics: string[];
-  level: string;
-  category: string;
-  industry: string;
-  instructor: {
-    name: string;
-    image: string;
-    experience: string;
-    specialty: string;
-    city: string;
-    country: string;
-    flag: string;
-    description: string;
-  };
-}
+import { Clock, Users, Star, Calendar } from 'lucide-react';
+import { Course } from '@/types';
+import { industriesData } from '@/data/masterData';
+
 interface CourseCardProps {
   course: Course;
 }
-const CourseCard: React.FC<CourseCardProps> = ({
-  course
-}) => {
-  const {
-    theme,
-    getIcon
-  } = useTheme();
-  return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
-      {/* Course Image */}
-      <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-0">
-        <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-0" />
-        <div className="absolute top-2 left-2">
-          <Badge variant="outline" className="bg-white/90 text-black">
-            {course.industry}
+
+const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
+  const getIndustryDisplayName = (industryId: string) => {
+    const industry = industriesData.find(ind => ind.id === industryId);
+    return industry ? industry.name : industryId;
+  };
+
+  return (
+    <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow">
+      <div className="relative">
+        <img 
+          src={course.image} 
+          alt={course.title}
+          className="w-full h-48 object-cover"
+        />
+        <div className="absolute top-2 left-2 flex gap-1">
+          <Badge variant="secondary" className="text-xs">
+            {getIndustryDisplayName(course.industry)}
+          </Badge>
+          <Badge variant="outline" className="text-xs">
+            {course.subject}
           </Badge>
         </div>
-        <div className="absolute top-2 right-2 flex gap-1">
-          <Badge variant="secondary" className="bg-white/90 text-black text-xs">
-            {course.category}
-          </Badge>
-          <Badge variant="secondary" className="bg-white/90 text-black text-xs">
-            {course.level}
+        <div className="absolute top-2 right-2">
+          <Badge variant="default" className="text-xs">
+            ${course.price}
           </Badge>
         </div>
       </div>
-
-      <CardHeader className="pb-2 mb-1 h-32 flex flex-col justify-start flex-shrink-0">
-        <div className="flex items-start justify-between">
-          <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
-            {course.title}
-          </CardTitle>
-        </div>
-        <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start max-h-30 overflow-hidden">{course.mediumDescription}</CardDescription>
+      
+      <CardHeader className="pb-2">
+        <h3 className="font-semibold text-lg line-clamp-2">{course.title}</h3>
+        <p className="text-sm text-muted-foreground line-clamp-2">{course.description}</p>
       </CardHeader>
-
-      <CardContent className="flex-1 flex flex-col ">
-        {/* Topics Covered - Fixed height for alignment, max 6 topics */}
-        <div className="flex-shrink-0 mb-1 ">
-          <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-          <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
-            {course.topics.slice(0, 6).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
-                {topic}
-              </Badge>)}
+      
+      <CardContent className="flex-1 flex flex-col justify-between">
+        <div className="space-y-2 mb-4">
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-1">
+              <Clock className="h-4 w-4" />
+              {course.duration}
+            </div>
+            <div className="flex items-center gap-1">
+              <Users className="h-4 w-4" />
+              {course.students}
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-1 text-sm text-muted-foreground">
+            <Calendar className="h-4 w-4" />
+            Next: {course.nextSession}
+          </div>
+          
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="text-xs">
+              {course.level}
+            </Badge>
+            <div className="flex items-center gap-1">
+              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+              <span className="text-xs">4.8</span>
+            </div>
           </div>
         </div>
-
-        {/* Instructor Section - using InstructorCard component */}
-        <div className="mt-auto">
-          <div className="mb-4 p-0">
-            <InstructorCard instructor={course.instructor} hideDescription={true} />
-          </div>
-  {/* Course Info Card - moved below image */}
-      <CourseInfoCard className="mb-2" duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
-
-          {/* Action Buttons - using ActionButtons component */}
-          <div className="p-0 pt-3">
-            <ActionButtons />
-          </div>
+        
+        <div className="flex items-center gap-2">
+          <img 
+            src={course.instructor.image} 
+            alt={course.instructor.name}
+            className="w-6 h-6 rounded-full object-cover"
+          />
+          <span className="text-sm font-medium">{course.instructor.name}</span>
+          <span className="text-xs text-muted-foreground">{course.instructor.flag}</span>
         </div>
       </CardContent>
-    </Card>;
+    </Card>
+  );
 };
+
 export default CourseCard;

@@ -29,7 +29,7 @@ export interface Course {
   topics: string[];
   longTopics: string[];
   level: string;
-  category: string;
+  subject: string;
   industry: string;
   instructor: Instructor;
 }
