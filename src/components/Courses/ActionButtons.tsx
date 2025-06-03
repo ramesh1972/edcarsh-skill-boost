@@ -26,9 +26,14 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           <Button 
             size="sm" 
             className={`flex items-center gap-1 border-2 ${
-              joinNowEnabled && !isDisabled ? 'animate-pulse bg-red-500 hover:bg-red-600 text-white font-bold shadow-lg' : ''
+              joinNowEnabled && !isDisabled ? 
+                'bg-red-500 hover:bg-red-600 text-white font-bold shadow-lg animate-pulse border-red-600' : 
+                ''
             }`}
             disabled={!joinNowEnabled || isDisabled}
+            style={{
+              animation: joinNowEnabled && !isDisabled ? 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none'
+            }}
           >
             Join Now
           </Button>
