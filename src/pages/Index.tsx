@@ -59,7 +59,28 @@ const Index = () => {
       <section className="py-20 bg-muted/50 relative overflow-hidden">
         <div className="container px-4 mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Why Choose EdCrash?</h2>
+            <div className="flex items-center justify-center gap-8 mb-4">
+              {/* Left Image */}
+              <div className="hidden md:block">
+                <img 
+                  src="/lovable-uploads/14c1d102-af1f-4765-be76-42b00c50c8e3.png" 
+                  alt="100% Quality Badge" 
+                  className="w-24 h-24 object-contain"
+                />
+              </div>
+              
+              {/* Center Text */}
+              <h2 className="text-3xl font-bold">Why Choose EdCrash?</h2>
+              
+              {/* Right Image */}
+              <div className="hidden md:block">
+                <img 
+                  src="/lovable-uploads/7aa0ba35-0c3f-47dc-a574-f6ff47194b94.png" 
+                  alt="Success Key Illustration" 
+                  className="w-24 h-24 object-contain"
+                />
+              </div>
+            </div>
             <p className="text-xl text-muted-foreground">
               We're revolutionizing online education with our unique approach
             </p>
