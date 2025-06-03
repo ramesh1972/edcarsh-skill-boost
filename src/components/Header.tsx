@@ -98,7 +98,7 @@ export const Header: React.FC = () => {
           border-right: none;
         }
       `}</style>
-      <header className={`w-full bg-primary ${getSkinClasses()} relative z-10 mt-4`} style={{ height: '80px' }}>
+      <header className={`w-full bg-primary ${getSkinClasses()} relative z-10 mt-0`} style={{ height: '80px' }}>
         <div className="w-full max-w-none flex items-center justify-between px-6 lg:px-[32px] h-full">
           {/* Logo Section - Left */}
           <div className="flex-shrink-0">

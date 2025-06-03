@@ -14,7 +14,7 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
   setIsMenuOpen
 }) => {
   return (
-    <div className="border-t border-primary-foreground/20 pt-6">
+    <div className="border-t border-primary-foreground/20">
     
       {/* Row: Theme, Inbox, and Profile */}
       <div className="flex items-center gap-3 px-4">
