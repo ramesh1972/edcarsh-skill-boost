@@ -1,4 +1,3 @@
-
 export const courses = [
   {
     id: 1,
@@ -7,7 +6,11 @@ export const courses = [
     duration: "16 hours",
     price: "$25",
     students: 250,
-    nextSession: "Dec 15, 2024"
+    nextSession: "Dec 15, 2024",
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=200&fit=crop",
+    topics: ["Components", "Hooks", "State Management", "React Router"],
+    level: "Beginner",
+    category: "Frontend"
   },
   {
     id: 2,
@@ -16,7 +19,11 @@ export const courses = [
     duration: "20 hours",
     price: "$25",
     students: 180,
-    nextSession: "Dec 18, 2024"
+    nextSession: "Dec 18, 2024",
+    image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=200&fit=crop",
+    topics: ["Pandas", "NumPy", "Matplotlib", "Data Visualization"],
+    level: "Intermediate",
+    category: "Data Science"
   },
   {
     id: 3,
@@ -25,7 +32,11 @@ export const courses = [
     duration: "12 hours",
     price: "$25",
     students: 320,
-    nextSession: "Dec 20, 2024"
+    nextSession: "Dec 20, 2024",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop",
+    topics: ["SEO", "Social Media", "Content Strategy", "Analytics"],
+    level: "Beginner",
+    category: "Marketing"
   }
 ];
 
