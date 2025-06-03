@@ -1,25 +1,22 @@
-
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
-
 interface CourseInfoCardProps {
   duration: string;
   students: number;
   price: string;
   nextSession: string;
 }
-
 const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
   duration,
   students,
   price,
   nextSession
 }) => {
-  const { getIcon } = useTheme();
-  
-  return (
-    <div className="grid grid-cols-1 grid-rows-2 gap-2 p-2">
+  const {
+    getIcon
+  } = useTheme();
+  return <div className="grid grid-cols-1 grid-rows-2 gap-2 p-0">
       {/* Course Details */}
       <div className="flex items-center justify-between text-sm border-b">
         <div className="flex items-center gap-1">
@@ -43,8 +40,6 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
           {nextSession}
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default CourseInfoCard;
