@@ -1,4 +1,3 @@
-
 export const courses = [
   {
     id: 1,
@@ -18,7 +17,11 @@ export const courses = [
       name: "Sarah Chen",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=100&h=100&fit=crop&crop=face",
       experience: "5+ years",
-      specialty: "Frontend Development"
+      specialty: "Frontend Development",
+      city: "San Francisco",
+      country: "United States",
+      flag: "🇺🇸",
+      description: "Passionate frontend developer with expertise in React ecosystem. Led development teams at top tech companies. Known for creating engaging user interfaces and mentoring junior developers."
     }
   },
   {
@@ -39,7 +42,11 @@ export const courses = [
       name: "Dr. Mike Rodriguez",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=face",
       experience: "8+ years",
-      specialty: "Data Science & Analytics"
+      specialty: "Data Science & Analytics",
+      city: "Toronto",
+      country: "Canada",
+      flag: "🇨🇦",
+      description: "Data science expert with PhD in Statistics. Published researcher in machine learning applications. Helps organizations make data-driven decisions through advanced analytics and visualization."
     }
   },
   {
@@ -60,7 +67,11 @@ export const courses = [
       name: "Emma Wilson",
       image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=100&h=100&fit=crop&crop=face",
       experience: "6+ years",
-      specialty: "Digital Marketing"
+      specialty: "Digital Marketing",
+      city: "London",
+      country: "United Kingdom",
+      flag: "🇬🇧",
+      description: "Award-winning digital marketing strategist. Former head of marketing at Fortune 500 companies. Specializes in growth hacking and conversion optimization for startups and enterprises."
     }
   },
   {
@@ -81,7 +92,11 @@ export const courses = [
       name: "Alex Johnson",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=100&h=100&fit=crop&crop=face",
       experience: "7+ years",
-      specialty: "Backend Development"
+      specialty: "Backend Development",
+      city: "Berlin",
+      country: "Germany",
+      flag: "🇩🇪",
+      description: "Senior backend engineer with experience in microservices architecture. Expert in Node.js ecosystem and cloud technologies. Passionate about building scalable and maintainable systems."
     }
   },
   {
@@ -102,7 +117,11 @@ export const courses = [
       name: "Lisa Park",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=face",
       experience: "9+ years",
-      specialty: "UX/UI Design"
+      specialty: "UX/UI Design",
+      city: "Seoul",
+      country: "South Korea",
+      flag: "🇰🇷",
+      description: "Lead UX designer with expertise in user-centered design. Previously worked at Apple and Google. Advocates for inclusive design and accessibility in digital products."
     }
   },
   {
@@ -123,7 +142,11 @@ export const courses = [
       name: "Dr. James Wu",
       image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=100&h=100&fit=crop&crop=face",
       experience: "10+ years",
-      specialty: "Machine Learning & AI"
+      specialty: "Machine Learning & AI",
+      city: "Singapore",
+      country: "Singapore",
+      flag: "🇸🇬",
+      description: "AI research scientist with PhD in Computer Science. Published over 50 papers in top-tier conferences. Specializes in deep learning and natural language processing applications."
     }
   },
   {
@@ -144,7 +167,11 @@ export const courses = [
       name: "Maria Garcia",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=100&h=100&fit=crop&crop=face",
       experience: "6+ years",
-      specialty: "Mobile Development"
+      specialty: "Mobile Development",
+      city: "Barcelona",
+      country: "Spain",
+      flag: "🇪🇸",
+      description: "Mobile development expert specializing in React Native and Flutter. Former mobile team lead at major fintech companies. Passionate about creating smooth user experiences on mobile devices."
     }
   },
   {
@@ -165,7 +192,11 @@ export const courses = [
       name: "David Kim",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=face",
       experience: "12+ years",
-      specialty: "DevOps & Cloud Architecture"
+      specialty: "DevOps & Cloud Architecture",
+      city: "Sydney",
+      country: "Australia",
+      flag: "🇦🇺",
+      description: "Senior DevOps engineer and cloud architect. AWS certified solutions architect with expertise in large-scale infrastructure. Helps organizations transition to cloud-native architectures."
     }
   }
 ];

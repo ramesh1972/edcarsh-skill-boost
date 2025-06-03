@@ -211,21 +211,28 @@ const Courses = () => {
                         className="w-10 h-10 rounded-full object-cover"
                       />
                       <div className="text-sm text-muted-foreground flex-1">
-                        <p className="font-medium text-foreground">{course.instructor.name}</p>
-                        <p className="text-xs">{course.instructor.experience} experience</p>
+                        <div className="flex items-center gap-2 mb-1">
+                          <p className="font-medium text-foreground">{course.instructor.name}</p>
+                          <Button variant="ghost" size="sm" className="text-xs px-2 h-6">
+                            About
+                          </Button>
+                        </div>
+                        <p className="text-xs mb-1">{course.instructor.experience} experience</p>
+                        <p className="text-xs mb-1 flex items-center gap-1">
+                          <span>{course.instructor.flag}</span>
+                          {course.instructor.city}, {course.instructor.country}
+                        </p>
+                        <p className="text-xs line-clamp-3">{course.instructor.description}</p>
                       </div>
-                      <Button variant="ghost" size="sm" className="text-xs px-2">
-                        About
-                      </Button>
                     </div>
 
-                    {/* Action Buttons aligned to bottom */}
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" className="flex-1 flex items-center gap-1 border-2">
+                    {/* Action Buttons aligned to bottom and right */}
+                    <div className="flex gap-2 justify-end">
+                      <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
                         <Eye className="h-3 w-3" />
                         View
                       </Button>
-                      <Button size="sm" className={`flex-1 ${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
+                      <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
                         Enroll Now
                       </Button>
                       <Button variant="outline" size="sm" className="px-2 border-2">
@@ -330,13 +337,18 @@ const Courses = () => {
                             </div>
                             <p className="mb-1">Expert in {course.instructor.specialty}</p>
                             <p className="mb-1">{course.level} level specialist</p>
-                            <p>Teaching for {course.instructor.experience}</p>
+                            <p className="mb-1">Teaching for {course.instructor.experience}</p>
+                            <p className="mb-1 flex items-center gap-1">
+                              <span>{course.instructor.flag}</span>
+                              {course.instructor.city}, {course.instructor.country}
+                            </p>
+                            <p className="text-xs line-clamp-3">{course.instructor.description}</p>
                           </div>
                         </div>
 
-                        {/* Action Buttons aligned to bottom */}
+                        {/* Action Buttons aligned to bottom and right */}
                         <div className="mt-auto">
-                          <div className="flex gap-2">
+                          <div className="flex gap-2 justify-end">
                             <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
                               <Eye className="h-3 w-3" />
                               View
