@@ -141,7 +141,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   if (viewMode === 'month') {
     return (
       <div 
-        className={`text-xs p-1 rounded border-l-2 ${getCategoryColor(course.category)} ${
+        className={`text-xs p-1 rounded border-2 ${getCategoryColor(course.category)} ${
           isSessionPast ? 'opacity-50 bg-gray-100' : ''
         }`}
         style={{ minHeight: `${Math.max(40, cardHeight / 3)}px` }}
@@ -189,7 +189,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   if (viewMode === 'week') {
     return (
       <div 
-        className={`text-xs p-2 rounded border ${getCategoryColor(course.category)} ${
+        className={`text-xs p-2 rounded border-2 ${getCategoryColor(course.category)} ${
           isSessionPast ? 'opacity-50 bg-gray-100' : ''
         }`}
         style={{ minHeight: `${Math.max(80, cardHeight / 2)}px` }}
@@ -250,7 +250,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
 
   // Day view - full detail
   return (
-    <Card className={`w-full ${isSessionPast ? 'opacity-60 bg-gray-50' : ''}`} style={{ minHeight: `${cardHeight}px` }}>
+    <Card className={`w-full border-2 ${isSessionPast ? 'opacity-60 bg-gray-50' : ''}`} style={{ minHeight: `${cardHeight}px` }}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <CardTitle className="text-lg leading-tight">{course.title}</CardTitle>
