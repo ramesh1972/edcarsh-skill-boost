@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Clock, Users, DollarSign } from 'lucide-react';
-import { parseISO, addDays, isSameDay, parse, addMinutes, subMinutes, isWithinInterval } from 'date-fns';
+import { parseISO, addDays, isSameDay, parse, addMinutes, subMinutes, isWithinInterval, addHours } from 'date-fns';
 
 interface Course {
   id: number;
@@ -13,6 +13,7 @@ interface Course {
   description: string;
   duration: string;
   durationHours: number;
+  dailySessionDuration: number;
   price: string;
   students: number;
   startDate: string;
@@ -85,28 +86,43 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
     
     // Parse the session time for today
     const sessionDateTime = parse(course.startTime, 'HH:mm', currentDay);
+    const sessionEndTime = addHours(sessionDateTime, course.dailySessionDuration);
     
-    // Calculate the time window: 15 mins before to 10 mins after
+    // Calculate the time window: 15 mins before to 10 mins after session start
     const enableTime = subMinutes(sessionDateTime, 15);
     const disableTime = addMinutes(sessionDateTime, 10);
     
-    const isInTimeWindow = isWithinInterval(now, { start: enableTime, end: disableTime });
+    // Show join button from 15 mins before until session ends
+    const showTimeWindow = isWithinInterval(now, { start: enableTime, end: sessionEndTime });
+    // Enable join button from 15 mins before until session starts
     const isEnabled = isWithinInterval(now, { start: enableTime, end: sessionDateTime });
     
     return { 
-      show: isInTimeWindow, 
+      show: showTimeWindow, 
       enabled: isEnabled 
     };
   };
 
+  // Calculate card height based on daily session duration
+  const getCardHeight = () => {
+    const baseHeight = 60; // Base height in pixels
+    const heightPerHour = 20; // Additional height per hour
+    return Math.max(baseHeight, baseHeight + (course.dailySessionDuration * heightPerHour));
+  };
+
   const sessionNumber = getSessionNumber();
   const joinButtonState = getJoinButtonState();
+  const cardHeight = getCardHeight();
 
   if (viewMode === 'month') {
     return (
-      <div className={`text-xs p-1 rounded border-l-2 ${getCategoryColor(course.category)}`}>
+      <div 
+        className={`text-xs p-1 rounded border-l-2 ${getCategoryColor(course.category)}`}
+        style={{ minHeight: `${Math.max(40, cardHeight / 3)}px` }}
+      >
         <div className="font-medium truncate">{course.title}</div>
         <div className="text-xs opacity-75">{course.startTime}</div>
+        <div className="text-xs opacity-75">{course.dailySessionDuration}h</div>
         <div className="text-xs font-semibold text-red-600 mt-1">
           Session - {sessionNumber}
         </div>
@@ -125,11 +141,17 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
 
   if (viewMode === 'week') {
     return (
-      <div className={`text-xs p-2 rounded border ${getCategoryColor(course.category)}`}>
+      <div 
+        className={`text-xs p-2 rounded border ${getCategoryColor(course.category)}`}
+        style={{ minHeight: `${Math.max(80, cardHeight / 2)}px` }}
+      >
         <div className="font-medium text-xs mb-1 line-clamp-2">{course.title}</div>
         <div className="flex items-center gap-1 text-xs opacity-75">
           <Clock className="h-3 w-3" />
           {course.startTime}
+        </div>
+        <div className="flex items-center gap-1 text-xs opacity-75">
+          <span>{course.dailySessionDuration}h duration</span>
         </div>
         <div className="flex items-center gap-1 text-xs opacity-75">
           <Users className="h-3 w-3" />
@@ -156,7 +178,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
 
   // Day view - full detail
   return (
-    <Card className="w-full">
+    <Card className="w-full" style={{ minHeight: `${cardHeight}px` }}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <CardTitle className="text-lg leading-tight">{course.title}</CardTitle>
@@ -171,6 +193,9 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
           <div className="flex items-center gap-1">
             <Clock className="h-4 w-4" />
             {course.startTime}
+          </div>
+          <div className="flex items-center gap-1">
+            <span>{course.dailySessionDuration}h session</span>
           </div>
           <div className="flex items-center gap-1">
             <Users className="h-4 w-4" />
@@ -192,7 +217,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
               {course.category}
             </Badge>
             <span className="text-sm text-muted-foreground">
-              {course.durationHours}h duration
+              {course.durationHours}h total duration
             </span>
           </div>
           
