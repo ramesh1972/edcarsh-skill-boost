@@ -72,6 +72,8 @@ export const Header: React.FC = () => {
     <style>{`
       .tab-curved {
         position: relative;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
       }
       .tab-curved::before,
       .tab-curved::after {
@@ -118,7 +120,7 @@ export const Header: React.FC = () => {
         {/* Desktop Navigation - Left aligned after logo */}
         <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-start ml-8">
           {mainNavItems.map(item => 
-            <div key={item.name} className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap rounded-t-lg transition-all duration-200 relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-lg tab-curved' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} style={isActiveRoute(item.href) ? {
+            <div key={item.name} className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all duration-200 relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-lg tab-curved' : 'text-primary-foreground hover:bg-primary-foreground/10 rounded-t-lg'}`} style={isActiveRoute(item.href) ? {
               marginBottom: '-10px',
               paddingBottom: '12px',
               zIndex: 20
