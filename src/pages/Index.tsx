@@ -24,7 +24,7 @@ const Index = () => {
     }}>
         <div className="container px-4 mx-auto rounded-[20px]">
           <div className="text-center">
-            <Badge className="mb-4" variant="secondary">
+            <Badge className="mb-4" variant="secondary" style={{font-size: '12px'}}>
               🚀 Launch Your Skills in Hours, Not Months
             </Badge>
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6 text-white">
@@ -36,7 +36,7 @@ const Index = () => {
             <p style={{
             color: 'orange',
             fontSize: '30px'
-          }} className="mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 my-[20px]">
+          }} className="mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 mt-[20px]">
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
