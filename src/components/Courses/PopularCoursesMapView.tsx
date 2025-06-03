@@ -1,4 +1,3 @@
-
 import React, { useMemo, useState } from 'react';
 import { Course } from '@/types';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -457,17 +456,15 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       </div>
       
       {/* Radial Map */}
-      <div className="flex justify-center items-center w-full h-full flex-1 bg-gradient-to-br from-blue-50 to-purple-50  overflow-hidden"
-        style={{border: '6px solid primary, borderRadius: '6px'}}>
+      <div className="flex justify-center items-center w-full h-full flex-1 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden border-2 border-primary rounded-md">
         <div 
-            className="relative inset-0 transition-transform duration-500 ease-out"
-            style={{ 
-              transform: `scale(${zoomLevel})`,
-              transformOrigin: 'center center'
-            }}
-          >
-        <div className="relative w-full h-full min-h-[1000px]">
-          
+          className="relative inset-0 transition-transform duration-500 ease-out"
+          style={{ 
+            transform: `scale(${zoomLevel})`,
+            transformOrigin: 'center center'
+          }}
+        >
+          <div className="relative w-full h-full min-h-[1000px]">
             {/* Center point */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
