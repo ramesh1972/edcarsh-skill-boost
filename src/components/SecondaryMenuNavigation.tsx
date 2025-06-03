@@ -22,7 +22,7 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
         <ThemeSelector />
         
         {/* Inbox Button */}
-        <Button variant="outline" className="flex items-center gap-2 text-primary-foreground border-primary-foreground/30">
+        <Button variant="outline" className="flex items-center gap-2 text-primary border-primary-foreground/30">
           <Bell className="w-4 h-4" />
           Inbox
         </Button>
