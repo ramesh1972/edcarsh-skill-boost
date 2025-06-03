@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
+import { getAllIndustries, getSubjectsByIndustry } from '@/data/masterData';
 import { Filter, LayoutGrid, List, Calendar as CalendarIcon, MapPin } from 'lucide-react';
 import { isAfter, parseISO, isSameDay } from 'date-fns';
 import CourseCard from '@/components/Courses/CourseCard';
@@ -20,16 +21,26 @@ const Courses = () => {
     getBackground
   } = useTheme();
   const [industryFilter, setIndustryFilter] = useState('all');
-  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [subjectFilter, setSubjectFilter] = useState('all');
   const [levelFilter, setLevelFilter] = useState('all');
   const [sortBy, setSortBy] = useState('title');
   const [viewMode, setViewMode] = useState('card');
   const [calendarViewMode, setCalendarViewMode] = useState('month');
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Get unique industries, categories and levels for filter options
-  const industries = ['all', ...Array.from(new Set(courses.map(course => course.industry)))];
-  const categories = ['all', ...Array.from(new Set(courses.map(course => course.subject)))];
+  // Get industries and subjects from master data
+  const industries = ['all', ...getAllIndustries()];
+  const availableSubjects = industryFilter === 'all' 
+    ? ['all', ...Array.from(new Set(courses.map(course => course.subject)))]
+    : ['all', ...getSubjectsByIndustry(industryFilter).map(subject => subject.name)];
+
+  // Reset subject filter when industry changes
+  const handleIndustryChange = (value: string) => {
+    setIndustryFilter(value);
+    setSubjectFilter('all'); // Reset subject when industry changes
+  };
+
+  // Get unique levels for filter options
   const levels = ['all', ...Array.from(new Set(courses.map(course => course.level)))];
 
   // Filter courses that are today or in the future for calendar view
@@ -39,17 +50,17 @@ const Courses = () => {
     return courses.filter(course => {
       const courseStartDate = parseISO(course.startDate);
       const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
-      const subjectMatch = categoryFilter === 'all' || course.subject === categoryFilter;
+      const subjectMatch = subjectFilter === 'all' || course.subject === subjectFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
       return industryMatch && subjectMatch && levelMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
     });
-  }, [industryFilter, categoryFilter, levelFilter]);
+  }, [industryFilter, subjectFilter, levelFilter]);
 
   // Filter and sort courses for card/list view
   const filteredAndSortedCourses = useMemo(() => {
     let filtered = courses.filter(course => {
       const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
-      const subjectMatch = categoryFilter === 'all' || course.subject === categoryFilter;
+      const subjectMatch = subjectFilter === 'all' || course.subject === subjectFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
       return industryMatch && subjectMatch && levelMatch;
     });
@@ -70,7 +81,7 @@ const Courses = () => {
       }
     });
     return filtered;
-  }, [industryFilter, categoryFilter, levelFilter, sortBy]);
+  }, [industryFilter, subjectFilter, levelFilter, sortBy]);
 
   return <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
@@ -117,7 +128,7 @@ const Courses = () => {
           
           <div className="flex flex-wrap gap-4">
             <div className="min-w-[150px]">
-              <Select value={industryFilter} onValueChange={setIndustryFilter}>
+              <Select value={industryFilter} onValueChange={handleIndustryChange}>
                 <SelectTrigger>
                   <SelectValue placeholder="Industry" />
                 </SelectTrigger>
@@ -130,13 +141,13 @@ const Courses = () => {
             </div>
 
             <div className="min-w-[150px]">
-              <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+              <Select value={subjectFilter} onValueChange={setSubjectFilter}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Category" />
+                  <SelectValue placeholder="Subject" />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map(category => <SelectItem key={category} value={category}>
-                      {category === 'all' ? 'All Categories' : category}
+                  {availableSubjects.map(subject => <SelectItem key={subject} value={subject}>
+                      {subject === 'all' ? 'All Subjects' : subject}
                     </SelectItem>)}
                 </SelectContent>
               </Select>
@@ -190,7 +201,7 @@ const Courses = () => {
           <CoursesCalendarView
             courses={courses}
             industryFilter={industryFilter}
-            categoryFilter={categoryFilter}
+            subjectFilter={subjectFilter}
             levelFilter={levelFilter}
             calendarViewMode={calendarViewMode}
             setCalendarViewMode={setCalendarViewMode}
