@@ -25,7 +25,7 @@ const App = () => (
       <ThemeProvider>
         <BrowserRouter>
           {/* Outer div - exactly 100vw and 100vh with theme primary background */}
-          <div className="w-screen h-screen bg-primary" style={{ width: '100vw', height: '100vh' }}>
+          <div className="w-screen h-screen bg-primary overflow-hidden" style={{ width: '100vw', height: '100vh' }}>
             {/* Header positioned at the top with same background */}
             <Header />
             
