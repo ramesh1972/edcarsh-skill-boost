@@ -30,16 +30,16 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         // Add some randomness and more spacing to prevent collisions
         const angle = angleOffset + (Math.random() * 0.8 - 0.4);
         
-        // Calculate distance from center with slightly increased spacing
-        let distance = 420; // outermost ring (increased by 20px)
+        // Calculate distance from center with increased spacing
+        let distance = 450; // outermost ring (increased by 30px)
         if (course.students >= 300) {
-          distance = 100; // innermost ring (increased by 20px)
+          distance = 130; // innermost ring (increased by 30px)
         } else if (course.students >= 200) {
-          distance = 160; // second ring (increased by 20px)
+          distance = 190; // second ring (increased by 30px)
         } else if (course.students >= 150) {
-          distance = 240; // third ring (increased by 20px)
+          distance = 270; // third ring (increased by 30px)
         } else if (course.students >= 100) {
-          distance = 320; // fourth ring (increased by 20px)
+          distance = 350; // fourth ring (increased by 30px)
         }
         
         // Calculate position
@@ -115,12 +115,12 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
             Courses Center
           </div>
           
-          {/* Concentric circles for each range with slightly increased spacing */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] border-2 border-red-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] border-2 border-orange-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] border-2 border-amber-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[640px] h-[640px] border-2 border-lime-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[840px] h-[840px] border-2 border-emerald-300 rounded-full opacity-30"></div>
+          {/* Concentric circles for each range with increased spacing */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] border-2 border-red-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] border-2 border-orange-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[540px] h-[540px] border-2 border-amber-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border-2 border-lime-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] border-2 border-emerald-300 rounded-full opacity-30"></div>
           
           {/* Course titles positioned radially */}
           {courseData.map((course) => (
