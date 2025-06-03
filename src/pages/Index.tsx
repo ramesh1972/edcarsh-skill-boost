@@ -5,10 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
-import { featuredCourses } from '@/data/courses';
+import { courses } from '@/data/courses';
 import { homeTestimonials } from '@/data/testimonials';
 import { usps } from '@/data/usps';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import ShortCourseCard from '@/components/ShortCourseCard';
 
 const Index = () => {
   const {
@@ -25,6 +26,9 @@ const Index = () => {
   const testimonialsAnimation = useScrollAnimation({ threshold: 0.1 });
   const ctaAnimation = useScrollAnimation({ threshold: 0.2 });
   const footerAnimation = useScrollAnimation({ threshold: 0.1 });
+
+  // Get the first 6 courses for the upcoming courses section
+  const upcomingCourses = courses.slice(0, 6);
 
   return (
     <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
@@ -223,10 +227,10 @@ const Index = () => {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredCourses.map((course, index) => (
-              <Card 
-                key={index} 
-                className={`hover:shadow-lg transition-all duration-700 ${
+            {upcomingCourses.map((course, index) => (
+              <div
+                key={course.id}
+                className={`transition-all duration-700 ${
                   coursesAnimation.isVisible 
                     ? `opacity-100 ${
                         index % 3 === 0 ? 'animate-fade-in-left' : 
@@ -238,48 +242,8 @@ const Index = () => {
                   transitionDelay: coursesAnimation.isVisible ? `${400 + index * 150}ms` : '0ms'
                 }}
               >
-                <CardHeader>
-                  <div className="flex justify-between items-start mb-2">
-                    <div className="flex gap-2">
-                      {course.tags.map(tag => (
-                        <Badge key={tag} variant="secondary" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-medium">{course.rating}</span>
-                    </div>
-                  </div>
-                  <CardTitle className="text-xl">{course.title}</CardTitle>
-                  <CardDescription>by {course.instructor}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-2">
-                        {getIcon('time')}
-                        {course.duration}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {getIcon('student')}
-                        {course.students.toLocaleString()} students
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-primary">{course.price}</span>
-                      <div className="text-sm text-muted-foreground">
-                        Next: {course.nextSession}
-                      </div>
-                    </div>
-                    <Button className="w-full gap-2">
-                      {getIcon('course')}
-                      Enroll Now
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                <ShortCourseCard course={course} />
+              </div>
             ))}
           </div>
         </div>
