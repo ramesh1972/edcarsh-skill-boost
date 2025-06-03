@@ -89,7 +89,7 @@ const ToolsNavigation: React.FC = () => {
         }
       `}</style>
       <div className="fixed bottom-0 left-0 right-0 bg-primary z-10 overflow-x-auto px-[15px]">
-        <nav className="flex items-end justify-end min-w-max px-4">
+        <nav className="flex items-stretch justify-end min-w-max px-4">
           {tabItems.map(item => (
             <div 
               key={item.name}
