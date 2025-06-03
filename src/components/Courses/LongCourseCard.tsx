@@ -96,7 +96,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
                   {course.title}
                 </h3>
               </div>
-              <p className="text-sm text-muted-foreground line-clamp-6 overflow-hidden">{course.longDescription}</p>
+              <p className="text-sm text-muted-foreground line-clamp-8 overflow-hidden">{course.longDescription}</p>
             </div>
 
             {/* Column 2: Topics as bulleted list - max 6 topics */}
@@ -105,7 +105,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
           }}>
               <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                {course.longTopics.slice(0, 6).map((topic, index) => <li key={index} className="flex items-start gap-2">
+                {course.longTopics.slice(0, 8).map((topic, index) => <li key={index} className="flex items-start gap-2">
                     <span className="text-primary mt-1">•</span>
                     <span>{topic}</span>
                   </li>)}
