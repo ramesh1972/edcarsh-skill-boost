@@ -18,7 +18,6 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
       {/* Row: Theme, Inbox, and Profile */}
       <div className="flex items-center gap-3 px-4">
         {/* Theme Dropdown */}
-        <DropdownMenu>
               <ThemeSelector />
         
         {/* Inbox Dropdown */}
