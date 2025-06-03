@@ -40,7 +40,7 @@ const About = () => {
   ];
 
   return (
-    <div className={`min-h-screen bg-background ${getBackground()}`}>
+    <div className={`min-h-screen bg-background rounded-[20px] ${getBackground()}`}>
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-12 text-center">
           <h1 className={`text-4xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
