@@ -31,15 +31,15 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         const angle = angleOffset + (Math.random() * 0.8 - 0.4);
         
         // Calculate distance from center with further increased spacing
-        let distance = 900; // outermost ring (increased by 30px)
+        let distance = 800; // outermost ring (increased by 30px)
         if (course.students >= 300) {
           distance = 100; // innermost ring (increased by 30px)
         } else if (course.students >= 200) {
-          distance = 300; // second ring (increased by 30px)
+          distance = 200; // second ring (increased by 30px)
         } else if (course.students >= 150) {
-          distance = 500; // third ring (increased by 30px)
+          distance = 400; // third ring (increased by 30px)
         } else if (course.students >= 100) {
-          distance = 700; // fourth ring (increased by 30px)
+          distance = 500; // fourth ring (increased by 30px)
         }
         
         // Calculate position
