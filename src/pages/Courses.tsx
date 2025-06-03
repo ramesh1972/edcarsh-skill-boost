@@ -29,7 +29,7 @@ const Courses = () => {
 
   // Get unique industries, categories and levels for filter options
   const industries = ['all', ...Array.from(new Set(courses.map(course => course.industry)))];
-  const categories = ['all', ...Array.from(new Set(courses.map(course => course.category)))];
+  const categories = ['all', ...Array.from(new Set(courses.map(course => course.subject)))];
   const levels = ['all', ...Array.from(new Set(courses.map(course => course.level)))];
 
   // Filter courses that are today or in the future for calendar view
@@ -39,9 +39,9 @@ const Courses = () => {
     return courses.filter(course => {
       const courseStartDate = parseISO(course.startDate);
       const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
-      const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
+      const subjectMatch = categoryFilter === 'all' || course.subject === categoryFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-      return industryMatch && categoryMatch && levelMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
+      return industryMatch && subjectMatch && levelMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
     });
   }, [industryFilter, categoryFilter, levelFilter]);
 
@@ -49,9 +49,9 @@ const Courses = () => {
   const filteredAndSortedCourses = useMemo(() => {
     let filtered = courses.filter(course => {
       const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
-      const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
+      const subjectMatch = categoryFilter === 'all' || course.subject === categoryFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-      return industryMatch && categoryMatch && levelMatch;
+      return industryMatch && subjectMatch && levelMatch;
     });
 
     // Sort courses

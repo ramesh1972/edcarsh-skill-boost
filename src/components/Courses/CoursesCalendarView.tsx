@@ -69,9 +69,9 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
     const coursesInPeriod = [];
     courses.forEach(course => {
       const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
-      const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
+      const subjectMatch = categoryFilter === 'all' || course.subject === categoryFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-      if (industryMatch && categoryMatch && levelMatch) {
+      if (industryMatch && subjectMatch && levelMatch) {
         const sessionDays = getCourseSessionDays(course);
         sessionDays.forEach(sessionDay => {
           if (calendarViewMode === 'day') {
