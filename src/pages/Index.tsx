@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, DollarSign, Globe, Calendar, Target, Users, Star, ArrowRight, CheckCircle, Play, Zap, Award, BookOpen, TrendingUp } from 'lucide-react';
@@ -9,6 +8,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { featuredCourses } from '@/data/courses';
 import { homeTestimonials } from '@/data/testimonials';
 import { usps } from '@/data/usps';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const Index = () => {
   const {
@@ -17,35 +17,68 @@ const Index = () => {
     getPageLayoutClasses
   } = useTheme();
 
+  // Scroll animation hooks for different sections
+  const heroAnimation = useScrollAnimation({ threshold: 0.2 });
+  const uspsAnimation = useScrollAnimation({ threshold: 0.1 });
+  const coursesAnimation = useScrollAnimation({ threshold: 0.1 });
+  const statsAnimation = useScrollAnimation({ threshold: 0.2 });
+  const testimonialsAnimation = useScrollAnimation({ threshold: 0.1 });
+  const ctaAnimation = useScrollAnimation({ threshold: 0.2 });
+  const footerAnimation = useScrollAnimation({ threshold: 0.1 });
+
   return (
     <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px] animate-fade-in" style={{
-        backgroundImage: `radial-gradient(circle at center, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0.4) 50%, rgba(155,155,155,0.2) 70%), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}>
+      <section 
+        ref={heroAnimation.ref}
+        className={`relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px] transition-all duration-1000 ${
+          heroAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
+        }`} 
+        style={{
+          backgroundImage: `radial-gradient(circle at center, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0.4) 50%, rgba(155,155,155,0.2) 70%), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="container px-4 mx-auto rounded-[20px]">
           <div className="text-center">
-            <Badge className="mb-4 animate-fade-in" variant="secondary" style={{fontSize: '12px', animationDelay: '0.1s'}}>
+            <Badge 
+              className={`mb-4 transition-all duration-700 delay-100 ${
+                heroAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-5'
+              }`} 
+              variant="secondary" 
+              style={{fontSize: '12px'}}
+            >
               🚀 Launch Your Skills in Hours, Not Months
             </Badge>
-            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6 text-white animate-zoom-in" style={{animationDelay: '0.3s'}}>
+            <h1 
+              className={`text-4xl sm:text-6xl font-bold tracking-tight mb-6 text-white transition-all duration-700 delay-300 ${
+                heroAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
+              }`}
+            >
               Master Skills Fast with{' '}
               <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
                 Crash Courses
               </span>
             </h1>
-            <p style={{
-              color: 'orange',
-              fontSize: '30px',
-              animationDelay: '0.5s'
-            }} className="mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 mt-[20px] animate-fade-in-left">
+            <p 
+              style={{
+                color: 'orange',
+                fontSize: '30px',
+              }} 
+              className={`mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 mt-[20px] transition-all duration-700 delay-500 ${
+                heroAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
+              }`}
+            >
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-20 animate-fade-in-right" style={{animationDelay: '0.7s'}}>
+            <div 
+              className={`flex flex-col sm:flex-row gap-4 justify-center mt-20 transition-all duration-700 delay-700 ${
+                heroAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-10'
+              }`}
+            >
               <Button size="lg" className="gap-2">
                 <Play className="w-5 h-5" />
                 Start Learning Now
@@ -60,26 +93,36 @@ const Index = () => {
       </section>
 
       {/* USPs Section */}
-      <section className="py-20 bg-muted/50 relative overflow-hidden">
+      <section 
+        ref={uspsAnimation.ref}
+        className="py-20 bg-muted/50 relative overflow-hidden"
+      >
         <div className="container px-4 mx-auto relative">
           {/* Corner Images */}
-          <div className="absolute top-0 left-0 hidden lg:block animate-fade-in-left" style={{
-            marginTop: '-90px',
-            animationDelay: '0.2s'
-          }}>
+          <div 
+            className={`absolute top-0 left-0 hidden lg:block transition-all duration-700 delay-200 ${
+              uspsAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
+            }`} 
+            style={{marginTop: '-90px'}}
+          >
             <img src="/lovable-uploads/14c1d102-af1f-4765-be76-42b00c50c8e3.png" alt="100% Quality Badge" className="w-48 h-48 object-contain" />
           </div>
           
-          <div className="absolute top-0 right-0 hidden lg:block animate-fade-in-right" style={{
-            marginTop: '-90px',
-            animationDelay: '0.4s'
-          }}>
+          <div 
+            className={`absolute top-0 right-0 hidden lg:block transition-all duration-700 delay-400 ${
+              uspsAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-10'
+            }`} 
+            style={{marginTop: '-90px'}}
+          >
             <img src="/lovable-uploads/7aa0ba35-0c3f-47dc-a574-f6ff47194b94.png" alt="Success Key Illustration" className="w-48 h-48 object-contain" />
           </div>
 
-          <div className="text-center mb-16 animate-zoom-in" style={{animationDelay: '0.3s'}}>
+          <div 
+            className={`text-center mb-16 transition-all duration-700 delay-300 ${
+              uspsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
+            }`}
+          >
             <div className="flex items-center justify-center gap-8 mb-4">
-              {/* Center Text */}
               <h2 className="text-3xl font-bold">Why Choose EdCrash?</h2>
             </div>
             <p className="text-xl text-muted-foreground">
@@ -107,11 +150,16 @@ const Index = () => {
             {/* Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
               {usps.map((usp, index) => (
-                <Card key={index} 
-                  className={`text-center hover:shadow-lg transition-all duration-300 hover:scale-105 hover:border-primary/50 group relative bg-background/80 backdrop-blur-sm ${
-                    index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'
+                <Card 
+                  key={index} 
+                  className={`text-center hover:shadow-lg transition-all duration-700 hover:scale-105 hover:border-primary/50 group relative bg-background/80 backdrop-blur-sm ${
+                    uspsAnimation.isVisible 
+                      ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}` 
+                      : 'opacity-0 translate-y-10'
                   }`}
-                  style={{animationDelay: `${0.5 + index * 0.1}s`}}
+                  style={{
+                    transitionDelay: uspsAnimation.isVisible ? `${500 + index * 100}ms` : '0ms'
+                  }}
                 >
                   {/* Connection dots */}
                   <div className="hidden lg:block absolute -top-2 -left-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
@@ -144,14 +192,22 @@ const Index = () => {
       </section>
 
       {/* Featured Courses */}
-      <section className="py-20 round-b-[20px] border-[10px] border-secondary" style={{
-        backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.8)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}>
+      <section 
+        ref={coursesAnimation.ref}
+        className="py-20 round-b-[20px] border-[10px] border-secondary" 
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.8)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="container px-4 mx-auto round-b-[20px]">
-          <div className="flex justify-between items-center mb-12 animate-fade-in-left" style={{animationDelay: '0.2s'}}>
+          <div 
+            className={`flex justify-between items-center mb-12 transition-all duration-700 delay-200 ${
+              coursesAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
+            }`}
+          >
             <div>
               <h2 className="text-3xl font-bold mb-4">Upcoming Courses</h2>
               <p className="text-xl text-muted-foreground">
@@ -167,12 +223,19 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredCourses.map((course, index) => (
-              <Card key={index} 
-                className={`hover:shadow-lg transition-shadow ${
-                  index % 3 === 0 ? 'animate-fade-in-left' : 
-                  index % 3 === 1 ? 'animate-zoom-in' : 'animate-fade-in-right'
+              <Card 
+                key={index} 
+                className={`hover:shadow-lg transition-all duration-700 ${
+                  coursesAnimation.isVisible 
+                    ? `opacity-100 ${
+                        index % 3 === 0 ? 'animate-fade-in-left' : 
+                        index % 3 === 1 ? 'animate-zoom-in' : 'animate-fade-in-right'
+                      }` 
+                    : 'opacity-0 translate-y-10'
                 }`}
-                style={{animationDelay: `${0.4 + index * 0.15}s`}}
+                style={{
+                  transitionDelay: coursesAnimation.isVisible ? `${400 + index * 150}ms` : '0ms'
+                }}
               >
                 <CardHeader>
                   <div className="flex justify-between items-start mb-2">
@@ -222,22 +285,43 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-primary text-primary-foreground round-[10px] animate-zoom-in" style={{animationDelay: '0.3s'}}>
+      <section 
+        ref={statsAnimation.ref}
+        className={`py-20 bg-primary text-primary-foreground round-[10px] transition-all duration-700 delay-300 ${
+          statsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
+        }`}
+      >
         <div className="container px-4 mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="animate-fade-in-left" style={{animationDelay: '0.5s'}}>
+            <div 
+              className={`transition-all duration-700 delay-500 ${
+                statsAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
+              }`}
+            >
               <div className="text-4xl font-bold mb-2">50K+</div>
               <div className="text-sm opacity-90">Active Students</div>
             </div>
-            <div className="animate-fade-in-right" style={{animationDelay: '0.6s'}}>
+            <div 
+              className={`transition-all duration-700 delay-600 ${
+                statsAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-10'
+              }`}
+            >
               <div className="text-4xl font-bold mb-2">500+</div>
               <div className="text-sm opacity-90">Courses Available</div>
             </div>
-            <div className="animate-fade-in-left" style={{animationDelay: '0.7s'}}>
+            <div 
+              className={`transition-all duration-700 delay-700 ${
+                statsAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
+              }`}
+            >
               <div className="text-4xl font-bold mb-2">95%</div>
               <div className="text-sm opacity-90">Success Rate</div>
             </div>
-            <div className="animate-fade-in-right" style={{animationDelay: '0.8s'}}>
+            <div 
+              className={`transition-all duration-700 delay-800 ${
+                statsAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-10'
+              }`}
+            >
               <div className="text-4xl font-bold mb-2">24/7</div>
               <div className="text-sm opacity-90">Support Available</div>
             </div>
@@ -246,14 +330,22 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-muted/50 round-[10px] border-[10px] border-secondary" style={{
-        backgroundImage: `linear-gradient(rgba(255, 255, 255,0.4), rgba(255, 255, 255,.8)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
-        backgroundSize: '400px auto',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'repeat'
-      }}>
+      <section 
+        ref={testimonialsAnimation.ref}
+        className="py-20 bg-muted/50 round-[10px] border-[10px] border-secondary" 
+        style={{
+          backgroundImage: `linear-gradient(rgba(255, 255, 255,0.4), rgba(255, 255, 255,.8)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
+          backgroundSize: '400px auto',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat'
+        }}
+      >
         <div className="container px-4 mx-auto">
-          <div className="text-center mb-16 animate-zoom-in" style={{animationDelay: '0.2s'}}>
+          <div 
+            className={`text-center mb-16 transition-all duration-700 delay-200 ${
+              testimonialsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
+            }`}
+          >
             <h2 className="text-3xl font-bold mb-4">What Our Students Say</h2>
             <p className="text-xl text-muted-foreground">
               Real success stories from our learning community
@@ -261,12 +353,19 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {homeTestimonials.map((testimonial, index) => (
-              <Card key={index}
-                className={`${
-                  index % 3 === 0 ? 'animate-fade-in-left' : 
-                  index % 3 === 1 ? 'animate-zoom-in' : 'animate-fade-in-right'
+              <Card 
+                key={index}
+                className={`transition-all duration-700 ${
+                  testimonialsAnimation.isVisible 
+                    ? `opacity-100 ${
+                        index % 3 === 0 ? 'animate-fade-in-left' : 
+                        index % 3 === 1 ? 'animate-zoom-in' : 'animate-fade-in-right'
+                      }` 
+                    : 'opacity-0 translate-y-10'
                 }`}
-                style={{animationDelay: `${0.4 + index * 0.2}s`}}
+                style={{
+                  transitionDelay: testimonialsAnimation.isVisible ? `${400 + index * 200}ms` : '0ms'
+                }}
               >
                 <CardHeader>
                   <div className="flex items-center gap-1 mb-2">
@@ -287,13 +386,32 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-blue-600 text-white round-[20px] animate-fade-in" style={{animationDelay: '0.3s'}}>
+      <section 
+        ref={ctaAnimation.ref}
+        className={`py-20 bg-gradient-to-r from-primary to-blue-600 text-white round-[20px] transition-all duration-700 delay-300 ${
+          ctaAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
+        }`}
+      >
         <div className="container px-4 mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4 animate-zoom-in" style={{animationDelay: '0.5s'}}>Ready to Crash Your Way to Success?</h2>
-          <p className="text-xl mb-8 opacity-90 animate-fade-in-left" style={{animationDelay: '0.7s'}}>
+          <h2 
+            className={`text-3xl font-bold mb-4 transition-all duration-700 delay-500 ${
+              ctaAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
+            }`}
+          >
+            Ready to Crash Your Way to Success?
+          </h2>
+          <p 
+            className={`text-xl mb-8 opacity-90 transition-all duration-700 delay-700 ${
+              ctaAnimation.isVisible ? 'animate-fade-in-left opacity-90' : 'opacity-0 -translate-x-10'
+            }`}
+          >
             Join thousands of professionals who've accelerated their careers with EdCrash
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-right" style={{animationDelay: '0.9s'}}>
+          <div 
+            className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-700 delay-900 ${
+              ctaAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-10'
+            }`}
+          >
             <Button size="lg" variant="secondary" className="gap-2">
               <Target className="w-5 h-5" />
               Express Your Learning Intent
@@ -307,7 +425,12 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-background border-t animate-fade-in" style={{animationDelay: '0.5s'}}>
+      <footer 
+        ref={footerAnimation.ref}
+        className={`py-12 bg-background border-t transition-all duration-700 delay-500 ${
+          footerAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
+        }`}
+      >
         <div className="container px-4 mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
