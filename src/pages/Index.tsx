@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, DollarSign, Globe, Calendar, Target, Users, Star, ArrowRight, CheckCircle, Play, Zap, Award, BookOpen, TrendingUp } from 'lucide-react';
@@ -124,7 +125,7 @@ const Index = () => {
 
       {/* Featured Courses */}
       <section 
-        className="py-20 round-b-[20px]"
+        className="py-20 round-b-[20px] border-[5px] border-primary"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.6)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
           backgroundSize: 'cover',
