@@ -16,9 +16,10 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
   const {
     getIcon
   } = useTheme();
-  return <>
+  return 
+    <div className="flex cols-grid-1 cols-row-2 gap-2 p-2">
       {/* Course Details */}
-      <div className="pl-3 pr-3 pt-3 pb-1 flex items-center justify-between text-sm border-b">
+      <div className="]flex items-center justify-between text-sm border-b">
         <div className="flex items-center gap-1">
           {getIcon('time')}
           {duration}
@@ -30,7 +31,7 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
       </div>
 
       {/* Price and Session */}
-      <div className="mb-3 mt-2 flex items-center justify-between border-b pl-3 pr-3">
+      <div className="flex items-center justify-between border-b">
         <Badge variant="secondary" className="flex items-center gap-1">
           {getIcon('price')}
           {price}
@@ -40,6 +41,6 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
           {nextSession}
         </div>
       </div>
-    </>;
+    </div>;
 };
 export default CourseInfoCard;
