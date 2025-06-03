@@ -20,7 +20,7 @@ const Index = () => {
       <section 
         className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px]"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255, 255,0.2), rgba(255, 255, 255,0.3)), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
+          backgroundImage: `linear-gradient(rgba(255,255, 255,0.2), rgba(255, 155, 155,0.3)), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
