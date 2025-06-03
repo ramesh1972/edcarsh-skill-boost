@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -186,7 +187,7 @@ const Courses = () => {
                       {course.title}
                     </CardTitle>
                   </div>
-                  <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start">{course.description}</CardDescription>
+                  <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start max-h-12 overflow-hidden">{course.description}</CardDescription>
                 </CardHeader>
 
                 <CardContent className="flex-1 flex flex-col">
@@ -222,12 +223,12 @@ const Courses = () => {
                           <span>{course.instructor.flag}</span>
                           {course.instructor.city}, {course.instructor.country}
                         </p>
-                        <p className="text-xs line-clamp-3">{course.instructor.description}</p>
+                        <p className="text-xs line-clamp-3 max-h-12 overflow-hidden">{course.instructor.description}</p>
                       </div>
                     </div>
 
                     {/* Action Buttons aligned to bottom and right */}
-                    <div className="flex gap-2 justify-end">
+                    <div className="flex gap-3 justify-end">
                       <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
                         <Eye className="h-3 w-3" />
                         View
@@ -304,7 +305,7 @@ const Courses = () => {
                             {course.title}
                           </h3>
                         </div>
-                        <p className="text-sm text-muted-foreground">{course.longDescription}</p>
+                        <p className="text-sm text-muted-foreground max-h-16 overflow-hidden">{course.longDescription}</p>
                       </div>
 
                       {/* Column 2: Topics - max 8 topics */}
@@ -342,13 +343,13 @@ const Courses = () => {
                               <span>{course.instructor.flag}</span>
                               {course.instructor.city}, {course.instructor.country}
                             </p>
-                            <p className="text-xs line-clamp-3">{course.instructor.description}</p>
+                            <p className="text-xs line-clamp-3 max-h-12 overflow-hidden">{course.instructor.description}</p>
                           </div>
                         </div>
 
                         {/* Action Buttons aligned to bottom and right */}
                         <div className="mt-auto">
-                          <div className="flex gap-2 justify-end">
+                          <div className="flex gap-3 justify-end">
                             <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
                               <Eye className="h-3 w-3" />
                               View
