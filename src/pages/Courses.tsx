@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,7 +7,6 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
 import { Heart, Eye, Filter, LayoutGrid, List, User } from 'lucide-react';
-
 const Courses = () => {
   const {
     theme,
@@ -49,9 +47,7 @@ const Courses = () => {
     });
     return filtered;
   }, [categoryFilter, levelFilter, sortBy]);
-
-  return (
-    <div className={`min-h-full bg-background ${getBackground()}`}>
+  return <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-8">
           <h1 className={`text-4xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
@@ -66,7 +62,7 @@ const Courses = () => {
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center gap-4">
             <span className="font-medium">View:</span>
-            <ToggleGroup type="single" value={viewMode} onValueChange={(value) => value && setViewMode(value)}>
+            <ToggleGroup type="single" value={viewMode} onValueChange={value => value && setViewMode(value)}>
               <ToggleGroupItem value="card" aria-label="Card view">
                 <LayoutGrid className="h-4 w-4" />
                 Card
@@ -93,11 +89,9 @@ const Courses = () => {
                   <SelectValue placeholder="Category" />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map(category => (
-                    <SelectItem key={category} value={category}>
+                  {categories.map(category => <SelectItem key={category} value={category}>
                       {category === 'all' ? 'All Categories' : category}
-                    </SelectItem>
-                  ))}
+                    </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -108,11 +102,9 @@ const Courses = () => {
                   <SelectValue placeholder="Level" />
                 </SelectTrigger>
                 <SelectContent>
-                  {levels.map(level => (
-                    <SelectItem key={level} value={level}>
+                  {levels.map(level => <SelectItem key={level} value={level}>
                       {level === 'all' ? 'All Levels' : level}
-                    </SelectItem>
-                  ))}
+                    </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -138,10 +130,8 @@ const Courses = () => {
         </div>
 
         {/* Card View */}
-        {viewMode === 'card' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredAndSortedCourses.map(course => (
-              <Card key={course.id} className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+        {viewMode === 'card' && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredAndSortedCourses.map(course => <Card key={course.id} className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
                 {/* Course Image */}
                 <div className="relative h-48 overflow-hidden flex-shrink-0">
                   <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
@@ -195,22 +185,16 @@ const Courses = () => {
                   <div className="flex-shrink-0 mb-4">
                     <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                     <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
-                      {course.topics.slice(0, 8).map((topic, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+                      {course.topics.slice(0, 8).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                           {topic}
-                        </Badge>
-                      ))}
+                        </Badge>)}
                     </div>
                   </div>
 
                   {/* Instructor Section */}
                   <div className="mt-auto">
                     <div className="flex items-start gap-3 mb-4">
-                      <img 
-                        src={course.instructor.image} 
-                        alt={course.instructor.name}
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
+                      <img src={course.instructor.image} alt={course.instructor.name} className="w-10 h-10 rounded-full object-cover" />
                       <div className="text-sm text-muted-foreground flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <p className="font-medium text-foreground">{course.instructor.name}</p>
@@ -242,16 +226,12 @@ const Courses = () => {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
-          </div>
-        )}
+              </Card>)}
+          </div>}
 
         {/* List View */}
-        {viewMode === 'list' && (
-          <div className="space-y-4">
-            {filteredAndSortedCourses.map(course => (
-              <Card key={course.id} className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+        {viewMode === 'list' && <div className="space-y-4">
+            {filteredAndSortedCourses.map(course => <Card key={course.id} className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
                 <div className="flex">
                   {/* Left side - Image and stats */}
                   <div className="w-64 flex-shrink-0">
@@ -305,30 +285,24 @@ const Courses = () => {
                             {course.title}
                           </h3>
                         </div>
-                        <p className="text-sm text-muted-foreground max-h-16 overflow-hidden">{course.longDescription}</p>
+                        <p className="text-sm text-muted-foreground max-h-[200px] overflow-hidden">{course.longDescription}</p>
                       </div>
 
                       {/* Column 2: Topics - max 8 topics */}
                       <div className="col-span-1">
                         <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                         <ul className="text-sm space-y-1">
-                          {course.longTopics.slice(0, 8).map((topic, index) => (
-                            <li key={index} className="flex items-center gap-2">
+                          {course.longTopics.slice(0, 8).map((topic, index) => <li key={index} className="flex items-center gap-2">
                               <span className="w-1 h-1 bg-current rounded-full flex-shrink-0"></span>
                               {topic}
-                            </li>
-                          ))}
+                            </li>)}
                         </ul>
                       </div>
 
                       {/* Column 3: About Instructor */}
                       <div className="col-span-1 flex flex-col">
                         <div className="flex items-start gap-3 mb-4 flex-1">
-                          <img 
-                            src={course.instructor.image} 
-                            alt={course.instructor.name}
-                            className="w-12 h-12 rounded-full object-cover"
-                          />
+                          <img src={course.instructor.image} alt={course.instructor.name} className="w-12 h-12 rounded-full object-cover" />
                           <div className="text-sm text-muted-foreground flex-1">
                             <div className="flex items-center gap-2 mb-1">
                               <p className="font-medium text-foreground">{course.instructor.name}</p>
@@ -366,13 +340,9 @@ const Courses = () => {
                     </div>
                   </div>
                 </div>
-              </Card>
-            ))}
-          </div>
-        )}
+              </Card>)}
+          </div>}
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Courses;
