@@ -4,10 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
+import { getSubjectColor } from '@/data/masterData';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
 import { Heart, Eye, UserPlus } from 'lucide-react';
+
 interface Course {
   id: number;
   title: string;
@@ -20,7 +22,7 @@ interface Course {
   image: string;
   topics: string[];
   level: string;
-  category: string;
+  subject: string;
   industry: string;
   instructor: {
     name: string;
@@ -33,9 +35,11 @@ interface Course {
     description: string;
   };
 }
+
 interface CourseCardProps {
   course: Course;
 }
+
 const CourseCard: React.FC<CourseCardProps> = ({
   course
 }) => {
@@ -43,6 +47,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
     theme,
     getIcon
   } = useTheme();
+  
   return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       {/* Course Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-0">
@@ -53,8 +58,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </Badge>
         </div>
         <div className="absolute top-2 right-2 flex gap-1">
-          <Badge variant="secondary" className="bg-white/90 text-black text-xs">
-            {course.category}
+          <Badge customColor={getSubjectColor(course.subject)} className="text-white text-xs">
+            {course.subject}
           </Badge>
           <Badge variant="secondary" className="bg-white/90 text-black text-xs">
             {course.level}
@@ -98,4 +103,5 @@ const CourseCard: React.FC<CourseCardProps> = ({
       </CardContent>
     </Card>;
 };
+
 export default CourseCard;

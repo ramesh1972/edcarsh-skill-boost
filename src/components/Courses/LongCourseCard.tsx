@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/contexts/ThemeContext';
+import { getSubjectColor } from '@/data/masterData';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
@@ -20,7 +21,7 @@ interface Course {
   image: string;
   longTopics: string[];
   level: string;
-  category: string;
+  subject: string;
   industry: string;
   instructor: {
     name: string;
@@ -54,8 +55,8 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
               </Badge>
             </div>
             <div className="absolute top-2 right-2 flex gap-1 flex-col">
-              <Badge variant="secondary" className="bg-white/90 text-black text-xs">
-                {course.category}
+              <Badge customColor={getSubjectColor(course.subject)} className="text-white text-xs">
+                {course.subject}
               </Badge>
               <Badge variant="secondary" className="bg-white/90 text-black text-xs">
                 {course.level}
