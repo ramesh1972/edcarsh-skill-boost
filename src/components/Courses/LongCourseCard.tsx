@@ -131,7 +131,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
               </div>
               
               {/* Action Buttons - using ActionButtons component */}
-              <div className="mt-auto">
+              <div className="mt-auto" style={{marginLeft: '-50px'}}>
                 <ActionButtons />
               </div>
             </div>
