@@ -7,7 +7,6 @@ import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
 import { Heart, Eye, UserPlus } from 'lucide-react';
-
 interface Course {
   id: number;
   title: string;
@@ -87,7 +86,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
       <CourseInfoCard className="mb-2" duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
 
           {/* Action Buttons - using ActionButtons component */}
-          <div className="px-2.5">
+          <div className="p-0 pt-3">
             <ActionButtons />
           </div>
         </div>
