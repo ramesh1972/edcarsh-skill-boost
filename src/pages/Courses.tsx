@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -159,27 +158,39 @@ const Courses = () => {
       const weekDays = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
       
       return (
-        <div className="grid grid-cols-7 gap-2">
-          {weekDays.map(day => {
-            const dayCourses = courses.filter(course => {
-              const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
-              const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-              return categoryMatch && levelMatch && isSameDay(parseISO(course.startDate), day);
-            });
-            
-            return (
-              <div key={day.toISOString()} className="border rounded-lg p-2 min-h-[200px]">
-                <div className="font-medium text-sm mb-2 text-center">
-                  {format(day, 'EEE d')}
-                </div>
-                <div className="space-y-1">
-                  {dayCourses.map(course => (
-                    <CourseCalendarEvent key={course.id} course={course} viewMode="week" />
-                  ))}
-                </div>
+        <div className="w-full">
+          {/* Week header */}
+          <div className="grid grid-cols-7 gap-2 mb-2">
+            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(dayName => (
+              <div key={dayName} className="p-2 text-center font-medium text-sm border-b">
+                {dayName}
               </div>
-            );
-          })}
+            ))}
+          </div>
+          
+          {/* Week days with courses */}
+          <div className="grid grid-cols-7 gap-2">
+            {weekDays.map(day => {
+              const dayCourses = courses.filter(course => {
+                const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
+                const levelMatch = levelFilter === 'all' || course.level === levelFilter;
+                return categoryMatch && levelMatch && isSameDay(parseISO(course.startDate), day);
+              });
+              
+              return (
+                <div key={day.toISOString()} className="border rounded-lg p-2 min-h-[200px] bg-background">
+                  <div className="font-medium text-sm mb-2 text-center">
+                    {format(day, 'EEE d')}
+                  </div>
+                  <div className="space-y-1">
+                    {dayCourses.map(course => (
+                      <CourseCalendarEvent key={course.id} course={course} viewMode="week" />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       );
     }
