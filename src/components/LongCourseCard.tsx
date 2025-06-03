@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -108,8 +107,8 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
               </ul>
             </div>
 
-            {/* Column 3: About Instructor */}
-            <div className="col-span-1 flex flex-col">
+            {/* Column 3: About Instructor - increased width by 20px */}
+            <div className="col-span-1 flex flex-col w-[calc(100%+20px)]">
               <div className="flex items-start gap-3 mb-4 flex-1">
                 <img src={course.instructor.image} alt={course.instructor.name} className="w-12 h-12 rounded-full object-cover" />
                 <div className="text-sm text-muted-foreground flex-1">

@@ -101,9 +101,9 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </div>
         </div>
 
-        {/* Instructor Section */}
-        <div className="mt-auto">
-          <div className="flex items-start gap-3 mb-4">
+        {/* Instructor Section - increased width by 20px */}
+        <div className="mt-auto w-[calc(100%+20px)] -mx-2.5">
+          <div className="flex items-start gap-3 mb-4 px-2.5">
             <img src={course.instructor.image} alt={course.instructor.name} className="w-10 h-10 rounded-full object-cover" />
             <div className="text-sm text-muted-foreground flex-1">
               <div className="flex items-center gap-2 mb-1">
@@ -122,7 +122,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </div>
 
           {/* Action Buttons - similar to ShortCourseCard */}
-          <div className="flex gap-2 justify-between items-center">
+          <div className="flex gap-2 justify-between items-center px-2.5">
             <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
               <UserPlus className="h-3 w-3" />
               Join as Guest
