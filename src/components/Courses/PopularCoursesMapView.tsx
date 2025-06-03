@@ -17,7 +17,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   // Calculate data based on view mode
   const mapData = useMemo(() => {
     if (viewMode === 'courses') {
-      // Original course data
+      // Original course data with inside-out positioning (more students = closer to center)
       const maxStudents = Math.max(...courses.map(course => course.students));
       const minStudents = Math.min(...courses.map(course => course.students));
       
@@ -36,15 +36,18 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           const angleOffset = (index / Math.max(rangeCourses.length, 1)) * 2 * Math.PI;
           const angle = angleOffset + (Math.random() * 0.8 - 0.4);
           
-          let distance = 800;
+          // Inside-out positioning: higher student count = closer to center (smaller distance)
+          let distance = 100;
           if (course.students >= 300) {
-            distance = 100;
+            distance = 100; // Closest to center
           } else if (course.students >= 200) {
-            distance = 200;
+            distance = 250;
           } else if (course.students >= 150) {
             distance = 400;
           } else if (course.students >= 100) {
-            distance = 500;
+            distance = 550;
+          } else {
+            distance = 700; // Furthest from center
           }
           
           const x = Math.cos(angle) * distance;
@@ -72,7 +75,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
             students: course.students,
             industry: course.industry,
             subject: course.subject,
-            category: course.category,
+            topics: course.topics,
             x,
             y,
             fontSize,
@@ -86,13 +89,14 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     }
 
     if (viewMode === 'industry') {
-      // Group by industry
+      // Group by industry with inside-out positioning
       const industryData = getAllIndustries().map((industry, index) => {
         const industryCourses = courses.filter(course => course.industry === industry);
         const totalStudents = industryCourses.reduce((sum, course) => sum + course.students, 0);
         
         const angle = (index / getAllIndustries().length) * 2 * Math.PI;
-        const distance = 300 + (totalStudents / 100) * 50; // Distance based on student count
+        // Inside-out: more students = closer to center
+        const distance = Math.max(150, 500 - (totalStudents / 50));
         const x = Math.cos(angle) * distance;
         const y = Math.sin(angle) * distance;
         
@@ -113,14 +117,15 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     }
 
     if (viewMode === 'subject') {
-      // Group by subject
+      // Group by subject with inside-out positioning
       const subjectData = getAllSubjects().map((subject, index) => {
         const subjectCourses = courses.filter(course => course.subject === subject);
         const totalStudents = subjectCourses.reduce((sum, course) => sum + course.students, 0);
         const industry = subjectCourses[0]?.industry || '';
         
         const angle = (index / getAllSubjects().length) * 2 * Math.PI;
-        const distance = 250 + (totalStudents / 100) * 30;
+        // Inside-out: more students = closer to center
+        const distance = Math.max(120, 400 - (totalStudents / 30));
         const x = Math.cos(angle) * distance;
         const y = Math.sin(angle) * distance;
         
@@ -142,16 +147,17 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     }
 
     if (viewMode === 'topic') {
-      // Group by category (topic)
-      const topics = Array.from(new Set(courses.map(course => course.category)));
-      const topicData = topics.map((topic, index) => {
-        const topicCourses = courses.filter(course => course.category === topic);
+      // Group by topics with inside-out positioning
+      const allTopics = Array.from(new Set(courses.flatMap(course => course.topics || [])));
+      const topicData = allTopics.map((topic, index) => {
+        const topicCourses = courses.filter(course => course.topics?.includes(topic));
         const totalStudents = topicCourses.reduce((sum, course) => sum + course.students, 0);
         const industry = topicCourses[0]?.industry || '';
         const subject = topicCourses[0]?.subject || '';
         
-        const angle = (index / topics.length) * 2 * Math.PI;
-        const distance = 200 + (totalStudents / 50) * 20;
+        const angle = (index / allTopics.length) * 2 * Math.PI;
+        // Inside-out: more students = closer to center
+        const distance = Math.max(100, 350 - (totalStudents / 20));
         const x = Math.cos(angle) * distance;
         const y = Math.sin(angle) * distance;
         
@@ -252,7 +258,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       return (
         <div>
           {item.title} - {item.students} students
-          <div className="text-xs opacity-75">{item.category} • {item.subject}</div>
+          <div className="text-xs opacity-75">{item.topics?.join(', ')} • {item.subject}</div>
         </div>
       );
     }
@@ -309,7 +315,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         <div className="mb-8 flex flex-wrap gap-4 justify-center text-sm">
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 bg-red-600 rounded"></div>
-            <span>300+ students</span>
+            <span>300+ students (center)</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 bg-orange-600 rounded"></div>
@@ -325,7 +331,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           </div>
           <div className="flex items-center gap-2">
             <div className="w-4 h-4 bg-emerald-600 rounded"></div>
-            <span>Less than 100 students</span>
+            <span>Less than 100 students (outer)</span>
           </div>
         </div>
       )}
@@ -342,11 +348,11 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           {/* Concentric circles - only show for courses view */}
           {viewMode === 'courses' && (
             <>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] border-2 border-red-300 rounded-full opacity-30"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[540px] h-[540px] border-2 border-orange-300 rounded-full opacity-30"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] border-2 border-red-300 rounded-full opacity-30"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border-2 border-orange-300 rounded-full opacity-30"></div>
               <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border-2 border-amber-300 rounded-full opacity-30"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[960px] h-[960px] border-2 border-lime-300 rounded-full opacity-30"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] border-2 border-emerald-300 rounded-full opacity-30"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] border-2 border-lime-300 rounded-full opacity-30"></div>
+              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1400px] h-[1400px] border-2 border-emerald-300 rounded-full opacity-30"></div>
             </>
           )}
           
