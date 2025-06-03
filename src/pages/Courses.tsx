@@ -116,11 +116,11 @@ const Courses = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[5px]">
           {filteredAndSortedCourses.map((course) => (
             <Card 
               key={course.id} 
-              className={`hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${
+              className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${
                 theme.designSystem === 'material' ? 'shadow-md' : 
                 theme.designSystem === 'fluent' ? 'border-2' : 
                 'hover:shadow-lg'
@@ -129,7 +129,7 @@ const Courses = () => {
               }`}
             >
               {/* Course Image */}
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-48 overflow-hidden flex-shrink-0">
                 <img 
                   src={course.image} 
                   alt={course.title}
@@ -142,7 +142,7 @@ const Courses = () => {
                 </div>
               </div>
 
-              <CardHeader className="pb-2 h-32 flex flex-col justify-start">
+              <CardHeader className="pb-2 h-32 flex flex-col justify-start flex-shrink-0">
                 <div className="flex items-start justify-between">
                   <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
                     {course.title}
@@ -156,7 +156,7 @@ const Courses = () => {
 
               <CardContent className="flex-1 flex flex-col">
                 {/* Topics Covered - Fixed height for alignment */}
-                <div className="mb-2">
+                <div className="mb-2 flex-shrink-0">
                   <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                   <div className="flex flex-wrap gap-1 h-[80px] content-start overflow-hidden">
                     {course.topics.map((topic, index) => (
@@ -168,7 +168,7 @@ const Courses = () => {
                 </div>
 
                 {/* Course Details - Fixed position */}
-                <div className="flex items-center justify-between text-sm mb-4">
+                <div className="flex items-center justify-between text-sm mb-4 flex-shrink-0">
                   <div className="flex items-center gap-1">
                     {getIcon('time')}
                     {course.duration}
@@ -180,7 +180,7 @@ const Courses = () => {
                 </div>
 
                 {/* Price and Session - Fixed position */}
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-4 flex-shrink-0">
                   <Badge variant="secondary" className="flex items-center gap-1">
                     {getIcon('price')}
                     {course.price}
