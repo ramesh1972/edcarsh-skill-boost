@@ -7,7 +7,7 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
 import { getAllIndustries, getSubjectsByIndustry } from '@/data/masterData';
-import { Filter, LayoutGrid, List, Calendar as CalendarIcon, MapPin } from 'lucide-react';
+import { Filter, Sort, LayoutGrid, List, Calendar as CalendarIcon, MapPin } from 'lucide-react';
 import { isAfter, parseISO, isSameDay } from 'date-fns';
 import CourseCard from '@/components/Courses/CourseCard';
 import LongCourseCard from '@/components/Courses/LongCourseCard';
@@ -98,7 +98,7 @@ const Courses = () => {
         <div className="flex flex-wrap gap-4 mb-6 p-4 bg-card rounded-lg border">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4" />
-            <span className="font-medium">Filters & Sort:</span>
+            <span className="font-medium">Filters</span>
           </div>
           
           <div className="flex flex-wrap gap-4 flex-1">
@@ -115,7 +115,7 @@ const Courses = () => {
               </Select>
             </div>
 
-            <div className="min-w-[150px]">
+            <div className="min-w-[150px] mr-[20px]">
               <Select value={subjectFilter} onValueChange={setSubjectFilter}>
                 <SelectTrigger>
                   <SelectValue placeholder="Subject" />
@@ -127,6 +127,11 @@ const Courses = () => {
                 </SelectContent>
               </Select>
             </div>
+
+          <div className="flex items-center gap-2">
+            <Sort className="h-4 w-4" />
+            <span className="font-medium">Sort</span>
+          </div>
 
             <div className="min-w-[150px]">
               <Select value={levelFilter} onValueChange={setLevelFilter}>
