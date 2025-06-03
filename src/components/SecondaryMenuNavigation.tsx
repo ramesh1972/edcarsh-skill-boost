@@ -25,11 +25,7 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
               Theme
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-48">
-            <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-            <DropdownMenuSeparator />
               <ThemeSelector />
-          </DropdownMenuContent>
         </DropdownMenu>
         
         {/* Inbox Dropdown */}
