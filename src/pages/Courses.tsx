@@ -148,29 +148,28 @@ const Courses = () => {
                 </div>
 
                 <div className="grid grid-cols-1 grid-rows-2 md:grid-cols-1 lg:grid-rows-2 gap-1">
-                {/* Course Details - moved below image */}
-                <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
-                  <div className="flex items-center gap-1">
-                    {getIcon('time')}
-                    {course.duration}
+                  {/* Course Details - moved below image */}
+                  <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
+                    <div className="flex items-center gap-1">
+                      {getIcon('time')}
+                      {course.duration}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      {getIcon('student')}
+                      {course.students} enrolled
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1">
-                    {getIcon('student')}
-                    {course.students} enrolled
-                  </div>
-                </div>
-
-                {/* Price and Session - moved below image */}
-                <div className="px-4 py-2 flex items-center justify-between border-b">
-                  <Badge variant="secondary" className="flex items-center gap-1">
-                    {getIcon('price')}
-                    {course.price}
-                  </Badge>
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                    📅
-                    {course.nextSession}
-                  </div>
-                </div>
+  
+                  {/* Price and Session - moved below image */}
+                  <div className="px-4 py-2 flex items-center justify-between border-b">
+                    <Badge variant="secondary" className="flex items-center gap-1">
+                      {getIcon('price')}
+                      {course.price}
+                    </Badge>
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                      📅
+                      {course.nextSession}
+                    </div>
                 </div>
               </div>
                 <CardHeader className="pb-2 mb-1 h-32 flex flex-col justify-start flex-shrink-0">
