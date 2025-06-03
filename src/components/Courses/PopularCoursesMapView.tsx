@@ -136,7 +136,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
               }}
             >
-              <div className="text-center w-fit p-2 bg-white/90 border-2 border-gray-300 rounded-lg shadow-sm">
+              <div className="text-center max-w-32 p-2 bg-white/90 border-2 border-gray-300 rounded-lg shadow-sm">
                 <div className="font-inherit leading-tight mb-1 break-words">
                   {course.title}
                 </div>
