@@ -96,7 +96,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
                   {course.title}
                 </h3>
               </div>
-              <p className="text-sm text-muted-foreground line-clamp-3 max-h-[160px] overflow-hidden">{course.longDescription}</p>
+              <p className="text-sm text-muted-foreground line-clamp-8  overflow-hidden">{course.longDescription}</p>
             </div>
 
             {/* Column 2: Topics as bulleted list - max 6 topics */}
