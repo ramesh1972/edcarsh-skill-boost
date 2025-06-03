@@ -59,7 +59,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       />
       
       {/* Radial Map */}
-      <div className="flex justify-center items-center w-full h-full flex-1 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden" style={{border: '6px solid grey'; borderRadius: '6px'}}>
+      <div className="flex justify-center items-center w-full h-full flex-1 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden" style={{border: '6px solid grey', borderRadius: '6px'}}>
         <div 
           className="relative inset-0 transition-transform duration-500 ease-out"
           style={{ 
