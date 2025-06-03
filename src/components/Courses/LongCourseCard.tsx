@@ -6,7 +6,6 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
 import { Heart, Eye, UserPlus, Info } from 'lucide-react';
-
 interface Course {
   id: number;
   title: string;
@@ -30,16 +29,17 @@ interface Course {
     description: string;
   };
 }
-
 interface LongCourseCardProps {
   course: Course;
 }
-
-const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
-  const { theme, getIcon } = useTheme();
-
-  return (
-    <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+const LongCourseCard: React.FC<LongCourseCardProps> = ({
+  course
+}) => {
+  const {
+    theme,
+    getIcon
+  } = useTheme();
+  return <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       <div className="flex">
         {/* Left side - Image and stats */}
         <div className="w-64 flex-shrink-0 flex flex-col">
@@ -96,19 +96,19 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
                   {course.title}
                 </h3>
               </div>
-              <p className="text-sm text-muted-foreground max-h-[300px] overflow-hidden">{course.longDescription}</p>
+              <p className="text-sm text-muted-foreground max-h-[160px] overflow-hidden">{course.longDescription}</p>
             </div>
 
             {/* Column 2: Topics as bulleted list - max 6 topics */}
-            <div className="col-span-1" style={{maxWidth: '280px'}}>
+            <div className="col-span-1" style={{
+            maxWidth: '280px'
+          }}>
               <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                {course.longTopics.slice(0, 6).map((topic, index) => (
-                  <li key={index} className="flex items-start gap-2">
+                {course.longTopics.slice(0, 6).map((topic, index) => <li key={index} className="flex items-start gap-2">
                     <span className="text-primary mt-1">•</span>
                     <span>{topic}</span>
-                  </li>
-                ))}
+                  </li>)}
               </ul>
             </div>
 
@@ -143,8 +143,6 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
           </div>
         </div>
       </div>
-    </Card>
-  );
+    </Card>;
 };
-
 export default LongCourseCard;
