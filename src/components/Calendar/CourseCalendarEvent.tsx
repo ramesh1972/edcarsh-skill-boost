@@ -141,7 +141,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   if (viewMode === 'month') {
     return (
       <div 
-        className={`text-xs p-1 rounded border-4 border-black ${getCategoryColor(course.category)} ${
+        className={`text-xs p-1 !rounded !border-4 !border-black ${getCategoryColor(course.category)} ${
           isSessionPast ? 'opacity-50 bg-gray-100' : ''
         }`}
         style={{ minHeight: `${Math.max(40, cardHeight / 3)}px` }}
