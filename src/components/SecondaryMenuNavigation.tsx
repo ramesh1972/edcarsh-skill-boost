@@ -15,8 +15,7 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
 }) => {
   return (
     <div className="border-t border-primary-foreground/20 pt-6">
-      <p className="text-xs font-semibold text-primary-foreground/70 mb-4 px-4">Actions</p>
-      
+    
       {/* Row: Theme, Inbox, and Profile */}
       <div className="flex items-center gap-3 px-4">
         {/* Theme Selector */}
