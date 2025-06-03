@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
@@ -94,18 +93,21 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
   }, [calendarViewMode, currentDate, categoryFilter, levelFilter, courses]);
 
   const navigatePeriod = (direction: 'prev' | 'next') => {
-    setCurrentDate(prev => {
-      switch (calendarViewMode) {
-        case 'day':
-          return direction === 'next' ? addDays(prev, 1) : subDays(prev, 1);
-        case 'week':
-          return direction === 'next' ? addWeeks(prev, 1) : subWeeks(prev, 1);
-        case 'month':
-          return direction === 'next' ? addMonths(prev, 1) : subMonths(prev, 1);
-        default:
-          return prev;
-      }
-    });
+    let newDate: Date;
+    switch (calendarViewMode) {
+      case 'day':
+        newDate = direction === 'next' ? addDays(currentDate, 1) : subDays(currentDate, 1);
+        break;
+      case 'week':
+        newDate = direction === 'next' ? addWeeks(currentDate, 1) : subWeeks(currentDate, 1);
+        break;
+      case 'month':
+        newDate = direction === 'next' ? addMonths(currentDate, 1) : subMonths(currentDate, 1);
+        break;
+      default:
+        newDate = currentDate;
+    }
+    setCurrentDate(newDate);
   };
 
   const getViewTitle = () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, DollarSign, Globe, Calendar, Target, Users, Star, ArrowRight, CheckCircle, Play, Zap, Award, BookOpen, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,6 +10,7 @@ import { homeTestimonials } from '@/data/testimonials';
 import { usps } from '@/data/usps';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import ShortCourseCard from '@/components/Courses/ShortCourseCard';
+import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
 
 const Index = () => {
   const {
@@ -18,10 +19,15 @@ const Index = () => {
     getPageLayoutClasses
   } = useTheme();
 
+  // Calendar state
+  const [calendarViewMode, setCalendarViewMode] = useState('month');
+  const [currentDate, setCurrentDate] = useState(new Date());
+
   // Scroll animation hooks for different sections
   const heroAnimation = useScrollAnimation({ threshold: 0.2 });
   const uspsAnimation = useScrollAnimation({ threshold: 0.1 });
   const coursesAnimation = useScrollAnimation({ threshold: 0.1 });
+  const calendarAnimation = useScrollAnimation({ threshold: 0.1 });
   const statsAnimation = useScrollAnimation({ threshold: 0.2 });
   const testimonialsAnimation = useScrollAnimation({ threshold: 0.1 });
   const ctaAnimation = useScrollAnimation({ threshold: 0.2 });
@@ -245,6 +251,40 @@ const Index = () => {
                 <ShortCourseCard course={course} />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Course Calendar Section */}
+      <section 
+        ref={calendarAnimation.ref}
+        className="py-20 bg-muted/30"
+      >
+        <div className="container px-4 mx-auto">
+          <div 
+            className={`text-center mb-12 transition-all duration-700 delay-200 ${
+              calendarAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            <h2 className="text-3xl font-bold mb-4">Course Calendar</h2>
+            <p className="text-xl text-muted-foreground">
+              View all upcoming courses in calendar format
+            </p>
+          </div>
+          <div 
+            className={`transition-all duration-700 delay-400 ${
+              calendarAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            <CoursesCalendarView
+              courses={courses}
+              categoryFilter="all"
+              levelFilter="all"
+              calendarViewMode={calendarViewMode}
+              setCalendarViewMode={setCalendarViewMode}
+              currentDate={currentDate}
+              setCurrentDate={setCurrentDate}
+            />
           </div>
         </div>
       </section>
