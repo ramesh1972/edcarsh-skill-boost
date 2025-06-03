@@ -7,7 +7,6 @@ import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
 import { Heart, Eye, UserPlus } from 'lucide-react';
-
 interface Course {
   id: number;
   title: string;
@@ -32,16 +31,17 @@ interface Course {
     description: string;
   };
 }
-
 interface CourseCardProps {
   course: Course;
 }
-
-const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
-  const { theme, getIcon } = useTheme();
-
-  return (
-    <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+const CourseCard: React.FC<CourseCardProps> = ({
+  course
+}) => {
+  const {
+    theme,
+    getIcon
+  } = useTheme();
+  return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       {/* Course Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0">
         <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
@@ -71,26 +71,19 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
         <div className="flex-shrink-0 mb-4">
           <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
           <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
-            {course.topics.slice(0, 6).map((topic, index) => (
-              <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+            {course.topics.slice(0, 6).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                 {topic}
-              </Badge>
-            ))}
+              </Badge>)}
           </div>
         </div>
 
         {/* Instructor Section - using InstructorCard component */}
-        <div className="mt-auto w-[calc(100%+20px)] -mx-2.5">
+        <div className="mt-auto">
           <div className="px-2.5 mb-4">
             <InstructorCard instructor={course.instructor} hideDescription={true} />
           </div>
   {/* Course Info Card - moved below image */}
-      <CourseInfoCard 
-        duration={course.duration}
-        students={course.students}
-        price={course.price}
-        nextSession={course.nextSession}
-      />
+      <CourseInfoCard duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
 
           {/* Action Buttons - using ActionButtons component */}
           <div className="px-2.5">
@@ -98,8 +91,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </div>
         </div>
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };
-
 export default CourseCard;
