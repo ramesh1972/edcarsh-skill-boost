@@ -87,11 +87,11 @@ const Courses = () => {
                 <LayoutGrid className="h-4 w-4" />
                 Card
               </ToggleGroupItem>
-              <ToggleGroupItem value="list" aria-label="List view">
+              <ToggleGroupItem value="list" aria-label="List view" className="gap-1">
                 <List className="h-4 w-4" />
                 List
               </ToggleGroupItem>
-              <ToggleGroupItem value="calendar" aria-label="Calendar view">
+              <ToggleGroupItem value="calendar" aria-label="Calendar view" className="gap-1">
                 <CalendarIcon className="h-4 w-4" />
                 Calendar
               </ToggleGroupItem>
