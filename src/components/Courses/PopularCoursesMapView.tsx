@@ -1,4 +1,5 @@
 
+
 import React, { useMemo } from 'react';
 import { Course } from '@/types';
 
@@ -31,16 +32,16 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         // Add some randomness and more spacing to prevent collisions
         const angle = angleOffset + (Math.random() * 0.8 - 0.4);
         
-        // Calculate distance from center with much larger spacing between rings
-        let distance = 1000; // outermost ring (increased significantly)
+        // Calculate distance from center with reduced spacing between rings
+        let distance = 400; // outermost ring (reduced from 1000)
         if (course.students >= 300) {
-          distance = 200; // innermost ring
+          distance = 80; // innermost ring (reduced from 200)
         } else if (course.students >= 200) {
-          distance = 350; // second ring 
+          distance = 140; // second ring (reduced from 350)
         } else if (course.students >= 150) {
-          distance = 550; // third ring
+          distance = 220; // third ring (reduced from 550)
         } else if (course.students >= 100) {
-          distance = 750; // fourth ring
+          distance = 300; // fourth ring (reduced from 750)
         }
         
         // Calculate position
@@ -109,19 +110,19 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       
       {/* Radial Course Map */}
       <div className="flex justify-center items-center w-full h-full flex-1">
-        <div className="relative w-full h-full min-h-[2000px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-gray-200 overflow-visible">
+        <div className="relative w-full h-full min-h-[1000px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-gray-200 overflow-visible">
           {/* Center point */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
             Courses Center
           </div>
           
-          {/* Concentric circles for each range with increased spacing */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border-2 border-red-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border-2 border-orange-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] border-2 border-amber-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1500px] h-[1500px] border-2 border-lime-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[2000px] h-[2000px] border-2 border-emerald-300 rounded-full opacity-30"></div>
+          {/* Concentric circles for each range with reduced spacing */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[160px] h-[160px] border-2 border-red-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] border-2 border-orange-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[440px] h-[440px] border-2 border-amber-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border-2 border-lime-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border-2 border-emerald-300 rounded-full opacity-30"></div>
           
           {/* Course titles positioned radially */}
           {courseData.map((course) => (
@@ -170,3 +171,4 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 };
 
 export default PopularCoursesMapView;
+
