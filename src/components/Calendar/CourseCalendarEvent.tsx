@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -88,14 +89,13 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
     const sessionDateTime = parse(course.startTime, 'HH:mm', currentDay);
     const sessionEndTime = addHours(sessionDateTime, course.dailySessionDuration);
     
-    // Calculate the time window: 15 mins before to 10 mins after session start
+    // Calculate the time window: 15 mins before session start
     const enableTime = subMinutes(sessionDateTime, 15);
-    const disableTime = addMinutes(sessionDateTime, 10);
     
     // Show join button from 15 mins before until session ends
     const showTimeWindow = isWithinInterval(now, { start: enableTime, end: sessionEndTime });
-    // Enable join button from 15 mins before until session starts
-    const isEnabled = isWithinInterval(now, { start: enableTime, end: sessionDateTime });
+    // Enable join button from 15 mins before until session ends (entire session duration)
+    const isEnabled = isWithinInterval(now, { start: enableTime, end: sessionEndTime });
     
     return { 
       show: showTimeWindow, 
