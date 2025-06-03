@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -6,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
-import { Heart, Eye, UserPlus } from 'lucide-react';
+import { Heart, Eye, UserPlus, Info } from 'lucide-react';
 
 interface Course {
   id: number;
@@ -97,30 +96,35 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
               <p className="text-sm text-muted-foreground max-h-[300px] overflow-hidden">{course.longDescription}</p>
             </div>
 
-            {/* Column 2: Topics - max 6 topics */}
+            {/* Column 2: Topics as bulleted list - max 8 topics */}
             <div className="col-span-1" style={{maxWidth: '280px'}}>
               <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-              <div className="flex flex-wrap gap-2">
-                {course.longTopics.slice(0, 6).map((topic, index) => (
-                  <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
-                    {topic}
-                  </Badge>
+              <ul className="text-sm text-muted-foreground space-y-1">
+                {course.longTopics.slice(0, 8).map((topic, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>{topic}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
 
             {/* Column 3: Instructor Details */}
             <div className="col-span-1">
               <h4 className="text-sm font-medium mb-3">Instructor:</h4>
               <div className="flex items-start gap-3">
-                <Avatar className="h-12 w-12">
+                <Avatar className="h-12 w-12 rounded-full flex-shrink-0">
                   <AvatarImage src={course.instructor.image} alt={course.instructor.name} />
                   <AvatarFallback>{course.instructor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
-                <div className="flex-1">
-                  <div className="flex items-center gap-1 mb-1">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
                     <h5 className="font-medium text-sm">{course.instructor.name}</h5>
                     <span className="text-xs">{course.instructor.flag}</span>
+                    <Button variant="outline" size="sm" className="h-6 px-2 text-xs">
+                      <Info className="h-3 w-3 mr-1" />
+                      About
+                    </Button>
                   </div>
                   <p className="text-xs text-muted-foreground mb-1">{course.instructor.specialty}</p>
                   <p className="text-xs text-muted-foreground mb-1">{course.instructor.experience} • {course.instructor.city}, {course.instructor.country}</p>
