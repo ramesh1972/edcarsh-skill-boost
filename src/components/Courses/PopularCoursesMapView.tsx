@@ -78,9 +78,9 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   }, [courses]);
 
   return (
-    <div className="flex flex-col items-center justify-center p-8 w-full min-h-screen">
+    <div className="flex flex-col items-center justify-center p-8 w-full h-full min-h-screen">
       <h2 className="text-2xl font-bold mb-6 text-center">Popular Courses Map</h2>
-      
+    
       {/* Legend */}
       <div className="mb-8 flex flex-wrap gap-4 justify-center text-sm">
         <div className="flex items-center gap-2">
@@ -136,7 +136,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
               }}
             >
-              <div className="text-center max-w-28">
+              <div className="text-center max-w-42" style={{border: '1px solid grey'; borderRadius: '50%'}}>
                 <div className="font-inherit leading-tight mb-1">
                   {course.title}
                 </div>
