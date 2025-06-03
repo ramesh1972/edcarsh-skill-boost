@@ -146,6 +146,30 @@ const Courses = () => {
                   </div>
                 </div>
 
+                {/* Course Details - moved below image */}
+                <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
+                  <div className="flex items-center gap-1">
+                    {getIcon('time')}
+                    {course.duration}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    {getIcon('student')}
+                    {course.students} enrolled
+                  </div>
+                </div>
+
+                {/* Price and Session - moved below image */}
+                <div className="px-4 py-2 flex items-center justify-between border-b">
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    {getIcon('price')}
+                    {course.price}
+                  </Badge>
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                    📅
+                    {course.nextSession}
+                  </div>
+                </div>
+
                 <CardHeader className="pb-2 mb-1 h-32 flex flex-col justify-start flex-shrink-0">
                   <div className="flex items-start justify-between">
                     <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
@@ -166,30 +190,6 @@ const Courses = () => {
                       {course.topics.slice(0, 5).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                           {topic}
                         </Badge>)}
-                    </div>
-                  </div>
-
-                  {/* Course Details - Fixed position */}
-                  <div className="flex items-center justify-between text-sm mb-1 flex-shrink-0">
-                    <div className="flex items-center gap-1">
-                      {getIcon('time')}
-                      {course.duration}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      {getIcon('student')}
-                      {course.students} enrolled
-                    </div>
-                  </div>
-
-                  {/* Price and Session - Fixed position */}
-                  <div className="flex items-center justify-between mb-5 flex-shrink-0">
-                    <Badge variant="secondary" className="flex items-center gap-1">
-                      {getIcon('price')}
-                      {course.price}
-                    </Badge>
-                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                      📅
-                      {course.nextSession}
                     </div>
                   </div>
 
@@ -229,6 +229,30 @@ const Courses = () => {
 
                   {/* Course Content */}
                   <div className="flex-1 p-6">
+                    {/* Course Details - moved below image section */}
+                    <div className="flex items-center justify-between text-sm mb-3 pb-3 border-b">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1">
+                          {getIcon('time')}
+                          {course.duration}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          {getIcon('student')}
+                          {course.students} enrolled
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                          {getIcon('price')}
+                          {course.price}
+                        </Badge>
+                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                          📅
+                          {course.nextSession}
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
@@ -257,30 +281,8 @@ const Courses = () => {
                         </ul>
                       </div>
 
-                      {/* Course details and actions */}
+                      {/* Course actions */}
                       <div className="space-y-3">
-                        <div className="flex items-center justify-between text-sm">
-                          <div className="flex items-center gap-1">
-                            {getIcon('time')}
-                            {course.duration}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            {getIcon('student')}
-                            {course.students} enrolled
-                          </div>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                          <Badge variant="secondary" className="flex items-center gap-1">
-                            {getIcon('price')}
-                            {course.price}
-                          </Badge>
-                          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                            📅
-                            {course.nextSession}
-                          </div>
-                        </div>
-
                         <div className="flex gap-2">
                           <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
                             <Eye className="h-3 w-3" />
