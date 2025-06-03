@@ -53,7 +53,7 @@ const Index = () => {
               🚀 Launch Your Skills in Hours, Not Months
             </Badge>
             <h1 
-              className={`text-4xl sm:text-6xl font-bold tracking-tight mb-6 text-white transition-all duration-700 delay-300 ${
+              className={`text-6xl sm:text-8xl font-bold tracking-tight mb-6 text-white transition-all duration-700 delay-300 ${
                 heroAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
               }`}
             >
@@ -66,6 +66,7 @@ const Index = () => {
               style={{
                 color: 'orange',
                 fontSize: '30px',
+                maringToo: '20px',
               }} 
               className={`mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 mt-[20px] transition-all duration-700 delay-500 ${
                 heroAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
@@ -337,7 +338,7 @@ const Index = () => {
           backgroundImage: `linear-gradient(rgba(255, 255, 255,0.4), rgba(255, 255, 255,.8)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
           backgroundSize: '400px auto',
           backgroundPosition: 'center',
-          backgroundRepeat: 'repeat'
+          backgroundRepeat: 'repeat-x'
         }}
       >
         <div className="container px-4 mx-auto">
