@@ -1,3 +1,4 @@
+
 import React, { useMemo, useState } from 'react';
 import { Course } from '@/types';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -24,60 +25,77 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     setZoomLevel(prev => Math.max(prev - 0.2, 0.3));
   };
 
+  // Dynamic range calculation helper
+  const calculateDynamicRanges = (values: number[], rangeCount: number = 9) => {
+    if (values.length === 0) return [];
+    
+    const sortedValues = [...values].sort((a, b) => a - b);
+    const min = sortedValues[0];
+    const max = sortedValues[sortedValues.length - 1];
+    
+    if (min === max) {
+      return [{ min, max, label: `${min}` }];
+    }
+    
+    const ranges = [];
+    const step = (max - min) / rangeCount;
+    
+    for (let i = 0; i < rangeCount; i++) {
+      const rangeMin = Math.floor(min + (step * i));
+      const rangeMax = i === rangeCount - 1 ? max : Math.floor(min + (step * (i + 1)) - 1);
+      
+      let label;
+      if (i === rangeCount - 1) {
+        label = `${rangeMin}+`;
+      } else if (rangeMin === rangeMax) {
+        label = `${rangeMin}`;
+      } else {
+        label = `${rangeMin}-${rangeMax}`;
+      }
+      
+      ranges.push({ min: rangeMin, max: rangeMax, label });
+    }
+    
+    return ranges.reverse(); // Highest first for inside-out positioning
+  };
+
   // Calculate data based on view mode
   const mapData = useMemo(() => {
     if (viewMode === 'courses') {
-      // Original course data with inside-out positioning (more students = closer to center)
-      const maxStudents = Math.max(...courses.map(course => course.students));
-      const minStudents = Math.min(...courses.map(course => course.students));
+      // Get student values and calculate dynamic ranges
+      const studentValues = courses.map(course => course.students);
+      const ranges = calculateDynamicRanges(studentValues, 9);
       
-      const ranges = {
-        '300+': courses.filter(course => course.students >= 300),
-        '200-299': courses.filter(course => course.students >= 200 && course.students < 300),
-        '150-199': courses.filter(course => course.students >= 150 && course.students < 200),
-        '100-149': courses.filter(course => course.students >= 100 && course.students < 150),
-        '<100': courses.filter(course => course.students < 100)
-      };
-
       const allCourseData: any[] = [];
+      const colors = [
+        '#dc2626', '#ea580c', '#d97706', '#ca8a04', '#65a30d', 
+        '#059669', '#0891b2', '#0284c7', '#3b82f6'
+      ];
 
-      Object.entries(ranges).forEach(([rangeName, rangeCourses]) => {
+      ranges.forEach((range, rangeIndex) => {
+        const rangeCourses = courses.filter(course => {
+          if (rangeIndex === 0) {
+            return course.students >= range.min;
+          } else {
+            return course.students >= range.min && course.students <= range.max;
+          }
+        });
+
         rangeCourses.forEach((course, index) => {
           const angleOffset = (index / Math.max(rangeCourses.length, 1)) * 2 * Math.PI;
           const angle = angleOffset + (Math.random() * 0.8 - 0.4);
           
-          // Inside-out positioning: higher student count = closer to center (smaller distance)
-          let distance = 100;
-          if (course.students >= 300) {
-            distance = 100; // Closest to center
-          } else if (course.students >= 200) {
-            distance = 250;
-          } else if (course.students >= 150) {
-            distance = 400;
-          } else if (course.students >= 100) {
-            distance = 550;
-          } else {
-            distance = 700; // Furthest from center
-          }
+          // Inside-out positioning: higher student count = closer to center
+          const baseDistance = 120 + (rangeIndex * 80);
+          const distance = (baseDistance * zoomLevel);
           
           const x = Math.cos(angle) * distance;
           const y = Math.sin(angle) * distance;
           
+          const maxStudents = Math.max(...studentValues);
+          const minStudents = Math.min(...studentValues);
           const studentRatio = (course.students - minStudents) / (maxStudents - minStudents) || 0;
-          const fontSize = 8 + (studentRatio * 8);
-          
-          let color = '#6b7280';
-          if (course.students >= 300) {
-            color = '#dc2626';
-          } else if (course.students >= 200) {
-            color = '#ea580c';
-          } else if (course.students >= 150) {
-            color = '#d97706';
-          } else if (course.students >= 100) {
-            color = '#65a30d';
-          } else {
-            color = '#059669';
-          }
+          const fontSize = 8 + (studentRatio * 6);
           
           allCourseData.push({
             id: course.id,
@@ -89,55 +107,74 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
             x,
             y,
             fontSize,
-            color,
-            studentRatio
+            color: colors[rangeIndex] || '#6b7280',
+            studentRatio,
+            range: range.label
           });
         });
       });
 
-      return allCourseData;
+      return { data: allCourseData, ranges };
     }
 
     if (viewMode === 'industry') {
-      // Group by industry with inside-out positioning
-      const industryData = getAllIndustries().map((industry, index) => {
+      // Group by industry and calculate dynamic ranges
+      const industryData = getAllIndustries().map(industry => {
         const industryCourses = courses.filter(course => course.industry === industry);
         const totalStudents = industryCourses.reduce((sum, course) => sum + course.students, 0);
-        
-        const angle = (index / getAllIndustries().length) * 2 * Math.PI;
-        // Inside-out: more students = closer to center
-        const distance = Math.max(150, 500 - (totalStudents / 50));
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-        
         return {
           id: industry,
           title: industry,
           students: totalStudents,
           courseCount: industryCourses.length,
+          type: 'industry'
+        };
+      }).filter(item => item.students > 0);
+
+      const studentValues = industryData.map(item => item.students);
+      const ranges = calculateDynamicRanges(studentValues, 9);
+      const colors = [
+        '#dc2626', '#ea580c', '#d97706', '#ca8a04', '#65a30d', 
+        '#059669', '#0891b2', '#0284c7', '#3b82f6'
+      ];
+
+      const mappedData = industryData.map((item, index) => {
+        const rangeIndex = ranges.findIndex(range => {
+          if (ranges.indexOf(range) === 0) {
+            return item.students >= range.min;
+          } else {
+            return item.students >= range.min && item.students <= range.max;
+          }
+        });
+
+        const angle = (index / industryData.length) * 2 * Math.PI;
+        const baseDistance = 150 + (rangeIndex * 60);
+        const distance = baseDistance * zoomLevel;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        const maxStudents = Math.max(...studentValues);
+        const fontSize = Math.min(16, 10 + (item.students / maxStudents) * 6);
+        
+        return {
+          ...item,
           x,
           y,
-          fontSize: Math.min(16, 10 + (totalStudents / 1000) * 6),
-          color: '#1e40af',
-          type: 'industry'
+          fontSize,
+          color: colors[rangeIndex] || '#1e40af',
+          range: ranges[rangeIndex]?.label || ''
         };
       });
 
-      return industryData;
+      return { data: mappedData, ranges };
     }
 
     if (viewMode === 'subject') {
-      // Group by subject with inside-out positioning
-      const subjectData = getAllSubjects().map((subject, index) => {
+      // Group by subject and calculate dynamic ranges
+      const subjectData = getAllSubjects().map(subject => {
         const subjectCourses = courses.filter(course => course.subject === subject);
         const totalStudents = subjectCourses.reduce((sum, course) => sum + course.students, 0);
         const industry = subjectCourses[0]?.industry || '';
-        
-        const angle = (index / getAllSubjects().length) * 2 * Math.PI;
-        // Inside-out: more students = closer to center
-        const distance = Math.max(120, 400 - (totalStudents / 30));
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
         
         return {
           id: subject,
@@ -145,31 +182,56 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           students: totalStudents,
           industry,
           courseCount: subjectCourses.length,
-          x,
-          y,
-          fontSize: Math.min(14, 8 + (totalStudents / 500) * 4),
-          color: '#7c3aed',
           type: 'subject'
         };
       }).filter(item => item.students > 0);
 
-      return subjectData;
+      const studentValues = subjectData.map(item => item.students);
+      const ranges = calculateDynamicRanges(studentValues, 9);
+      const colors = [
+        '#dc2626', '#ea580c', '#d97706', '#ca8a04', '#65a30d', 
+        '#059669', '#0891b2', '#0284c7', '#3b82f6'
+      ];
+
+      const mappedData = subjectData.map((item, index) => {
+        const rangeIndex = ranges.findIndex(range => {
+          if (ranges.indexOf(range) === 0) {
+            return item.students >= range.min;
+          } else {
+            return item.students >= range.min && item.students <= range.max;
+          }
+        });
+
+        const angle = (index / subjectData.length) * 2 * Math.PI;
+        const baseDistance = 120 + (rangeIndex * 50);
+        const distance = baseDistance * zoomLevel;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        const maxStudents = Math.max(...studentValues);
+        const fontSize = Math.min(14, 8 + (item.students / maxStudents) * 4);
+        
+        return {
+          ...item,
+          x,
+          y,
+          fontSize,
+          color: colors[rangeIndex] || '#7c3aed',
+          range: ranges[rangeIndex]?.label || ''
+        };
+      });
+
+      return { data: mappedData, ranges };
     }
 
     if (viewMode === 'topic') {
-      // Group by topics with inside-out positioning
+      // Group by topics and calculate dynamic ranges
       const allTopics = Array.from(new Set(courses.flatMap(course => course.topics || [])));
-      const topicData = allTopics.map((topic, index) => {
+      const topicData = allTopics.map(topic => {
         const topicCourses = courses.filter(course => course.topics?.includes(topic));
         const totalStudents = topicCourses.reduce((sum, course) => sum + course.students, 0);
         const industry = topicCourses[0]?.industry || '';
         const subject = topicCourses[0]?.subject || '';
-        
-        const angle = (index / allTopics.length) * 2 * Math.PI;
-        // Inside-out: more students = closer to center
-        const distance = Math.max(100, 350 - (totalStudents / 20));
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
         
         return {
           id: topic,
@@ -178,29 +240,63 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           industry,
           subject,
           courseCount: topicCourses.length,
-          x,
-          y,
-          fontSize: Math.min(12, 8 + (totalStudents / 300) * 3),
-          color: '#059669',
           type: 'topic'
         };
       }).filter(item => item.students > 0);
 
-      return topicData;
+      const studentValues = topicData.map(item => item.students);
+      const ranges = calculateDynamicRanges(studentValues, 9);
+      const colors = [
+        '#dc2626', '#ea580c', '#d97706', '#ca8a04', '#65a30d', 
+        '#059669', '#0891b2', '#0284c7', '#3b82f6'
+      ];
+
+      const mappedData = topicData.map((item, index) => {
+        const rangeIndex = ranges.findIndex(range => {
+          if (ranges.indexOf(range) === 0) {
+            return item.students >= range.min;
+          } else {
+            return item.students >= range.min && item.students <= range.max;
+          }
+        });
+
+        const angle = (index / topicData.length) * 2 * Math.PI;
+        const baseDistance = 100 + (rangeIndex * 40);
+        const distance = baseDistance * zoomLevel;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        const maxStudents = Math.max(...studentValues);
+        const fontSize = Math.min(12, 8 + (item.students / maxStudents) * 3);
+        
+        return {
+          ...item,
+          x,
+          y,
+          fontSize,
+          color: colors[rangeIndex] || '#059669',
+          range: ranges[rangeIndex]?.label || ''
+        };
+      });
+
+      return { data: mappedData, ranges };
     }
 
-    return [];
-  }, [courses, viewMode]);
+    return { data: [], ranges: [] };
+  }, [courses, viewMode, zoomLevel]);
 
   const getDisplayContent = (item: any) => {
     if (viewMode === 'courses') {
       return (
-        <div className="text-center p-2 bg-white/90 border-2 border-gray-300 rounded-lg shadow-sm">
-          <div className="font-inherit leading-tight mb-1 break-words">
+        <div className="text-center p-3 bg-white/90 border-2 border-gray-300 rounded-lg shadow-sm max-w-[100px]">
+          <div className="font-bold leading-tight mb-1 break-words">
             {item.title}
           </div>
-          <div className="text-xs opacity-80 font-normal">
-            {item.students} students
+          <div className="text-xs font-medium">
+            {item.students.toLocaleString()} students
+          </div>
+          <div className="text-xs opacity-70">
+            {item.subject}
           </div>
         </div>
       );
@@ -208,7 +304,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
     if (viewMode === 'industry') {
       return (
-        <div className="text-center p-3 bg-blue-50/90 border-2 border-blue-300 rounded-lg shadow-sm">
+        <div className="text-center p-3 bg-blue-50/90 border-2 border-blue-300 rounded-lg shadow-sm max-w-[100px]">
           <div className="font-bold leading-tight mb-1 break-words">
             {item.title}
           </div>
@@ -224,7 +320,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
     if (viewMode === 'subject') {
       return (
-        <div className="text-center p-3 bg-purple-50/90 border-2 border-purple-300 rounded-lg shadow-sm">
+        <div className="text-center p-3 bg-purple-50/90 border-2 border-purple-300 rounded-lg shadow-sm max-w-[100px]">
           <div className="font-bold leading-tight mb-1 break-words">
             {item.title}
           </div>
@@ -243,7 +339,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
     if (viewMode === 'topic') {
       return (
-        <div className="text-center p-3 bg-green-50/90 border-2 border-green-300 rounded-lg shadow-sm">
+        <div className="text-center p-3 bg-green-50/90 border-2 border-green-300 rounded-lg shadow-sm max-w-[100px]">
           <div className="font-bold leading-tight mb-1 break-words">
             {item.title}
           </div>
@@ -266,7 +362,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   const getTooltipContent = (item: any) => {
     if (viewMode === 'courses') {
       return (
-        <div className="max-w-">
+        <div className="max-w-[200px]">
           {item.title} - {item.students} students
           <div className="text-xs opacity-75">{item.topics?.join(', ')} • {item.subject}</div>
         </div>
@@ -316,29 +412,24 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         </RadioGroup>
       </div>
     
-      {/* Legend - only show for courses view */}
-      {viewMode === 'courses' && (
+      {/* Dynamic Legend */}
+      {mapData.ranges && mapData.ranges.length > 0 && (
         <div className="mb-8 flex flex-wrap gap-4 justify-center text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-red-600 rounded"></div>
-            <span>300+ students (center)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-orange-600 rounded"></div>
-            <span>200-299 students</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-amber-600 rounded"></div>
-            <span>150-199 students</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-lime-600 rounded"></div>
-            <span>100-149 students</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-emerald-600 rounded"></div>
-            <span>Less than 100 students (outer)</span>
-          </div>
+          {mapData.ranges.map((range, index) => {
+            const colors = [
+              '#dc2626', '#ea580c', '#d97706', '#ca8a04', '#65a30d', 
+              '#059669', '#0891b2', '#0284c7', '#3b82f6'
+            ];
+            return (
+              <div key={index} className="flex items-center gap-2">
+                <div 
+                  className="w-4 h-4 rounded" 
+                  style={{ backgroundColor: colors[index] || '#6b7280' }}
+                ></div>
+                <span>{range.label} students {index === 0 ? '(center)' : index === mapData.ranges.length - 1 ? '(outer)' : ''}</span>
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -382,19 +473,33 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
               Center
             </div>
             
-            {/* Concentric circles - only show for courses view */}
-            
-              <>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] border-2 border-red-300 rounded-full opacity-30"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border-2 border-orange-300 rounded-full opacity-30"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border-2 border-amber-300 rounded-full opacity-30"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] border-2 border-lime-300 rounded-full opacity-30"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1400px] h-[1400px] border-2 border-emerald-300 rounded-full opacity-30"></div>
-              </>
-            
+            {/* Dynamic concentric circles */}
+            {mapData.ranges && mapData.ranges.map((_, index) => {
+              const colors = [
+                '#dc2626', '#ea580c', '#d97706', '#ca8a04', '#65a30d', 
+                '#059669', '#0891b2', '#0284c7', '#3b82f6'
+              ];
+              const baseDistance = viewMode === 'courses' ? 120 + (index * 80) :
+                                  viewMode === 'industry' ? 150 + (index * 60) :
+                                  viewMode === 'subject' ? 120 + (index * 50) :
+                                  100 + (index * 40);
+              const diameter = (baseDistance * 2) * zoomLevel;
+              
+              return (
+                <div 
+                  key={index}
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 rounded-full opacity-30"
+                  style={{
+                    width: `${diameter}px`,
+                    height: `${diameter}px`,
+                    borderColor: colors[index] || '#6b7280'
+                  }}
+                ></div>
+              );
+            })}
             
             {/* Map items positioned radially */}
-            {mapData.map((item) => (
+            {mapData.data.map((item) => (
               <div
                 key={item.id}
                 className="absolute cursor-pointer hover:opacity-80 transition-opacity group"
@@ -404,18 +509,16 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                   transform: 'translate(-50%, -50%)',
                   fontSize: `${item.fontSize}px`,
                   color: item.color,
-                  fontWeight: viewMode === 'courses' 
-                    ? (item.studentRatio > 0.7 ? 'bold' : item.studentRatio > 0.4 ? 'semibold' : 'medium')
-                    : 'bold',
+                  fontWeight: 'bold',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-                  maxWidth: viewMode === 'courses' ? '100px' : '150px',
+                  maxWidth: '100px',
                   height: 'auto'
                 }}
               >
                 {getDisplayContent(item)}
                 
                 {/* Tooltip on hover */}
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs rounded px-2 py-1 whitespace-nowrap z-20">
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs rounded px-2 py-1 whitespace-nowrap z-20 max-w-[200px] break-words">
                   {getTooltipContent(item)}
                 </div>
               </div>
@@ -441,7 +544,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         )}
         {viewMode === 'subject' && (
           <>
-            <p>Total Subjects: {mapData.length}</p>
+            <p>Total Subjects: {mapData.data.length}</p>
             <p>Total Students: {courses.reduce((sum, course) => sum + course.students, 0).toLocaleString()}</p>
           </>
         )}
