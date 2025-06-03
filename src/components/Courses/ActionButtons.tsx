@@ -27,12 +27,13 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             size="sm" 
             className={`flex items-center gap-1 border-2 ${
               joinNowEnabled && !isDisabled ? 
-                'bg-red-500 hover:bg-red-600 text-white font-bold shadow-lg animate-pulse border-red-600' : 
+                'bg-red-500 hover:bg-red-600 text-white font-bold shadow-lg border-red-600' : 
                 ''
             }`}
             disabled={!joinNowEnabled || isDisabled}
             style={{
-              animation: joinNowEnabled && !isDisabled ? 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite' : 'none'
+              animation: joinNowEnabled && !isDisabled ? 'flash 1s ease-in-out infinite' : 'none',
+              background: joinNowEnabled && !isDisabled ? '#ef4444' : undefined
             }}
           >
             Join Now
@@ -76,6 +77,19 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           <Heart className="h-3 w-3" />
         </Button>
       </div>
+      
+      <style jsx>{`
+        @keyframes flash {
+          0%, 100% { 
+            background-color: #ef4444;
+            box-shadow: 0 0 5px #ef4444;
+          }
+          50% { 
+            background-color: #dc2626;
+            box-shadow: 0 0 20px #ef4444, 0 0 30px #ef4444;
+          }
+        }
+      `}</style>
     </div>
   );
 };
