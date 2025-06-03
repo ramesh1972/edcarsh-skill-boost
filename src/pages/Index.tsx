@@ -9,7 +9,7 @@ import { courses } from '@/data/courses';
 import { homeTestimonials } from '@/data/testimonials';
 import { usps } from '@/data/usps';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import ShortCourseCard from '@/components/ShortCourseCard';
+import ShortCourseCard from '@/components/Courses/ShortCourseCard';
 
 const Index = () => {
   const {
