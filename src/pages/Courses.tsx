@@ -340,7 +340,7 @@ const Courses = () => {
                     <SelectItem value="students">Students</SelectItem>
                     <SelectItem value="duration">Duration</SelectItem>
                   </SelectContent>
-                </SelectContent>
+                </Select>
               </div>
             )}
           </div>
