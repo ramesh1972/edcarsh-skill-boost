@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button';
 
 export const ThemeSelector: React.FC = () => {
   const { theme, updateTheme, resetTheme } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const colorThemes = [
     { key: 'ocean', label: 'Ocean Depths', description: 'Deep blues with coral and teal accents' },
@@ -51,13 +51,18 @@ export const ThemeSelector: React.FC = () => {
     event.stopPropagation();
   };
 
-  const handleClose = (event: React.MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setIsOpen(false);
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger asChild>
+        <div className="flex items-center gap-2 text-primary-foreground cursor-pointer hover:opacity-80 transition-opacity">
+          <Palette className="w-4 h-4" />
+          <span className="text-sm font-medium">Theme</span>
+        </div>
+      </DropdownMenuTrigger>
       <DropdownMenuContent className="w-72">
         <div className="flex items-center justify-between px-2 py-1.5">
           <DropdownMenuLabel className="p-0">Customize Theme</DropdownMenuLabel>
@@ -228,5 +233,6 @@ export const ThemeSelector: React.FC = () => {
           Reset to Default
         </DropdownMenuItem>
       </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
