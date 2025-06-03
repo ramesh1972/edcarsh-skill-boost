@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -30,17 +31,16 @@ interface Course {
     description: string;
   };
 }
+
 interface LongCourseCardProps {
   course: Course;
 }
-const LongCourseCard: React.FC<LongCourseCardProps> = ({
-  course
-}) => {
-  const {
-    theme,
-    getIcon
-  } = useTheme();
-  return <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+
+const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
+  const { theme, getIcon } = useTheme();
+  
+  return (
+    <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       <div className="flex">
         {/* Left side - Image and stats */}
         <div className="w-64 flex-shrink-0 flex flex-col">
@@ -97,33 +97,32 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
                   {course.title}
                 </h3>
               </div>
-              <p className="text-sm text-muted-foreground  max-h-[165px] overflow-hidden">{course.longDescription}</p>
+              <p className="text-sm text-muted-foreground max-h-[165px] overflow-hidden">{course.longDescription}</p>
             </div>
 
             {/* Column 2: Topics as bulleted list - max 6 topics */}
-            <div className="col-span-1" style={{
-            maxWidth: '280px'
-          }}>
+            <div className="col-span-1" style={{ maxWidth: '280px' }}>
               <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                {course.longTopics.slice(0, 7).map((topic, index) => <li key={index} className="flex items-start gap-2">
+                {course.longTopics.slice(0, 7).map((topic, index) => (
+                  <li key={index} className="flex items-start gap-2">
                     <span className="text-primary mt-1">•</span>
                     <span>{topic}</span>
-                  </li>)}
+                  </li>
+                ))}
               </ul>
             </div>
 
             {/* Column 3: Instructor Details */}
-          <div className="mt-auto -ml-[25px]">
-
-            <InstructorCard instructor={course.instructor} />
-            <ActionButtons /
-          </div>
-          </div>
-          
+            <div className="mt-auto -ml-[25px]">
+              <InstructorCard instructor={course.instructor} />
+              <ActionButtons />
+            </div>
           </div>
         </div>
       </div>
-    </Card>;
+    </Card>
+  );
 };
+
 export default LongCourseCard;
