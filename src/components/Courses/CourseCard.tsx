@@ -44,8 +44,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
   } = useTheme();
   return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       {/* Course Image */}
-      <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-none">
-        <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-none" />
+      <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-0">
+        <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-0" />
         <div className="absolute top-2 left-2">
           <Badge variant="outline" className="bg-white/90 text-black">
             {course.category}
