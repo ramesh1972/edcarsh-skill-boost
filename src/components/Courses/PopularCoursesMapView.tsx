@@ -382,7 +382,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
             </div>
             
             {/* Concentric circles - only show for courses view */}
-            (
+            
               <>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] border-2 border-red-300 rounded-full opacity-30"></div>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border-2 border-orange-300 rounded-full opacity-30"></div>
@@ -390,7 +390,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] border-2 border-lime-300 rounded-full opacity-30"></div>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1400px] h-[1400px] border-2 border-emerald-300 rounded-full opacity-30"></div>
               </>
-            )
+            
             
             {/* Map items positioned radially */}
             {mapData.map((item) => (
