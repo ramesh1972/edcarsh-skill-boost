@@ -112,13 +112,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                   About
                 </Button>
               </div>
-              <p className="text-xs mb-1">{course.instructor.experience} experience</p>
-              <p className="text-xs mb-1 flex items-center gap-1">
-                <span>{course.instructor.flag}</span>
-                {course.instructor.city}, {course.instructor.country}
-              </p>
-              <p className="text-xs line-clamp-3 max-h-12 overflow-hidden">{course.instructor.description}</p>
-            </div>
           </div>
 
           {/* Action Buttons - using ActionButtons component */}
