@@ -136,7 +136,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
               }}
             >
-              <div className="text-center max-w-42" style={{border: '1px solid grey'; borderRadius: '50%'}}>
+              <div className="text-center max-w-42" style={{border: '1px solid grey', borderRadius: '50%'}}>
                 <div className="font-inherit leading-tight mb-1">
                   {course.title}
                 </div>
