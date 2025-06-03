@@ -38,8 +38,8 @@ const ToolsNavigation: React.FC = () => {
       icon: 'testimonial'
     },
     {
-      name: 'Calculators',
-      href: '/calculators',
+      name: 'Tools',
+      href: '/edutools',
       icon: 'tools'
     },
     {
