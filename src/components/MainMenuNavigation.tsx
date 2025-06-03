@@ -26,7 +26,7 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
   const { getIcon } = useTheme();
 
   return (
-    <nav className="hidden lg:flex items-center space-x-2 mt-[35px]">
+    <nav className="hidden lg:flex items-stretch justify-left space-x-2 mt-[35px]">
       {mainNavItems.map(item => 
         <div key={item.name} className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap !rounded-t-lg relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-lg tab-curved' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} style={isActiveRoute(item.href) ? {
           marginBottom: '-6px',
