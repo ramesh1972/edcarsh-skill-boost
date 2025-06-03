@@ -20,7 +20,7 @@ const Index = () => {
       <section 
         className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px]"
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -124,7 +124,7 @@ const Index = () => {
 
       {/* Featured Courses */}
       <section 
-        className="py-20"
+        className="py-20 round-b-[20px]"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.6)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
           backgroundSize: 'cover',
@@ -194,7 +194,7 @@ const Index = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="py-20 bg-primary text-primary-foreground round-[10px]">
         <div className="container px-4 mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
@@ -218,7 +218,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-muted/50">
+      <section className="py-20 bg-muted/50 round-[10px]">
         <div className="container px-4 mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">What Our Students Say</h2>
@@ -244,7 +244,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-blue-600 text-white round-b-[20px]">
+      <section className="py-20 bg-gradient-to-r from-primary to-blue-600 text-white round-[20px]">
         <div className="container px-4 mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Crash Your Way to Success?</h2>
           <p className="text-xl mb-8 opacity-90">
