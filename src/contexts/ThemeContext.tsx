@@ -18,6 +18,7 @@ interface ThemeContextType {
   getAvatar: (avatarName: string) => string;
   getBackground: () => string;
   getSkinClasses: () => string;
+  getLayoutClasses: () => string;
 }
 
 const defaultTheme: ThemeConfig = {
@@ -176,13 +177,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.classList.remove('ocean', 'sunset', 'forest', 'lavender', 'monochrome');
     body.classList.remove('font-technical', 'font-professional', 'font-elegant', 'font-modern', 'font-playful');
     root.classList.remove('material-design', 'human-interface', 'fluent-design', 'ant-design', 'carbon-design', 'atlassian-design', 'bootstrap-design', 'polaris-design', 'lightning-design', 'tailwind-design');
-    root.classList.remove('layout-compact', 'layout-spacious', 'layout-modern', 'layout-default');
     root.classList.remove('skin-default', 'skin-gradient', 'skin-textured', 'skin-glassmorphism');
     
-    // Apply current theme classes
+    // Apply current theme classes (excluding layout - that's handled per component now)
     root.classList.add(theme.colorTheme);
     root.classList.add(`${theme.designSystem}-design`);
-    root.classList.add(`layout-${theme.layout}`);
     root.classList.add(`skin-${theme.skin}`);
     
     // Apply typography to body
@@ -378,6 +377,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return `skin-${theme.skin}`;
   };
 
+  const getLayoutClasses = (): string => {
+    return `layout-${theme.layout}`;
+  };
+
   const updateTheme = (updates: Partial<ThemeConfig>) => {
     setTheme(prev => ({ ...prev, ...updates }));
   };
@@ -394,7 +397,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       getIcon, 
       getAvatar, 
       getBackground,
-      getSkinClasses
+      getSkinClasses,
+      getLayoutClasses
     }}>
       {children}
     </ThemeContext.Provider>

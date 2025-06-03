@@ -5,7 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { Header } from "@/components/Header";
 import Index from "./pages/Index";
 import Courses from "./pages/Courses";
@@ -24,6 +24,7 @@ const queryClient = new QueryClient();
 const AppContent = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { getLayoutClasses } = useTheme();
 
   useEffect(() => {
     // Check if this is a fresh app load (not a navigation within the app)
@@ -48,7 +49,7 @@ const AppContent = () => {
         <Header />
         
         {/* Inner div - absolute positioned with 15px left/right, adjusted for 80px header, 60px bottom for tabs */}
-        <div className="relative overflow-auto !left-[15px] right-[15px] !rounded-l-[40px]" style={{ 
+        <div className={`relative overflow-auto !left-[15px] right-[15px] !rounded-l-[40px] ${getLayoutClasses()}`} style={{ 
           width: 'calc(100vw - 30px)',
           height: 'calc(100vh - 132px)'
         }}>
