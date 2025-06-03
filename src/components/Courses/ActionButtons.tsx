@@ -12,6 +12,7 @@ interface ActionButtonsProps {
   isDisabled?: boolean;
   courseId?: number;
   nextSession?: string;
+  onViewClick?: () => void;
 }
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({ 
@@ -20,13 +21,16 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   showJoinAsGuest = true,
   isDisabled = false,
   courseId,
-  nextSession
+  nextSession,
+  onViewClick
 }) => {
   const { theme } = useTheme();
   const navigate = useNavigate();
 
   const handleViewClick = () => {
-    if (courseId) {
+    if (onViewClick) {
+      onViewClick();
+    } else if (courseId) {
       navigate(`/courses/${courseId}`);
     }
   };

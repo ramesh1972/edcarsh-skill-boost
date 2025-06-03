@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getSubjectColor } from '@/data/masterData';
+import { useNavigate } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import { Wifi, WifiOff, Wrench } from 'lucide-react';
@@ -38,12 +39,23 @@ interface Course {
 
 interface ShortCourseCardProps {
   course: Course;
+  referrerRoute?: string;
+  referrerName?: string;
 }
 
 const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
-  course
+  course,
+  referrerRoute = '/courses',
+  referrerName = 'Courses'
 }) => {
   const { theme } = useTheme();
+  const navigate = useNavigate();
+
+  const handleViewClick = () => {
+    navigate(`/courses/${course.id}`, {
+      state: { from: referrerRoute, fromName: referrerName }
+    });
+  };
   
   return (
     <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
@@ -107,6 +119,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
           <ActionButtons 
             courseId={course.id} 
             nextSession={course.nextSession}
+            onViewClick={handleViewClick}
           />
         </div>
       </CardContent>

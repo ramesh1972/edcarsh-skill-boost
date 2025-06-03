@@ -1,6 +1,5 @@
-
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -15,9 +14,36 @@ import ActionButtons from './ActionButtons';
 const CourseView: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const { theme, getBackground } = useTheme();
+  const [referrerRoute, setReferrerRoute] = useState('/courses');
+  const [referrerName, setReferrerName] = useState('Courses');
   
   const course = courses.find(c => c.id === parseInt(id || '0'));
+
+  useEffect(() => {
+    // Get the referrer from location state or session storage
+    const state = location.state as { from?: string; fromName?: string } | null;
+    const storedReferrer = sessionStorage.getItem('courseViewReferrer');
+    const storedReferrerName = sessionStorage.getItem('courseViewReferrerName');
+
+    if (state?.from) {
+      setReferrerRoute(state.from);
+      setReferrerName(state.fromName || 'Back');
+      sessionStorage.setItem('courseViewReferrer', state.from);
+      sessionStorage.setItem('courseViewReferrerName', state.fromName || 'Back');
+    } else if (storedReferrer) {
+      setReferrerRoute(storedReferrer);
+      setReferrerName(storedReferrerName || 'Back');
+    }
+  }, [location]);
+
+  const handleBackClick = () => {
+    // Clear the stored referrer
+    sessionStorage.removeItem('courseViewReferrer');
+    sessionStorage.removeItem('courseViewReferrerName');
+    navigate(referrerRoute);
+  };
 
   if (!course) {
     return (
@@ -25,7 +51,7 @@ const CourseView: React.FC = () => {
         <Card className="p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Course Not Found</h2>
           <p className="mb-4">The course you're looking for doesn't exist.</p>
-          <Button onClick={() => navigate('/courses')}>Back to Courses</Button>
+          <Button onClick={handleBackClick}>Back to {referrerName}</Button>
         </Card>
       </div>
     );
@@ -37,11 +63,11 @@ const CourseView: React.FC = () => {
         {/* Back button */}
         <Button 
           variant="outline" 
-          onClick={() => navigate('/courses')} 
+          onClick={handleBackClick} 
           className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Courses
+          Back to {referrerName}
         </Button>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
