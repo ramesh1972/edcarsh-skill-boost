@@ -76,7 +76,9 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
 
         {/* Course Info Card - moved below image */}
-        <CourseInfoCard className="mb-2" duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
+        <div className="mb-2">
+          <CourseInfoCard duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
+        </div>
 
         {/* Action Buttons aligned to bottom */}
         <div className="mt-auto">

@@ -60,7 +60,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
           </div>
           
           {/* Spacer to push stats and price to bottom */}
-          <div className="flex-1"></div>
+          <div className="flex-1 p-2">
           
           {/* Course Info Card - aligned to bottom */}
           <CourseInfoCard 
@@ -69,6 +69,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
             price={course.price}
             nextSession={course.nextSession}
           />
+            </div>
         </div>
 
         {/* Right side - 3 columns structure */}
