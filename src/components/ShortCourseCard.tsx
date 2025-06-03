@@ -100,27 +100,8 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
           </div>
         </div>
 
-        {/* Instructor Section */}
+        {/* Action Buttons aligned to bottom and right */}
         <div className="mt-auto">
-          <div className="flex items-start gap-3 mb-4">
-            <img src={course.instructor.image} alt={course.instructor.name} className="w-10 h-10 rounded-full object-cover" />
-            <div className="text-sm text-muted-foreground flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <p className="font-medium text-foreground">{course.instructor.name}</p>
-                <Button variant="ghost" size="sm" className="text-xs px-2 h-6">
-                  About
-                </Button>
-              </div>
-              <p className="text-xs mb-1">{course.instructor.experience} experience</p>
-              <p className="text-xs mb-1 flex items-center gap-1">
-                <span>{course.instructor.flag}</span>
-                {course.instructor.city}, {course.instructor.country}
-              </p>
-              <p className="text-xs line-clamp-3 max-h-12 overflow-hidden">{course.instructor.description}</p>
-            </div>
-          </div>
-
-          {/* Action Buttons aligned to bottom and right */}
           <div className="flex gap-4 justify-end">
             <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
               <Eye className="h-3 w-3" />
