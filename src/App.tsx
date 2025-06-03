@@ -38,7 +38,7 @@ const App = () => (
               top: '60px', 
               bottom: '60px',
               width: 'calc(100vw - 30px)',
-              height: 'calc(100vh - 120px)',
+              height: 'calc(100vh - 140px)',
               borderTopLeftRadius: '40px',
               borderBottomLeftRadius: '40px'
             }}>
