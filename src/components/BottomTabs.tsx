@@ -102,12 +102,12 @@ const BottomTabs: React.FC = () => {
               style={isActiveRoute(item.href) ? {
                 marginTop: '-2px',
                 marginBottom: '7px',
-                paddingTop: '17px',
+                paddingTop: '18px',
                 zIndex: 20
               } : {
                 marginTop: '-2px',
                 marginBottom: '7px',
-                paddingTop: '17px',
+                paddingTop: '18px',
                 zIndex: 18
               }}
             >
