@@ -138,7 +138,7 @@ const Courses = () => {
                 {/* Topics Covered - Fixed height for alignment */}
                 <div className="flex-shrink-0">
                   <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-                  <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
+                  <div className="flex flex-wrap mb-1 gap-1 h-[60px] content-start overflow-hidden">
                     {course.topics.map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                         {topic}
                       </Badge>)}
@@ -146,7 +146,7 @@ const Courses = () => {
                 </div>
 
                 {/* Course Details - Fixed position */}
-                <div className="flex items-center justify-between text-sm mb-2 flex-shrink-0">
+                <div className="flex items-center justify-between text-sm mb-1 flex-shrink-0">
                   <div className="flex items-center gap-1">
                     {getIcon('time')}
                     {course.duration}
@@ -158,7 +158,7 @@ const Courses = () => {
                 </div>
 
                 {/* Price and Session - Fixed position */}
-                <div className="flex items-center justify-between mb-3 flex-shrink-0">
+                <div className="flex items-center justify-between mb-2 flex-shrink-0">
                   <Badge variant="secondary" className="flex items-center gap-1">
                     {getIcon('price')}
                     {course.price}
