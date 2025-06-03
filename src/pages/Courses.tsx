@@ -1,5 +1,3 @@
-
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,9 +6,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
 import { Heart, Eye, Filter } from 'lucide-react';
-
 const Courses = () => {
-  const { theme, getIcon, getBackground } = useTheme();
+  const {
+    theme,
+    getIcon,
+    getBackground
+  } = useTheme();
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [levelFilter, setLevelFilter] = useState('all');
   const [sortBy, setSortBy] = useState('title');
@@ -42,12 +43,9 @@ const Courses = () => {
           return 0;
       }
     });
-
     return filtered;
   }, [categoryFilter, levelFilter, sortBy]);
-
-  return (
-    <div className={`min-h-full bg-background ${getBackground()}`}>
+  return <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-8">
           <h1 className={`text-4xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
@@ -72,11 +70,9 @@ const Courses = () => {
                   <SelectValue placeholder="Category" />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map(category => (
-                    <SelectItem key={category} value={category}>
+                  {categories.map(category => <SelectItem key={category} value={category}>
                       {category === 'all' ? 'All Categories' : category}
-                    </SelectItem>
-                  ))}
+                    </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -87,11 +83,9 @@ const Courses = () => {
                   <SelectValue placeholder="Level" />
                 </SelectTrigger>
                 <SelectContent>
-                  {levels.map(level => (
-                    <SelectItem key={level} value={level}>
+                  {levels.map(level => <SelectItem key={level} value={level}>
                       {level === 'all' ? 'All Levels' : level}
-                    </SelectItem>
-                  ))}
+                    </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -117,24 +111,10 @@ const Courses = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[5px]">
-          {filteredAndSortedCourses.map((course) => (
-            <Card 
-              key={course.id} 
-              className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${
-                theme.designSystem === 'material' ? 'shadow-md' : 
-                theme.designSystem === 'fluent' ? 'border-2' : 
-                'hover:shadow-lg'
-              } ${
-                theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
-              }`}
-            >
+          {filteredAndSortedCourses.map(course => <Card key={course.id} className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
               {/* Course Image */}
               <div className="relative h-48 overflow-hidden flex-shrink-0">
-                <img 
-                  src={course.image} 
-                  alt={course.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                />
+                <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
                 <div className="absolute top-2 right-2">
                   <Badge variant="secondary" className="bg-white/90 text-black">
                     {course.level}
@@ -142,7 +122,7 @@ const Courses = () => {
                 </div>
               </div>
 
-              <CardHeader className="pb-2 h-32 flex flex-col justify-start flex-shrink-0">
+              <CardHeader className="pb-2 mb-1 h-32   flex flex-col justify-start flex-shrink-0">
                 <div className="flex items-start justify-between">
                   <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
                     {course.title}
@@ -158,12 +138,10 @@ const Courses = () => {
                 {/* Topics Covered - Fixed height for alignment */}
                 <div className="flex-shrink-0">
                   <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-                  <div className="flex flex-wrap gap-1 h-[80px] content-start overflow-hidden">
-                    {course.topics.map((topic, index) => (
-                      <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+                  <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
+                    {course.topics.map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                         {topic}
-                      </Badge>
-                    ))}
+                      </Badge>)}
                   </div>
                 </div>
 
@@ -180,7 +158,7 @@ const Courses = () => {
                 </div>
 
                 {/* Price and Session - Fixed position */}
-                <div className="flex items-center justify-between mb-2 flex-shrink-0">
+                <div className="flex items-center justify-between mb-3 flex-shrink-0">
                   <Badge variant="secondary" className="flex items-center gap-1">
                     {getIcon('price')}
                     {course.price}
@@ -193,41 +171,21 @@ const Courses = () => {
 
                 {/* Action Buttons - Always at bottom */}
                 <div className="flex gap-2 mt-auto">
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="flex-1 flex items-center gap-1"
-                  >
+                  <Button variant="outline" size="sm" className="flex-1 flex items-center gap-1">
                     <Eye className="h-3 w-3" />
                     View
                   </Button>
-                  <Button 
-                    size="sm"
-                    className={`flex-1 ${
-                      theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' :
-                      theme.designSystem === 'human' ? 'rounded-lg' :
-                      theme.designSystem === 'fluent' ? 'rounded-sm' :
-                      ''
-                    }`}
-                  >
+                  <Button size="sm" className={`flex-1 ${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
                     Enroll Now
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="px-2"
-                  >
+                  <Button variant="outline" size="sm" className="px-2">
                     <Heart className="h-3 w-3" />
                   </Button>
                 </div>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Courses;
-
