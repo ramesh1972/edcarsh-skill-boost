@@ -1,5 +1,3 @@
-
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -192,11 +190,11 @@ const Courses = () => {
                 </CardHeader>
 
                 <CardContent className="flex-1 flex flex-col">
-                  {/* Topics Covered - Fixed height for alignment */}
+                  {/* Topics Covered - Fixed height for alignment, max 8 topics */}
                   <div className="flex-shrink-0 mb-4">
                     <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                     <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
-                      {course.topics.slice(0, 5).map((topic, index) => (
+                      {course.topics.slice(0, 8).map((topic, index) => (
                         <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                           {topic}
                         </Badge>
@@ -204,9 +202,8 @@ const Courses = () => {
                     </div>
                   </div>
 
-                  {/* Instructor Section with Buttons */}
+                  {/* Instructor Section */}
                   <div className="mt-auto">
-                    <h4 className="text-sm font-medium mb-2">Instructor:</h4>
                     <div className="flex items-start gap-3 mb-4">
                       <img 
                         src={course.instructor.image} 
@@ -217,9 +214,12 @@ const Courses = () => {
                         <p className="font-medium text-foreground">{course.instructor.name}</p>
                         <p className="text-xs">{course.instructor.experience} experience</p>
                       </div>
+                      <Button variant="ghost" size="sm" className="text-xs px-2">
+                        About
+                      </Button>
                     </div>
 
-                    {/* Action Buttons */}
+                    {/* Action Buttons aligned to bottom */}
                     <div className="flex gap-2">
                       <Button variant="outline" size="sm" className="flex-1 flex items-center gap-1 border-2">
                         <Eye className="h-3 w-3" />
@@ -232,11 +232,6 @@ const Courses = () => {
                         <Heart className="h-3 w-3" />
                       </Button>
                     </div>
-                    
-                    <Button variant="ghost" size="sm" className="w-full mt-2 flex items-center gap-1 text-xs">
-                      <User className="h-3 w-3" />
-                      View Instructor Details
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -305,11 +300,11 @@ const Courses = () => {
                         <p className="text-sm text-muted-foreground">{course.longDescription}</p>
                       </div>
 
-                      {/* Column 2: Topics */}
+                      {/* Column 2: Topics - max 8 topics */}
                       <div className="col-span-1">
                         <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                         <ul className="text-sm space-y-1">
-                          {course.longTopics.slice(0, 10).map((topic, index) => (
+                          {course.longTopics.slice(0, 8).map((topic, index) => (
                             <li key={index} className="flex items-center gap-2">
                               <span className="w-1 h-1 bg-current rounded-full flex-shrink-0"></span>
                               {topic}
@@ -318,25 +313,29 @@ const Courses = () => {
                         </ul>
                       </div>
 
-                      {/* Column 3: About Instructor with Buttons */}
-                      <div className="col-span-1">
-                        <h4 className="text-sm font-medium mb-2">About Instructor:</h4>
-                        <div className="flex items-start gap-3 mb-4">
+                      {/* Column 3: About Instructor */}
+                      <div className="col-span-1 flex flex-col">
+                        <div className="flex items-start gap-3 mb-4 flex-1">
                           <img 
                             src={course.instructor.image} 
                             alt={course.instructor.name}
                             className="w-12 h-12 rounded-full object-cover"
                           />
-                          <div className="text-sm text-muted-foreground">
-                            <p className="font-medium text-foreground mb-1">{course.instructor.name}</p>
+                          <div className="text-sm text-muted-foreground flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <p className="font-medium text-foreground">{course.instructor.name}</p>
+                              <Button variant="ghost" size="sm" className="text-xs px-2 h-6">
+                                About
+                              </Button>
+                            </div>
                             <p className="mb-1">Expert in {course.instructor.specialty}</p>
                             <p className="mb-1">{course.level} level specialist</p>
                             <p>Teaching for {course.instructor.experience}</p>
                           </div>
                         </div>
 
-                        {/* Action Buttons in Instructor Section */}
-                        <div className="space-y-2">
+                        {/* Action Buttons aligned to bottom */}
+                        <div className="mt-auto">
                           <div className="flex gap-2">
                             <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
                               <Eye className="h-3 w-3" />
@@ -349,11 +348,6 @@ const Courses = () => {
                               <Heart className="h-3 w-3" />
                             </Button>
                           </div>
-                          
-                          <Button variant="ghost" size="sm" className="w-full flex items-center gap-1 text-xs">
-                            <User className="h-3 w-3" />
-                            View Instructor Details
-                          </Button>
                         </div>
                       </div>
                     </div>
@@ -369,4 +363,3 @@ const Courses = () => {
 };
 
 export default Courses;
-
