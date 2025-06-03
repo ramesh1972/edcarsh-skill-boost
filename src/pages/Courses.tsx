@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -8,7 +7,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
 import { Filter, LayoutGrid, List } from 'lucide-react';
 import CourseCard from '@/components/CourseCard';
-import LongCourseCard from '@/components/LongCourseCard';
+import LongCourseCard from '@/components/Courses/LongCourseCard';
 
 const Courses = () => {
   const {
