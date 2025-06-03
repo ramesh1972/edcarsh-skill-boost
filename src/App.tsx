@@ -31,13 +31,13 @@ const App = () => (
             <Header />
             
             {/* Inner div - absolute positioned with 15px left/right, 64px top, 60px bottom for tabs */}
-            <div className="absolute overflow-auto" style={{ 
+            <div className="absolute overflow-auto rounded-tl-2xl" style={{ 
               left: '15px', 
               right: '15px', 
               top: '64px', 
-              bottom: '40px',
+              bottom: '60px',
               width: 'calc(100vw - 30px)',
-              height: 'calc(100vh - 104px)'
+              height: 'calc(100vh - 124px)'
             }}>
               <Toaster />
               <Sonner />
