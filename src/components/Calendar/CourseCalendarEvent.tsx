@@ -139,24 +139,27 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         <div className="text-xs font-semibold text-red-600 mt-1">
           Session - {sessionNumber}
         </div>
-        {joinButtonState.show ? (
-          <Button 
-            size="sm" 
-            className="text-xs mt-1 h-5 px-2"
-            disabled={!joinButtonState.enabled}
-          >
-            Join Now
-          </Button>
-        ) : showJoinAsGuest && (
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="text-xs mt-1 h-5 px-1 flex items-center gap-1"
-          >
-            <UserPlus className="h-2 w-2" />
-            Guest
-          </Button>
-        )}
+        <div className="flex gap-1 mt-1">
+          {joinButtonState.show && (
+            <Button 
+              size="sm" 
+              className="text-xs h-5 px-2"
+              disabled={!joinButtonState.enabled}
+            >
+              Join Now
+            </Button>
+          )}
+          {showJoinAsGuest && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="text-xs h-5 px-1 flex items-center gap-1"
+            >
+              <UserPlus className="h-2 w-2" />
+              Guest
+            </Button>
+          )}
+        </div>
       </div>
     );
   }
@@ -185,24 +188,27 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         <div className="text-xs font-semibold text-red-600 mt-1 bg-red-50 px-1 py-0.5 rounded">
           Session - {sessionNumber}
         </div>
-        {joinButtonState.show ? (
-          <Button 
-            size="sm" 
-            className="text-xs mt-1 h-6 px-2 w-full"
-            disabled={!joinButtonState.enabled}
-          >
-            Join Now
-          </Button>
-        ) : showJoinAsGuest && (
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="text-xs mt-1 h-6 px-2 w-full flex items-center gap-1"
-          >
-            <UserPlus className="h-3 w-3" />
-            Guest
-          </Button>
-        )}
+        <div className="flex gap-1 mt-1">
+          {joinButtonState.show && (
+            <Button 
+              size="sm" 
+              className="text-xs h-6 px-2 flex-1"
+              disabled={!joinButtonState.enabled}
+            >
+              Join Now
+            </Button>
+          )}
+          {showJoinAsGuest && (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="text-xs h-6 px-2 flex-1 flex items-center gap-1"
+            >
+              <UserPlus className="h-3 w-3" />
+              Guest
+            </Button>
+          )}
+        </div>
       </div>
     );
   }
