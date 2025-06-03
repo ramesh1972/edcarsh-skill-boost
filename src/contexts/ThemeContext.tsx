@@ -191,6 +191,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     // Apply design system specific styles
     applyDesignSystemStyles(theme.designSystem);
     
+    // Apply layout specific styles
+    applyLayoutStyles(theme.layout);
+    
     // Apply color theme variables
     applyColorTheme(theme.colorTheme);
     
@@ -203,6 +206,38 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       typography: `font-${theme.typography}`
     });
   }, [theme]);
+
+  const applyLayoutStyles = (layout: string) => {
+    const root = document.documentElement;
+    
+    // Apply layout specific CSS custom properties for inner content
+    switch (layout) {
+      case 'compact':
+        root.style.setProperty('--content-padding', '0.75rem');
+        root.style.setProperty('--content-gap', '0.75rem');
+        root.style.setProperty('--card-padding', '1rem');
+        root.style.setProperty('--section-spacing', '1.5rem');
+        break;
+      case 'spacious':
+        root.style.setProperty('--content-padding', '2rem');
+        root.style.setProperty('--content-gap', '2rem');
+        root.style.setProperty('--card-padding', '2rem');
+        root.style.setProperty('--section-spacing', '3rem');
+        break;
+      case 'modern':
+        root.style.setProperty('--content-padding', '1.5rem');
+        root.style.setProperty('--content-gap', '1.5rem');
+        root.style.setProperty('--card-padding', '1.75rem');
+        root.style.setProperty('--section-spacing', '2.5rem');
+        break;
+      default: // default
+        root.style.setProperty('--content-padding', '1rem');
+        root.style.setProperty('--content-gap', '1rem');
+        root.style.setProperty('--card-padding', '1.5rem');
+        root.style.setProperty('--section-spacing', '2rem');
+        break;
+    }
+  };
 
   const applyDesignSystemStyles = (designSystem: string) => {
     const root = document.documentElement;
