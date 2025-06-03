@@ -4,9 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
-import { Filter, LayoutGrid, List, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Filter, LayoutGrid, List, Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, addDays, addWeeks, addMonths, subDays, subWeeks, subMonths, isSameDay, isAfter, parseISO } from 'date-fns';
 import CourseCard from '@/components/Courses/CourseCard';
 import LongCourseCard from '@/components/Courses/LongCourseCard';
@@ -90,11 +92,18 @@ const Courses = () => {
         endDate = new Date(currentDate);
     }
 
-    return futureCourses.filter(course => {
+    return courses.filter(course => {
       const courseStartDate = parseISO(course.startDate);
-      return courseStartDate >= startDate && courseStartDate <= endDate;
+      const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
+      const levelMatch = levelFilter === 'all' || course.level === levelFilter;
+      
+      if (calendarViewMode === 'day') {
+        return categoryMatch && levelMatch && isSameDay(courseStartDate, currentDate);
+      }
+      
+      return categoryMatch && levelMatch && courseStartDate >= startDate && courseStartDate <= endDate;
     });
-  }, [calendarViewMode, currentDate, futureCourses]);
+  }, [calendarViewMode, currentDate, categoryFilter, levelFilter]);
 
   const navigatePeriod = (direction: 'prev' | 'next') => {
     setCurrentDate(prev => {
@@ -152,9 +161,11 @@ const Courses = () => {
       return (
         <div className="grid grid-cols-7 gap-2">
           {weekDays.map(day => {
-            const dayCourses = futureCourses.filter(course => 
-              isSameDay(parseISO(course.startDate), day)
-            );
+            const dayCourses = courses.filter(course => {
+              const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
+              const levelMatch = levelFilter === 'all' || course.level === levelFilter;
+              return categoryMatch && levelMatch && isSameDay(parseISO(course.startDate), day);
+            });
             
             return (
               <div key={day.toISOString()} className="border rounded-lg p-2 min-h-[200px]">
@@ -198,9 +209,11 @@ const Courses = () => {
         
         {/* Calendar days */}
         {calendarDays.map(day => {
-          const dayCourses = futureCourses.filter(course => 
-            isSameDay(parseISO(course.startDate), day)
-          );
+          const dayCourses = courses.filter(course => {
+            const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
+            const levelMatch = levelFilter === 'all' || course.level === levelFilter;
+            return categoryMatch && levelMatch && isSameDay(parseISO(course.startDate), day);
+          });
           
           const isCurrentMonth = day.getMonth() === currentDate.getMonth();
           const isToday = isSameDay(day, new Date());
@@ -260,7 +273,7 @@ const Courses = () => {
                 List
               </ToggleGroupItem>
               <ToggleGroupItem value="calendar" aria-label="Calendar view">
-                <Calendar className="h-4 w-4" />
+                <CalendarIcon className="h-4 w-4" />
                 Calendar
               </ToggleGroupItem>
             </ToggleGroup>
@@ -277,9 +290,23 @@ const Courses = () => {
               <Button variant="outline" size="sm" onClick={() => navigatePeriod('prev')}>
                 <ChevronLeft className="h-4 w-4" />
               </Button>
-              <div className="font-medium min-w-[200px] text-center text-sm">
-                {getViewTitle()}
-              </div>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" size="sm" className="min-w-[200px] text-center">
+                    <CalendarIcon className="h-4 w-4 mr-2" />
+                    {getViewTitle()}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="center">
+                  <Calendar
+                    mode="single"
+                    selected={currentDate}
+                    onSelect={(date) => date && setCurrentDate(date)}
+                    initialFocus
+                    className="p-3 pointer-events-auto"
+                  />
+                </PopoverContent>
+              </Popover>
               <Button variant="outline" size="sm" onClick={() => navigatePeriod('next')}>
                 <ChevronRight className="h-4 w-4" />
               </Button>
