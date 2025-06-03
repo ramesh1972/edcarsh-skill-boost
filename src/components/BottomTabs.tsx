@@ -100,12 +100,14 @@ const BottomTabs: React.FC = () => {
                   : 'text-primary-foreground hover:bg-primary-foreground/10'
               }`}
               style={isActiveRoute(item.href) ? {
-                marginTop: '-10px',
-                paddingTop: '20px',
+                marginTop: '-12px',
+                marginBottom: '2px',
+                paddingTop: '24px',
                 zIndex: 20
               } : {
-                marginTop: '-10px',
-                paddingTop: '20px',
+                marginTop: '-12px',
+                marginBottom: '2px',
+                paddingTop: '24px',
                 zIndex: 18
               }}
             >
