@@ -1,8 +1,9 @@
-
 import React, { useMemo, useState } from 'react';
 import { Course } from '@/types';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { ZoomIn, ZoomOut } from 'lucide-react';
 import { getAllIndustries, getSubjectsByIndustry, getAllSubjects } from '@/data/masterData';
 
 interface PopularCoursesMapViewProps {
@@ -13,6 +14,15 @@ type ViewMode = 'courses' | 'industry' | 'subject' | 'topic';
 
 const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('courses');
+  const [zoomLevel, setZoomLevel] = useState(1);
+
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 0.2, 3));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 0.2, 0.3));
+  };
 
   // Calculate data based on view mode
   const mapData = useMemo(() => {
@@ -335,54 +345,85 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           </div>
         </div>
       )}
+
+      {/* Zoom Controls */}
+      <div className="mb-4 flex gap-2 items-center">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleZoomOut}
+          disabled={zoomLevel <= 0.3}
+        >
+          <ZoomOut className="h-4 w-4" />
+        </Button>
+        <span className="text-sm text-muted-foreground min-w-[60px] text-center">
+          {Math.round(zoomLevel * 100)}%
+        </span>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={handleZoomIn}
+          disabled={zoomLevel >= 3}
+        >
+          <ZoomIn className="h-4 w-4" />
+        </Button>
+      </div>
       
       {/* Radial Map */}
       <div className="flex justify-center items-center w-full h-full flex-1">
-        <div className="relative w-full h-full min-h-[1000px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-gray-200 overflow-visible">
-          {/* Center point */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
-            Center
-          </div>
-          
-          {/* Concentric circles - only show for courses view */}
-          {viewMode === 'courses' && (
-            <>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] border-2 border-red-300 rounded-full opacity-30"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border-2 border-orange-300 rounded-full opacity-30"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border-2 border-amber-300 rounded-full opacity-30"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] border-2 border-lime-300 rounded-full opacity-30"></div>
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1400px] h-[1400px] border-2 border-emerald-300 rounded-full opacity-30"></div>
-            </>
-          )}
-          
-          {/* Map items positioned radially */}
-          {mapData.map((item) => (
-            <div
-              key={item.id}
-              className="absolute cursor-pointer hover:opacity-80 transition-opacity group"
-              style={{
-                left: `calc(50% + ${item.x}px)`,
-                top: `calc(50% + ${item.y}px)`,
-                transform: 'translate(-50%, -50%)',
-                fontSize: `${item.fontSize}px`,
-                color: item.color,
-                fontWeight: viewMode === 'courses' 
-                  ? (item.studentRatio > 0.7 ? 'bold' : item.studentRatio > 0.4 ? 'semibold' : 'medium')
-                  : 'bold',
-                textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-                maxWidth: viewMode === 'courses' ? '100px' : '150px',
-                height: 'auto'
-              }}
-            >
-              {getDisplayContent(item)}
-              
-              {/* Tooltip on hover */}
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs rounded px-2 py-1 whitespace-nowrap z-20">
-                {getTooltipContent(item)}
-              </div>
+        <div className="relative w-full h-full min-h-[1000px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-gray-200 overflow-hidden">
+          <div 
+            className="absolute inset-0 transition-transform duration-300 ease-out"
+            style={{ 
+              transform: `scale(${zoomLevel})`,
+              transformOrigin: 'center center'
+            }}
+          >
+            {/* Center point */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
+              Center
             </div>
-          ))}
+            
+            {/* Concentric circles - only show for courses view */}
+            {viewMode === 'courses' && (
+              <>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] border-2 border-red-300 rounded-full opacity-30"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border-2 border-orange-300 rounded-full opacity-30"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border-2 border-amber-300 rounded-full opacity-30"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] border-2 border-lime-300 rounded-full opacity-30"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1400px] h-[1400px] border-2 border-emerald-300 rounded-full opacity-30"></div>
+              </>
+            )}
+            
+            {/* Map items positioned radially */}
+            {mapData.map((item) => (
+              <div
+                key={item.id}
+                className="absolute cursor-pointer hover:opacity-80 transition-opacity group"
+                style={{
+                  left: `calc(50% + ${item.x}px)`,
+                  top: `calc(50% + ${item.y}px)`,
+                  transform: 'translate(-50%, -50%)',
+                  fontSize: `${item.fontSize}px`,
+                  color: item.color,
+                  fontWeight: viewMode === 'courses' 
+                    ? (item.studentRatio > 0.7 ? 'bold' : item.studentRatio > 0.4 ? 'semibold' : 'medium')
+                    : 'bold',
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+                  maxWidth: viewMode === 'courses' ? '100px' : '150px',
+                  height: 'auto'
+                }}
+              >
+                {getDisplayContent(item)}
+                
+                {/* Tooltip on hover */}
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs rounded px-2 py-1 whitespace-nowrap z-20">
+                  {getTooltipContent(item)}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       
