@@ -24,7 +24,7 @@ const Index = () => {
     }}>
         <div className="container px-4 mx-auto rounded-[20px]">
           <div className="text-center">
-            <Badge className="mb-4" variant="secondary" style={{font-size: '12px'}}>
+            <Badge className="mb-4" variant="secondary" style={{fontSize: '12px'}}>
               🚀 Launch Your Skills in Hours, Not Months
             </Badge>
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6 text-white">
