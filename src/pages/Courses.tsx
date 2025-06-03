@@ -50,8 +50,7 @@ const Courses = () => {
     return filtered;
   }, [categoryFilter, levelFilter, sortBy]);
 
-  return (
-    <div className={`min-h-full bg-background ${getBackground()}`}>
+  return <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-8">
           <h1 className={`text-4xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
@@ -93,11 +92,9 @@ const Courses = () => {
                   <SelectValue placeholder="Category" />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map(category => (
-                    <SelectItem key={category} value={category}>
+                  {categories.map(category => <SelectItem key={category} value={category}>
                       {category === 'all' ? 'All Categories' : category}
-                    </SelectItem>
-                  ))}
+                    </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -108,11 +105,9 @@ const Courses = () => {
                   <SelectValue placeholder="Level" />
                 </SelectTrigger>
                 <SelectContent>
-                  {levels.map(level => (
-                    <SelectItem key={level} value={level}>
+                  {levels.map(level => <SelectItem key={level} value={level}>
                       {level === 'all' ? 'All Levels' : level}
-                    </SelectItem>
-                  ))}
+                    </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -140,8 +135,7 @@ const Courses = () => {
         {/* Card View */}
         {viewMode === 'card' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredAndSortedCourses.map(course => (
-              <Card key={course.id} className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+            {filteredAndSortedCourses.map(course => <Card key={course.id} className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
                 {/* Course Image */}
                 <div className="relative h-48 overflow-hidden flex-shrink-0">
                   <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
@@ -193,11 +187,9 @@ const Courses = () => {
                   <div className="flex-shrink-0">
                     <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                     <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
-                      {course.topics.slice(0, 5).map((topic, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+                      {course.topics.slice(0, 5).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                           {topic}
-                        </Badge>
-                      ))}
+                        </Badge>)}
                     </div>
                   </div>
 
@@ -215,8 +207,7 @@ const Courses = () => {
                     </Button>
                   </div>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         )}
 
@@ -226,9 +217,8 @@ const Courses = () => {
             {filteredAndSortedCourses.map(course => (
               <Card key={course.id} className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
                 <div className="flex">
-                  {/* Image Section */}
-                  <div className="flex-shrink-0 w-48">
-                    <div className="relative h-48 overflow-hidden">
+                  <div className="grid grid-cols-1 grid-rows-2 md:grid-cols-1 lg:grid-rows-2 gap-1">
+                    <div className="relative h-48 overflow-hidden flex-shrink-0">
                       <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
                       <div className="absolute top-2 right-2">
                         <Badge variant="secondary" className="bg-white/90 text-black">
@@ -236,34 +226,38 @@ const Courses = () => {
                         </Badge>
                       </div>
                     </div>
-                    
-                    {/* Stats below image */}
-                    <div className="p-4 pb-2 flex flex-col gap-2 text-sm border-b">
-                      <div className="flex items-center gap-1">
-                        {getIcon('time')}
-                        {course.duration}
+      
+                    <div className="grid grid-cols-1 grid-rows-2 md:grid-cols-1 lg:grid-rows-2 gap-1 w-200">
+                      {/* Course Details - moved below image */}
+                      <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
+                        <div className="flex items-center gap-1">
+                          {getIcon('time')}
+                          {course.duration}
+                        </div>
+                        <div className="flex items-center gap-1">
+                          {getIcon('student')}
+                          {course.students} enrolled
+                        </div>
                       </div>
-                      <div className="flex items-center gap-1">
-                        {getIcon('student')}
-                        {course.students} enrolled
+                  
+                      {/* Price and Session - moved below image */}
+                      <div className="px-4 py-2 flex items-center justify-between border-b">
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                          {getIcon('price')}
+                          {course.price}
+                        </Badge>
+                        <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                          📅
+                          {course.nextSession}
+                        </div>
                       </div>
-                    </div>
-                    
-                    {/* Price and Session below stats */}
-                    <div className="px-4 py-2 flex flex-col gap-2">
-                      <Badge variant="secondary" className="flex items-center gap-1 w-fit">
-                        {getIcon('price')}
-                        {course.price}
-                      </Badge>
-                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                        📅
-                        {course.nextSession}
-                      </div>
-                    </div>
                   </div>
+
+                  
                   
                   {/* Course Content */}
                   <div className="flex-1 p-6">
+
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
@@ -315,8 +309,7 @@ const Courses = () => {
           </div>
         )}
       </div>
-    </div>
-  );
+    </div>;
 };
 
 export default Courses;
