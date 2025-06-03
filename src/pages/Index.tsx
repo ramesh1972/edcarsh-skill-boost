@@ -18,7 +18,7 @@ const Index = () => {
   return <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
       {/* Hero Section */}
       <section 
-        className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[10px]"
+        className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px]"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
           backgroundSize: 'cover',
@@ -244,7 +244,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-blue-600 text-white">
+      <section className="py-20 bg-gradient-to-r from-primary to-blue-600 text-white round-b-[20px]">
         <div className="container px-4 mx-auto text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Crash Your Way to Success?</h2>
           <p className="text-xl mb-8 opacity-90">
