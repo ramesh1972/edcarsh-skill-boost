@@ -1,9 +1,12 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Bell, User, Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
-import { SecondaryMenuNavigation } from './SecondaryMenuNavigation';
+import { ThemeSelector } from './ThemeSelector';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface NavigationItem {
   name: string;
@@ -34,13 +37,13 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   return (
     <>
       {/* Mobile menu button */}
-      <Button variant="outline" size="sm" className="lg:hidden text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+      <Button variant="outline" size="sm" className="text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground/10" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
       </Button>
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden border-t border-primary-foreground/20 bg-primary">
+        <div className="absolute top-full left-0 right-0 border-t border-primary-foreground/20 bg-primary z-50">
           <div className="w-full px-6 py-6 space-y-6">
             {/* Main Navigation Section */}
             <div className="space-y-3">
@@ -53,8 +56,50 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
               )}
             </div>
 
-            {/* Utility Actions Section */}
-            <SecondaryMenuNavigation setIsMenuOpen={setIsMenuOpen} />
+            {/* Secondary Menu Section */}
+            <div className="border-t border-primary-foreground/20 pt-6">
+              {/* Row: Theme, Inbox, and Profile */}
+              <div className="flex items-center gap-3 px-4">
+                {/* Theme Selector */}
+                <ThemeSelector />
+                
+                {/* Inbox Button */}
+                <Button variant="outline" className="flex items-center gap-2 text-primary-foreground border-primary-foreground/30">
+                  <Bell className="w-4 h-4" />
+                  Inbox
+                </Button>
+
+                {/* Profile Section */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <div className="flex items-center gap-2 px-3 py-2 border border-primary-foreground/20 rounded-lg cursor-pointer hover:bg-primary-foreground/10 transition-colors">
+                      <Avatar className="w-6 h-6">
+                        <AvatarImage src="" alt="Profile" />
+                        <AvatarFallback className="bg-primary-foreground/20 text-primary-foreground">
+                          <User className="w-3 h-3" />
+                        </AvatarFallback>
+                      </Avatar>
+                      <span className="text-sm font-medium text-primary-foreground">Profile</span>
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48">
+                    <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
+                      <User className="w-4 h-4 mr-2" />
+                      Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
+                      <Settings className="w-4 h-4 mr-2" />
+                      Settings
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </div>
           </div>
         </div>
       )}
