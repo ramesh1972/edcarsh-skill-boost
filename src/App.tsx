@@ -56,7 +56,8 @@ const AppContent = () => {
           width: 'calc(100vw - 30px)',
           height: 'calc(100vh - 110px)',
           borderTopLeftRadius: '40px !important',
-          borderBottomLeftRadius: '40px !important'
+          borderBottomLeftRadius: '40px !important',
+          inset: '0px 15px 40px'
         }}>
           <Toaster />
           <Sonner />
