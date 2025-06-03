@@ -144,7 +144,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         className={`text-xs p-1 !rounded !border-4 !border-black ${getCategoryColor(course.category)} ${
           isSessionPast ? 'opacity-50 bg-gray-100' : ''
         }`}
-        style={{ minHeight: `${Math.max(40, cardHeight / 3)}px` }}
+        style={{ minHeight: `${Math.max(40, cardHeight / 3)}px`, border: '2px solid black !important' }}
       >
         <div className="font-medium truncate">{course.title}</div>
         <div className="text-xs opacity-75">{course.startTime}</div>
