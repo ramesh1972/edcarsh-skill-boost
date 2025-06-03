@@ -10,6 +10,7 @@ import { homeTestimonials } from '@/data/testimonials';
 import { usps } from '@/data/usps';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import ShortCourseCard from '@/components/Courses/ShortCourseCard';
+import { parseISO, addDays, format, isAfter, isSameDay, startOfDay } from 'date-fns';
 
 const Index = () => {
   const {
@@ -22,6 +23,7 @@ const Index = () => {
   const heroAnimation = useScrollAnimation({ threshold: 0.2 });
   const uspsAnimation = useScrollAnimation({ threshold: 0.1 });
   const coursesAnimation = useScrollAnimation({ threshold: 0.1 });
+  const calendarAnimation = useScrollAnimation({ threshold: 0.1 });
   const statsAnimation = useScrollAnimation({ threshold: 0.2 });
   const testimonialsAnimation = useScrollAnimation({ threshold: 0.1 });
   const ctaAnimation = useScrollAnimation({ threshold: 0.2 });
@@ -29,6 +31,49 @@ const Index = () => {
 
   // Get the first 6 courses for the upcoming courses section
   const upcomingCourses = courses.slice(0, 6);
+
+  // Get courses for the next 30 days
+  const getNext30DaysCourses = () => {
+    const today = startOfDay(new Date());
+    const next30Days = addDays(today, 30);
+    
+    const coursesWithDates = [];
+    
+    courses.forEach(course => {
+      const courseStartDate = parseISO(course.startDate);
+      const courseEndDate = parseISO(course.endDate);
+      
+      // Get all session days for this course
+      let currentDay = courseStartDate;
+      while (currentDay <= courseEndDate && currentDay <= next30Days) {
+        if ((isSameDay(currentDay, today) || isAfter(currentDay, today)) && currentDay <= next30Days) {
+          coursesWithDates.push({
+            ...course,
+            sessionDate: currentDay
+          });
+        }
+        currentDay = addDays(currentDay, 1);
+      }
+    });
+    
+    // Sort by date
+    return coursesWithDates.sort((a, b) => a.sessionDate.getTime() - b.sessionDate.getTime());
+  };
+
+  const next30DaysCourses = getNext30DaysCourses();
+
+  const getCategoryColor = (category: string) => {
+    const colors = {
+      'Frontend': 'bg-blue-100 text-blue-800',
+      'Backend': 'bg-green-100 text-green-800',
+      'Data Science': 'bg-purple-100 text-purple-800',
+      'Marketing': 'bg-orange-100 text-orange-800',
+      'Design': 'bg-pink-100 text-pink-800',
+      'Mobile': 'bg-cyan-100 text-cyan-800',
+      'DevOps': 'bg-red-100 text-red-800',
+    };
+    return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800';
+  };
 
   return (
     <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
@@ -246,6 +291,125 @@ const Index = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Next 30 Days Calendar Section */}
+      <section 
+        ref={calendarAnimation.ref}
+        className="py-20 bg-background"
+      >
+        <div className="container px-4 mx-auto">
+          <div 
+            className={`flex justify-between items-center mb-12 transition-all duration-700 delay-200 ${
+              calendarAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
+            }`}
+          >
+            <div>
+              <h2 className="text-3xl font-bold mb-4">Next 30 Days Schedule</h2>
+              <p className="text-xl text-muted-foreground">
+                See what's coming up in your learning journey
+              </p>
+            </div>
+            <Link to="/calendar">
+              <Button variant="outline" className="gap-2">
+                <Calendar className="w-4 h-4" />
+                View Full Calendar
+              </Button>
+            </Link>
+          </div>
+
+          {next30DaysCourses.length === 0 ? (
+            <Card className="text-center py-12">
+              <CardContent>
+                <Calendar className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
+                <h3 className="text-xl font-semibold mb-2">No Courses Scheduled</h3>
+                <p className="text-muted-foreground mb-4">
+                  There are no courses scheduled for the next 30 days.
+                </p>
+                <Link to="/courses">
+                  <Button>Browse All Courses</Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="space-y-4 max-h-96 overflow-y-auto">
+              {next30DaysCourses.map((courseWithDate, index) => (
+                <Card
+                  key={`${courseWithDate.id}-${courseWithDate.sessionDate.getTime()}`}
+                  className={`transition-all duration-700 hover:shadow-lg ${
+                    calendarAnimation.isVisible 
+                      ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}` 
+                      : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{
+                    transitionDelay: calendarAnimation.isVisible ? `${400 + index * 100}ms` : '0ms'
+                  }}
+                >
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="text-center min-w-[60px]">
+                            <div className="text-2xl font-bold text-primary">
+                              {format(courseWithDate.sessionDate, 'dd')}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              {format(courseWithDate.sessionDate, 'MMM')}
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              {format(courseWithDate.sessionDate, 'EEE')}
+                            </div>
+                          </div>
+                          <div className="flex-1">
+                            <CardTitle className="text-lg mb-1">{courseWithDate.title}</CardTitle>
+                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                              <div className="flex items-center gap-1">
+                                <Clock className="h-4 w-4" />
+                                {courseWithDate.startTime}
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <span>{courseWithDate.dailySessionDuration}h session</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Users className="h-4 w-4" />
+                                {courseWithDate.students}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col gap-2 items-end">
+                        <Badge className={getCategoryColor(courseWithDate.category)}>
+                          {courseWithDate.category}
+                        </Badge>
+                        <Badge variant="outline">{courseWithDate.level}</Badge>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <img 
+                          src={courseWithDate.instructor.image} 
+                          alt={courseWithDate.instructor.name}
+                          className="w-6 h-6 rounded-full"
+                        />
+                        <span className="text-sm font-medium">{courseWithDate.instructor.name}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-bold text-primary">{courseWithDate.price}</span>
+                        <Button size="sm" className="gap-1">
+                          <Calendar className="w-3 h-3" />
+                          View Details
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
