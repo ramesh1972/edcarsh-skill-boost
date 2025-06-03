@@ -95,15 +95,22 @@ const BottomTabs: React.FC = () => {
             <div 
               key={item.name} 
               className={`flex items-center gap-2 px-3 py-2 text-xs font-medium whitespace-nowrap rounded-b-lg relative ${
-                isActiveRoute(item.href) 
+                isAct
+                marginTop: '-10px',
+                paddingTop: '22px'
+                zIndex: 18iveRoute(item.href) 
                   ? 'bg-background text-foreground shadow-lg bottom-tab-curved' 
                   : 'text-primary-foreground hover:bg-primary-foreground/10'
               }`}
               style={isActiveRoute(item.href) ? {
                 marginTop: '-10px',
-                paddingTop: '12px',
+                paddingTop: '22px',
                 zIndex: 20
-              } : {}}
+              } : {
+                marginTop: '-10px',
+                paddingTop: '22px'
+                zIndex: 18
+              }}
             >
               <Link to={item.href} className="flex items-center gap-2">
                 {getIcon(item.icon)}
