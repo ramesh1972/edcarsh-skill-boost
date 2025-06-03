@@ -56,15 +56,7 @@ const Index = () => {
       </section>
 
       {/* USPs Section */}
-      <section 
-        className="py-20 bg-muted/50 relative overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.6)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
-          backgroundSize: 'fill',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'repeat'
-        }}
-      >
+      <section className="py-20 bg-muted/50 relative overflow-hidden">
         <div className="container px-4 mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Why Choose EdCrash?</h2>
@@ -218,7 +210,15 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-muted/50 round-[10px]">
+      <section 
+        className="py-20 bg-muted/50 round-[10px]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.6)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
+          backgroundSize: 'fill',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat'
+        }}
+      >
         <div className="container px-4 mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">What Our Students Say</h2>
