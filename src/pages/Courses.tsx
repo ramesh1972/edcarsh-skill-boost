@@ -158,7 +158,7 @@ const Courses = () => {
                 </div>
 
                 {/* Price and Session - Fixed position */}
-                <div className="flex items-center justify-between mb-2 flex-shrink-0">
+                <div className="flex items-center justify-between mb-3 flex-shrink-0">
                   <Badge variant="secondary" className="flex items-center gap-1">
                     {getIcon('price')}
                     {course.price}
