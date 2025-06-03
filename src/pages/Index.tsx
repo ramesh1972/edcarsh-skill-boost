@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, DollarSign, Globe, Calendar, Target, Users, Star, ArrowRight, CheckCircle, Play, Zap, Award, BookOpen, TrendingUp } from 'lucide-react';
@@ -236,7 +237,7 @@ const Index = () => {
         className="py-20 bg-muted/50 round-[10px] border-[10px] border-primary"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.6)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
-          backgroundSize: '300px 300px',
+          backgroundSize: '150px auto',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat'
         }}
