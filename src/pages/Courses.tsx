@@ -1,4 +1,5 @@
 
+
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -141,7 +142,7 @@ const Courses = () => {
                 </div>
               </div>
 
-              <CardHeader className="pb-2 h-32 flex flex-col justify-between">
+              <CardHeader className="pb-2 h-32 flex flex-col justify-start">
                 <div className="flex items-start justify-between">
                   <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
                     {course.title}
@@ -155,7 +156,7 @@ const Courses = () => {
 
               <CardContent className="flex-1 flex flex-col">
                 {/* Topics Covered - Fixed height for alignment */}
-                <div className="mb-4">
+                <div className="mb-2">
                   <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
                   <div className="flex flex-wrap gap-1 h-[80px] content-start overflow-hidden">
                     {course.topics.map((topic, index) => (
@@ -229,3 +230,4 @@ const Courses = () => {
 };
 
 export default Courses;
+
