@@ -28,7 +28,7 @@ const Index = () => {
   const { theme, getIcon } = useTheme();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background rounded-[20px]">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32">
         <div className="container px-4 mx-auto">
