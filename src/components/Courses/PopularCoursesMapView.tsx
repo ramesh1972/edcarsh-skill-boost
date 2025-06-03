@@ -72,19 +72,23 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       const maxStudents = Math.max(...studentCounts);
       const minStudents = Math.min(...studentCounts);
       
-      // Calculate dynamic ranges based on percentiles
-      const percentile20 = studentCounts[Math.floor(studentCounts.length * 0.2)];
-      const percentile40 = studentCounts[Math.floor(studentCounts.length * 0.4)];
-      const percentile60 = studentCounts[Math.floor(studentCounts.length * 0.6)];
-      const percentile80 = studentCounts[Math.floor(studentCounts.length * 0.8)];
+      // Calculate dynamic ranges based on percentiles for 7 ranges
+      const percentile14 = studentCounts[Math.floor(studentCounts.length * 0.14)];
+      const percentile28 = studentCounts[Math.floor(studentCounts.length * 0.28)];
+      const percentile42 = studentCounts[Math.floor(studentCounts.length * 0.42)];
+      const percentile56 = studentCounts[Math.floor(studentCounts.length * 0.56)];
+      const percentile70 = studentCounts[Math.floor(studentCounts.length * 0.70)];
+      const percentile84 = studentCounts[Math.floor(studentCounts.length * 0.84)];
 
       // Dynamic ranges with zoom-responsive distances
       const ranges = [
-        { name: `${percentile20}+`, min: percentile20, distance: 100 * zoomMultiplier, color: '#dc2626' },
-        { name: `${percentile40}-${percentile20-1}`, min: percentile40, max: percentile20-1, distance: 200 * zoomMultiplier, color: '#ea580c' },
-        { name: `${percentile60}-${percentile40-1}`, min: percentile60, max: percentile40-1, distance: 300 * zoomMultiplier, color: '#d97706' },
-        { name: `${percentile80}-${percentile60-1}`, min: percentile80, max: percentile60-1, distance: 400 * zoomMultiplier, color: '#65a30d' },
-        { name: `<${percentile80}`, max: percentile80-1, distance: 500 * zoomMultiplier, color: '#059669' }
+        { name: `${percentile14}+`, min: percentile14, distance: 80 * zoomMultiplier, color: '#dc2626' },
+        { name: `${percentile28}-${percentile14-1}`, min: percentile28, max: percentile14-1, distance: 150 * zoomMultiplier, color: '#ea580c' },
+        { name: `${percentile42}-${percentile28-1}`, min: percentile42, max: percentile28-1, distance: 220 * zoomMultiplier, color: '#d97706' },
+        { name: `${percentile56}-${percentile42-1}`, min: percentile56, max: percentile42-1, distance: 290 * zoomMultiplier, color: '#ca8a04' },
+        { name: `${percentile70}-${percentile56-1}`, min: percentile70, max: percentile56-1, distance: 360 * zoomMultiplier, color: '#65a30d' },
+        { name: `${percentile84}-${percentile70-1}`, min: percentile84, max: percentile70-1, distance: 430 * zoomMultiplier, color: '#059669' },
+        { name: `<${percentile84}`, max: percentile84-1, distance: 500 * zoomMultiplier, color: '#0891b2' }
       ];
 
       const allCourseData: any[] = [];
