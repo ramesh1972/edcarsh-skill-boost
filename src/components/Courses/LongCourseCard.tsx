@@ -60,7 +60,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
           </div>
           
           {/* Spacer to push stats and price to bottom */}
-          <div className="flex-1 p-2">
+          <div className="flex-1 p-4">
           
           {/* Course Info Card - aligned to bottom */}
           <CourseInfoCard 
