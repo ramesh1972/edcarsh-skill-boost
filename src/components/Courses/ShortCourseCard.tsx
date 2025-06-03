@@ -6,7 +6,6 @@ import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import { Heart, Eye, UserPlus } from 'lucide-react';
-
 interface Course {
   id: number;
   title: string;
@@ -56,7 +55,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
       </div>
 
-      <CardHeader className=" flex flex-col justify-start flex-shrink-0 pt-4 h-[90px]">
+      <CardHeader className=" flex flex-col justify-start flex-shrink-0 pt-4 h-[85px]">
         <div className="flex items-start justify-between">
           <CardTitle className={`text-base leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-sm font-medium' : 'text-base'}`}>
             {course.title}
@@ -67,7 +66,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
 
       <CardContent className="flex-1 flex flex-col">
         {/* Topics Covered - Reduced height for alignment, max 6 topics */}
-        <div className="flex-shrink-0 mt-4">
+        <div className="flex-shrink-0 p-0 mb-4">
           <h4 className="text-xs font-medium mb-1">Topics Covered:</h4>
           <div className="flex flex-wrap mb-2 gap-1 h-[50px] content-start overflow-hidden">
             {course.topics.slice(0, 6).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
@@ -77,12 +76,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
 
         {/* Course Info Card - moved below image */}
-        <CourseInfoCard 
-          duration={course.duration}
-          students={course.students}
-          price={course.price}
-          nextSession={course.nextSession}
-        />
+        <CourseInfoCard duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
 
         {/* Action Buttons aligned to bottom */}
         <div className="mt-auto">
