@@ -18,7 +18,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       
       // Calculate distance from center (inversely proportional to students)
       const studentRatio = (course.students - minStudents) / (maxStudents - minStudents) || 0;
-      const distance = 180 - (studentRatio * 120); // Range from 60px to 180px from center
+      const distance = 120 + (studentRatio * 160); // Range from 120px to 280px from center
       
       // Calculate position
       const x = Math.cos(angle) * distance;
@@ -53,7 +53,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   }, [courses]);
 
   return (
-    <div className="flex flex-col items-center p-8">
+    <div className="flex flex-col items-center justify-center p-8 w-full">
       <h2 className="text-2xl font-bold mb-6 text-center">Popular Courses Map</h2>
       
       {/* Legend */}
@@ -81,8 +81,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       </div>
       
       {/* Radial Course Map */}
-      <div className="w-full max-w-2xl mx-auto">
-        <div className="relative w-[1200px] h-[1200px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-full border-2 border-gray-200 overflow-hidden aspect-square">
+      <div className="flex justify-center items-center w-full">
+        <div className="relative w-[800px] h-[800px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-full border-2 border-gray-200 overflow-visible">
           {/* Center point */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
@@ -122,10 +122,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           ))}
           
           {/* Concentric circles for visual reference */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-gray-300 rounded-full opacity-20"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-gray-300 rounded-full opacity-20"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 border border-gray-300 rounded-full opacity-20"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-gray-300 rounded-full opacity-20"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-gray-300 rounded-full opacity-20"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-gray-300 rounded-full opacity-20"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-gray-300 rounded-full opacity-20"></div>
         </div>
       </div>
       
