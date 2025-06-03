@@ -6,7 +6,6 @@ import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import { Heart, Eye, UserPlus } from 'lucide-react';
-
 interface Course {
   id: number;
   title: string;
@@ -30,11 +29,9 @@ interface Course {
     description: string;
   };
 }
-
 interface ShortCourseCardProps {
   course: Course;
 }
-
 const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
   course
 }) => {
@@ -69,7 +66,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
 
       <CardContent className="flex-1 flex flex-col">
         {/* Topics Covered - Reduced height for alignment, max 6 topics */}
-        <div className="flex-shrink-0 p-0 mb-4">
+        <div className="flex-shrink-0 p-0 mb-2">
           <h4 className="text-xs font-medium mb-1">Topics Covered:</h4>
           <div className="flex flex-wrap mb-2 gap-1 h-[50px] content-start overflow-hidden">
             {course.topics.slice(0, 6).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
@@ -88,5 +85,4 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
       </CardContent>
     </Card>;
 };
-
 export default ShortCourseCard;
