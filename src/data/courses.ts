@@ -1,5 +1,7 @@
 
-export const courses = [
+import { Course } from '@/types';
+
+export const courses: Course[] = [
   {
     id: 1,
     title: "React Development Crash Course",
@@ -21,7 +23,7 @@ export const courses = [
     level: "Beginner",
     subject: "Frontend",
     industry: "Software",
-    mode: "live",
+    mode: "live" as const,
     tools: true,
     instructor: {
       name: "Sarah Chen",
@@ -55,7 +57,7 @@ export const courses = [
     level: "Intermediate",
     subject: "Data Science",
     industry: "Software",
-    mode: "live",
+    mode: "live" as const,
     tools: true,
     instructor: {
       name: "Dr. Mike Rodriguez",
@@ -89,7 +91,7 @@ export const courses = [
     level: "Beginner",
     subject: "Marketing",
     industry: "Marketing",
-    mode: "offline",
+    mode: "offline" as const,
     tools: false,
     instructor: {
       name: "Emma Wilson",
@@ -123,7 +125,7 @@ export const courses = [
     level: "Intermediate",
     subject: "Backend",
     industry: "Software",
-    mode: "live",
+    mode: "live" as const,
     tools: true,
     instructor: {
       name: "Alex Johnson",
@@ -157,7 +159,7 @@ export const courses = [
     level: "Beginner",
     subject: "Design",
     industry: "Software",
-    mode: "offline",
+    mode: "offline" as const,
     tools: true,
     instructor: {
       name: "Lisa Park",
@@ -191,7 +193,7 @@ export const courses = [
     level: "Advanced",
     subject: "Data Science",
     industry: "Software",
-    mode: "live",
+    mode: "live" as const,
     tools: true,
     instructor: {
       name: "Dr. James Wu",
@@ -225,7 +227,7 @@ export const courses = [
     level: "Intermediate",
     subject: "Mobile",
     industry: "Software",
-    mode: "offline",
+    mode: "offline" as const,
     tools: false,
     instructor: {
       name: "Maria Garcia",
@@ -259,7 +261,7 @@ export const courses = [
     level: "Advanced",
     subject: "DevOps",
     industry: "Software",
-    mode: "live",
+    mode: "live" as const,
     tools: true,
     instructor: {
       name: "David Kim",
