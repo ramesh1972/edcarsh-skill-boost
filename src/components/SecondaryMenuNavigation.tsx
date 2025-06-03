@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Bell, User, Settings, LogOut, Palette, Mail, Archive, Star, Trash2 } from 'lucide-react';
+import { Bell, User, Settings, LogOut, Palette, Mail, Archive, Star, Trash2, CreditCard, KeyRound, MessageCircle } from 'lucide-react';
 import { ThemeSelector } from './ThemeSelector';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuLabel } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -71,6 +71,18 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
             <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
               <User className="w-4 h-4 mr-2" />
               Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
+              <CreditCard className="w-4 h-4 mr-2" />
+              Payments
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
+              <KeyRound className="w-4 h-4 mr-2" />
+              Reset Password
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Contact
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setIsMenuOpen(false)}>
               <Settings className="w-4 h-4 mr-2" />
