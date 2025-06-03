@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
 
@@ -193,17 +194,27 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     // Apply color theme variables
     applyColorTheme(theme.colorTheme);
     
-    // Ensure dropdown menus have proper z-index
+    // Remove any existing theme style tag and add new one
+    const existingThemeStyle = document.getElementById('theme-dropdown-styles');
+    if (existingThemeStyle) {
+      existingThemeStyle.remove();
+    }
+    
+    // Add dropdown z-index styles only once
     const style = document.createElement('style');
+    style.id = 'theme-dropdown-styles';
     style.textContent = `
       [data-radix-popper-content-wrapper] {
-        z-index: 9999 !important;
+        z-index: 50 !important;
+        position: relative !important;
       }
-      [data-state="open"] {
-        z-index: 9999 !important;
+      [data-radix-dropdown-menu-content] {
+        z-index: 50 !important;
+        position: relative !important;
+        pointer-events: auto !important;
       }
-      .dropdown-menu-content {
-        z-index: 9999 !important;
+      [data-radix-dropdown-menu-item] {
+        pointer-events: auto !important;
       }
     `;
     document.head.appendChild(style);
