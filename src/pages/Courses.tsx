@@ -153,10 +153,10 @@ const Courses = () => {
               </CardHeader>
 
               <CardContent className="flex-1 flex flex-col">
-                {/* Topics Covered - Fixed height */}
+                {/* Topics Covered - Fixed height for alignment */}
                 <div className="mb-4">
                   <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-                  <div className="flex flex-wrap gap-1 min-h-[60px] content-start">
+                  <div className="flex flex-wrap gap-1 h-[80px] content-start overflow-hidden">
                     {course.topics.map((topic, index) => (
                       <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                         {topic}
