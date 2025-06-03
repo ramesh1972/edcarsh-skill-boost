@@ -35,9 +35,9 @@ const App = () => (
               left: '15px', 
               right: '15px', 
               top: '64px', 
-              bottom: '56px',
+              bottom: '52px',
               width: 'calc(100vw - 30px)',
-              height: 'calc(100vh - 120px)'
+              height: 'calc(100vh - 116px)'
             }}>
               <Toaster />
               <Sonner />
