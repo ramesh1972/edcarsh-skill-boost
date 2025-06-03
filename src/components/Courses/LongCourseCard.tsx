@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -81,60 +82,36 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
           </div>
         </div>
 
-        {/* Right side - 2 rows structure */}
+        {/* Right side - 2 columns structure */}
         <div className="flex-1 p-6 flex flex-col">
-          {/* Top row - 3 columns */}
-          <div className="grid grid-cols-3 gap-6 flex-1">
-            {/* Column 1: Title and Description */}
+          {/* Top row - 2 columns now */}
+          <div className="grid grid-cols-2 gap-6 flex-1">
+            {/* Column 1: Title and Description - increased height */}
             <div className="col-span-1">
               <div className="flex items-center gap-2 mb-2">
                 <h3 className={`text-xl font-semibold ${theme.designSystem === 'material' ? 'text-lg font-medium' : 'text-xl'}`}>
                   {course.title}
                 </h3>
               </div>
-              <p className="text-sm text-muted-foreground max-h-[200px] overflow-hidden">{course.longDescription}</p>
+              <p className="text-sm text-muted-foreground max-h-[300px] overflow-hidden">{course.longDescription}</p>
             </div>
 
-            {/* Column 2: Topics - max 8 topics */}
+            {/* Column 2: Topics - max 6 topics */}
             <div className="col-span-1" style={{maxWidth: '280px'}}>
               <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-              <ul className="text-sm space-y-1">
-                {course.longTopics.slice(0, 8).map((topic, index) => (
-                  <li key={index} className="flex items-center gap-2">
-                    <span className="w-1 h-1 bg-current rounded-full flex-shrink-0"></span>
+              <div className="flex flex-wrap gap-2">
+                {course.longTopics.slice(0, 6).map((topic, index) => (
+                  <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                     {topic}
-                  </li>
+                  </Badge>
                 ))}
-              </ul>
+              </div>
             </div>
+          </div>
 
-            {/* Column 3: About Instructor - increased width by 20px */}
-            <div className="col-span-1 flex flex-col" style={{marginLeft: '-25px'}}>
-              <div className="flex items-start gap-3 mb-4 flex-1">
-                <img src={course.instructor.image} alt={course.instructor.name} className="w-12 h-12 rounded-full object-cover" />
-                <div className="text-sm text-muted-foreground flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <p className="font-medium text-foreground">{course.instructor.name}</p>
-                    <Button variant="ghost" size="sm" className="text-xs px-2 h-6">
-                      About
-                    </Button>
-                  </div>
-                  <p className="mb-1">Expert in {course.instructor.specialty}</p>
-                  <p className="text-xs line-clamp-3 max-h-12 overflow-hidden">{course.instructor.description}</p>
-                  <p className="mb-1">{course.level} level specialist</p>
-                  <p className="mb-1">Teaching for {course.instructor.experience}</p>
-                  <p className="mb-1 flex items-center gap-1">
-                    <span>{course.instructor.flag}</span>
-                    {course.instructor.city}, {course.instructor.country}
-                  </p>
-                </div>
-              </div>
-              
-              {/* Action Buttons - using ActionButtons component */}
-              <div className="mt-auto">
-                <ActionButtons />
-              </div>
-            </div>
+          {/* Bottom row - Action Buttons */}
+          <div className="mt-6 pt-4 border-t">
+            <ActionButtons />
           </div>
         </div>
       </div>
