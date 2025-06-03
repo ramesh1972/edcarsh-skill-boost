@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { Bell, User, Settings, LogOut, Palette, Mail, Archive, Star, Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { ThemeSelector } from './ThemeSelector';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuLabel } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -16,17 +15,31 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
   return (
     <div className="border-t border-primary-foreground/20">
       {/* Row: Theme, Inbox, and Profile */}
-      <div className="flex items-center gap-3 px-4">
+      <div className="flex items-center gap-6 px-4">
         {/* Theme Dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <div className="flex items-center gap-2 text-primary-foreground cursor-pointer hover:opacity-80 transition-opacity">
+              <Palette className="w-4 h-4" />
+              <span className="text-sm font-medium">Theme</span>
+            </div>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="center" className="w-48">
+            <DropdownMenuLabel>Select Theme</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <div className="p-2">
               <ThemeSelector />
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
         
         {/* Inbox Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="flex items-center gap-2 text-primary border-primary-foreground/30">
+            <div className="flex items-center gap-2 text-primary-foreground cursor-pointer hover:opacity-80 transition-opacity">
               <Bell className="w-4 h-4" />
-              Inbox
-            </Button>
+              <span className="text-sm font-medium">Inbox</span>
+            </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="center" className="w-64">
             <DropdownMenuLabel>Notifications & Messages</DropdownMenuLabel>
@@ -58,14 +71,14 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
         {/* Profile Dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <div className="flex items-center gap-2 text-primary border-primary-foreground/30 border rounded-lg cursor-pointer hover:bg-primary-foreground/10">
-              <Avatar className="w-6 h-6">
+            <div className="flex items-center gap-2 text-primary-foreground cursor-pointer hover:opacity-80 transition-opacity">
+              <Avatar className="w-4 h-4">
                 <AvatarImage src="" alt="Profile" />
                 <AvatarFallback className="bg-primary-foreground/20 text-primary-foreground">
-                  <User className="w-3 h-3" />
+                  <User className="w-2 h-2" />
                 </AvatarFallback>
               </Avatar>
-              <span className="text-sm font-medium text-primary-foreground">Profile</span>
+              <span className="text-sm font-medium">Profile</span>
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
