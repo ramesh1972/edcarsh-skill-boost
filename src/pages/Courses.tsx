@@ -195,7 +195,7 @@ const Courses = () => {
           {/* Week header */}
           <div className="grid grid-cols-7 gap-2 mb-2">
             {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(dayName => (
-              <div key={dayName} className="p-2 text-center font-medium text-sm border-b">
+              <div key={dayName} className="p-2 text-center font-medium text-sm border-b border-gray-300">
                 {dayName}
               </div>
             ))}
@@ -209,7 +209,7 @@ const Courses = () => {
               );
               
               return (
-                <div key={day.toISOString()} className="border rounded-lg p-2 min-h-[200px] bg-background">
+                <div key={day.toISOString()} className="border border-gray-300 rounded-lg p-2 min-h-[200px] bg-background">
                   <div className="font-medium text-sm mb-2 text-center">
                     {format(day, 'EEE d')}
                   </div>
@@ -266,7 +266,7 @@ const Courses = () => {
           return (
             <div 
               key={day.toISOString()} 
-              className={`border rounded p-1 min-h-[100px] ${
+              className={`border border-gray-300 rounded p-1 min-h-[100px] ${
                 isCurrentMonth ? 'bg-background' : 'bg-muted/30'
               } ${isToday ? 'ring-2 ring-primary' : ''}`}
             >
