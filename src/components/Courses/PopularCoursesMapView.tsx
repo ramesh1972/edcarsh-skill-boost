@@ -12,53 +12,69 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     const maxStudents = Math.max(...courses.map(course => course.students));
     const minStudents = Math.min(...courses.map(course => course.students));
     
-    return courses.map((course, index) => {
-      // Calculate angle for radial positioning
-      const angle = (index / courses.length) * 2 * Math.PI;
-      
-      // Calculate distance from center based on student ranges
-      let distance = 280; // default outer ring
-      if (course.students >= 300) {
-        distance = 80; // innermost ring
-      } else if (course.students >= 200) {
-        distance = 120; // second ring
-      } else if (course.students >= 150) {
-        distance = 160; // third ring
-      } else if (course.students >= 100) {
-        distance = 200; // fourth ring
-      }
-      
-      // Calculate position
-      const x = Math.cos(angle) * distance;
-      const y = Math.sin(angle) * distance;
-      
-      // Calculate font size based on student count (reduced sizes)
-      const studentRatio = (course.students - minStudents) / (maxStudents - minStudents) || 0;
-      const fontSize = 10 + (studentRatio * 12); // Range from 10px to 22px (reduced)
-      
-      // Determine color based on student ranges
-      let color = '#6b7280'; // gray-500 (default)
-      if (course.students >= 300) {
-        color = '#dc2626'; // red-600 (high enrollment)
-      } else if (course.students >= 200) {
-        color = '#ea580c'; // orange-600 (medium-high enrollment)
-      } else if (course.students >= 150) {
-        color = '#d97706'; // amber-600 (medium enrollment)
-      } else if (course.students >= 100) {
-        color = '#65a30d'; // lime-600 (low-medium enrollment)
-      } else {
-        color = '#059669'; // emerald-600 (low enrollment)
-      }
-      
-      return {
-        ...course,
-        x,
-        y,
-        fontSize,
-        color,
-        studentRatio
-      };
+    // Group courses by student ranges
+    const ranges = {
+      '300+': courses.filter(course => course.students >= 300),
+      '200-299': courses.filter(course => course.students >= 200 && course.students < 300),
+      '150-199': courses.filter(course => course.students >= 150 && course.students < 200),
+      '100-149': courses.filter(course => course.students >= 100 && course.students < 150),
+      '<100': courses.filter(course => course.students < 100)
+    };
+
+    const allCourseData: any[] = [];
+
+    // Process each range
+    Object.entries(ranges).forEach(([rangeName, rangeCourses]) => {
+      rangeCourses.forEach((course, index) => {
+        // Calculate angle for even distribution within the range
+        const angle = (index / rangeCourses.length) * 2 * Math.PI;
+        
+        // Calculate distance from center based on student ranges
+        let distance = 280; // default outer ring
+        if (course.students >= 300) {
+          distance = 80; // innermost ring
+        } else if (course.students >= 200) {
+          distance = 120; // second ring
+        } else if (course.students >= 150) {
+          distance = 160; // third ring
+        } else if (course.students >= 100) {
+          distance = 200; // fourth ring
+        }
+        
+        // Calculate position
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        // Calculate font size based on student count (reduced sizes)
+        const studentRatio = (course.students - minStudents) / (maxStudents - minStudents) || 0;
+        const fontSize = 10 + (studentRatio * 12); // Range from 10px to 22px (reduced)
+        
+        // Determine color based on student ranges
+        let color = '#6b7280'; // gray-500 (default)
+        if (course.students >= 300) {
+          color = '#dc2626'; // red-600 (high enrollment)
+        } else if (course.students >= 200) {
+          color = '#ea580c'; // orange-600 (medium-high enrollment)
+        } else if (course.students >= 150) {
+          color = '#d97706'; // amber-600 (medium enrollment)
+        } else if (course.students >= 100) {
+          color = '#65a30d'; // lime-600 (low-medium enrollment)
+        } else {
+          color = '#059669'; // emerald-600 (low enrollment)
+        }
+        
+        allCourseData.push({
+          ...course,
+          x,
+          y,
+          fontSize,
+          color,
+          studentRatio
+        });
+      });
     });
+
+    return allCourseData;
   }, [courses]);
 
   return (
