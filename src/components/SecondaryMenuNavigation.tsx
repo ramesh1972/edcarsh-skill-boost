@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Bell, Calendar, User, Settings, LogOut } from 'lucide-react';
+import { Bell, User, Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeSelector } from './ThemeSelector';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
@@ -17,8 +17,8 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
     <div className="border-t border-primary-foreground/20 pt-6">
       <p className="text-xs font-semibold text-primary-foreground/70 mb-4 px-4">Actions</p>
       
-      {/* First row: Theme, Inbox, and Profile */}
-      <div className="flex items-center gap-3 mb-4 px-4">
+      {/* Row: Theme, Inbox, and Profile */}
+      <div className="flex items-center gap-3 px-4">
         {/* Theme Selector */}
         <ThemeSelector />
         
@@ -57,14 +57,6 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      </div>
-
-      {/* Second row: Live Session */}
-      <div className="px-4">
-        <Button className="w-full flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 py-3">
-          <Calendar className="w-4 h-4" />
-          Live Session 2h
-        </Button>
       </div>
     </div>
   );
