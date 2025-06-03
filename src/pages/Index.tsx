@@ -59,7 +59,7 @@ const Index = () => {
       <section 
         className="py-20 bg-muted/50 relative overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,.3)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,.6)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
           backgroundSize: 'fill',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat'
@@ -127,9 +127,9 @@ const Index = () => {
         className="py-20"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0..3), rgba(255,255,255,0.5)), url('/lovable-uploads/1a921246-68aa-4cc6-a586-1f5c0c89c6fc.png')`,
-          backgroundSize: 'fill',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'repeat'
+          backgroundSize: 'cover',
+          backgroundPosition: 'top',
+          backgroundRepeat: 'no-repeat'
         }}
       >
         <div className="container px-4 mx-auto">
