@@ -48,7 +48,7 @@ const AppContent = () => {
         <Header />
         
         {/* Inner div - absolute positioned with 15px left/right, 60px top, 60px bottom for tabs */}
-        <div className="relative overflow-auto !left-[15px] right-[15px] !rounded-l-[40px] rounded-lb-[40px]" style={{ 
+        <div className="relative overflow-scroll !left-[15px] right-[15px] !rounded-l-[40px] rounded-lb-[40px]" style={{ 
           left: '15px', 
           right: '15px', 
           top: '60px', 
