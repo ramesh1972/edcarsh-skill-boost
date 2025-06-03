@@ -82,7 +82,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       
       {/* Radial Course Map */}
       <div className="w-full max-w-2xl mx-auto">
-        <div className="relative w-full h-96 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full border-2 border-gray-200 overflow-hidden aspect-square">
+        <div className="relative w-[800px] h-[800px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-full border-2 border-gray-200 overflow-hidden aspect-square">
           {/* Center point */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
