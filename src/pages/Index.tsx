@@ -20,7 +20,7 @@ const Index = () => {
       <section 
         className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px]"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255, 255,0.2), rgba(255, 255, 255,0.4)), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
+          backgroundImage: `linear-gradient(rgba(255,255, 255,0.6), rgba(255, 255, 255,0.8)), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
@@ -132,7 +132,7 @@ const Index = () => {
           backgroundRepeat: 'no-repeat'
         }}
       >
-        <div className="container px-4 mx-auto">
+        <div className="container px-4 mx-auto round-b-[20px]">
           <div className="flex justify-between items-center mb-12">
             <div>
               <h2 className="text-3xl font-bold mb-4">Upcoming Courses</h2>
