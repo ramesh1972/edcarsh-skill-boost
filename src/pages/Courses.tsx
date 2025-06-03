@@ -1,17 +1,17 @@
+
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
-import { Filter, LayoutGrid, List, Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
-import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, addDays, addWeeks, addMonths, subDays, subWeeks, subMonths, isSameDay, isAfter, parseISO } from 'date-fns';
+import { Filter, LayoutGrid, List, Calendar as CalendarIcon } from 'lucide-react';
+import { isAfter, parseISO, isSameDay } from 'date-fns';
 import CourseCard from '@/components/Courses/CourseCard';
 import LongCourseCard from '@/components/Courses/LongCourseCard';
-import CourseCalendarEvent from '@/components/Calendar/CourseCalendarEvent';
+import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
+
 const Courses = () => {
   const {
     theme,
@@ -22,21 +22,8 @@ const Courses = () => {
   const [levelFilter, setLevelFilter] = useState('all');
   const [sortBy, setSortBy] = useState('title');
   const [viewMode, setViewMode] = useState('card');
-  const [calendarViewMode, setCalendarViewMode] = useState('month'); // 'day', 'week', 'month'
+  const [calendarViewMode, setCalendarViewMode] = useState('month');
   const [currentDate, setCurrentDate] = useState(new Date());
-
-  // Helper function to get all session days for a course
-  const getCourseSessionDays = (course: any) => {
-    const startDate = parseISO(course.startDate);
-    const endDate = parseISO(course.endDate);
-    const sessionDays = [];
-    let currentDay = startDate;
-    while (currentDay <= endDate) {
-      sessionDays.push(new Date(currentDay));
-      currentDay = addDays(currentDay, 1);
-    }
-    return sessionDays;
-  };
 
   // Get unique categories and levels for filter options
   const categories = ['all', ...Array.from(new Set(courses.map(course => course.category)))];
@@ -80,170 +67,6 @@ const Courses = () => {
     return filtered;
   }, [categoryFilter, levelFilter, sortBy]);
 
-  // Get courses for current calendar view period - now includes all session days
-  const getCoursesForPeriod = useMemo(() => {
-    let startDate, endDate;
-    switch (calendarViewMode) {
-      case 'day':
-        startDate = new Date(currentDate);
-        endDate = new Date(currentDate);
-        break;
-      case 'week':
-        startDate = startOfWeek(currentDate, {
-          weekStartsOn: 1
-        });
-        endDate = endOfWeek(currentDate, {
-          weekStartsOn: 1
-        });
-        break;
-      case 'month':
-        startDate = startOfMonth(currentDate);
-        endDate = endOfMonth(currentDate);
-        break;
-      default:
-        startDate = new Date(currentDate);
-        endDate = new Date(currentDate);
-    }
-    const coursesInPeriod = [];
-    courses.forEach(course => {
-      const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
-      const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-      if (categoryMatch && levelMatch) {
-        const sessionDays = getCourseSessionDays(course);
-        sessionDays.forEach(sessionDay => {
-          if (calendarViewMode === 'day') {
-            if (isSameDay(sessionDay, currentDate)) {
-              coursesInPeriod.push({
-                ...course,
-                sessionDay
-              });
-            }
-          } else {
-            if (sessionDay >= startDate && sessionDay <= endDate) {
-              coursesInPeriod.push({
-                ...course,
-                sessionDay
-              });
-            }
-          }
-        });
-      }
-    });
-    return coursesInPeriod;
-  }, [calendarViewMode, currentDate, categoryFilter, levelFilter]);
-  const navigatePeriod = (direction: 'prev' | 'next') => {
-    setCurrentDate(prev => {
-      switch (calendarViewMode) {
-        case 'day':
-          return direction === 'next' ? addDays(prev, 1) : subDays(prev, 1);
-        case 'week':
-          return direction === 'next' ? addWeeks(prev, 1) : subWeeks(prev, 1);
-        case 'month':
-          return direction === 'next' ? addMonths(prev, 1) : subMonths(prev, 1);
-        default:
-          return prev;
-      }
-    });
-  };
-  const getViewTitle = () => {
-    switch (calendarViewMode) {
-      case 'day':
-        return format(currentDate, 'EEEE, MMMM d, yyyy');
-      case 'week':
-        const weekStart = startOfWeek(currentDate, {
-          weekStartsOn: 1
-        });
-        const weekEnd = endOfWeek(currentDate, {
-          weekStartsOn: 1
-        });
-        return `${format(weekStart, 'MMM d')} - ${format(weekEnd, 'MMM d, yyyy')}`;
-      case 'month':
-        return format(currentDate, 'MMMM yyyy');
-      default:
-        return '';
-    }
-  };
-  const renderCalendarView = () => {
-    if (calendarViewMode === 'day') {
-      const daysCourses = getCoursesForPeriod;
-      return <div className="space-y-4">
-          {daysCourses.length === 0 ? <div className="text-center py-8 text-muted-foreground">
-              No courses scheduled for this day
-            </div> : daysCourses.map((courseWithSession, index) => <CourseCalendarEvent key={`${courseWithSession.id}-${index}`} course={courseWithSession} viewMode="day" currentDay={courseWithSession.sessionDay} />)}
-        </div>;
-    }
-    if (calendarViewMode === 'week') {
-      const weekStart = startOfWeek(currentDate, {
-        weekStartsOn: 1
-      });
-      const weekDays = Array.from({
-        length: 7
-      }, (_, i) => addDays(weekStart, i));
-      return <div className="w-full">
-          {/* Week header */}
-          <div className="grid grid-cols-7 gap-2 mb-2">
-            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map(dayName => <div key={dayName} className="p-2 text-center font-medium text-sm border-b border-gray-300">
-                {dayName}
-              </div>)}
-          </div>
-          
-          {/* Week days with courses */}
-          <div className="grid grid-cols-7 gap-2">
-            {weekDays.map(day => {
-            const dayCourses = getCoursesForPeriod.filter(courseWithSession => isSameDay(courseWithSession.sessionDay, day));
-            return <div key={day.toISOString()} className="border border-gray-300 rounded-lg p-2 min-h-[200px] bg-background">
-                  <div className="font-medium text-sm mb-2 text-center">
-                    {format(day, 'EEE d')}
-                  </div>
-                  <div className="space-y-1">
-                    {dayCourses.map((courseWithSession, index) => <CourseCalendarEvent key={`${courseWithSession.id}-${index}`} course={courseWithSession} viewMode="week" currentDay={courseWithSession.sessionDay} />)}
-                  </div>
-                </div>;
-          })}
-          </div>
-        </div>;
-    }
-
-    // Month view
-    const monthStart = startOfMonth(currentDate);
-    const monthEnd = endOfMonth(currentDate);
-    const calendarStart = startOfWeek(monthStart, {
-      weekStartsOn: 1
-    });
-    const calendarEnd = endOfWeek(monthEnd, {
-      weekStartsOn: 1
-    });
-    const calendarDays = [];
-    let day = calendarStart;
-    while (day <= calendarEnd) {
-      calendarDays.push(new Date(day));
-      day = addDays(day, 1);
-    }
-    return <div className="grid grid-cols-7 gap-2">
-        {/* Week headers */}
-        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(dayName => <div key={dayName} className="p-2 text-center font-medium text-sm text-muted-foreground">
-            {dayName}
-          </div>)}
-        
-        {/* Calendar days */}
-        {calendarDays.map(day => {
-        const dayCourses = getCoursesForPeriod.filter(courseWithSession => isSameDay(courseWithSession.sessionDay, day));
-        const isCurrentMonth = day.getMonth() === currentDate.getMonth();
-        const isToday = isSameDay(day, new Date());
-        return <div key={day.toISOString()} className={`border border-gray-300 rounded p-1 min-h-[100px] ${isCurrentMonth ? 'bg-background' : 'bg-muted/30'} ${isToday ? 'ring-2 ring-primary' : ''}`}>
-              <div className={`text-xs font-medium mb-1 ${isCurrentMonth ? 'text-foreground' : 'text-muted-foreground'}`}>
-                {format(day, 'd')}
-              </div>
-              <div className="space-y-1">
-                {dayCourses.slice(0, 3).map((courseWithSession, index) => <CourseCalendarEvent key={`${courseWithSession.id}-${index}`} course={courseWithSession} viewMode="month" currentDay={courseWithSession.sessionDay} />)}
-                {dayCourses.length > 3 && <div className="text-xs text-muted-foreground">
-                    +{dayCourses.length - 3} more
-                  </div>}
-              </div>
-            </div>;
-      })}
-      </div>;
-  };
   return <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-8">
@@ -274,35 +97,6 @@ const Courses = () => {
               </ToggleGroupItem>
             </ToggleGroup>
           </div>
-
-          {/* Calendar Navigation - only show when in calendar view */}
-          {viewMode === 'calendar' && <div className="flex items-center gap-2">
-              <ToggleGroup type="single" value={calendarViewMode} onValueChange={value => value && setCalendarViewMode(value)}>
-                <ToggleGroupItem value="day" aria-label="Day view">Day</ToggleGroupItem>
-                <ToggleGroupItem value="week" aria-label="Week view">Week</ToggleGroupItem>
-                <ToggleGroupItem value="month" aria-label="Month view">Month</ToggleGroupItem>
-              </ToggleGroup>
-              <Button variant="outline" size="sm" onClick={() => navigatePeriod('prev')}>
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="outline" size="sm" className="min-w-[200px] text-center">
-                    <CalendarIcon className="h-4 w-4 mr-2" />
-                    {getViewTitle()}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="center">
-                  <Calendar mode="single" selected={currentDate} onSelect={date => date && setCurrentDate(date)} initialFocus className="p-3 pointer-events-auto" />
-                </PopoverContent>
-              </Popover>
-              <Button variant="outline" size="sm" onClick={() => navigatePeriod('next')}>
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="sm" onClick={() => setCurrentDate(new Date())}>
-                Today
-              </Button>
-            </div>}
         </div>
 
         {/* Filters and Sort Controls */}
@@ -355,7 +149,7 @@ const Courses = () => {
           </div>
 
           <div className="ml-auto text-sm text-muted-foreground">
-            {viewMode === 'calendar' ? `${getCoursesForPeriod.length} course${getCoursesForPeriod.length !== 1 ? 's' : ''} in this ${calendarViewMode}` : `${filteredAndSortedCourses.length} course${filteredAndSortedCourses.length !== 1 ? 's' : ''} found`}
+            {viewMode === 'calendar' ? '' : `${filteredAndSortedCourses.length} course${filteredAndSortedCourses.length !== 1 ? 's' : ''} found`}
           </div>
         </div>
 
@@ -370,10 +164,19 @@ const Courses = () => {
           </div>}
 
         {/* Calendar View */}
-        {viewMode === 'calendar' && <div className="bg-card rounded-lg border p-4">
-            {renderCalendarView()}
-          </div>}
+        {viewMode === 'calendar' && (
+          <CoursesCalendarView
+            courses={courses}
+            categoryFilter={categoryFilter}
+            levelFilter={levelFilter}
+            calendarViewMode={calendarViewMode}
+            setCalendarViewMode={setCalendarViewMode}
+            currentDate={currentDate}
+            setCurrentDate={setCurrentDate}
+          />
+        )}
       </div>
     </div>;
 };
+
 export default Courses;
