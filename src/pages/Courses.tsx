@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -154,45 +153,44 @@ const Courses = () => {
               </CardHeader>
 
               <CardContent className="flex-1 flex flex-col">
-                <div className="flex-1 space-y-4">
-                  {/* Topics Covered */}
-                  <div>
-                    <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-                    <div className="flex flex-wrap gap-1">
-                      {course.topics.map((topic, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
-                          {topic}
-                        </Badge>
-                      ))}
-                    </div>
+                {/* Topics Covered - Fixed height */}
+                <div className="mb-4">
+                  <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
+                  <div className="flex flex-wrap gap-1 min-h-[60px] content-start">
+                    {course.topics.map((topic, index) => (
+                      <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+                        {topic}
+                      </Badge>
+                    ))}
                   </div>
+                </div>
 
-                  {/* Course Details */}
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-1">
-                      {getIcon('time')}
-                      {course.duration}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      {getIcon('student')}
-                      {course.students} enrolled
-                    </div>
+                {/* Course Details - Fixed position */}
+                <div className="flex items-center justify-between text-sm mb-4">
+                  <div className="flex items-center gap-1">
+                    {getIcon('time')}
+                    {course.duration}
                   </div>
+                  <div className="flex items-center gap-1">
+                    {getIcon('student')}
+                    {course.students} enrolled
+                  </div>
+                </div>
 
-                  <div className="flex items-center justify-between">
-                    <Badge variant="secondary" className="flex items-center gap-1">
-                      {getIcon('price')}
-                      {course.price}
-                    </Badge>
-                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                      📅
-                      {course.nextSession}
-                    </div>
+                {/* Price and Session - Fixed position */}
+                <div className="flex items-center justify-between mb-4">
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    {getIcon('price')}
+                    {course.price}
+                  </Badge>
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                    📅
+                    {course.nextSession}
                   </div>
                 </div>
 
                 {/* Action Buttons - Always at bottom */}
-                <div className="flex gap-2 pt-4 mt-auto">
+                <div className="flex gap-2 mt-auto">
                   <Button 
                     variant="outline" 
                     size="sm"
