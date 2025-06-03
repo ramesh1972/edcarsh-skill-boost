@@ -1,4 +1,4 @@
-
+6
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -101,7 +101,7 @@ const BottomTabs: React.FC = () => {
               }`}
               style={isActiveRoute(item.href) ? {
                 marginTop: '-18px',
-                paddingTop: '18px',
+                paddingTop: '16px',
                 zIndex: 20
               } : {}}
             >
