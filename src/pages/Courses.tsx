@@ -94,39 +94,14 @@ const Courses = () => {
           </p>
         </div>
 
-        {/* View Mode Toggle */}
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center gap-4">
-            <span className="font-medium">View:</span>
-            <ToggleGroup type="single" value={viewMode} onValueChange={value => value && setViewMode(value)}>
-              <ToggleGroupItem value="card" aria-label="Card view" className="gap-1">
-                <LayoutGrid className="h-4 w-4" />
-                Card
-              </ToggleGroupItem>
-              <ToggleGroupItem value="list" aria-label="List view" className="gap-1">
-                <List className="h-4 w-4" />
-                List
-              </ToggleGroupItem>
-              <ToggleGroupItem value="calendar" aria-label="Calendar view" className="gap-1">
-                <CalendarIcon className="h-4 w-4" />
-                Calendar
-              </ToggleGroupItem>
-              <ToggleGroupItem value="map" aria-label="Map view" className="gap-1">
-                <MapPin className="h-4 w-4" />
-                Map
-              </ToggleGroupItem>
-            </ToggleGroup>
-          </div>
-        </div>
-
-        {/* Filters and Sort Controls */}
+        {/* Filters, Sort Controls and View Mode Toggle */}
         <div className="flex flex-wrap gap-4 mb-6 p-4 bg-card rounded-lg border">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4" />
             <span className="font-medium">Filters & Sort:</span>
           </div>
           
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 flex-1">
             <div className="min-w-[150px]">
               <Select value={industryFilter} onValueChange={handleIndustryChange}>
                 <SelectTrigger>
@@ -181,7 +156,31 @@ const Courses = () => {
               </div>}
           </div>
 
-          <div className="ml-auto text-sm text-muted-foreground">
+          {/* View Mode Toggle - aligned to the right */}
+          <div className="flex items-center gap-4 ml-auto">
+            <span className="font-medium">View:</span>
+            <ToggleGroup type="single" value={viewMode} onValueChange={value => value && setViewMode(value)}>
+              <ToggleGroupItem value="card" aria-label="Card view" className="gap-1">
+                <LayoutGrid className="h-4 w-4" />
+                Card
+              </ToggleGroupItem>
+              <ToggleGroupItem value="list" aria-label="List view" className="gap-1">
+                <List className="h-4 w-4" />
+                List
+              </ToggleGroupItem>
+              <ToggleGroupItem value="calendar" aria-label="Calendar view" className="gap-1">
+                <CalendarIcon className="h-4 w-4" />
+                Calendar
+              </ToggleGroupItem>
+              <ToggleGroupItem value="map" aria-label="Map view" className="gap-1">
+                <MapPin className="h-4 w-4" />
+                Map
+              </ToggleGroupItem>
+            </ToggleGroup>
+          </div>
+
+          {/* Course count */}
+          <div className="w-full text-right text-sm text-muted-foreground">
             {viewMode === 'calendar' || viewMode === 'map' ? '' : `${filteredAndSortedCourses.length} course${filteredAndSortedCourses.length !== 1 ? 's' : ''} found`}
           </div>
         </div>
