@@ -1,4 +1,5 @@
 
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -30,14 +31,14 @@ const App = () => (
             {/* Header positioned at the top with same background */}
             <Header />
             
-            {/* Inner div - absolute positioned with 15px left/right, 48px top, 60px bottom for tabs */}
+            {/* Inner div - absolute positioned with 15px left/right, 60px top, 60px bottom for tabs */}
             <div className="absolute overflow-auto" style={{ 
               left: '15px', 
               right: '15px', 
-              top: '54px', 
+              top: '60px', 
               bottom: '60px',
               width: 'calc(100vw - 30px)',
-              height: 'calc(100vh - 102px)',
+              height: 'calc(100vh - 120px)',
               borderTopLeftRadius: '40px',
               borderBottomLeftRadius: '40px'
             }}>
@@ -68,3 +69,4 @@ const App = () => (
 );
 
 export default App;
+
