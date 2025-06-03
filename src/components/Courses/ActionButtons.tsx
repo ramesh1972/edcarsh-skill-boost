@@ -4,15 +4,40 @@ import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Heart, Eye, UserPlus } from 'lucide-react';
 
-const ActionButtons: React.FC = () => {
+interface ActionButtonsProps {
+  showJoinNow?: boolean;
+  joinNowEnabled?: boolean;
+  showJoinAsGuest?: boolean;
+}
+
+const ActionButtons: React.FC<ActionButtonsProps> = ({ 
+  showJoinNow = false, 
+  joinNowEnabled = false,
+  showJoinAsGuest = false
+}) => {
   const { theme } = useTheme();
 
   return (
     <div className="flex gap-2 justify-between items-center">
-      <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
-        <UserPlus className="h-3 w-3" />
-        Join as Guest
-      </Button>
+      {showJoinNow ? (
+        <Button 
+          size="sm" 
+          className="flex items-center gap-1 border-2"
+          disabled={!joinNowEnabled}
+        >
+          Join Now
+        </Button>
+      ) : showJoinAsGuest ? (
+        <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
+          <UserPlus className="h-3 w-3" />
+          Join as Guest
+        </Button>
+      ) : (
+        <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
+          <UserPlus className="h-3 w-3" />
+          Join as Guest
+        </Button>
+      )}
       <div className="flex gap-2">
         <Button variant="secondary" size="sm" className="flex items-center gap-1">
           <Eye className="h-3 w-3" />

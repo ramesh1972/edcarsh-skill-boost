@@ -200,7 +200,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
             className="text-xs mt-1 h-6 px-2 w-full flex items-center gap-1"
           >
             <UserPlus className="h-3 w-3" />
-            Join as Guest
+            Guest
           </Button>
         )}
       </div>
@@ -263,7 +263,11 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         </div>
         
         <div className="mt-3">
-          <ActionButtons />
+          <ActionButtons 
+            showJoinNow={joinButtonState.show}
+            joinNowEnabled={joinButtonState.enabled}
+            showJoinAsGuest={showJoinAsGuest && !joinButtonState.show}
+          />
         </div>
       </CardContent>
     </Card>
