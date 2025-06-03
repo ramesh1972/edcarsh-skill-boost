@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 
-const BottomTabs: React.FC = () => {
+const ToolsNavigation: React.FC = () => {
   const { getIcon } = useTheme();
   const location = useLocation();
 
@@ -127,4 +126,4 @@ const BottomTabs: React.FC = () => {
   );
 };
 
-export default BottomTabs;
+export default ToolsNavigation;

@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -17,7 +16,7 @@ import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-import BottomTabs from "@/components/BottomTabs";
+import ToolsNavigation from "@/components/ToolsNavigation";
 
 const queryClient = new QueryClient();
 
@@ -70,7 +69,7 @@ const AppContent = () => {
         </div>
         
         {/* Bottom Tabs */}
-        <BottomTabs />
+        <ToolsNavigation />
       </div>
     </>
   );

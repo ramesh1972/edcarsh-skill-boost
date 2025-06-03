@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 import { HeaderLogo } from './HeaderLogo';
-import { DesktopNavigation } from './DesktopNavigation';
+import { MainMenuNavigation } from './MainMenuNavigation';
 import { HeaderActions } from './HeaderActions';
 import { MobileNavigation } from './MobileNavigation';
 
@@ -99,22 +98,17 @@ export const Header: React.FC = () => {
         }
       `}</style>
       <header className={`w-full bg-primary ${getSkinClasses()} relative z-10 mt-4`}>
-        {/* Single line - Logo, main navigation, and right-aligned tools */}
         <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-[32px] my-3">
-          {/* Logo */}
           <HeaderLogo />
 
-          {/* Desktop Navigation - Left aligned after logo */}
-          <DesktopNavigation 
+          <MainMenuNavigation 
             mainNavItems={mainNavItems}
             moreMenuItems={moreMenuItems}
             isActiveRoute={isActiveRoute}
           />
 
-          {/* Right-aligned tools */}
           <HeaderActions />
 
-          {/* Mobile Navigation */}
           <MobileNavigation 
             isMenuOpen={isMenuOpen}
             setIsMenuOpen={setIsMenuOpen}

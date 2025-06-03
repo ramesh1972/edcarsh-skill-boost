@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
@@ -12,13 +11,13 @@ interface NavigationItem {
   icon: string;
 }
 
-interface DesktopNavigationProps {
+interface MainMenuNavigationProps {
   mainNavItems: NavigationItem[];
   moreMenuItems: NavigationItem[];
   isActiveRoute: (href: string) => boolean;
 }
 
-export const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
+export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
   mainNavItems,
   moreMenuItems,
   isActiveRoute

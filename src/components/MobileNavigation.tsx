@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
-import { MobileUtilityActions } from './MobileUtilityActions';
+import { SecondaryMenuNavigation } from './SecondaryMenuNavigation';
 
 interface NavigationItem {
   name: string;
@@ -55,7 +54,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
             </div>
 
             {/* Utility Actions Section */}
-            <MobileUtilityActions setIsMenuOpen={setIsMenuOpen} />
+            <SecondaryMenuNavigation setIsMenuOpen={setIsMenuOpen} />
           </div>
         </div>
       )}

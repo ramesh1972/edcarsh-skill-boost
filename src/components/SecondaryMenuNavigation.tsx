@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Bell, Calendar, User, Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,11 +5,11 @@ import { ThemeSelector } from './ThemeSelector';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-interface MobileUtilityActionsProps {
+interface SecondaryMenuNavigationProps {
   setIsMenuOpen: (open: boolean) => void;
 }
 
-export const MobileUtilityActions: React.FC<MobileUtilityActionsProps> = ({
+export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = ({
   setIsMenuOpen
 }) => {
   return (
