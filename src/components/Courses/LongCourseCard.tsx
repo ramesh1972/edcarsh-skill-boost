@@ -130,7 +130,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
                     </Button>
                   </div>
                   <p className="text-xs text-muted-foreground mb-1">{course.instructor.specialty}</p>
-                  <p className="text-xs text-muted-foreground mb-1">{course.instructor.experience} • {course.instructor.city}, {course.instructor.country}</p>
+                  <p className="text-xs text-muted-foreground">{course.instructor.experience} • {course.instructor.city}, {course.instructor.country}</p>
                 </div>
               </div>
               <p className="text-xs text-muted-foreground line-clamp-3 mb-4">{course.instructor.description}</p>
