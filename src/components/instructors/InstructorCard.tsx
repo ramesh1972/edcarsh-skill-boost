@@ -17,9 +17,10 @@ interface Instructor {
 
 interface InstructorCardProps {
   instructor: Instructor;
+  hideDescription?: boolean;
 }
 
-const InstructorCard: React.FC<InstructorCardProps> = ({ instructor }) => {
+const InstructorCard: React.FC<InstructorCardProps> = ({ instructor, hideDescription = false }) => {
   return (
     <div className="col-span-1 flex flex-col">
       <h4 className="text-sm font-medium mb-3">Instructor:</h4>
@@ -41,7 +42,9 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor }) => {
           <p className="text-xs text-muted-foreground">{instructor.experience} • {instructor.city}, {instructor.country}</p>
         </div>
       </div>
-      <p className="text-xs text-muted-foreground line-clamp-4">{instructor.description}</p>
+      {!hideDescription && (
+        <p className="text-xs text-muted-foreground line-clamp-4">{instructor.description}</p>
+      )}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
+import InstructorCard from '@/components/instructors/InstructorCard';
 import { Heart, Eye, UserPlus } from 'lucide-react';
 
 interface Course {
@@ -101,23 +102,10 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
           </div>
         </div>
 
-        {/* Instructor Section - increased width by 20px */}
+        {/* Instructor Section - using InstructorCard component */}
         <div className="mt-auto w-[calc(100%+20px)] -mx-2.5">
-          <div className="flex items-start gap-3 mb-4 px-2.5">
-            <img src={course.instructor.image} alt={course.instructor.name} className="w-10 h-10 rounded-full object-cover" />
-            <div className="text-sm text-muted-foreground flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <p className="font-medium text-foreground">{course.instructor.name}</p>
-                <Button variant="ghost" size="sm" className="text-xs px-2 h-6">
-                  About
-                </Button>
-              </div>
-              <p className="text-xs mb-1">{course.instructor.experience} experience</p>
-              <p className="text-xs mb-1 flex items-center gap-1">
-                <span>{course.instructor.flag}</span>
-                {course.instructor.city}, {course.instructor.country}
-              </p>
-            </div>
+          <div className="px-2.5 mb-4">
+            <InstructorCard instructor={course.instructor} hideDescription={true} />
           </div>
 
           {/* Action Buttons - using ActionButtons component */}
