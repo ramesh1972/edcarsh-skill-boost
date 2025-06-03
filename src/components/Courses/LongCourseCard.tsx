@@ -115,7 +115,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
             {/* Column 3: Instructor Details */}
             <div className="col-span-1 flex flex-col">
               <h4 className="text-sm font-medium mb-3">Instructor:</h4>
-              <div className="flex items-start gap-3 ">
+              <div className="flex items-start gap-3 pb-2">
                 <Avatar className="h-12 w-12 rounded-full flex-shrink-0">
                   <AvatarImage src={course.instructor.image} alt={course.instructor.name} />
                   <AvatarFallback>{course.instructor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
