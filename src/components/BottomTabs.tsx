@@ -89,7 +89,7 @@ const BottomTabs: React.FC = () => {
           border-right: none;
         }
       `}</style>
-      <div className="fixed bottom-0 left-[15px] right-[15px] bg-primary z-10 overflow-x-auto">
+      <div className="fixed bottom-0 left-0 right-0 bg-primary z-10 overflow-x-auto px-[15px]">
         <nav className="flex items-center justify-start min-w-max px-4 py-2">
           {tabItems.map(item => (
             <div 
