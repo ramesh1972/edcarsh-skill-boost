@@ -65,7 +65,18 @@ export const Header: React.FC = () => {
   }];
 
   const isActiveRoute = (href: string) => {
-    return location.pathname === href;
+    // Check if we're on the exact route
+    if (location.pathname === href) {
+      return true;
+    }
+    
+    // Special case: if we're on a course view page and it came from Home, highlight Home tab
+    if (href === '/' && location.pathname.startsWith('/courses/')) {
+      const storedReferrer = sessionStorage.getItem('courseViewReferrer');
+      return storedReferrer === '/';
+    }
+    
+    return false;
   };
 
   return (
