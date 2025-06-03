@@ -100,7 +100,7 @@ export const Header: React.FC = () => {
         border-right: none;
       }
     `}</style>
-    <header className={`w-full bg-primary ${getSkinClasses()} relative z-10`} style={{ marginTop: '8px' }}>
+    <header className={`w-full bg-primary ${getSkinClasses()} relative z-10`}>
       {/* Single line - Logo, main navigation, and right-aligned tools */}
       <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-[32px] my-[18px]">
         {/* Logo */}
