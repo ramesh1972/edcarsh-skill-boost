@@ -8,7 +8,7 @@ const ActionButtons: React.FC = () => {
   const { theme } = useTheme();
 
   return (
-    <div className="flex gap-2 justify-between items-center">
+    <div className="flex gap-2 justify-between items-center ml-8">
       <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
         <UserPlus className="h-3 w-3" />
         Join as Guest
