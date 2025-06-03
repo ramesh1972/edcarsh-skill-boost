@@ -28,7 +28,7 @@ export const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
   return (
     <nav className="hidden lg:flex items-center space-x-2 flex-1 justify-start ml-8">
       {mainNavItems.map(item => 
-        <div key={item.name} className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap rounded-t-lg relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-lg tab-curved' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} style={isActiveRoute(item.href) ? {
+        <div key={item.name} className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap !rounded-t-lg relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-lg tab-curved' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} style={isActiveRoute(item.href) ? {
           marginBottom: '-6px',
           paddingBottom: '16px',
           zIndex: 20
