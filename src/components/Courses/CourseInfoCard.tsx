@@ -1,25 +1,22 @@
-
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
-
 interface CourseInfoCardProps {
   duration: string;
   students: number;
   price: string;
   nextSession: string;
 }
-
 const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
   duration,
   students,
   price,
   nextSession
 }) => {
-  const { getIcon } = useTheme();
-
-  return (
-    <>
+  const {
+    getIcon
+  } = useTheme();
+  return <>
       {/* Course Details */}
       <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
         <div className="flex items-center gap-1">
@@ -33,7 +30,7 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
       </div>
 
       {/* Price and Session */}
-      <div className="px-4 py-2 flex items-center justify-between border-b">
+      <div className="px-4 py-2 mb-2 flex items-center justify-between border-b">
         <Badge variant="secondary" className="flex items-center gap-1">
           {getIcon('price')}
           {price}
@@ -43,8 +40,6 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
           {nextSession}
         </div>
       </div>
-    </>
-  );
+    </>;
 };
-
 export default CourseInfoCard;
