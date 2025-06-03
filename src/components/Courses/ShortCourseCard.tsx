@@ -87,7 +87,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
       </div>
 
       {/* Price and Session - moved below image */}
-      <div className="px-4 py-2 flex items-center justify-between border-b">
+      <div className="px-4 py-1 flex items-center justify-between border-b mb-4">
         <Badge variant="secondary" className="flex items-center gap-1">
           {getIcon('price')}
           {course.price}
