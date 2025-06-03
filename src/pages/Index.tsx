@@ -417,7 +417,7 @@ const Index = () => {
               <Target className="w-5 h-5" />
               Express Your Learning Intent
             </Button>
-            <Button size="lg" variant="outline" className="gap-2 text-white border-white hover:bg-white hover:text-primary">
+            <Button size="lg" variant="outline" className="gap-2 border-white hover:bg-white hover:text-primary">
               <Calendar className="w-5 h-5" />
               View Course Calendar
             </Button>
