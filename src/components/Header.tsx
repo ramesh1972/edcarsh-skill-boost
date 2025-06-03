@@ -1,9 +1,10 @@
+
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 import { HeaderLogo } from './HeaderLogo';
 import { MainMenuNavigation } from './MainMenuNavigation';
-import { HeaderActions } from './HeaderActions';
+import { SecondaryMenuNavigation } from './SecondaryMenuNavigation';
 import { MobileNavigation } from './MobileNavigation';
 
 export const Header: React.FC = () => {
@@ -107,7 +108,9 @@ export const Header: React.FC = () => {
             isActiveRoute={isActiveRoute}
           />
 
-          <HeaderActions />
+          <div className="hidden lg:block">
+            <SecondaryMenuNavigation setIsMenuOpen={setIsMenuOpen} />
+          </div>
 
           <MobileNavigation 
             isMenuOpen={isMenuOpen}
