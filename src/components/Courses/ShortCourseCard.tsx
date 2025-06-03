@@ -76,12 +76,12 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
 
         {/* Course Info Card - moved below image */}
-        <div className="mb-2">
+        <div className="mb-4">
           <CourseInfoCard duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
         </div>
 
         {/* Action Buttons aligned to bottom */}
-        <div className="mt-auto">
+        <div className="mt-auto p-0">
           <ActionButtons />
         </div>
       </CardContent>
