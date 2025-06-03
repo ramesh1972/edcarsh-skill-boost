@@ -100,25 +100,34 @@ export const Header: React.FC = () => {
       `}</style>
       <header className={`w-full bg-primary ${getSkinClasses()} relative z-10 mt-4`} style={{ height: '80px' }}>
         <div className="w-full max-w-none flex items-center justify-between px-6 lg:px-[32px] h-full">
-          <HeaderLogo />
-
-          <MainMenuNavigation 
-            mainNavItems={mainNavItems}
-            moreMenuItems={moreMenuItems}
-            isActiveRoute={isActiveRoute}
-          />
-
-          <div className="hidden lg:block">
-            <SecondaryMenuNavigation setIsMenuOpen={setIsMenuOpen} />
+          {/* Logo Section - Left */}
+          <div className="flex-shrink-0">
+            <HeaderLogo />
           </div>
 
-          <MobileNavigation 
-            isMenuOpen={isMenuOpen}
-            setIsMenuOpen={setIsMenuOpen}
-            mainNavItems={mainNavItems}
-            moreMenuItems={moreMenuItems}
-            isActiveRoute={isActiveRoute}
-          />
+          {/* Navigation Section - Center */}
+          <div className="flex-1 flex justify-center">
+            <MainMenuNavigation 
+              mainNavItems={mainNavItems}
+              moreMenuItems={moreMenuItems}
+              isActiveRoute={isActiveRoute}
+            />
+          </div>
+
+          {/* Secondary Menu Section - Right */}
+          <div className="flex-shrink-0">
+            <div className="hidden lg:block">
+              <SecondaryMenuNavigation setIsMenuOpen={setIsMenuOpen} />
+            </div>
+
+            <MobileNavigation 
+              isMenuOpen={isMenuOpen}
+              setIsMenuOpen={setIsMenuOpen}
+              mainNavItems={mainNavItems}
+              moreMenuItems={moreMenuItems}
+              isActiveRoute={isActiveRoute}
+            />
+          </div>
         </div>
       </header>
     </>
