@@ -306,24 +306,25 @@ const Courses = () => {
                           <div className="text-sm text-muted-foreground flex-1">
                             <div className="flex items-center gap-2 mb-1">
                               <p className="font-medium text-foreground">{course.instructor.name}</p>
-                              <Button variant="ghost" size="sm" className="text-xs px-2 h-6">
+                              <Button variant="primary" size="sm" className="text-xs px-2 h-6">
                                 About
                               </Button>
                             </div>
                             <p className="mb-1">Expert in {course.instructor.specialty}</p>
+                            <p className="text-xs line-clamp-3 max-h-12 overflow-hidden">{course.instructor.description}</p>
+
                             <p className="mb-1">{course.level} level specialist</p>
                             <p className="mb-1">Teaching for {course.instructor.experience}</p>
                             <p className="mb-1 flex items-center gap-1">
                               <span>{course.instructor.flag}</span>
                               {course.instructor.city}, {course.instructor.country}
                             </p>
-                            <p className="text-xs line-clamp-3 max-h-12 overflow-hidden">{course.instructor.description}</p>
                           </div>
                         </div>
 
                         {/* Action Buttons aligned to bottom and right */}
                         <div className="mt-auto">
-                          <div className="flex gap-3 justify-end">
+                          <div className="flex gap-5 justify-end">
                             <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
                               <Eye className="h-3 w-3" />
                               View
