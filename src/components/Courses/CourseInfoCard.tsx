@@ -36,7 +36,7 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
 
       {/* Price and Session */}
       <div className="flex items-center justify-between text-sm border-b">
-        <Badge variant="default" className="flex items-center gap-1" style={{fontSize:'16px'}}>
+        <Badge variant="secondary" className="flex items-center gap-1" style={{fontSize:'20px', borderRadius: '2px'}}>
           {getIcon('price')}
           {price}
         </Badge>
