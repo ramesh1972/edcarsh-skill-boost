@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -29,7 +28,7 @@ const Index = () => {
   const { theme, getIcon } = useTheme();
 
   return (
-    <>
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32">
         <div className="container px-4 mx-auto">
@@ -311,7 +310,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 
