@@ -30,14 +30,16 @@ const App = () => (
             {/* Header positioned at the top with same background */}
             <Header />
             
-            {/* Inner div - absolute positioned with 15px left/right, 64px top, 60px bottom for tabs */}
-            <div className="absolute overflow-auto !rounded-tl-[40px] !rounded-br-[40px]" style={{ 
+            {/* Inner div - absolute positioned with 15px left/right, 48px top, 60px bottom for tabs */}
+            <div className="absolute overflow-auto" style={{ 
               left: '15px', 
               right: '15px', 
-              top: '64px', 
+              top: '48px', 
               bottom: '60px',
               width: 'calc(100vw - 30px)',
-              height: 'calc(100vh - 124px)'
+              height: 'calc(100vh - 108px)',
+              borderTopLeftRadius: '40px',
+              borderBottomLeftRadius: '40px'
             }}>
               <Toaster />
               <Sonner />

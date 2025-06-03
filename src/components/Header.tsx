@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -100,7 +99,7 @@ export const Header: React.FC = () => {
       `}</style>
       <header className={`w-full bg-primary ${getSkinClasses()} relative z-10`}>
         {/* Single line - Logo, main navigation, and right-aligned tools */}
-        <div className="w-full max-w-none flex h-12 items-center justify-between px-6 lg:px-[32px] my-[18px]">
+        <div className="w-full max-w-none flex h-8 items-center justify-between px-6 lg:px-[32px] my-2">
           {/* Logo */}
           <HeaderLogo />
 
