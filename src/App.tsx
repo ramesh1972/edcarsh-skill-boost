@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,6 +15,7 @@ import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import BottomTabs from "@/components/BottomTabs";
 
 const queryClient = new QueryClient();
 
@@ -29,14 +29,14 @@ const App = () => (
             {/* Header positioned at the top with same background */}
             <Header />
             
-            {/* Inner div - absolute positioned with 15px left/right, 64px top/bottom */}
+            {/* Inner div - absolute positioned with 15px left/right, 64px top, 100px bottom */}
             <div className="absolute overflow-auto" style={{ 
               left: '15px', 
               right: '15px', 
               top: '64px', 
-              bottom: '60px',
+              bottom: '100px',
               width: 'calc(100vw - 30px)',
-              height: 'calc(100vh - 124px)'
+              height: 'calc(100vh - 164px)'
             }}>
               <Toaster />
               <Sonner />
@@ -54,6 +54,9 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>
+            
+            {/* Bottom Tabs */}
+            <BottomTabs />
           </div>
         </BrowserRouter>
       </ThemeProvider>
