@@ -96,7 +96,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
                   {course.title}
                 </h3>
               </div>
-              <p className="text-sm text-muted-foreground max-h-[160px] overflow-hidden">{course.longDescription}</p>
+              <p className="text-sm text-muted-foreground line-clamp-3 max-h-[160px] overflow-hidden">{course.longDescription}</p>
             </div>
 
             {/* Column 2: Topics as bulleted list - max 6 topics */}
@@ -133,7 +133,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
                   <p className="text-xs text-muted-foreground">{course.instructor.experience} • {course.instructor.city}, {course.instructor.country}</p>
                 </div>
               </div>
-              <p className="text-xs text-muted-foreground line-clamp-3 mb-4">{course.instructor.description}</p>
+              <p className="text-xs text-muted-foreground line-clamp-4 mb-4">{course.instructor.description}</p>
               
               {/* Action Buttons aligned to bottom with left margin */}
               <div className="mt-auto -ml-[25px]">
