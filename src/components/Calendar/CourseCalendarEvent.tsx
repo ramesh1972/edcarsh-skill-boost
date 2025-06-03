@@ -39,15 +39,15 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
 
   const getCategoryColor = (category: string) => {
     const colors = {
-      'Frontend': 'bg-blue-100 text-blue-800 border-blue-200',
-      'Backend': 'bg-green-100 text-green-800 border-green-200',
-      'Data Science': 'bg-purple-100 text-purple-800 border-purple-200',
-      'Marketing': 'bg-orange-100 text-orange-800 border-orange-200',
-      'Design': 'bg-pink-100 text-pink-800 border-pink-200',
-      'Mobile': 'bg-cyan-100 text-cyan-800 border-cyan-200',
-      'DevOps': 'bg-red-100 text-red-800 border-red-200',
+      'Frontend': 'bg-blue-100 text-blue-800',
+      'Backend': 'bg-green-100 text-green-800',
+      'Data Science': 'bg-purple-100 text-purple-800',
+      'Marketing': 'bg-orange-100 text-orange-800',
+      'Design': 'bg-pink-100 text-pink-800',
+      'Mobile': 'bg-cyan-100 text-cyan-800',
+      'DevOps': 'bg-red-100 text-red-800',
     };
-    return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
+    return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
 
   // Calculate session number if currentDay is provided
@@ -141,7 +141,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   if (viewMode === 'month') {
     return (
       <div 
-        className={`text-xs p-1 rounded border-2 ${getCategoryColor(course.category)} ${
+        className={`text-xs p-1 rounded border-2 border-gray-300 ${getCategoryColor(course.category)} ${
           isSessionPast ? 'opacity-50 bg-gray-100' : ''
         }`}
         style={{ minHeight: `${Math.max(40, cardHeight / 3)}px` }}
@@ -189,7 +189,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   if (viewMode === 'week') {
     return (
       <div 
-        className={`text-xs p-2 rounded border-2 ${getCategoryColor(course.category)} ${
+        className={`text-xs p-2 rounded border-2 border-gray-300 ${getCategoryColor(course.category)} ${
           isSessionPast ? 'opacity-50 bg-gray-100' : ''
         }`}
         style={{ minHeight: `${Math.max(80, cardHeight / 2)}px` }}
@@ -250,7 +250,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
 
   // Day view - full detail
   return (
-    <Card className={`w-full border-2 ${isSessionPast ? 'opacity-60 bg-gray-50' : ''}`} style={{ minHeight: `${cardHeight}px` }}>
+    <Card className={`w-full border-2 border-gray-300 ${isSessionPast ? 'opacity-60 bg-gray-50' : ''}`} style={{ minHeight: `${cardHeight}px` }}>
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <CardTitle className="text-lg leading-tight">{course.title}</CardTitle>
