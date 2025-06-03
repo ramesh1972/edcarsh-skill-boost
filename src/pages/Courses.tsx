@@ -127,10 +127,6 @@ const Courses = () => {
               </Select>
             </div>
 
-          <div className="flex items-center gap-2">
-            <ArrowUpDown className="h-4 w-4" />
-            <span className="font-medium">Sort</span>
-          </div>
 
             <div className="min-w-[150px]">
               <Select value={levelFilter} onValueChange={setLevelFilter}>
@@ -144,6 +140,11 @@ const Courses = () => {
                 </SelectContent>
               </Select>
             </div>
+
+                      <div className="flex items-center gap-2">
+            <ArrowUpDown className="h-4 w-4" />
+            <span className="font-medium">Sort</span>
+          </div>
 
             {viewMode !== 'calendar' && viewMode !== 'map' && <div className="min-w-[150px]">
                 <Select value={sortBy} onValueChange={setSortBy}>
