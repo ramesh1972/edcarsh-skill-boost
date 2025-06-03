@@ -166,11 +166,13 @@ const CourseView: React.FC = () => {
             {/* Action buttons */}
             <Card>
               <CardContent className="pt-6">
-                <ActionButtons 
-                  showJoinNow={true}
-                  joinNowEnabled={true}
-                  showJoinAsGuest={true}
-                />
+                <div className="space-y-3">
+                  <ActionButtons 
+                    showJoinNow={true}
+                    joinNowEnabled={true}
+                    showJoinAsGuest={true}
+                  />
+                </div>
               </CardContent>
             </Card>
 
