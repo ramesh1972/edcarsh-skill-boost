@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -140,16 +141,16 @@ const Courses = () => {
                 </div>
               </div>
 
-              <CardHeader className="pb-2">
+              <CardHeader className="pb-2 h-32 flex flex-col justify-between">
                 <div className="flex items-start justify-between">
-                  <CardTitle className={`text-lg leading-tight ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
+                  <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
                     {course.title}
                   </CardTitle>
-                  <Badge variant="outline" className="ml-2 text-xs">
+                  <Badge variant="outline" className="ml-2 text-xs shrink-0">
                     {course.category}
                   </Badge>
                 </div>
-                <CardDescription className="text-sm">{course.description}</CardDescription>
+                <CardDescription className="text-sm line-clamp-2">{course.description}</CardDescription>
               </CardHeader>
 
               <CardContent className="flex-1 flex flex-col">
