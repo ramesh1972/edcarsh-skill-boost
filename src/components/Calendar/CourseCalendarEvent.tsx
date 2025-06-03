@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Clock, Users, DollarSign } from 'lucide-react';
+import { parseISO, addDays, isSameDay } from 'date-fns';
 
 interface Course {
   id: number;
@@ -29,9 +30,10 @@ interface Course {
 interface CourseCalendarEventProps {
   course: Course;
   viewMode: 'day' | 'week' | 'month';
+  currentDay?: Date;
 }
 
-const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewMode }) => {
+const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewMode, currentDay }) => {
   const { getIcon } = useTheme();
 
   const getCategoryColor = (category: string) => {
@@ -47,11 +49,37 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
     return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
   };
 
+  // Calculate session number if currentDay is provided
+  const getSessionNumber = () => {
+    if (!currentDay) return 1;
+    
+    const startDate = parseISO(course.startDate);
+    const endDate = parseISO(course.endDate);
+    
+    let sessionCount = 1;
+    let checkDate = startDate;
+    
+    while (checkDate <= endDate) {
+      if (isSameDay(checkDate, currentDay)) {
+        return sessionCount;
+      }
+      checkDate = addDays(checkDate, 1);
+      sessionCount++;
+    }
+    
+    return 1;
+  };
+
+  const sessionNumber = getSessionNumber();
+
   if (viewMode === 'month') {
     return (
       <div className={`text-xs p-1 rounded border-l-2 ${getCategoryColor(course.category)}`}>
         <div className="font-medium truncate">{course.title}</div>
         <div className="text-xs opacity-75">{course.startTime}</div>
+        <div className="text-xs font-semibold text-red-600 mt-1">
+          Session - {sessionNumber}
+        </div>
       </div>
     );
   }
@@ -71,6 +99,9 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         <Badge variant="outline" className="text-xs mt-1">
           {course.level}
         </Badge>
+        <div className="text-xs font-semibold text-red-600 mt-1 bg-red-50 px-1 py-0.5 rounded">
+          Session - {sessionNumber}
+        </div>
       </div>
     );
   }
@@ -81,7 +112,12 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <CardTitle className="text-lg leading-tight">{course.title}</CardTitle>
-          <Badge variant="secondary">{course.level}</Badge>
+          <div className="flex flex-col gap-1">
+            <Badge variant="secondary">{course.level}</Badge>
+            <Badge className="bg-red-100 text-red-800 border-red-200 font-semibold">
+              Session - {sessionNumber}
+            </Badge>
+          </div>
         </div>
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">

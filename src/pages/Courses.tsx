@@ -26,6 +26,21 @@ const Courses = () => {
   const [calendarViewMode, setCalendarViewMode] = useState('month'); // 'day', 'week', 'month'
   const [currentDate, setCurrentDate] = useState(new Date());
 
+  // Helper function to get all session days for a course
+  const getCourseSessionDays = (course: any) => {
+    const startDate = parseISO(course.startDate);
+    const endDate = parseISO(course.endDate);
+    const sessionDays = [];
+    
+    let currentDay = startDate;
+    while (currentDay <= endDate) {
+      sessionDays.push(new Date(currentDay));
+      currentDay = addDays(currentDay, 1);
+    }
+    
+    return sessionDays;
+  };
+
   // Get unique categories and levels for filter options
   const categories = ['all', ...Array.from(new Set(courses.map(course => course.category)))];
   const levels = ['all', ...Array.from(new Set(courses.map(course => course.level)))];
@@ -69,7 +84,7 @@ const Courses = () => {
     return filtered;
   }, [categoryFilter, levelFilter, sortBy]);
 
-  // Get courses for current calendar view period
+  // Get courses for current calendar view period - now includes all session days
   const getCoursesForPeriod = useMemo(() => {
     let startDate, endDate;
     
@@ -91,17 +106,30 @@ const Courses = () => {
         endDate = new Date(currentDate);
     }
 
-    return courses.filter(course => {
-      const courseStartDate = parseISO(course.startDate);
+    const coursesInPeriod = [];
+    
+    courses.forEach(course => {
       const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
       
-      if (calendarViewMode === 'day') {
-        return categoryMatch && levelMatch && isSameDay(courseStartDate, currentDate);
+      if (categoryMatch && levelMatch) {
+        const sessionDays = getCourseSessionDays(course);
+        
+        sessionDays.forEach(sessionDay => {
+          if (calendarViewMode === 'day') {
+            if (isSameDay(sessionDay, currentDate)) {
+              coursesInPeriod.push({ ...course, sessionDay });
+            }
+          } else {
+            if (sessionDay >= startDate && sessionDay <= endDate) {
+              coursesInPeriod.push({ ...course, sessionDay });
+            }
+          }
+        });
       }
-      
-      return categoryMatch && levelMatch && courseStartDate >= startDate && courseStartDate <= endDate;
     });
+
+    return coursesInPeriod;
   }, [calendarViewMode, currentDate, categoryFilter, levelFilter]);
 
   const navigatePeriod = (direction: 'prev' | 'next') => {
@@ -145,8 +173,13 @@ const Courses = () => {
               No courses scheduled for this day
             </div>
           ) : (
-            daysCourses.map(course => (
-              <CourseCalendarEvent key={course.id} course={course} viewMode="day" />
+            daysCourses.map((courseWithSession, index) => (
+              <CourseCalendarEvent 
+                key={`${courseWithSession.id}-${index}`} 
+                course={courseWithSession} 
+                viewMode="day" 
+                currentDay={courseWithSession.sessionDay}
+              />
             ))
           )}
         </div>
@@ -171,11 +204,9 @@ const Courses = () => {
           {/* Week days with courses */}
           <div className="grid grid-cols-7 gap-2">
             {weekDays.map(day => {
-              const dayCourses = courses.filter(course => {
-                const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
-                const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-                return categoryMatch && levelMatch && isSameDay(parseISO(course.startDate), day);
-              });
+              const dayCourses = getCoursesForPeriod.filter(courseWithSession => 
+                isSameDay(courseWithSession.sessionDay, day)
+              );
               
               return (
                 <div key={day.toISOString()} className="border rounded-lg p-2 min-h-[200px] bg-background">
@@ -183,8 +214,13 @@ const Courses = () => {
                     {format(day, 'EEE d')}
                   </div>
                   <div className="space-y-1">
-                    {dayCourses.map(course => (
-                      <CourseCalendarEvent key={course.id} course={course} viewMode="week" />
+                    {dayCourses.map((courseWithSession, index) => (
+                      <CourseCalendarEvent 
+                        key={`${courseWithSession.id}-${index}`} 
+                        course={courseWithSession} 
+                        viewMode="week" 
+                        currentDay={courseWithSession.sessionDay}
+                      />
                     ))}
                   </div>
                 </div>
@@ -220,11 +256,9 @@ const Courses = () => {
         
         {/* Calendar days */}
         {calendarDays.map(day => {
-          const dayCourses = courses.filter(course => {
-            const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
-            const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-            return categoryMatch && levelMatch && isSameDay(parseISO(course.startDate), day);
-          });
+          const dayCourses = getCoursesForPeriod.filter(courseWithSession => 
+            isSameDay(courseWithSession.sessionDay, day)
+          );
           
           const isCurrentMonth = day.getMonth() === currentDate.getMonth();
           const isToday = isSameDay(day, new Date());
@@ -242,8 +276,13 @@ const Courses = () => {
                 {format(day, 'd')}
               </div>
               <div className="space-y-1">
-                {dayCourses.slice(0, 3).map(course => (
-                  <CourseCalendarEvent key={course.id} course={course} viewMode="month" />
+                {dayCourses.slice(0, 3).map((courseWithSession, index) => (
+                  <CourseCalendarEvent 
+                    key={`${courseWithSession.id}-${index}`} 
+                    course={courseWithSession} 
+                    viewMode="month" 
+                    currentDay={courseWithSession.sessionDay}
+                  />
                 ))}
                 {dayCourses.length > 3 && (
                   <div className="text-xs text-muted-foreground">
