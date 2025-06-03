@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
@@ -25,10 +26,10 @@ import { homeTestimonials } from '@/data/testimonials';
 import { usps } from '@/data/usps';
 
 const Index = () => {
-  const { theme, getIcon } = useTheme();
+  const { theme, getIcon, getPageLayoutClasses } = useTheme();
 
   return (
-    <div className="min-h-full bg-background">
+    <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-[20px]">
         <div className="container px-4 mx-auto rounded-[20px]">
