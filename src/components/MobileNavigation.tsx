@@ -54,7 +54,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
       </Button>
 
       {/* Mobile Navigation - Semi-circular overlay */}
-      {isMenuOpen && (
+      {true && (
         <div className="lg:hidden fixed inset-0 z-50 bg-primary/95 backdrop-blur-sm">
           {/* Profile at top right */}
           <div className="absolute top-6 right-6">
