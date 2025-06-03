@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -7,6 +8,11 @@ const ToolsNavigation: React.FC = () => {
   const location = useLocation();
 
   const tabItems = [
+    {
+      name: 'Calendar',
+      href: '/calendar',
+      icon: 'course'
+    },
     {
       name: 'Your Classroom',
       href: '/classroom',

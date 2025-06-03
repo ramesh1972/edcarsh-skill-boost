@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -18,6 +17,7 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import ToolsNavigation from "@/components/ToolsNavigation";
+import Calendar from "./pages/Calendar";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +57,7 @@ const AppContent = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/courses" element={<Courses />} />
+            <Route path="/calendar" element={<Calendar />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/express-intent" element={<ExpressIntent />} />
             <Route path="/instructors" element={<Instructors />} />
