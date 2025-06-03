@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -43,7 +44,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
     <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       <div className="flex">
         {/* Left side - Image and stats */}
-        <div className="w-64 flex-shrink-0">
+        <div className="w-64 flex-shrink-0 flex flex-col">
           <div className="relative h-48 overflow-hidden">
             <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
             <div className="absolute top-2 left-2">
@@ -58,7 +59,10 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
             </div>
           </div>
           
-          {/* Course Details - moved below image */}
+          {/* Spacer to push stats and price to bottom */}
+          <div className="flex-1"></div>
+          
+          {/* Course Details - aligned to bottom */}
           <div className="p-4 pb-2 flex items-center justify-between text-sm border-b">
             <div className="flex items-center gap-1">
               {getIcon('time')}
@@ -70,7 +74,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
             </div>
           </div>
       
-          {/* Price and Session - moved below image */}
+          {/* Price and Session - aligned to bottom */}
           <div className="px-4 py-2 flex items-center justify-between border-b">
             <Badge variant="secondary" className="flex items-center gap-1">
               {getIcon('price')}
@@ -146,3 +150,4 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
 };
 
 export default LongCourseCard;
+
