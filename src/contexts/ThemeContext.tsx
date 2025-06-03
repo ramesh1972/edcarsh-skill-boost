@@ -179,7 +179,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.classList.remove('material-design', 'human-interface', 'fluent-design', 'ant-design', 'carbon-design', 'atlassian-design', 'bootstrap-design', 'polaris-design', 'lightning-design', 'tailwind-design');
     root.classList.remove('skin-default', 'skin-gradient', 'skin-textured', 'skin-glassmorphism');
     
-    // Apply current theme classes (excluding layout - that's handled per component now)
+    // Apply current theme classes
     root.classList.add(theme.colorTheme);
     root.classList.add(`${theme.designSystem}-design`);
     root.classList.add(`skin-${theme.skin}`);
@@ -193,11 +193,25 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     // Apply color theme variables
     applyColorTheme(theme.colorTheme);
     
+    // Ensure dropdown menus have proper z-index
+    const style = document.createElement('style');
+    style.textContent = `
+      [data-radix-popper-content-wrapper] {
+        z-index: 9999 !important;
+      }
+      [data-state="open"] {
+        z-index: 9999 !important;
+      }
+      .dropdown-menu-content {
+        z-index: 9999 !important;
+      }
+    `;
+    document.head.appendChild(style);
+    
     // Debug logging
     console.log('Applied theme classes:', {
       colorTheme: theme.colorTheme,
       designSystem: `${theme.designSystem}-design`,
-      layout: `layout-${theme.layout}`,
       skin: `skin-${theme.skin}`,
       typography: `font-${theme.typography}`
     });
