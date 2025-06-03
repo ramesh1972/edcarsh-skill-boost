@@ -106,7 +106,7 @@ export const Header: React.FC = () => {
           </div>
 
           {/* Navigation Section - Center */}
-          <div className="flex-1 flex">
+          <div className="flex-1 flex justify-center">
             <MainMenuNavigation 
               mainNavItems={mainNavItems}
               moreMenuItems={moreMenuItems}
