@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -13,7 +12,6 @@ import CourseCard from '@/components/Courses/CourseCard';
 import LongCourseCard from '@/components/Courses/LongCourseCard';
 import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
 import PopularCoursesMapView from '@/components/Courses/PopularCoursesMapView';
-
 const Courses = () => {
   const {
     theme,
@@ -31,9 +29,7 @@ const Courses = () => {
 
   // Get industries and subjects from master data
   const industries = ['all', ...getAllIndustries()];
-  const availableSubjects = industryFilter === 'all' 
-    ? ['all', ...Array.from(new Set(courses.map(course => course.subject)))]
-    : ['all', ...getSubjectsByIndustry(industryFilter).map(subject => subject.name)];
+  const availableSubjects = industryFilter === 'all' ? ['all', ...Array.from(new Set(courses.map(course => course.subject)))] : ['all', ...getSubjectsByIndustry(industryFilter).map(subject => subject.name)];
 
   // Reset subject filter when industry changes
   const handleIndustryChange = (value: string) => {
@@ -89,11 +85,9 @@ const Courses = () => {
     });
     return filtered;
   }, [industryFilter, subjectFilter, levelFilter, sortBy, sortDirection]);
-
   const toggleSortDirection = () => {
     setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
   };
-
   return <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-8">
@@ -157,8 +151,7 @@ const Courses = () => {
               <span className="font-medium">Sort</span>
             </div>
 
-            {viewMode !== 'calendar' && viewMode !== 'map' && (
-              <div className="flex items-center gap-2">
+            {viewMode !== 'calendar' && viewMode !== 'map' && <div className="flex items-center gap-2">
                 <div className="min-w-[150px]">
                   <Select value={sortBy} onValueChange={setSortBy}>
                     <SelectTrigger>
@@ -172,17 +165,10 @@ const Courses = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={toggleSortDirection}
-                  className="h-10 w-10"
-                  title={`Sort ${sortDirection === 'asc' ? 'ascending' : 'descending'}`}
-                >
+                <Button variant="outline" size="icon" onClick={toggleSortDirection} className="h-10 w-10" title={`Sort ${sortDirection === 'asc' ? 'ascending' : 'descending'}`}>
                   {sortDirection === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
                 </Button>
-              </div>
-            )}
+              </div>}
           </div>
 
           {/* View Mode Toggle - aligned to the right */}
@@ -209,7 +195,7 @@ const Courses = () => {
           </div>
 
           {/* Course count */}
-          <div className="absolute bottom-2 right-4 text-sm text-muted-foreground">
+          <div className="absolute bottom-2 right-4 text-sm text-muted-foreground my-[-35px]">
             {viewMode === 'calendar' || viewMode === 'map' ? '' : `${filteredAndSortedCourses.length} course${filteredAndSortedCourses.length !== 1 ? 's' : ''} found`}
           </div>
         </div>
@@ -225,25 +211,11 @@ const Courses = () => {
           </div>}
 
         {/* Calendar View */}
-        {viewMode === 'calendar' && (
-          <CoursesCalendarView
-            courses={courses}
-            industryFilter={industryFilter}
-            subjectFilter={subjectFilter}
-            levelFilter={levelFilter}
-            calendarViewMode={calendarViewMode}
-            setCalendarViewMode={setCalendarViewMode}
-            currentDate={currentDate}
-            setCurrentDate={setCurrentDate}
-          />
-        )}
+        {viewMode === 'calendar' && <CoursesCalendarView courses={courses} industryFilter={industryFilter} subjectFilter={subjectFilter} levelFilter={levelFilter} calendarViewMode={calendarViewMode} setCalendarViewMode={setCalendarViewMode} currentDate={currentDate} setCurrentDate={setCurrentDate} />}
 
         {/* Map View */}
-        {viewMode === 'map' && (
-          <PopularCoursesMapView courses={filteredAndSortedCourses} />
-        )}
+        {viewMode === 'map' && <PopularCoursesMapView courses={filteredAndSortedCourses} />}
       </div>
     </div>;
 };
-
 export default Courses;
