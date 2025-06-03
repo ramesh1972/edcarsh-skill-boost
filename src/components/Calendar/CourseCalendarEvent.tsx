@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Clock, Users, DollarSign } from 'lucide-react';
-import { parseISO, addDays, isSameDay } from 'date-fns';
+import { parseISO, addDays, isSameDay, parse, addMinutes, subMinutes, isWithinInterval } from 'date-fns';
 
 interface Course {
   id: number;
@@ -70,7 +70,37 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
     return 1;
   };
 
+  // Check if current session should show Join Now button and if it should be enabled
+  const getJoinButtonState = () => {
+    if (!currentDay) return { show: false, enabled: false };
+    
+    const now = new Date();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // Only show for today's sessions
+    if (!isSameDay(currentDay, today)) {
+      return { show: false, enabled: false };
+    }
+    
+    // Parse the session time for today
+    const sessionDateTime = parse(course.startTime, 'HH:mm', currentDay);
+    
+    // Calculate the time window: 15 mins before to 10 mins after
+    const enableTime = subMinutes(sessionDateTime, 15);
+    const disableTime = addMinutes(sessionDateTime, 10);
+    
+    const isInTimeWindow = isWithinInterval(now, { start: enableTime, end: disableTime });
+    const isEnabled = isWithinInterval(now, { start: enableTime, end: sessionDateTime });
+    
+    return { 
+      show: isInTimeWindow, 
+      enabled: isEnabled 
+    };
+  };
+
   const sessionNumber = getSessionNumber();
+  const joinButtonState = getJoinButtonState();
 
   if (viewMode === 'month') {
     return (
@@ -80,6 +110,15 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         <div className="text-xs font-semibold text-red-600 mt-1">
           Session - {sessionNumber}
         </div>
+        {joinButtonState.show && (
+          <Button 
+            size="sm" 
+            className="text-xs mt-1 h-5 px-2"
+            disabled={!joinButtonState.enabled}
+          >
+            Join Now
+          </Button>
+        )}
       </div>
     );
   }
@@ -102,6 +141,15 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         <div className="text-xs font-semibold text-red-600 mt-1 bg-red-50 px-1 py-0.5 rounded">
           Session - {sessionNumber}
         </div>
+        {joinButtonState.show && (
+          <Button 
+            size="sm" 
+            className="text-xs mt-1 h-6 px-2 w-full"
+            disabled={!joinButtonState.enabled}
+          >
+            Join Now
+          </Button>
+        )}
       </div>
     );
   }
@@ -159,9 +207,19 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
         </div>
         
         <div className="mt-3 flex gap-2">
-          <Button size="sm" className="flex-1">
-            Enroll Now
-          </Button>
+          {joinButtonState.show ? (
+            <Button 
+              size="sm" 
+              className="flex-1"
+              disabled={!joinButtonState.enabled}
+            >
+              Join Now
+            </Button>
+          ) : (
+            <Button size="sm" className="flex-1">
+              Enroll Now
+            </Button>
+          )}
           <Button variant="outline" size="sm">
             View Details
           </Button>
