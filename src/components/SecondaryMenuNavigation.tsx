@@ -24,13 +24,7 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
               <span className="text-sm font-medium">Theme</span>
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="center" className="w-48">
-            <DropdownMenuLabel>Select Theme</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <div className="p-2">
               <ThemeSelector />
-            </div>
-          </DropdownMenuContent>
         </DropdownMenu>
         
         {/* Inbox Dropdown */}
