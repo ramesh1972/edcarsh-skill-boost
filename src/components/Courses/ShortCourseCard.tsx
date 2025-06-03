@@ -5,7 +5,6 @@ import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
 import ActionButtons from './ActionButtons';
 import { Heart, Eye, UserPlus } from 'lucide-react';
-
 interface Course {
   id: number;
   title: string;
@@ -29,16 +28,17 @@ interface Course {
     description: string;
   };
 }
-
 interface ShortCourseCardProps {
   course: Course;
 }
-
-const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
-  const { theme, getIcon } = useTheme();
-
-  return (
-    <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
+  course
+}) => {
+  const {
+    theme,
+    getIcon
+  } = useTheme();
+  return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       {/* Course Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0">
         <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
@@ -78,7 +78,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
         </div>
       </div>
 
-      <CardHeader className="pb-2 mb-1 h-20 flex flex-col justify-start flex-shrink-0">
+      <CardHeader className=" flex flex-col justify-start flex-shrink-0 pt-2">
         <div className="flex items-start justify-between">
           <CardTitle className={`text-base leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-sm font-medium' : 'text-base'}`}>
             {course.title}
@@ -92,11 +92,9 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
         <div className="flex-shrink-0 mb-4">
           <h4 className="text-xs font-medium mb-1">Topics Covered:</h4>
           <div className="flex flex-wrap mb-2 gap-1 h-[40px] content-start overflow-hidden">
-            {course.topics.slice(0, 6).map((topic, index) => (
-              <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+            {course.topics.slice(0, 6).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                 {topic}
-              </Badge>
-            ))}
+              </Badge>)}
           </div>
         </div>
 
@@ -105,8 +103,6 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({ course }) => {
           <ActionButtons />
         </div>
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };
-
 export default ShortCourseCard;
