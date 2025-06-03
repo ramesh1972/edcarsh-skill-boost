@@ -1,3 +1,4 @@
+
 import React, { useMemo, useState } from 'react';
 import { Course } from '@/types';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -278,68 +279,66 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   };
 
   return (
-    <div className="flex flex-col w-full h-full">
-      <div className="flex-shrink-0 p-8 pb-4">
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          {viewMode === 'courses' && 'Popular Courses Map'}
-          {viewMode === 'industry' && 'Industry Overview Map'}
-          {viewMode === 'subject' && 'Subject Distribution Map'}
-          {viewMode === 'topic' && 'Topic Categories Map'}
-        </h2>
+    <div className="flex flex-col items-center justify-center p-8 w-full h-full min-h-screen">
+      <h2 className="text-2xl font-bold mb-6 text-center">
+        {viewMode === 'courses' && 'Popular Courses Map'}
+        {viewMode === 'industry' && 'Industry Overview Map'}
+        {viewMode === 'subject' && 'Subject Distribution Map'}
+        {viewMode === 'topic' && 'Topic Categories Map'}
+      </h2>
 
-        {/* View Mode Filter */}
-        <div className="mb-6 p-4 bg-card rounded-lg border">
-          <h3 className="text-sm font-medium mb-3">View Mode:</h3>
-          <RadioGroup value={viewMode} onValueChange={(value: ViewMode) => setViewMode(value)} className="flex flex-wrap gap-6">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="courses" id="courses" />
-              <Label htmlFor="courses" className="text-sm cursor-pointer">Individual Courses</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="industry" id="industry" />
-              <Label htmlFor="industry" className="text-sm cursor-pointer">By Industry</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="subject" id="subject" />
-              <Label htmlFor="subject" className="text-sm cursor-pointer">By Subject</Label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="topic" id="topic" />
-              <Label htmlFor="topic" className="text-sm cursor-pointer">By Topic</Label>
-            </div>
-          </RadioGroup>
-        </div>
-      
-        {/* Legend - only show for courses view */}
-        {viewMode === 'courses' && (
-          <div className="mb-8 flex flex-wrap gap-4 justify-center text-sm">
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-red-600 rounded"></div>
-              <span>300+ students (center)</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-orange-600 rounded"></div>
-              <span>200-299 students</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-amber-600 rounded"></div>
-              <span>150-199 students</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-lime-600 rounded"></div>
-              <span>100-149 students</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-emerald-600 rounded"></div>
-              <span>Less than 100 students (outer)</span>
-            </div>
+      {/* View Mode Filter */}
+      <div className="mb-6 p-4 bg-card rounded-lg border">
+        <h3 className="text-sm font-medium mb-3">View Mode:</h3>
+        <RadioGroup value={viewMode} onValueChange={(value: ViewMode) => setViewMode(value)} className="flex flex-wrap gap-6">
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="courses" id="courses" />
+            <Label htmlFor="courses" className="text-sm cursor-pointer">Individual Courses</Label>
           </div>
-        )}
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="industry" id="industry" />
+            <Label htmlFor="industry" className="text-sm cursor-pointer">By Industry</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="subject" id="subject" />
+            <Label htmlFor="subject" className="text-sm cursor-pointer">By Subject</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="topic" id="topic" />
+            <Label htmlFor="topic" className="text-sm cursor-pointer">By Topic</Label>
+          </div>
+        </RadioGroup>
       </div>
+    
+      {/* Legend - only show for courses view */}
+      {viewMode === 'courses' && (
+        <div className="mb-8 flex flex-wrap gap-4 justify-center text-sm">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-red-600 rounded"></div>
+            <span>300+ students (center)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-orange-600 rounded"></div>
+            <span>200-299 students</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-amber-600 rounded"></div>
+            <span>150-199 students</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-lime-600 rounded"></div>
+            <span>100-149 students</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-emerald-600 rounded"></div>
+            <span>Less than 100 students (outer)</span>
+          </div>
+        </div>
+      )}
       
       {/* Radial Map */}
-      <div className="flex-1 flex justify-center items-center px-8">
-        <div className="relative w-full h-full min-h-[800px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-gray-200 overflow-visible">
+      <div className="flex justify-center items-center w-full h-full flex-1">
+        <div className="relative w-full h-full min-h-[1000px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-gray-200 overflow-visible">
           {/* Center point */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
@@ -388,7 +387,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       </div>
       
       {/* Summary stats */}
-      <div className="flex-shrink-0 p-8 pt-4 text-center text-sm text-gray-600">
+      <div className="mt-6 text-center text-sm text-gray-600">
         {viewMode === 'courses' && (
           <>
             <p>Total Courses: {courses.length}</p>
