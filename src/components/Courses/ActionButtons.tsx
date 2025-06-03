@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useNavigate } from 'react-router-dom';
 import { Heart, Eye, UserPlus } from 'lucide-react';
 
 interface ActionButtonsProps {
@@ -9,15 +10,24 @@ interface ActionButtonsProps {
   joinNowEnabled?: boolean;
   showJoinAsGuest?: boolean;
   isDisabled?: boolean;
+  courseId?: number;
 }
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({ 
   showJoinNow = false, 
   joinNowEnabled = false,
   showJoinAsGuest = true,
-  isDisabled = false
+  isDisabled = false,
+  courseId
 }) => {
   const { theme } = useTheme();
+  const navigate = useNavigate();
+
+  const handleViewClick = () => {
+    if (courseId) {
+      navigate(`/courses/${courseId}`);
+    }
+  };
 
   return (
     <div className="flex gap-2 justify-between items-center">
@@ -53,6 +63,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           size="sm" 
           className="flex items-center gap-1"
           disabled={isDisabled}
+          onClick={handleViewClick}
         >
           <Eye className="h-3 w-3" />
           View

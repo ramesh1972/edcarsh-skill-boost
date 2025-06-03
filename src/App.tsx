@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -8,6 +9,7 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Header } from "@/components/Header";
 import Index from "./pages/Index";
 import Courses from "./pages/Courses";
+import CourseView from "@/components/Courses/CourseView";
 import Dashboard from "./pages/Dashboard";
 import ExpressIntent from "./pages/ExpressIntent";
 import Instructors from "./pages/Instructors";
