@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -7,7 +6,7 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
 import { getAllIndustries, getSubjectsByIndustry } from '@/data/masterData';
-import { Filter, Sort, LayoutGrid, List, Calendar as CalendarIcon, MapPin } from 'lucide-react';
+import { Filter, ArrowUpDown, LayoutGrid, List, Calendar as CalendarIcon, MapPin } from 'lucide-react';
 import { isAfter, parseISO, isSameDay } from 'date-fns';
 import CourseCard from '@/components/Courses/CourseCard';
 import LongCourseCard from '@/components/Courses/LongCourseCard';
@@ -129,7 +128,7 @@ const Courses = () => {
             </div>
 
           <div className="flex items-center gap-2">
-            <Sort className="h-4 w-4" />
+            <ArrowUpDown className="h-4 w-4" />
             <span className="font-medium">Sort</span>
           </div>
 
