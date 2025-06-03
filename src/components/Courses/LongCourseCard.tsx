@@ -131,9 +131,9 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
                   </div>
                   <p className="text-xs text-muted-foreground mb-1">{course.instructor.specialty}</p>
                   <p className="text-xs text-muted-foreground mb-1">{course.instructor.experience} • {course.instructor.city}, {course.instructor.country}</p>
-                  <p className="text-xs text-muted-foreground line-clamp-3">{course.instructor.description}</p>
                 </div>
               </div>
+              <p className="text-xs text-muted-foreground line-clamp-3 mb-4">{course.instructor.description}</p>
               
               {/* Action Buttons aligned to bottom with left margin */}
               <div className="mt-auto -ml-[25px]">
@@ -145,4 +145,5 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
       </div>
     </Card>;
 };
+
 export default LongCourseCard;
