@@ -1,14 +1,49 @@
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
-import { Heart, Eye } from 'lucide-react';
+import { Heart, Eye, Filter } from 'lucide-react';
 
 const Courses = () => {
   const { theme, getIcon, getBackground } = useTheme();
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [levelFilter, setLevelFilter] = useState('all');
+  const [sortBy, setSortBy] = useState('title');
+
+  // Get unique categories and levels for filter options
+  const categories = ['all', ...Array.from(new Set(courses.map(course => course.category)))];
+  const levels = ['all', ...Array.from(new Set(courses.map(course => course.level)))];
+
+  // Filter and sort courses
+  const filteredAndSortedCourses = useMemo(() => {
+    let filtered = courses.filter(course => {
+      const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
+      const levelMatch = levelFilter === 'all' || course.level === levelFilter;
+      return categoryMatch && levelMatch;
+    });
+
+    // Sort courses
+    filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'title':
+          return a.title.localeCompare(b.title);
+        case 'price':
+          return parseInt(a.price.replace('$', '')) - parseInt(b.price.replace('$', ''));
+        case 'students':
+          return b.students - a.students;
+        case 'duration':
+          return parseInt(a.duration) - parseInt(b.duration);
+        default:
+          return 0;
+      }
+    });
+
+    return filtered;
+  }, [categoryFilter, levelFilter, sortBy]);
 
   return (
     <div className={`min-h-full bg-background ${getBackground()}`}>
@@ -22,8 +57,66 @@ const Courses = () => {
           </p>
         </div>
 
+        {/* Filters and Sort Controls */}
+        <div className="flex flex-wrap gap-4 mb-6 p-4 bg-card rounded-lg border">
+          <div className="flex items-center gap-2">
+            <Filter className="h-4 w-4" />
+            <span className="font-medium">Filters & Sort:</span>
+          </div>
+          
+          <div className="flex flex-wrap gap-4">
+            <div className="min-w-[150px]">
+              <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map(category => (
+                    <SelectItem key={category} value={category}>
+                      {category === 'all' ? 'All Categories' : category}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="min-w-[150px]">
+              <Select value={levelFilter} onValueChange={setLevelFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Level" />
+                </SelectTrigger>
+                <SelectContent>
+                  {levels.map(level => (
+                    <SelectItem key={level} value={level}>
+                      {level === 'all' ? 'All Levels' : level}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="min-w-[150px]">
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="title">Title</SelectItem>
+                  <SelectItem value="price">Price</SelectItem>
+                  <SelectItem value="students">Students</SelectItem>
+                  <SelectItem value="duration">Duration</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div className="ml-auto text-sm text-muted-foreground">
+            {filteredAndSortedCourses.length} course{filteredAndSortedCourses.length !== 1 ? 's' : ''} found
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map((course) => (
+          {filteredAndSortedCourses.map((course) => (
             <Card 
               key={course.id} 
               className={`hover:shadow-lg transition-all duration-200 overflow-hidden ${

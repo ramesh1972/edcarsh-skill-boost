@@ -37,6 +37,71 @@ export const courses = [
     topics: ["SEO", "Social Media", "Content Strategy", "Analytics"],
     level: "Beginner",
     category: "Marketing"
+  },
+  {
+    id: 4,
+    title: "Node.js Backend Development",
+    description: "Build scalable backend APIs with Node.js and Express",
+    duration: "24 hours",
+    price: "$35",
+    students: 195,
+    nextSession: "Dec 22, 2024",
+    image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=200&fit=crop",
+    topics: ["Express.js", "MongoDB", "Authentication", "REST APIs"],
+    level: "Intermediate",
+    category: "Backend"
+  },
+  {
+    id: 5,
+    title: "UX/UI Design Fundamentals",
+    description: "Design user-centered interfaces with modern tools",
+    duration: "18 hours",
+    price: "$30",
+    students: 275,
+    nextSession: "Dec 25, 2024",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=200&fit=crop",
+    topics: ["Figma", "User Research", "Prototyping", "Design Systems"],
+    level: "Beginner",
+    category: "Design"
+  },
+  {
+    id: 6,
+    title: "Machine Learning with Python",
+    description: "Introduction to ML algorithms and practical applications",
+    duration: "28 hours",
+    price: "$45",
+    students: 145,
+    nextSession: "Dec 28, 2024",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=200&fit=crop",
+    topics: ["Scikit-learn", "TensorFlow", "Neural Networks", "Deep Learning"],
+    level: "Advanced",
+    category: "Data Science"
+  },
+  {
+    id: 7,
+    title: "Mobile App Development with React Native",
+    description: "Build cross-platform mobile apps efficiently",
+    duration: "22 hours",
+    price: "$40",
+    students: 165,
+    nextSession: "Jan 2, 2025",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=200&fit=crop",
+    topics: ["React Native", "Navigation", "Native Modules", "App Store"],
+    level: "Intermediate",
+    category: "Mobile"
+  },
+  {
+    id: 8,
+    title: "DevOps and Cloud Deployment",
+    description: "Deploy and manage applications in the cloud",
+    duration: "26 hours",
+    price: "$50",
+    students: 125,
+    nextSession: "Jan 5, 2025",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop",
+    topics: ["Docker", "AWS", "CI/CD", "Kubernetes"],
+    level: "Advanced",
+    category: "DevOps"
   }
 ];
 
