@@ -29,25 +29,25 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         // Calculate angle for even distribution within the range
         const angle = (index / rangeCourses.length) * 2 * Math.PI;
         
-        // Calculate distance from center based on student ranges
-        let distance = 280; // default outer ring
+        // Calculate distance from center based on student ranges (increased spacing)
+        let distance = 350; // outermost ring (increased from 280)
         if (course.students >= 300) {
-          distance = 80; // innermost ring
+          distance = 60; // innermost ring (reduced from 80)
         } else if (course.students >= 200) {
-          distance = 120; // second ring
+          distance = 120; // second ring (same)
         } else if (course.students >= 150) {
-          distance = 160; // third ring
+          distance = 180; // third ring (increased from 160)
         } else if (course.students >= 100) {
-          distance = 200; // fourth ring
+          distance = 240; // fourth ring (increased from 200)
         }
         
         // Calculate position
         const x = Math.cos(angle) * distance;
         const y = Math.sin(angle) * distance;
         
-        // Calculate font size based on student count (reduced sizes)
+        // Calculate font size based on student count
         const studentRatio = (course.students - minStudents) / (maxStudents - minStudents) || 0;
-        const fontSize = 10 + (studentRatio * 12); // Range from 10px to 22px (reduced)
+        const fontSize = 8 + (studentRatio * 8); // Range from 8px to 16px
         
         // Determine color based on student ranges
         let color = '#6b7280'; // gray-500 (default)
@@ -114,12 +114,12 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
             Courses Center
           </div>
           
-          {/* Concentric circles for each range */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 border-2 border-red-300 rounded-full opacity-30"></div>
+          {/* Concentric circles for each range (increased spacing) */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-red-300 rounded-full opacity-30"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 border-2 border-orange-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 border-2 border-amber-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border-2 border-lime-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] border-2 border-emerald-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-90 h-90 border-2 border-amber-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] border-2 border-lime-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border-2 border-emerald-300 rounded-full opacity-30"></div>
           
           {/* Course titles positioned radially */}
           {courseData.map((course) => (
