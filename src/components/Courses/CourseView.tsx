@@ -85,12 +85,23 @@ const CourseView: React.FC = () => {
               </CardHeader>
             </Card>
 
-            {/* Topics covered */}
+            {/* Topics covered as prominent chips */}
             <Card>
               <CardHeader>
                 <CardTitle>Topics Covered</CardTitle>
               </CardHeader>
               <CardContent>
+                <div className="flex flex-wrap gap-3 mb-6">
+                  {course.topics.map((topic, index) => (
+                    <Badge 
+                      key={index} 
+                      variant="secondary" 
+                      className="px-4 py-2 text-sm font-medium bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer"
+                    >
+                      {topic}
+                    </Badge>
+                  ))}
+                </div>
                 <ul className="space-y-2">
                   {course.longTopics.map((topic, index) => (
                     <li key={index} className="flex items-start gap-2">
