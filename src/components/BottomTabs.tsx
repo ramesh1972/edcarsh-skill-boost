@@ -103,11 +103,15 @@ const BottomTabs: React.FC = () => {
                 marginTop: '-6px',
                 marginBottom: '12px',
                 paddingTop: '18px',
+                borderBottomLeftRadius: '8px !important',
+                borderBottomRightRadius: '8px !important',
                 zIndex: 20
               } : {
                 marginTop: '-6px',
                 marginBottom: '12px',
                 paddingTop: '18px',
+                borderBottomLeftRadius: '0px !important',
+                borderBottomRightRadius: '0px !important',
                 zIndex: 18
               }}
             >
