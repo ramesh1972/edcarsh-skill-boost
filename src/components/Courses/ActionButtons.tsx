@@ -14,7 +14,7 @@ interface ActionButtonsProps {
 const ActionButtons: React.FC<ActionButtonsProps> = ({ 
   showJoinNow = false, 
   joinNowEnabled = false,
-  showJoinAsGuest = false,
+  showJoinAsGuest = true, // Changed default to true
   isDisabled = false
 }) => {
   const { theme } = useTheme();
