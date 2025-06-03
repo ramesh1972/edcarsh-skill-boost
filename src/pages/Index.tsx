@@ -278,6 +278,7 @@ const Index = () => {
           >
             <CoursesCalendarView
               courses={courses}
+              industryFilter="all"
               categoryFilter="all"
               levelFilter="all"
               calendarViewMode={calendarViewMode}
