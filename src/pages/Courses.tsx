@@ -83,7 +83,7 @@ const Courses = () => {
           <div className="flex items-center gap-4">
             <span className="font-medium">View:</span>
             <ToggleGroup type="single" value={viewMode} onValueChange={value => value && setViewMode(value)}>
-              <ToggleGroupItem value="card" aria-label="Card view">
+              <ToggleGroupItem value="card" aria-label="Card view" className="gap-1">
                 <LayoutGrid className="h-4 w-4" />
                 Card
               </ToggleGroupItem>
