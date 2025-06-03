@@ -14,7 +14,7 @@ export const courses = [
     nextSession: "Jun 3, 2025",
     startDate: "2025-06-03",
     endDate: "2025-06-08",
-    startTime: "23:30",
+    startTime: "00:00",
     image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=200&fit=crop",
     topics: ["Components", "Hooks", "State Management", "JSX", "Props", "Context API", "React Router", "Event Handling"],
     longTopics: ["React Components & JSX", "React Hooks (useState, useEffect, useContext)", "State Management with Redux", "React Router for Navigation", "Component Lifecycle Methods", "Props and State Management", "Event Handling in React", "Conditional Rendering Techniques", "Forms and Controlled Components", "React Performance Optimization", "Custom Hooks Development", "Error Boundaries", "Testing React Components", "Code Splitting & Lazy Loading"],
