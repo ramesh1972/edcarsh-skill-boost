@@ -66,7 +66,7 @@ const Index = () => {
               style={{
                 color: 'orange',
                 fontSize: '30px',
-                maringToo: '20px',
+                marginTop: '20px',
               }} 
               className={`mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 mt-[20px] transition-all duration-700 delay-500 ${
                 heroAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
