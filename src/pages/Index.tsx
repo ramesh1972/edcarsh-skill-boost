@@ -66,7 +66,7 @@ const Index = () => {
               style={{
                 color: 'orange',
                 fontSize: '30px',
-                marginTop: '25px',
+                marginTop: '30px',
               }} 
               className={`mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 mt-[20px] transition-all duration-700 delay-500 ${
                 heroAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
@@ -76,7 +76,7 @@ const Index = () => {
               and industry-focused training - all starting from just $25 per course.
             </p>
             <div 
-              className={`flex flex-col sm:flex-row gap-4 justify-center mt-20 transition-all duration-700 delay-700 ${
+              className={`flex flex-col sm:flex-row gap-4 justify-center mt-10 transition-all duration-700 delay-700 ${
                 heroAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-10'
               }`}
             >
