@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react';
 import { Course } from '@/types';
 
@@ -29,18 +28,18 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         // Calculate angle for even distribution within the range with more spacing
         const angleOffset = (index / Math.max(rangeCourses.length, 1)) * 2 * Math.PI;
         // Add some randomness and more spacing to prevent collisions
-        const angle = angleOffset + (Math.random() * 0.5 - 0.25);
+        const angle = angleOffset + (Math.random() * 0.8 - 0.4);
         
         // Calculate distance from center with much larger spacing between rings
-        let distance = 800; // outermost ring (increased significantly)
+        let distance = 1000; // outermost ring (increased significantly)
         if (course.students >= 300) {
-          distance = 150; // innermost ring
+          distance = 200; // innermost ring
         } else if (course.students >= 200) {
-          distance = 280; // second ring 
+          distance = 350; // second ring 
         } else if (course.students >= 150) {
-          distance = 420; // third ring
+          distance = 550; // third ring
         } else if (course.students >= 100) {
-          distance = 580; // fourth ring
+          distance = 750; // fourth ring
         }
         
         // Calculate position
@@ -109,7 +108,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       
       {/* Radial Course Map */}
       <div className="flex justify-center items-center w-full h-full flex-1">
-        <div className="relative w-full h-full min-h-[1600px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-gray-200 overflow-visible">
+        <div className="relative w-full h-full min-h-[2000px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-gray-200 overflow-visible">
           {/* Center point */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
@@ -117,11 +116,11 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           </div>
           
           {/* Concentric circles for each range with increased spacing */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] border-2 border-red-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[560px] h-[560px] border-2 border-orange-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[840px] h-[840px] border-2 border-amber-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1160px] h-[1160px] border-2 border-lime-300 rounded-full opacity-30"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1600px] h-[1600px] border-2 border-emerald-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border-2 border-red-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border-2 border-orange-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] border-2 border-amber-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1500px] h-[1500px] border-2 border-lime-300 rounded-full opacity-30"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[2000px] h-[2000px] border-2 border-emerald-300 rounded-full opacity-30"></div>
           
           {/* Course titles positioned radially */}
           {courseData.map((course) => (
@@ -136,7 +135,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 color: course.color,
                 fontWeight: course.studentRatio > 0.7 ? 'bold' : course.studentRatio > 0.4 ? 'semibold' : 'medium',
                 textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-                width: 'fit-content'
+                maxWidth: '42px',
+                height: 'auto'
               }}
             >
               <div className="text-center p-2 bg-white/90 border-2 border-gray-300 rounded-lg shadow-sm">
