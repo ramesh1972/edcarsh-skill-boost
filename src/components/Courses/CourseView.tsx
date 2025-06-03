@@ -171,6 +171,7 @@ const CourseView: React.FC = () => {
                     showJoinNow={true}
                     joinNowEnabled={true}
                     showJoinAsGuest={true}
+                    nextSession={course.nextSession}
                   />
                 </div>
               </CardContent>

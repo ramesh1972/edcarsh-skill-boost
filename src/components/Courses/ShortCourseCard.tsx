@@ -104,7 +104,10 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
 
         {/* Action Buttons aligned to bottom */}
         <div className="mt-auto p-0">
-          <ActionButtons courseId={course.id} />
+          <ActionButtons 
+            courseId={course.id} 
+            nextSession={course.nextSession}
+          />
         </div>
       </CardContent>
     </Card>

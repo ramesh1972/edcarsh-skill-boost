@@ -11,6 +11,7 @@ interface ActionButtonsProps {
   showJoinAsGuest?: boolean;
   isDisabled?: boolean;
   courseId?: number;
+  nextSession?: string;
 }
 
 const ActionButtons: React.FC<ActionButtonsProps> = ({ 
@@ -18,7 +19,8 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   joinNowEnabled = false,
   showJoinAsGuest = true,
   isDisabled = false,
-  courseId
+  courseId,
+  nextSession
 }) => {
   const { theme } = useTheme();
   const navigate = useNavigate();
@@ -29,9 +31,24 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
     }
   };
 
+  // Check if Join Now button should be displayed based on session timing
+  const shouldShowJoinNow = () => {
+    if (!nextSession) return false;
+    
+    const now = new Date();
+    const sessionDate = new Date(nextSession);
+    const timeDifference = sessionDate.getTime() - now.getTime();
+    const minutesDifference = timeDifference / (1000 * 60);
+    
+    // Show Join Now button from 15 minutes before to 10 minutes after session start
+    return minutesDifference <= 15 && minutesDifference >= -10;
+  };
+
+  const displayJoinNow = showJoinNow && shouldShowJoinNow();
+
   return (
     <div className="flex flex-wrap gap-2">
-      {showJoinNow && (
+      {displayJoinNow && (
         <Button 
           size="sm" 
           className={`flex items-center gap-1 border-2 ${
