@@ -114,12 +114,13 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
             </div>
 
             {/* Column 3: Instructor Details */}
+          <div className="mt-auto -ml-[25px]">
+
             <InstructorCard instructor={course.instructor} />
+            <ActionButtons /
+          </div>
           </div>
           
-          {/* Action Buttons aligned to bottom with left margin */}
-          <div className="mt-auto -ml-[25px]">
-            <ActionButtons />
           </div>
         </div>
       </div>
