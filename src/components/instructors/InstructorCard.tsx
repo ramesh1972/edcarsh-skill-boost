@@ -29,7 +29,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
       <h4 className="text-sm font-medium mb-3">Instructor:</h4>
       <div className="flex items-start gap-3">
         <Avatar className="h-12 w-12 flex-shrink-0">
-          <AvatarImage src={instructor.image} alt={instructor.name} className="rounded-full object-cover" />
+          <AvatarImage src={instructor.image} alt={instructor.name} className="rounded-full rounded-b-0 object-cover" />
           <AvatarFallback className="rounded-full">
             {instructor.name.split(' ').map(n => n[0]).join('')}
           </AvatarFallback>
