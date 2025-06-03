@@ -15,7 +15,9 @@ const Index = () => {
     getIcon,
     getPageLayoutClasses
   } = useTheme();
-  return <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
+  
+  return (
+    <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
       {/* Hero Section */}
       <section 
         className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px]"
@@ -77,11 +79,8 @@ const Index = () => {
 
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-8 mb-4">
-              
               {/* Center Text */}
               <h2 className="text-3xl font-bold">Why Choose EdCrash?</h2>
-              
-              </div>
             </div>
             <p className="text-xl text-muted-foreground">
               We're revolutionizing online education with our unique approach
@@ -331,7 +330,8 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
 
 export default Index;
