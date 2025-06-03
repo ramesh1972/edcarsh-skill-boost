@@ -59,7 +59,7 @@ const Index = () => {
       <section 
         className="py-20 bg-muted/50 relative overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,.4)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,.6)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
           backgroundSize: 'fill',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat'
@@ -126,7 +126,7 @@ const Index = () => {
       <section 
         className="py-20"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.6)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat'
