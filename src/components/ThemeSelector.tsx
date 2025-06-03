@@ -54,7 +54,41 @@ export const ThemeSelector: React.FC = () => {
       <DropdownMenuContent className="w-72">
         <DropdownMenuLabel>Customize Theme</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        
+
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger 
+            className="flex items-center gap-2"
+            onSelect={(e) => e.preventDefault()}
+            onClick={handleSubMenuClick}
+          >
+            <Layers className="w-4 h-4" />
+            Design System
+          </DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            {[
+              { key: 'tailwind', label: 'Tailwind CSS' },
+              { key: 'material', label: 'Material Design' },
+              { key: 'human', label: 'Human Interface' },
+              { key: 'fluent', label: 'Fluent Design' },
+              { key: 'ant', label: 'Ant Design' },
+              { key: 'carbon', label: 'Carbon Design' },
+              { key: 'atlassian', label: 'Atlassian' },
+              { key: 'bootstrap', label: 'Bootstrap' },
+              { key: 'polaris', label: 'Polaris' },
+              { key: 'lightning', label: 'Lightning' }
+            ].map((designSystem) => (
+              <DropdownMenuItem
+                key={designSystem.key}
+                onSelect={(e) => e.preventDefault()}
+                onClick={(e) => handleItemClick({ designSystem: designSystem.key as any }, e)}
+                className={theme.designSystem === designSystem.key ? 'bg-primary text-primary-foreground' : ''}
+              >
+                {designSystem.label}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+        <DropdownMenuSeparator />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger 
             className="flex items-center gap-2"
@@ -120,40 +154,6 @@ export const ThemeSelector: React.FC = () => {
                 className={theme.iconScheme === iconScheme ? 'bg-primary text-primary-foreground' : ''}
               >
                 {iconScheme.charAt(0).toUpperCase() + iconScheme.slice(1)}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
-
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger 
-            className="flex items-center gap-2"
-            onSelect={(e) => e.preventDefault()}
-            onClick={handleSubMenuClick}
-          >
-            <Layers className="w-4 h-4" />
-            Design System
-          </DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            {[
-              { key: 'tailwind', label: 'Tailwind CSS' },
-              { key: 'material', label: 'Material Design' },
-              { key: 'human', label: 'Human Interface' },
-              { key: 'fluent', label: 'Fluent Design' },
-              { key: 'ant', label: 'Ant Design' },
-              { key: 'carbon', label: 'Carbon Design' },
-              { key: 'atlassian', label: 'Atlassian' },
-              { key: 'bootstrap', label: 'Bootstrap' },
-              { key: 'polaris', label: 'Polaris' },
-              { key: 'lightning', label: 'Lightning' }
-            ].map((designSystem) => (
-              <DropdownMenuItem
-                key={designSystem.key}
-                onSelect={(e) => e.preventDefault()}
-                onClick={(e) => handleItemClick({ designSystem: designSystem.key as any }, e)}
-                className={theme.designSystem === designSystem.key ? 'bg-primary text-primary-foreground' : ''}
-              >
-                {designSystem.label}
               </DropdownMenuItem>
             ))}
           </DropdownMenuSubContent>
