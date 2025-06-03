@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -86,7 +85,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             {course.title}
           </CardTitle>
         </div>
-        <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start max-h-12 overflow-hidden">{course.mediumDescription}</CardDescription>
+        <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start max-h-30 overflow-hidden">{course.mediumDescription}</CardDescription>
       </CardHeader>
 
       <CardContent className="flex-1 flex flex-col">
@@ -113,6 +112,11 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
                   About
                 </Button>
               </div>
+              <p className="text-xs mb-1">{course.instructor.experience} experience</p>
+              <p className="text-xs mb-1 flex items-center gap-1">
+                <span>{course.instructor.flag}</span>
+                {course.instructor.city}, {course.instructor.country}
+              </p>
             </div>
           </div>
 
