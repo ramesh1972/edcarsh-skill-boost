@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, DollarSign, Globe, Calendar, Target, Users, Star, ArrowRight, CheckCircle, Play, Zap, Award, BookOpen, TrendingUp } from 'lucide-react';
@@ -9,26 +8,20 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { featuredCourses } from '@/data/courses';
 import { homeTestimonials } from '@/data/testimonials';
 import { usps } from '@/data/usps';
-
 const Index = () => {
   const {
     theme,
     getIcon,
     getPageLayoutClasses
   } = useTheme();
-  
-  return (
-    <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
+  return <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
       {/* Hero Section */}
-      <section 
-        className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px]"
-        style={{
-          backgroundImage: `radial-gradient(circle at center, rgba(0,0,0,0.6) 30%, rgba(155,155,155,0.2) 70%), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px]" style={{
+      backgroundImage: `radial-gradient(circle at center, rgba(0,0,0,0.6) 30%, rgba(155,155,155,0.2) 70%), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
         <div className="container px-4 mx-auto rounded-[20px]">
           <div className="text-center">
             <Badge className="mb-4" variant="secondary">
@@ -40,7 +33,10 @@ const Index = () => {
                 Crash Courses
               </span>
             </h1>
-            <p className="text-xl  mb-8 mt-15 max-w-3xl mx-auto" style={{color:'orange', fontSize:'30px'}}>
+            <p style={{
+            color: 'orange',
+            fontSize: '30px'
+          }} className="mb-8 mt-18 max-w-3xl mx-auto text-3xl font-semibold">
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
@@ -62,20 +58,16 @@ const Index = () => {
       <section className="py-20 bg-muted/50 relative overflow-hidden">
         <div className="container px-4 mx-auto relative">
           {/* Corner Images */}
-          <div className="absolute top-0 left-0 hidden lg:block" style={{marginTop: '-90px'}}>
-            <img 
-              src="/lovable-uploads/14c1d102-af1f-4765-be76-42b00c50c8e3.png" 
-              alt="100% Quality Badge" 
-              className="w-48 h-48 object-contain"
-            />
+          <div className="absolute top-0 left-0 hidden lg:block" style={{
+          marginTop: '-90px'
+        }}>
+            <img src="/lovable-uploads/14c1d102-af1f-4765-be76-42b00c50c8e3.png" alt="100% Quality Badge" className="w-48 h-48 object-contain" />
           </div>
           
-          <div className="absolute top-0 right-0 hidden lg:block" style={{marginTop: '-90px'}}>
-            <img 
-              src="/lovable-uploads/7aa0ba35-0c3f-47dc-a574-f6ff47194b94.png" 
-              alt="Success Key Illustration" 
-              className="w-48 h-48 object-contain"
-            />
+          <div className="absolute top-0 right-0 hidden lg:block" style={{
+          marginTop: '-90px'
+        }}>
+            <img src="/lovable-uploads/7aa0ba35-0c3f-47dc-a574-f6ff47194b94.png" alt="Success Key Illustration" className="w-48 h-48 object-contain" />
           </div>
 
           <div className="text-center mb-16">
@@ -138,15 +130,12 @@ const Index = () => {
       </section>
 
       {/* Featured Courses */}
-      <section 
-        className="py-20 round-b-[20px] border-[10px] border-secondary"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.8)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
+      <section className="py-20 round-b-[20px] border-[10px] border-secondary" style={{
+      backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.8)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
         <div className="container px-4 mx-auto round-b-[20px]">
           <div className="flex justify-between items-center mb-12">
             <div>
@@ -233,15 +222,12 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section 
-        className="py-20 bg-muted/50 round-[10px] border-[10px] border-secondary"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255, 255, 255,0.4), rgba(255, 255, 255,.8)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
-          backgroundSize: '260px auto',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'repeat'
-        }}
-      >
+      <section className="py-20 bg-muted/50 round-[10px] border-[10px] border-secondary" style={{
+      backgroundImage: `linear-gradient(rgba(255, 255, 255,0.4), rgba(255, 255, 255,.8)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
+      backgroundSize: '260px auto',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'repeat'
+    }}>
         <div className="container px-4 mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">What Our Students Say</h2>
@@ -331,8 +317,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
