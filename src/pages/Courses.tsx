@@ -6,11 +6,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
-import { Filter, LayoutGrid, List, Calendar as CalendarIcon } from 'lucide-react';
+import { Filter, LayoutGrid, List, Calendar as CalendarIcon, MapPin } from 'lucide-react';
 import { isAfter, parseISO, isSameDay } from 'date-fns';
 import CourseCard from '@/components/Courses/CourseCard';
 import LongCourseCard from '@/components/Courses/LongCourseCard';
 import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
+import PopularCoursesMapView from '@/components/Courses/PopularCoursesMapView';
 
 const Courses = () => {
   const {
@@ -95,6 +96,10 @@ const Courses = () => {
                 <CalendarIcon className="h-4 w-4" />
                 Calendar
               </ToggleGroupItem>
+              <ToggleGroupItem value="map" aria-label="Map view" className="gap-1">
+                <MapPin className="h-4 w-4" />
+                Map
+              </ToggleGroupItem>
             </ToggleGroup>
           </div>
         </div>
@@ -133,7 +138,7 @@ const Courses = () => {
               </Select>
             </div>
 
-            {viewMode !== 'calendar' && <div className="min-w-[150px]">
+            {viewMode !== 'calendar' && viewMode !== 'map' && <div className="min-w-[150px]">
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger>
                     <SelectValue placeholder="Sort by" />
@@ -149,7 +154,7 @@ const Courses = () => {
           </div>
 
           <div className="ml-auto text-sm text-muted-foreground">
-            {viewMode === 'calendar' ? '' : `${filteredAndSortedCourses.length} course${filteredAndSortedCourses.length !== 1 ? 's' : ''} found`}
+            {viewMode === 'calendar' || viewMode === 'map' ? '' : `${filteredAndSortedCourses.length} course${filteredAndSortedCourses.length !== 1 ? 's' : ''} found`}
           </div>
         </div>
 
@@ -174,6 +179,11 @@ const Courses = () => {
             currentDate={currentDate}
             setCurrentDate={setCurrentDate}
           />
+        )}
+
+        {/* Map View */}
+        {viewMode === 'map' && (
+          <PopularCoursesMapView courses={filteredAndSortedCourses} />
         )}
       </div>
     </div>;
