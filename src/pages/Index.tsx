@@ -8,6 +8,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { featuredCourses } from '@/data/courses';
 import { homeTestimonials } from '@/data/testimonials';
 import { usps } from '@/data/usps';
+
 const Index = () => {
   const {
     theme,
@@ -16,7 +17,7 @@ const Index = () => {
   } = useTheme();
   return <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-none">
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32">
         <div className="container px-4 mx-auto rounded-[20px]">
           <div className="text-center">
             <Badge className="mb-4" variant="secondary">
@@ -75,7 +76,7 @@ const Index = () => {
 
             {/* Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
-              {usps.map((usp, index) => <Card key={index} className="text-center hover:shadow-lg transition-all duration-300 hover:scale-105 hover:border-primary/50 group relative bg-background/80 backdrop-blur-sm">
+              {usps.map((usp, index) => <Card key={index} className="text-center hover:scale-105 transition-all duration-300 group relative bg-background/80 backdrop-blur-sm border-0 shadow-none">
                   {/* Connection dots */}
                   <div className="hidden lg:block absolute -top-2 -left-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
                   <div className="hidden lg:block absolute -top-2 -right-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
@@ -123,7 +124,7 @@ const Index = () => {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredCourses.map((course, index) => <Card key={index} className="hover:shadow-lg transition-shadow">
+            {featuredCourses.map((course, index) => <Card key={index} className="hover:scale-105 transition-all duration-300 border-0 shadow-none">
                 <CardHeader>
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex gap-2">
@@ -202,7 +203,7 @@ const Index = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {homeTestimonials.map((testimonial, index) => <Card key={index}>
+            {homeTestimonials.map((testimonial, index) => <Card key={index} className="border-0 shadow-none">
                 <CardHeader>
                   <div className="flex items-center gap-1 mb-2">
                     {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}
@@ -239,7 +240,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 bg-background border-t">
+      <footer className="py-12 bg-background border-0">
         <div className="container px-4 mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
