@@ -8,7 +8,7 @@ const Testimonials = () => {
   const { theme, getIcon, getBackground } = useTheme();
 
   return (
-    <div className={`min-h-screen bg-background ${getBackground()}`}>
+    <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-8 text-center">
           <h1 className={`text-4xl font-bold mb-4 flex items-center justify-center gap-3 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
