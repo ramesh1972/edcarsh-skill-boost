@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Info } from 'lucide-react';
-
 interface Instructor {
   name: string;
   image: string;
@@ -14,18 +12,15 @@ interface Instructor {
   flag: string;
   description: string;
 }
-
 interface InstructorCardProps {
   instructor: Instructor;
   hideDescription?: boolean;
 }
-
 const InstructorCard: React.FC<InstructorCardProps> = ({
   instructor,
   hideDescription = false
 }) => {
-  return (
-    <div className="col-span-1 flex flex-col mb-1 p-0">
+  return <div className="col-span-1 flex flex-col mb-1 p-0">
       <h4 className="text-sm font-medium mb-3">Instructor:</h4>
       <div className="flex items-start gap-3">
         <Avatar className="h-12 w-12 flex-shrink-0">
@@ -47,11 +42,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
           <p className="text-xs text-muted-foreground">{instructor.experience} • {instructor.city}, {instructor.country}</p>
         </div>
       </div>
-      {!hideDescription && (
-        <p className="text-xs text-muted-foreground line-clamp-4">{instructor.description}</p>
-      )}
-    </div>
-  );
+      {!hideDescription && <p className="text-xs text-muted-foreground line-clamp-4 mt-3">{instructor.description}</p>}
+    </div>;
 };
-
 export default InstructorCard;
