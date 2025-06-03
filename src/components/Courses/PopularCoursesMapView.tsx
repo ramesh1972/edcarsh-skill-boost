@@ -16,9 +16,9 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       // Calculate angle for radial positioning
       const angle = (index / courses.length) * 2 * Math.PI;
       
-      // Calculate distance from center (inversely proportional to students)
+      // Calculate distance from center (courses with more students closer to center)
       const studentRatio = (course.students - minStudents) / (maxStudents - minStudents) || 0;
-      const distance = 120 + (studentRatio * 160); // Range from 120px to 280px from center
+      const distance = 280 - (studentRatio * 160); // Range from 120px to 280px from center (reversed)
       
       // Calculate position
       const x = Math.cos(angle) * distance;
