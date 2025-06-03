@@ -1,4 +1,4 @@
-6
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -95,10 +95,7 @@ const BottomTabs: React.FC = () => {
             <div 
               key={item.name} 
               className={`flex items-center gap-2 px-3 py-2 text-xs font-medium whitespace-nowrap rounded-b-lg relative ${
-                isAct
-                marginTop: '-10px',
-                paddingTop: '22px'
-                zIndex: 18iveRoute(item.href) 
+                isActiveRoute(item.href) 
                   ? 'bg-background text-foreground shadow-lg bottom-tab-curved' 
                   : 'text-primary-foreground hover:bg-primary-foreground/10'
               }`}
