@@ -37,11 +37,11 @@ const Index = () => {
                 Crash Courses
               </span>
             </h1>
-            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-orange/40 mb-8 max-w-3xl mx-auto">
               Learn new skills with short, practical crash courses. Live sessions, affordable pricing, 
               and industry-focused training - all starting from just $25 per course.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-20">
               <Button size="lg" className="gap-2">
                 <Play className="w-5 h-5" />
                 Start Learning Now
