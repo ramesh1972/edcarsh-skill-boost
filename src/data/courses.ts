@@ -40,7 +40,7 @@ export const courses = [
     price: "25",
     students: 180,
     nextSession: "Jun 5, 2025",
-    startDate: "2025-06-05",
+    startDate: "2025-06-03",
     endDate: "2025-06-06",
     startTime: "14:00",
     image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=200&fit=crop",
