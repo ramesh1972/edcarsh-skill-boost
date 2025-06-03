@@ -78,7 +78,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
       </div>
 
-      <CardHeader className=" flex flex-col justify-start flex-shrink-0 pt-2">
+      <CardHeader className=" flex flex-col justify-start flex-shrink-0 pt-2 h-20">
         <div className="flex items-start justify-between">
           <CardTitle className={`text-base leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-sm font-medium' : 'text-base'}`}>
             {course.title}
