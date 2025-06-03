@@ -508,6 +508,14 @@
     @apply transition-transform duration-200 hover:scale-105;
   }
 
+  /* Main content container with forced border radius */
+  .main-content-container {
+    border-top-left-radius: 40px !important;
+    border-bottom-left-radius: 40px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
   /* Responsive utilities */
   .mobile-responsive {
     @apply flex flex-col sm:flex-row gap-4;
