@@ -90,7 +90,7 @@ const BottomTabs: React.FC = () => {
         }
       `}</style>
       <div className="fixed bottom-0 left-0 right-0 bg-primary z-10 overflow-x-auto px-[15px]">
-        <nav className="flex items-end justify-end min-w-max px-4 py-2">
+        <nav className="flex items-end justify-end min-w-max px-4">
           {tabItems.map(item => (
             <div 
               key={item.name} 
@@ -100,14 +100,14 @@ const BottomTabs: React.FC = () => {
                   : 'text-primary-foreground hover:bg-primary-foreground/10'
               }`}
               style={isActiveRoute(item.href) ? {
-                marginTop: '-10px',
-                marginBottom: '2px',
-                paddingTop: '24px',
+                marginTop: '-2px',
+                marginBottom: '7px',
+                paddingTop: '17px',
                 zIndex: 20
               } : {
-                marginTop: '-10px',
-                marginBottom: '2px',
-                paddingTop: '24px',
+                marginTop: '-2px',
+                marginBottom: '7px',
+                paddingTop: '17px',
                 zIndex: 18
               }}
             >
