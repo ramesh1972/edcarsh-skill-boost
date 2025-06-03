@@ -369,7 +369,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       <div className="flex justify-center items-center w-full h-full flex-1 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-6 border-gray-200 overflow-hidden">
         <div className="relative w-full h-full min-h-[1000px]">
           <div 
-            className="absolute inset-0 transition-transform duration-300 ease-out"
+            className="absolute inset-0 transition-transform duration-500 ease-out"
             style={{ 
               transform: `scale(${zoomLevel})`,
               transformOrigin: 'center center'
