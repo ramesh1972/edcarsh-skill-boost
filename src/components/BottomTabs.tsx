@@ -71,7 +71,7 @@ const BottomTabs: React.FC = () => {
           position: absolute;
           top: -7px;
           width: 25px;
-          height: 25px;
+          height: 21px;
           background: hsl(var(--primary));
         }
         .bottom-tab-curved::before {
