@@ -108,7 +108,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
             </div>
 
             {/* Column 3: About Instructor - increased width by 20px */}
-            <div className="col-span-1 flex flex-col w-[calc(100%+20px)]">
+            <div className="col-span-1 flex flex-col" style={{marginLeft: '-20px'}}>
               <div className="flex items-start gap-3 mb-4 flex-1">
                 <img src={course.instructor.image} alt={course.instructor.name} className="w-12 h-12 rounded-full object-cover" />
                 <div className="text-sm text-muted-foreground flex-1">
@@ -119,16 +119,19 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
                     </Button>
                   </div>
                   <p className="mb-1">Expert in {course.instructor.specialty}</p>
-                  <p className="text-xs line-clamp-3 max-h-12 overflow-hidden">{course.instructor.description}</p>
-                  <p className="mb-1">{course.level} level specialist</p>
-                  <p className="mb-1">Teaching for {course.instructor.experience}</p>
-                  <p className="mb-1 flex items-center gap-1">
-                    <span>{course.instructor.flag}</span>
-                    {course.instructor.city}, {course.instructor.country}
-                  </p>
                 </div>
               </div>
-
+              
+              <div className="flex items-start gap-3 mb-4 flex-1>
+                <p className="text-xs line-clamp-3 max-h-12 overflow-hidden">{course.instructor.description}</p>
+                <p className="mb-1">{course.level} level specialist</p>
+                <p className="mb-1">Teaching for {course.instructor.experience}</p>
+                <p className="mb-1 flex items-center gap-1">
+                  <span>{course.instructor.flag}</span>
+                  {course.instructor.city}, {course.instructor.country}
+                </p>
+              </div>
+              
               {/* Action Buttons - similar to ShortCourseCard */}
               <div className="mt-auto">
                 <div className="flex gap-2 justify-between items-center">
