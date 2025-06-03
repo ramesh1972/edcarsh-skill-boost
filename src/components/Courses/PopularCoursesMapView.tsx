@@ -135,7 +135,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 fontSize: `${course.fontSize}px`,
                 color: course.color,
                 fontWeight: course.studentRatio > 0.7 ? 'bold' : course.studentRatio > 0.4 ? 'semibold' : 'medium',
-                textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
+                textShad;ow: '1px 1px 2px rgba(0,0,0,0.1)',
+                maxWidth: '42px',
+                textWrap: 'wrap',
+                borderRadius: '50%'
               }}
             >
               <div className="text-center max-w-42 p-2 bg-white/90 border-2 border-gray-300 rounded-lg shadow-sm">
