@@ -112,7 +112,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
             {/* Column 3: Instructor Details */}
             <div className="col-span-1">
               <h4 className="text-sm font-medium mb-3">Instructor:</h4>
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 mb-4">
                 <Avatar className="h-12 w-12 rounded-full flex-shrink-0">
                   <AvatarImage src={course.instructor.image} alt={course.instructor.name} />
                   <AvatarFallback>{course.instructor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
@@ -131,12 +131,10 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
                   <p className="text-xs text-muted-foreground line-clamp-3">{course.instructor.description}</p>
                 </div>
               </div>
+              
+              {/* Action Buttons within instructor section */}
+              <ActionButtons />
             </div>
-          </div>
-
-          {/* Bottom row - Action Buttons */}
-          <div className="mt-6 pt-4 border-t">
-            <ActionButtons />
           </div>
         </div>
       </div>
