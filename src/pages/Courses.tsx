@@ -19,6 +19,7 @@ const Courses = () => {
     getIcon,
     getBackground
   } = useTheme();
+  const [industryFilter, setIndustryFilter] = useState('all');
   const [categoryFilter, setCategoryFilter] = useState('all');
   const [levelFilter, setLevelFilter] = useState('all');
   const [sortBy, setSortBy] = useState('title');
@@ -26,7 +27,8 @@ const Courses = () => {
   const [calendarViewMode, setCalendarViewMode] = useState('month');
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Get unique categories and levels for filter options
+  // Get unique industries, categories and levels for filter options
+  const industries = ['all', ...Array.from(new Set(courses.map(course => course.industry)))];
   const categories = ['all', ...Array.from(new Set(courses.map(course => course.category)))];
   const levels = ['all', ...Array.from(new Set(courses.map(course => course.level)))];
 
@@ -36,18 +38,20 @@ const Courses = () => {
     today.setHours(0, 0, 0, 0);
     return courses.filter(course => {
       const courseStartDate = parseISO(course.startDate);
+      const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
       const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-      return categoryMatch && levelMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
+      return industryMatch && categoryMatch && levelMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
     });
-  }, [categoryFilter, levelFilter]);
+  }, [industryFilter, categoryFilter, levelFilter]);
 
   // Filter and sort courses for card/list view
   const filteredAndSortedCourses = useMemo(() => {
     let filtered = courses.filter(course => {
+      const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
       const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-      return categoryMatch && levelMatch;
+      return industryMatch && categoryMatch && levelMatch;
     });
 
     // Sort courses
@@ -66,7 +70,7 @@ const Courses = () => {
       }
     });
     return filtered;
-  }, [categoryFilter, levelFilter, sortBy]);
+  }, [industryFilter, categoryFilter, levelFilter, sortBy]);
 
   return <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
@@ -112,6 +116,19 @@ const Courses = () => {
           </div>
           
           <div className="flex flex-wrap gap-4">
+            <div className="min-w-[150px]">
+              <Select value={industryFilter} onValueChange={setIndustryFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Industry" />
+                </SelectTrigger>
+                <SelectContent>
+                  {industries.map(industry => <SelectItem key={industry} value={industry}>
+                      {industry === 'all' ? 'All Industries' : industry}
+                    </SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+
             <div className="min-w-[150px]">
               <Select value={categoryFilter} onValueChange={setCategoryFilter}>
                 <SelectTrigger>
@@ -172,6 +189,7 @@ const Courses = () => {
         {viewMode === 'calendar' && (
           <CoursesCalendarView
             courses={courses}
+            industryFilter={industryFilter}
             categoryFilter={categoryFilter}
             levelFilter={levelFilter}
             calendarViewMode={calendarViewMode}

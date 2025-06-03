@@ -20,6 +20,7 @@ export const courses = [
     longTopics: ["React Components & JSX", "React Hooks (useState, useEffect, useContext)", "State Management with Redux", "React Router for Navigation", "Component Lifecycle Methods", "Props and State Management", "Event Handling in React", "Conditional Rendering Techniques", "Forms and Controlled Components", "React Performance Optimization", "Custom Hooks Development", "Error Boundaries", "Testing React Components", "Code Splitting & Lazy Loading"],
     level: "Beginner",
     category: "Frontend",
+    industry: "Software",
     instructor: {
       name: "Sarah Chen",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=100&h=100&fit=crop&crop=face",
@@ -51,6 +52,7 @@ export const courses = [
     longTopics: ["Python Fundamentals for Data Science", "Pandas DataFrame Manipulation", "NumPy Array Operations", "Data Cleaning and Preprocessing", "Statistical Analysis with Python", "Data Visualization with Matplotlib", "Seaborn for Advanced Plotting", "Working with CSV and JSON Data", "Time Series Analysis", "Introduction to Machine Learning", "Data Wrangling Techniques", "Exploratory Data Analysis", "Database Connections", "Web Scraping for Data"],
     level: "Intermediate",
     category: "Data Science",
+    industry: "Software",
     instructor: {
       name: "Dr. Mike Rodriguez",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=face",
@@ -82,6 +84,7 @@ export const courses = [
     longTopics: ["Search Engine Optimization (SEO)", "Social Media Marketing Strategy", "Content Marketing and Creation", "Google Analytics and Tracking", "Pay-Per-Click (PPC) Advertising", "Email Marketing Campaigns", "Conversion Rate Optimization", "Brand Building and Positioning", "Marketing Automation Tools", "ROI Measurement and Analysis", "Influencer Marketing", "Video Marketing", "Mobile Marketing", "Customer Journey Mapping"],
     level: "Beginner",
     category: "Marketing",
+    industry: "Marketing",
     instructor: {
       name: "Emma Wilson",
       image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=100&h=100&fit=crop&crop=face",
@@ -113,6 +116,7 @@ export const courses = [
     longTopics: ["Node.js Fundamentals", "Express.js Framework", "MongoDB Database Integration", "RESTful API Design", "Authentication and Authorization", "Middleware Development", "Error Handling and Logging", "Database Modeling with Mongoose", "Security Best Practices", "Deployment and DevOps", "Testing with Jest", "Real-time Communication", "Rate Limiting", "API Documentation"],
     level: "Intermediate",
     category: "Backend",
+    industry: "Software",
     instructor: {
       name: "Alex Johnson",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=100&h=100&fit=crop&crop=face",
@@ -144,6 +148,7 @@ export const courses = [
     longTopics: ["Design Thinking Process", "User Research and Personas", "Wireframing and Prototyping", "Figma Design Tools", "Typography and Color Theory", "Responsive Design Principles", "Accessibility in Design", "Design Systems and Components", "Usability Testing Methods", "Design Handoff to Developers", "Information Architecture", "Interaction Design", "Visual Hierarchy", "Mobile-First Design"],
     level: "Beginner",
     category: "Design",
+    industry: "Software",
     instructor: {
       name: "Lisa Park",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=face",
@@ -175,6 +180,7 @@ export const courses = [
     longTopics: ["Machine Learning Fundamentals", "Data Preprocessing and Feature Engineering", "Supervised Learning Algorithms", "Unsupervised Learning Techniques", "Neural Networks and Deep Learning", "Model Evaluation and Validation", "Scikit-learn Library Mastery", "TensorFlow and Keras", "Computer Vision Basics", "Natural Language Processing", "Ensemble Methods", "Hyperparameter Tuning", "Cross-Validation", "Model Deployment"],
     level: "Advanced",
     category: "Data Science",
+    industry: "Software",
     instructor: {
       name: "Dr. James Wu",
       image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=100&h=100&fit=crop&crop=face",
@@ -206,6 +212,7 @@ export const courses = [
     longTopics: ["React Native Setup and Configuration", "Mobile UI Components", "Navigation and Routing", "State Management in Mobile Apps", "Native Device APIs", "Camera and Media Integration", "Push Notifications", "App Store Deployment", "Performance Optimization", "Testing Mobile Applications", "Offline Data Storage", "Location Services", "Biometric Authentication", "In-App Purchases"],
     level: "Intermediate",
     category: "Mobile",
+    industry: "Software",
     instructor: {
       name: "Maria Garcia",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=100&h=100&fit=crop&crop=face",
@@ -237,6 +244,7 @@ export const courses = [
     longTopics: ["Docker Containerization", "Kubernetes Orchestration", "AWS Cloud Services", "CI/CD Pipeline Development", "Infrastructure as Code (Terraform)", "Monitoring and Logging", "Security and Compliance", "Load Balancing and Scaling", "Database Management in Cloud", "Cost Optimization Strategies", "GitOps Workflows", "Container Security", "Service Mesh", "Disaster Recovery"],
     level: "Advanced",
     category: "DevOps",
+    industry: "Software",
     instructor: {
       name: "David Kim",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=100&h=100&fit=crop&crop=face",

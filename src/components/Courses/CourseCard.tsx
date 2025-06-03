@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -20,6 +21,7 @@ interface Course {
   topics: string[];
   level: string;
   category: string;
+  industry: string;
   instructor: {
     name: string;
     image: string;
@@ -47,11 +49,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-0" />
         <div className="absolute top-2 left-2">
           <Badge variant="outline" className="bg-white/90 text-black">
-            {course.category}
+            {course.industry}
           </Badge>
         </div>
-        <div className="absolute top-2 right-2">
-          <Badge variant="secondary" className="bg-white/90 text-black">
+        <div className="absolute top-2 right-2 flex gap-1">
+          <Badge variant="secondary" className="bg-white/90 text-black text-xs">
+            {course.category}
+          </Badge>
+          <Badge variant="secondary" className="bg-white/90 text-black text-xs">
             {course.level}
           </Badge>
         </div>

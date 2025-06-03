@@ -10,6 +10,7 @@ import { Course } from '@/types';
 
 interface CoursesCalendarViewProps {
   courses: Course[];
+  industryFilter: string;
   categoryFilter: string;
   levelFilter: string;
   calendarViewMode: string;
@@ -20,6 +21,7 @@ interface CoursesCalendarViewProps {
 
 const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
   courses,
+  industryFilter,
   categoryFilter,
   levelFilter,
   calendarViewMode,
@@ -66,9 +68,10 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
     }
     const coursesInPeriod = [];
     courses.forEach(course => {
+      const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
       const categoryMatch = categoryFilter === 'all' || course.category === categoryFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
-      if (categoryMatch && levelMatch) {
+      if (industryMatch && categoryMatch && levelMatch) {
         const sessionDays = getCourseSessionDays(course);
         sessionDays.forEach(sessionDay => {
           if (calendarViewMode === 'day') {
@@ -90,7 +93,7 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
       }
     });
     return coursesInPeriod;
-  }, [calendarViewMode, currentDate, categoryFilter, levelFilter, courses]);
+  }, [calendarViewMode, currentDate, industryFilter, categoryFilter, levelFilter, courses]);
 
   const navigatePeriod = (direction: 'prev' | 'next') => {
     let newDate: Date;

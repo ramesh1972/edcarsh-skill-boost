@@ -30,5 +30,6 @@ export interface Course {
   longTopics: string[];
   level: string;
   category: string;
+  industry: string;
   instructor: Instructor;
 }
