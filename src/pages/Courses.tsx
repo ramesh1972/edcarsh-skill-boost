@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
 import { Heart, Eye, Filter } from 'lucide-react';
+
 const Courses = () => {
   const {
     theme,
@@ -122,7 +123,7 @@ const Courses = () => {
                 </div>
               </div>
 
-              <CardHeader className="pb-2 mb-1 h-32   flex flex-col justify-start flex-shrink-0">
+              <CardHeader className="pb-2 mb-1 h-32 flex flex-col justify-start flex-shrink-0">
                 <div className="flex items-start justify-between">
                   <CardTitle className={`text-lg leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-base font-medium' : 'text-lg'}`}>
                     {course.title}
@@ -131,14 +132,14 @@ const Courses = () => {
                     {course.category}
                   </Badge>
                 </div>
-                <CardDescription className="text-sm line-clamp-2">{course.description}</CardDescription>
+                <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start">{course.description}</CardDescription>
               </CardHeader>
 
               <CardContent className="flex-1 flex flex-col">
                 {/* Topics Covered - Fixed height for alignment */}
                 <div className="flex-shrink-0">
                   <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-                  <div className="flex flex-wrap mb-1 gap-1 h-[60px] content-start overflow-hidden">
+                  <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
                     {course.topics.map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                         {topic}
                       </Badge>)}
@@ -171,14 +172,14 @@ const Courses = () => {
 
                 {/* Action Buttons - Always at bottom */}
                 <div className="flex gap-2 mt-auto">
-                  <Button variant="outline" size="sm" className="flex-1 flex items-center gap-1">
+                  <Button variant="outline" size="sm" className="flex-1 flex items-center gap-1 border-2">
                     <Eye className="h-3 w-3" />
                     View
                   </Button>
                   <Button size="sm" className={`flex-1 ${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
                     Enroll Now
                   </Button>
-                  <Button variant="outline" size="sm" className="px-2">
+                  <Button variant="outline" size="sm" className="px-2 border-2">
                     <Heart className="h-3 w-3" />
                   </Button>
                 </div>
@@ -188,4 +189,5 @@ const Courses = () => {
       </div>
     </div>;
 };
+
 export default Courses;
