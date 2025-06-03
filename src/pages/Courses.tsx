@@ -119,7 +119,7 @@ const Courses = () => {
           {filteredAndSortedCourses.map((course) => (
             <Card 
               key={course.id} 
-              className={`hover:shadow-lg transition-all duration-200 overflow-hidden ${
+              className={`hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${
                 theme.designSystem === 'material' ? 'shadow-md' : 
                 theme.designSystem === 'fluent' ? 'border-2' : 
                 'hover:shadow-lg'
@@ -153,44 +153,46 @@ const Courses = () => {
                 <CardDescription className="text-sm">{course.description}</CardDescription>
               </CardHeader>
 
-              <CardContent className="space-y-4">
-                {/* Topics Covered */}
-                <div>
-                  <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-                  <div className="flex flex-wrap gap-1">
-                    {course.topics.map((topic, index) => (
-                      <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
-                        {topic}
-                      </Badge>
-                    ))}
+              <CardContent className="flex-1 flex flex-col">
+                <div className="flex-1 space-y-4">
+                  {/* Topics Covered */}
+                  <div>
+                    <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
+                    <div className="flex flex-wrap gap-1">
+                      {course.topics.map((topic, index) => (
+                        <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+                          {topic}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Course Details */}
+                  <div className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-1">
+                      {getIcon('time')}
+                      {course.duration}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      {getIcon('student')}
+                      {course.students} enrolled
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <Badge variant="secondary" className="flex items-center gap-1">
+                      {getIcon('price')}
+                      {course.price}
+                    </Badge>
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                      📅
+                      {course.nextSession}
+                    </div>
                   </div>
                 </div>
 
-                {/* Course Details */}
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-1">
-                    {getIcon('time')}
-                    {course.duration}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {getIcon('student')}
-                    {course.students} enrolled
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <Badge variant="secondary" className="flex items-center gap-1">
-                    {getIcon('price')}
-                    {course.price}
-                  </Badge>
-                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                    📅
-                    {course.nextSession}
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-2 pt-2">
+                {/* Action Buttons - Always at bottom */}
+                <div className="flex gap-2 pt-4 mt-auto">
                   <Button 
                     variant="outline" 
                     size="sm"
