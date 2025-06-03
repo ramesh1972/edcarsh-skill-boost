@@ -28,9 +28,7 @@ export const SecondaryMenuNavigation: React.FC<SecondaryMenuNavigationProps> = (
           <DropdownMenuContent align="start" className="w-48">
             <DropdownMenuLabel>Appearance</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <div className="p-2">
               <ThemeSelector />
-            </div>
           </DropdownMenuContent>
         </DropdownMenu>
         
