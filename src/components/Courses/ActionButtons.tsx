@@ -14,7 +14,7 @@ interface ActionButtonsProps {
 const ActionButtons: React.FC<ActionButtonsProps> = ({ 
   showJoinNow = false, 
   joinNowEnabled = false,
-  showJoinAsGuest = true, // Changed default to true
+  showJoinAsGuest = true,
   isDisabled = false
 }) => {
   const { theme } = useTheme();
@@ -25,7 +25,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
         {showJoinNow && (
           <Button 
             size="sm" 
-            className="flex items-center gap-1 border-2"
+            className={`flex items-center gap-1 border-2 ${
+              joinNowEnabled && !isDisabled ? 'animate-pulse bg-primary hover:bg-primary/90' : ''
+            }`}
             disabled={!joinNowEnabled || isDisabled}
           >
             Join Now
