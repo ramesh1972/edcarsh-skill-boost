@@ -20,7 +20,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
   instructor,
   hideDescription = false
 }) => {
-  return <div className="col-span-1 flex flex-col mb-1">
+  return <div className="col-span-1 flex flex-col mb-1 p-0">
       <h4 className="text-sm font-medium mb-3">Instructor:</h4>
       <div className="flex items-start gap-3">
         <Avatar className="h-12 w-12 rounded-full flex-shrink-0">
