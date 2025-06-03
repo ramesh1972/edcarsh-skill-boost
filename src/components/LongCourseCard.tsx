@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Heart, Eye } from 'lucide-react';
+import { Heart, Eye, UserPlus } from 'lucide-react';
 
 interface Course {
   id: number;
@@ -115,7 +115,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
                 <div className="text-sm text-muted-foreground flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <p className="font-medium text-foreground">{course.instructor.name}</p>
-                    <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium text-xs px-2 h-6 secondary' : theme.designSystem === 'human' ? 'rounded-lg text-xs px-2 h-6  secondary' : theme.designSystem === 'fluent' ? 'rounded-sm text-xs px-2 h-6  secondary' : 'text-xs px-2 h-6  secondary' }`}>
+                    <Button variant="ghost" size="sm" className="text-xs px-2 h-6">
                       About
                     </Button>
                   </div>
@@ -130,19 +130,25 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({ course }) => {
                 </div>
               </div>
 
-              {/* Action Buttons aligned to bottom and right */}
+              {/* Action Buttons - similar to ShortCourseCard */}
               <div className="mt-auto">
-                <div className="flex gap-4 justify-end">
+                <div className="flex gap-2 justify-between items-center">
                   <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
-                    <Eye className="h-3 w-3" />
-                    View
+                    <UserPlus className="h-3 w-3" />
+                    Join as Guest
                   </Button>
-                  <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
-                    Enroll Now
-                  </Button>
-                  <Button variant="outline" size="sm" className="px-2 border-2">
-                    <Heart className="h-3 w-3" />
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button variant="secondary" size="sm" className="flex items-center gap-1">
+                      <Eye className="h-3 w-3" />
+                      View
+                    </Button>
+                    <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
+                      Enroll Now
+                    </Button>
+                    <Button variant="secondary" size="sm" className="px-2">
+                      <Heart className="h-3 w-3" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -4,12 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Heart, Eye } from 'lucide-react';
+import { Heart, Eye, UserPlus } from 'lucide-react';
 
 interface Course {
   id: number;
   title: string;
   description: string;
+  mediumDescription: string;
   duration: string;
   price: string;
   students: number;
@@ -84,15 +85,15 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             {course.title}
           </CardTitle>
         </div>
-        <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start max-h-12 overflow-hidden">{course.description}</CardDescription>
+        <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start max-h-12 overflow-hidden">{course.mediumDescription}</CardDescription>
       </CardHeader>
 
       <CardContent className="flex-1 flex flex-col">
-        {/* Topics Covered - Fixed height for alignment, max 8 topics */}
+        {/* Topics Covered - Fixed height for alignment, max 6 topics */}
         <div className="flex-shrink-0 mb-4">
           <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
           <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
-            {course.topics.slice(0, 8).map((topic, index) => (
+            {course.topics.slice(0, 6).map((topic, index) => (
               <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                 {topic}
               </Badge>
@@ -120,18 +121,24 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             </div>
           </div>
 
-          {/* Action Buttons aligned to bottom and right */}
-          <div className="flex gap-4 justify-end">
+          {/* Action Buttons - similar to ShortCourseCard */}
+          <div className="flex gap-2 justify-between items-center">
             <Button variant="outline" size="sm" className="flex items-center gap-1 border-2">
-              <Eye className="h-3 w-3" />
-              View
+              <UserPlus className="h-3 w-3" />
+              Join as Guest
             </Button>
-            <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
-              Enroll Now
-            </Button>
-            <Button variant="outline" size="sm" className="px-2 border-2">
-              <Heart className="h-3 w-3" />
-            </Button>
+            <div className="flex gap-2">
+              <Button variant="secondary" size="sm" className="flex items-center gap-1">
+                <Eye className="h-3 w-3" />
+                View
+              </Button>
+              <Button size="sm" className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}>
+                Enroll Now
+              </Button>
+              <Button variant="secondary" size="sm" className="px-2">
+                <Heart className="h-3 w-3" />
+              </Button>
+            </div>
           </div>
         </div>
       </CardContent>
