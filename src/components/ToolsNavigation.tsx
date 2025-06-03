@@ -95,7 +95,7 @@ const ToolsNavigation: React.FC = () => {
               key={item.name}
               className={`flex items-center gap-2 px-3 py-2 text-xs font-medium whitespace-nowrap !rounded-b-lg relative ${
                 isActiveRoute(item.href) 
-                  ? 'bg-background text-foreground shadow-lg bottom-tab-curved' 
+                  ? 'bg-seconday-background text-foreground shadow-lg bottom-tab-curved' 
                   : 'text-primary-foreground hover:bg-primary-foreground/10'
               }`}
               style={isActiveRoute(item.href) ? {
