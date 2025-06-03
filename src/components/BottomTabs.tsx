@@ -108,7 +108,7 @@ const BottomTabs: React.FC = () => {
                 zIndex: 20
               } : {
                 marginTop: '-10px',
-                paddingTop: '22px'
+                paddingTop: '22px',
                 zIndex: 18
               }}
             >
