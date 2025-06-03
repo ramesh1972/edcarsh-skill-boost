@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, DollarSign, Globe, Calendar, Target, Users, Star, ArrowRight, CheckCircle, Play, Zap, Award, BookOpen, TrendingUp } from 'lucide-react';
@@ -279,7 +280,7 @@ const Index = () => {
             <CoursesCalendarView
               courses={courses}
               industryFilter="all"
-              categoryFilter="all"
+              subjectFilter="all"
               levelFilter="all"
               calendarViewMode={calendarViewMode}
               setCalendarViewMode={setCalendarViewMode}
