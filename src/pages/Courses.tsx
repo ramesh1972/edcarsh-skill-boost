@@ -306,7 +306,7 @@ const Courses = () => {
                           <div className="text-sm text-muted-foreground flex-1">
                             <div className="flex items-center gap-2 mb-1">
                               <p className="font-medium text-foreground">{course.instructor.name}</p>
-                              <Button variant="primary" size="sm" className="text-xs px-2 h-6">
+                              <Button variant="solid" size="sm" className="bg-background text-xs px-2 h-6">
                                 About
                               </Button>
                             </div>
