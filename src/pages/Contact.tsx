@@ -4,20 +4,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import TitleComponent from '@/components/TitleComponent';
 
 const Contact = () => {
   return (
-    <div className="min-h-full bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Get in touch with our team. We're here to help you succeed in your learning journey.
-          </p>
-        </div>
+    <div className="min-h-full bg-background bg-gradient-to-br from-background/100 to-primary/55 dark:from-background dark:to-primary/80 duration-500">
+      <div className="container mx-auto px-4 py-12 space-y-8">
+        <TitleComponent
+          title="Contact Us"
+          subtitle="Have questions or need help? Reach out and our team will get back to you quickly."
+          iconName="contact"
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          <Card>
+          <div className="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl p-8 hover:scale-[1.025] transition-transform duration-200">
             <CardHeader>
               <CardTitle>Send us a Message</CardTitle>
               <CardDescription>
@@ -56,10 +56,10 @@ const Contact = () => {
 
               <Button className="w-full" size="lg">Send Message</Button>
             </CardContent>
-          </Card>
+          </div>
 
           <div className="space-y-6">
-            <Card>
+            <div className="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl p-8 hover:scale-[1.025] transition-transform duration-200">
               <CardHeader>
                 <CardTitle>Get in Touch</CardTitle>
                 <CardDescription>
@@ -99,9 +99,9 @@ const Contact = () => {
                   </div>
                 </div>
               </CardContent>
-            </Card>
+            </div>
 
-            <Card>
+            <div className="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl p-8 hover:scale-[1.025] transition-transform duration-200">
               <CardHeader>
                 <CardTitle>Quick Help</CardTitle>
               </CardHeader>
@@ -119,7 +119,7 @@ const Contact = () => {
                   Corporate Training
                 </Button>
               </CardContent>
-            </Card>
+            </div>
           </div>
         </div>
       </div>

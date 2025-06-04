@@ -1,9 +1,8 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
 
 export interface ThemeConfig {
-  colorTheme: 'ocean' | 'sunset' | 'forest' | 'lavender' | 'monochrome';
+  colorTheme: 'ocean' | 'sunset' | 'forest' | 'lavender' | 'monochrome' | 'aurora' | 'citrus' | 'flamingo' | 'galaxy';
   typography: 'technical' | 'professional' | 'elegant' | 'modern' | 'playful';
   iconScheme: 'normal' | 'cartoon' | 'emoji' | 'avatars';
   designSystem: 'material' | 'human' | 'fluent' | 'ant' | 'carbon' | 'atlassian' | 'bootstrap' | 'polaris' | 'lightning' | 'tailwind';
@@ -206,65 +205,209 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const applyDesignSystemStyles = (designSystem: string) => {
     const root = document.documentElement;
-    
-    // Apply design system specific CSS custom properties
+    // Reset all design system related CSS variables to defaults first
+    root.style.setProperty('--radius', '0.5rem');
+    root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
+    root.style.setProperty('--elevation', '2px');
+    root.style.setProperty('--sidebar-background', '0 0% 98%');
+    root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+    root.style.setProperty('--sidebar-primary', '240 5.9% 10%');
+    root.style.setProperty('--sidebar-primary-foreground', '0 0% 98%');
+    root.style.setProperty('--sidebar-accent', '240 4.8% 95.9%');
+    root.style.setProperty('--sidebar-accent-foreground', '240 5.9% 10%');
+    root.style.setProperty('--sidebar-border', '220 13% 91%');
+    root.style.setProperty('--sidebar-ring', '217.2 91.2% 59.8%');
+
     switch (designSystem) {
       case 'material':
         root.style.setProperty('--radius', '4px');
         root.style.setProperty('--shadow', '0 2px 4px rgba(0,0,0,0.1)');
         root.style.setProperty('--elevation', '4px');
+        root.style.setProperty('--sidebar-background', '0 0% 98%');
+        root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+        root.style.setProperty('--sidebar-primary', '210 85% 40%');
+        root.style.setProperty('--sidebar-primary-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-accent', '14 80% 65%');
+        root.style.setProperty('--sidebar-accent-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-border', '210 30% 85%');
+        root.style.setProperty('--sidebar-ring', '210 100% 45%');
         break;
       case 'human':
         root.style.setProperty('--radius', '12px');
         root.style.setProperty('--shadow', '0 4px 16px rgba(0,0,0,0.1)');
         root.style.setProperty('--elevation', '8px');
+        root.style.setProperty('--sidebar-background', '0 0% 98%');
+        root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+        root.style.setProperty('--sidebar-primary', '140 60% 35%');
+        root.style.setProperty('--sidebar-primary-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-accent', '45 75% 55%');
+        root.style.setProperty('--sidebar-accent-foreground', '25 40% 15%');
+        root.style.setProperty('--sidebar-border', '115 18% 80%');
+        root.style.setProperty('--sidebar-ring', '45 75% 55%');
         break;
       case 'fluent':
         root.style.setProperty('--radius', '2px');
         root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
         root.style.setProperty('--elevation', '2px');
+        root.style.setProperty('--sidebar-background', '0 0% 98%');
+        root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+        root.style.setProperty('--sidebar-primary', '275 65% 50%');
+        root.style.setProperty('--sidebar-primary-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-accent', '160 45% 65%');
+        root.style.setProperty('--sidebar-accent-foreground', '160 50% 15%');
+        root.style.setProperty('--sidebar-border', '295 20% 82%');
+        root.style.setProperty('--sidebar-ring', '160 45% 65%');
         break;
       case 'ant':
         root.style.setProperty('--radius', '6px');
         root.style.setProperty('--shadow', '0 2px 8px rgba(0,0,0,0.1)');
         root.style.setProperty('--elevation', '4px');
+        root.style.setProperty('--sidebar-background', '0 0% 98%');
+        root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+        root.style.setProperty('--sidebar-primary', '20 85% 55%');
+        root.style.setProperty('--sidebar-primary-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-accent', '290 70% 65%');
+        root.style.setProperty('--sidebar-accent-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-border', '45 40% 80%');
+        root.style.setProperty('--sidebar-ring', '290 70% 65%');
         break;
       case 'carbon':
         root.style.setProperty('--radius', '0px');
         root.style.setProperty('--shadow', '0 1px 2px rgba(0,0,0,0.1)');
         root.style.setProperty('--elevation', '1px');
+        root.style.setProperty('--sidebar-background', '0 0% 98%');
+        root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+        root.style.setProperty('--sidebar-primary', '0 0% 15%');
+        root.style.setProperty('--sidebar-primary-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-accent', '210 100% 50%');
+        root.style.setProperty('--sidebar-accent-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-border', '0 0% 80%');
+        root.style.setProperty('--sidebar-ring', '210 100% 50%');
         break;
       case 'atlassian':
         root.style.setProperty('--radius', '3px');
         root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
         root.style.setProperty('--elevation', '2px');
+        root.style.setProperty('--sidebar-background', '0 0% 98%');
+        root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+        root.style.setProperty('--sidebar-primary', '210 100% 45%');
+        root.style.setProperty('--sidebar-primary-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-accent', '217.2 91.2% 59.8%');
+        root.style.setProperty('--sidebar-accent-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-border', '210 30% 85%');
+        root.style.setProperty('--sidebar-ring', '217.2 91.2% 59.8%');
         break;
       case 'bootstrap':
         root.style.setProperty('--radius', '0.375rem');
         root.style.setProperty('--shadow', '0 0.125rem 0.25rem rgba(0,0,0,0.075)');
         root.style.setProperty('--elevation', '2px');
+        root.style.setProperty('--sidebar-background', '0 0% 98%');
+        root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+        root.style.setProperty('--sidebar-primary', '0 0% 15%');
+        root.style.setProperty('--sidebar-primary-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-accent', '210 100% 50%');
+        root.style.setProperty('--sidebar-accent-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-border', '0 0% 80%');
+        root.style.setProperty('--sidebar-ring', '210 100% 50%');
         break;
       case 'polaris':
         root.style.setProperty('--radius', '8px');
         root.style.setProperty('--shadow', '0 1px 0 rgba(0,0,0,0.05)');
         root.style.setProperty('--elevation', '2px');
+        root.style.setProperty('--sidebar-background', '0 0% 98%');
+        root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+        root.style.setProperty('--sidebar-primary', '285 40% 95%');
+        root.style.setProperty('--sidebar-primary-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-accent', '160 45% 65%');
+        root.style.setProperty('--sidebar-accent-foreground', '160 50% 15%');
+        root.style.setProperty('--sidebar-border', '295 20% 82%');
+        root.style.setProperty('--sidebar-ring', '160 45% 65%');
         break;
       case 'lightning':
         root.style.setProperty('--radius', '0.25rem');
         root.style.setProperty('--shadow', '0 2px 2px rgba(0,0,0,0.1)');
         root.style.setProperty('--elevation', '2px');
+        root.style.setProperty('--sidebar-background', '0 0% 98%');
+        root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+        root.style.setProperty('--sidebar-primary', '265 90% 60%');
+        root.style.setProperty('--sidebar-primary-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-accent', '200 100% 60%');
+        root.style.setProperty('--sidebar-accent-foreground', '0 0% 100%');
+        root.style.setProperty('--sidebar-border', '265 30% 40%');
+        root.style.setProperty('--sidebar-ring', '200 100% 60%');
         break;
       default: // tailwind
         root.style.setProperty('--radius', '0.5rem');
         root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
         root.style.setProperty('--elevation', '2px');
+        root.style.setProperty('--sidebar-background', '0 0% 98%');
+        root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+        root.style.setProperty('--sidebar-primary', '240 5.9% 10%');
+        root.style.setProperty('--sidebar-primary-foreground', '0 0% 98%');
+        root.style.setProperty('--sidebar-accent', '240 4.8% 95.9%');
+        root.style.setProperty('--sidebar-accent-foreground', '240 5.9% 10%');
+        root.style.setProperty('--sidebar-border', '220 13% 91%');
+        root.style.setProperty('--sidebar-ring', '217.2 91.2% 59.8%');
         break;
     }
   };
 
+  // Add support for new color themes in applyColorTheme
   const applyColorTheme = (colorTheme: string) => {
     const root = document.documentElement;
-    
+    // Reset all theme variables to defaults first (from :root in index.css)
+    root.style.setProperty('--background', '210 40% 98%');
+    root.style.setProperty('--foreground', '210 40% 15%');
+    root.style.setProperty('--card', '0 0% 100%');
+    root.style.setProperty('--card-foreground', '210 40% 15%');
+    root.style.setProperty('--popover', '0 0% 100%');
+    root.style.setProperty('--popover-foreground', '210 40% 15%');
+    root.style.setProperty('--primary', '210 100% 45%');
+    root.style.setProperty('--primary-foreground', '0 0% 100%');
+    root.style.setProperty('--secondary', '190 40% 92%');
+    root.style.setProperty('--secondary-foreground', '210 40% 15%');
+    root.style.setProperty('--muted', '210 30% 95%');
+    root.style.setProperty('--muted-foreground', '210 20% 50%');
+    root.style.setProperty('--accent', '190 50% 85%');
+    root.style.setProperty('--accent-foreground', '210 40% 15%');
+    root.style.setProperty('--destructive', '0 84.2% 60.2%');
+    root.style.setProperty('--destructive-foreground', '210 40% 98%');
+    root.style.setProperty('--border', '210 30% 85%');
+    root.style.setProperty('--input', '210 30% 85%');
+    root.style.setProperty('--ring', '210 100% 45%');
+    root.style.setProperty('--radius', '0.5rem');
+    root.style.setProperty('--shadow', '0 1px 3px rgba(0,0,0,0.1)');
+    root.style.setProperty('--elevation', '2px');
+    root.style.setProperty('--sidebar-background', '0 0% 98%');
+    root.style.setProperty('--sidebar-foreground', '240 5.3% 26.1%');
+    root.style.setProperty('--sidebar-primary', '240 5.9% 10%');
+    root.style.setProperty('--sidebar-primary-foreground', '0 0% 98%');
+    root.style.setProperty('--sidebar-accent', '240 4.8% 95.9%');
+    root.style.setProperty('--sidebar-accent-foreground', '240 5.9% 10%');
+    root.style.setProperty('--sidebar-border', '220 13% 91%');
+    root.style.setProperty('--sidebar-ring', '217.2 91.2% 59.8%');
+    root.style.setProperty('--scrollbar-bg', '210 30% 95%');
+    root.style.setProperty('--scrollbar-thumb', '210 20% 80%');
+    root.style.setProperty('--scrollbar-thumb-hover', '210 100% 45%');
+    root.style.setProperty('--focus', '210 100% 45%');
+    root.style.setProperty('--link', '210 100% 45%');
+    root.style.setProperty('--link-hover', '210 100% 35%');
+    root.style.setProperty('--success', '140 60% 35%');
+    root.style.setProperty('--success-foreground', '0 0% 100%');
+    root.style.setProperty('--warning', '45 100% 51%');
+    root.style.setProperty('--warning-foreground', '0 0% 0%');
+    root.style.setProperty('--info', '210 100% 45%');
+    root.style.setProperty('--info-foreground', '0 0% 100%');
+    root.style.setProperty('--error', '0 84.2% 60.2%');
+    root.style.setProperty('--error-foreground', '210 40% 98%');
+    root.style.setProperty('--overlay', '210 40% 10% / 0.5');
+    root.style.setProperty('--modal-bg', '0 0% 100% / 0.95');
+    root.style.setProperty('--modal-border', '210 30% 85%');
+    root.style.setProperty('--tooltip-bg', '210 40% 15%');
+    root.style.setProperty('--tooltip-foreground', '0 0% 100%');
+    root.style.setProperty('--selection-bg', '210 100% 45% / 0.2');
+    root.style.setProperty('--selection-foreground', '210 40% 15%');
+
     switch (colorTheme) {
       case 'ocean':
         // Ocean theme: Deep blues with coral and teal accents
@@ -355,6 +498,74 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--border', '0 0% 80%');
         root.style.setProperty('--input', '0 0% 88%');
         root.style.setProperty('--ring', '210 100% 50%');
+        break;
+      case 'aurora':
+        root.style.setProperty('--background', '168 80% 96%');
+        root.style.setProperty('--foreground', '282 40% 18%');
+        root.style.setProperty('--primary', '168 90% 45%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '282 70% 90%');
+        root.style.setProperty('--secondary-foreground', '282 40% 18%');
+        root.style.setProperty('--muted', '195 40% 92%');
+        root.style.setProperty('--muted-foreground', '282 20% 45%');
+        root.style.setProperty('--card', '168 80% 99%');
+        root.style.setProperty('--card-foreground', '282 40% 18%');
+        root.style.setProperty('--accent', '312 80% 65%');
+        root.style.setProperty('--accent-foreground', '0 0% 100%');
+        root.style.setProperty('--border', '168 30% 80%');
+        root.style.setProperty('--input', '168 30% 90%');
+        root.style.setProperty('--ring', '312 80% 65%');
+        break;
+      case 'citrus':
+        root.style.setProperty('--background', '60 90% 97%');
+        root.style.setProperty('--foreground', '40 60% 18%');
+        root.style.setProperty('--primary', '90 95% 50%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '40 95% 90%');
+        root.style.setProperty('--secondary-foreground', '40 60% 18%');
+        root.style.setProperty('--muted', '60 40% 92%');
+        root.style.setProperty('--muted-foreground', '40 20% 45%');
+        root.style.setProperty('--card', '60 90% 99%');
+        root.style.setProperty('--card-foreground', '40 60% 18%');
+        root.style.setProperty('--accent', '30 95% 60%');
+        root.style.setProperty('--accent-foreground', '0 0% 100%');
+        root.style.setProperty('--border', '90 30% 80%');
+        root.style.setProperty('--input', '60 30% 90%');
+        root.style.setProperty('--ring', '30 95% 60%');
+        break;
+      case 'flamingo':
+        root.style.setProperty('--background', '330 80% 97%');
+        root.style.setProperty('--foreground', '330 40% 18%');
+        root.style.setProperty('--primary', '340 90% 60%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '20 90% 90%');
+        root.style.setProperty('--secondary-foreground', '330 40% 18%');
+        root.style.setProperty('--muted', '300 40% 92%');
+        root.style.setProperty('--muted-foreground', '330 20% 45%');
+        root.style.setProperty('--card', '340 80% 99%');
+        root.style.setProperty('--card-foreground', '330 40% 18%');
+        root.style.setProperty('--accent', '270 80% 65%');
+        root.style.setProperty('--accent-foreground', '0 0% 100%');
+        root.style.setProperty('--border', '340 30% 80%');
+        root.style.setProperty('--input', '340 30% 90%');
+        root.style.setProperty('--ring', '270 80% 65%');
+        break;
+      case 'galaxy':
+        root.style.setProperty('--background', '248 60% 10%');
+        root.style.setProperty('--foreground', '220 40% 95%');
+        root.style.setProperty('--primary', '265 90% 60%');
+        root.style.setProperty('--primary-foreground', '0 0% 100%');
+        root.style.setProperty('--secondary', '220 80% 20%');
+        root.style.setProperty('--secondary-foreground', '220 40% 95%');
+        root.style.setProperty('--muted', '248 40% 18%');
+        root.style.setProperty('--muted-foreground', '220 20% 80%');
+        root.style.setProperty('--card', '248 60% 15%');
+        root.style.setProperty('--card-foreground', '220 40% 95%');
+        root.style.setProperty('--accent', '200 100% 60%');
+        root.style.setProperty('--accent-foreground', '0 0% 100%');
+        root.style.setProperty('--border', '265 30% 40%');
+        root.style.setProperty('--input', '248 30% 20%');
+        root.style.setProperty('--ring', '200 100% 60%');
         break;
     }
   };

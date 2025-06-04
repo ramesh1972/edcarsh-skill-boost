@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Target, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,11 +9,11 @@ const CTASection = () => {
   return (
     <section 
       ref={ctaAnimation.ref}
-      className={`py-20 bg-gradient-to-r from-primary to-blue-600 text-white round-[20px] transition-all duration-700 delay-300 ${
+      className={`py-20 w-full max-w-[1800px] mx-auto bg-gradient-to-l from-pink-700/90 via-fuchsia-600/80 to-yellow-400/80 text-white rounded-[20px] transition-all duration-700 ${
         ctaAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
       }`}
     >
-      <div className="container px-4 mx-auto text-center">
+      <div className="container px-8 mx-auto text-center w-full">
         <h2 
           className={`text-3xl font-bold mb-4 transition-all duration-700 delay-500 ${
             ctaAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'

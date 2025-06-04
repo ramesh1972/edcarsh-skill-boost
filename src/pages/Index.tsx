@@ -1,9 +1,22 @@
-
 import React from 'react';
 import Home from './Home';
 
+import { Card } from '../components/ui/card';
+import TitleComponent from '@/components/TitleComponent';
+
 const Index = () => {
-  return <Home />;
+  return (
+    <div className="min-h-full bg-background bg-gradient-to-br from-background/100 to-primary/55 dark:from-background dark:to-primary/80 duration-500">
+      <div className="container mx-auto px-4 py-12 space-y-8 " >
+        <TitleComponent
+          title="Welcome to Edcarsh Skill Boost"
+          subtitle="Accelerate your career with short, practical crash courses for busy professionals."
+          iconName="home"
+        />
+        <Home />
+      </div>
+    </div>
+  );
 };
 
 export default Index;

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,7 +10,9 @@ const TestimonialsSection = () => {
   return (
     <section 
       ref={testimonialsAnimation.ref}
-      className="py-20 bg-muted/50 round-[10px] border-[10px] border-secondary" 
+      className={`py-20 bg-muted/50 round-[10px] border-[10px] border-primary transition-all duration-700 ${
+        testimonialsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
+      }`}
       style={{
         backgroundImage: `linear-gradient(rgba(255, 255, 255,0.4), rgba(255, 255, 255,.8)), url('/lovable-uploads/9c6e854a-b9ee-4453-be78-e8a940f7033d.png')`,
         backgroundSize: 'auto 100%',
@@ -20,11 +21,7 @@ const TestimonialsSection = () => {
       }}
     >
       <div className="container px-4 mx-auto">
-        <div 
-          className={`text-center mb-16 transition-all duration-700 delay-200 ${
-            testimonialsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
-          }`}
-        >
+        <div className="text-center mb-16">
           <h2 className="text-3xl font-bold mb-4">What Our Students Say</h2>
           <p className="text-xl text-muted-foreground">
             Real success stories from our learning community

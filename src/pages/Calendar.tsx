@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -8,6 +7,7 @@ import { courses } from '@/data/courses';
 import { Calendar as CalendarIcon, LayoutGrid, List, ChevronLeft, ChevronRight } from 'lucide-react';
 import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, addDays, addWeeks, addMonths, subDays, subWeeks, subMonths, isSameDay, isAfter, isBefore, parseISO } from 'date-fns';
 import CourseCalendarEvent from '@/components/Calendar/CourseCalendarEvent';
+import TitleComponent from '@/components/TitleComponent';
 
 const Calendar = () => {
   const { theme, getIcon, getBackground } = useTheme();
@@ -78,9 +78,9 @@ const Calendar = () => {
       case 'day':
         return format(currentDate, 'EEEE, MMMM d, yyyy');
       case 'week':
-        const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
+        { const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
         const weekEnd = endOfWeek(currentDate, { weekStartsOn: 1 });
-        return `${format(weekStart, 'MMM d')} - ${format(weekEnd, 'MMM d, yyyy')}`;
+        return `${format(weekStart, 'MMM d')} - ${format(weekEnd, 'MMM d, yyyy')}`; }
       case 'month':
         return format(currentDate, 'MMMM yyyy');
       default:
@@ -198,82 +198,80 @@ const Calendar = () => {
   };
 
   return (
-    <div className={`min-h-full bg-background ${getBackground()}`}>
-      <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
-        <div className="mb-8">
-          <h1 className={`text-4xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
-            {getIcon('course')} Course Calendar
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            View courses scheduled for today and future dates
-          </p>
-        </div>
-
-        {/* View Mode Toggle and Navigation */}
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center gap-4">
-            <span className="font-medium">View:</span>
-            <ToggleGroup type="single" value={viewMode} onValueChange={value => value && setViewMode(value)}>
-              <ToggleGroupItem value="day" aria-label="Day view">
-                Day
-              </ToggleGroupItem>
-              <ToggleGroupItem value="week" aria-label="Week view">
-                Week
-              </ToggleGroupItem>
-              <ToggleGroupItem value="month" aria-label="Month view">
-                Month
-              </ToggleGroupItem>
-            </ToggleGroup>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" onClick={() => navigatePeriod('prev')}>
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <div className="font-medium min-w-[200px] text-center">
-              {getViewTitle()}
+    <div className="min-h-full bg-background bg-gradient-to-br from-background/100 to-primary/55 dark:from-background dark:to-primary/80 duration-500">
+      <div className="container mx-auto px-4 py-12 space-y-8">
+        <TitleComponent
+          title="Course Calendar"
+          subtitle="View upcoming course schedules and plan your learning journey."
+          iconName="time"
+        />
+        <div className="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl p-8 hover:scale-[1.025] transition-transform duration-200">
+          {/* View Mode Toggle and Navigation */}
+          <div className="flex justify-between items-center mb-6">
+            <div className="flex items-center gap-4">
+              <span className="font-medium">View:</span>
+              <ToggleGroup type="single" value={viewMode} onValueChange={value => value && setViewMode(value)}>
+                <ToggleGroupItem value="day" aria-label="Day view">
+                  Day
+                </ToggleGroupItem>
+                <ToggleGroupItem value="week" aria-label="Week view">
+                  Week
+                </ToggleGroupItem>
+                <ToggleGroupItem value="month" aria-label="Month view">
+                  Month
+                </ToggleGroupItem>
+              </ToggleGroup>
             </div>
-            <Button variant="outline" size="sm" onClick={() => navigatePeriod('next')}>
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-            <Button variant="outline" size="sm" onClick={() => setCurrentDate(new Date())}>
-              Today
-            </Button>
-          </div>
-        </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-4 mb-6 p-4 bg-card rounded-lg border">
-          <div className="flex items-center gap-2">
-            <CalendarIcon className="h-4 w-4" />
-            <span className="font-medium">Filters:</span>
-          </div>
-          
-          <div className="min-w-[150px]">
-            <Select value={subjectFilter} onValueChange={setSubjectFilter}>
-              <SelectTrigger>
-                <SelectValue placeholder="Subject" />
-              </SelectTrigger>
-              <SelectContent>
-                {subjects.map(subject => (
-                  <SelectItem key={subject} value={subject}>
-                    {subject === 'all' ? 'All Subjects' : subject}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="sm" onClick={() => navigatePeriod('prev')}>
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <div className="font-medium min-w-[200px] text-center">
+                {getViewTitle()}
+              </div>
+              <Button variant="outline" size="sm" onClick={() => navigatePeriod('next')}>
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => setCurrentDate(new Date())}>
+                Today
+              </Button>
+            </div>
           </div>
 
-          <div className="ml-auto text-sm text-muted-foreground">
-            {getCoursesForPeriod.length} course{getCoursesForPeriod.length !== 1 ? 's' : ''} in this {viewMode}
-          </div>
-        </div>
+          {/* Filters */}
+          <div className="flex flex-wrap gap-4 mb-6 p-4 bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl hover:scale-[1.025] transition-transform duration-200">
+            <div className="flex items-center gap-2">
+              <CalendarIcon className="h-4 w-4" />
+              <span className="font-medium">Filters:</span>
+            </div>
+            
+            <div className="min-w-[150px]">
+              <Select value={subjectFilter} onValueChange={setSubjectFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Subject" />
+                </SelectTrigger>
+                <SelectContent>
+                  {subjects.map(subject => (
+                    <SelectItem key={subject} value={subject}>
+                      {subject === 'all' ? 'All Subjects' : subject}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
-        {/* Calendar Views */}
-        <div className="bg-card rounded-lg border p-4">
-          {viewMode === 'day' && renderDayView()}
-          {viewMode === 'week' && renderWeekView()}
-          {viewMode === 'month' && renderMonthView()}
+            <div className="ml-auto text-sm text-muted-foreground">
+              {getCoursesForPeriod.length} course{getCoursesForPeriod.length !== 1 ? 's' : ''} in this {viewMode}
+            </div>
+          </div>
+
+          {/* Calendar Views */}
+          <div className="bg-card rounded-lg border p-4">
+            {viewMode === 'day' && renderDayView()}
+            {viewMode === 'week' && renderWeekView()}
+            {viewMode === 'month' && renderMonthView()}
+          </div>
         </div>
       </div>
     </div>

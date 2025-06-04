@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -9,7 +8,7 @@ const FooterSection = () => {
   return (
     <footer 
       ref={footerAnimation.ref}
-      className={`py-12 bg-background border-t transition-all duration-700 delay-500 ${
+      className={`py-12 bg-background border-t transition-all duration-700 ${
         footerAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
       }`}
     >

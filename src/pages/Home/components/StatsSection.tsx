@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -6,15 +5,15 @@ const StatsSection = () => {
   const statsAnimation = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <section 
+    <section
       ref={statsAnimation.ref}
-      className={`py-20 bg-primary text-primary-foreground round-[10px] transition-all duration-700 delay-300 ${
+      className={`py-20 w-full max-w-[1800px] mx-auto bg-gradient-to-r from-[#1e293b] via-primary/40 to-[#0f172a] rounded-[20px] shadow-xl transition-all duration-700 ${
         statsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
       }`}
     >
-      <div className="container px-4 mx-auto">
+      <div className="container px-8 mx-auto w-full">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div 
+          <div
             className={`transition-all duration-700 delay-500 ${
               statsAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
             }`}
@@ -22,7 +21,7 @@ const StatsSection = () => {
             <div className="text-4xl font-bold mb-2">50K+</div>
             <div className="text-sm opacity-90">Active Students</div>
           </div>
-          <div 
+          <div
             className={`transition-all duration-700 delay-600 ${
               statsAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-10'
             }`}
@@ -30,7 +29,7 @@ const StatsSection = () => {
             <div className="text-4xl font-bold mb-2">500+</div>
             <div className="text-sm opacity-90">Courses Available</div>
           </div>
-          <div 
+          <div
             className={`transition-all duration-700 delay-700 ${
               statsAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
             }`}
@@ -38,7 +37,7 @@ const StatsSection = () => {
             <div className="text-4xl font-bold mb-2">95%</div>
             <div className="text-sm opacity-90">Success Rate</div>
           </div>
-          <div 
+          <div
             className={`transition-all duration-700 delay-800 ${
               statsAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-10'
             }`}

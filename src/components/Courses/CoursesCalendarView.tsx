@@ -7,6 +7,7 @@ import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-reac
 import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, addDays, addWeeks, addMonths, subDays, subWeeks, subMonths, isSameDay, parseISO } from 'date-fns';
 import CourseCalendarEvent from '@/components/Calendar/CourseCalendarEvent';
 import { Course } from '@/types';
+import CoursesCalendarBackground from './CoursesCalendarBackground';
 
 interface CoursesCalendarViewProps {
   courses: Course[];
@@ -117,7 +118,7 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
     switch (calendarViewMode) {
       case 'day':
         return format(currentDate, 'EEEE, MMMM d, yyyy');
-      case 'week':
+      case 'week': {
         const weekStart = startOfWeek(currentDate, {
           weekStartsOn: 1
         });
@@ -125,6 +126,7 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
           weekStartsOn: 1
         });
         return `${format(weekStart, 'MMM d')} - ${format(weekEnd, 'MMM d, yyyy')}`;
+      }
       case 'month':
         return format(currentDate, 'MMMM yyyy');
       default:
@@ -215,46 +217,48 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
   };
 
   return (
-    <>
-      {/* Calendar Navigation */}
-      <div className="flex items-center gap-2 mb-6">
-        <ToggleGroup type="single" value={calendarViewMode} onValueChange={value => value && setCalendarViewMode(value)}>
-          <ToggleGroupItem value="day" aria-label="Day view">Day</ToggleGroupItem>
-          <ToggleGroupItem value="week" aria-label="Week view">Week</ToggleGroupItem>
-          <ToggleGroupItem value="month" aria-label="Month view">Month</ToggleGroupItem>
-        </ToggleGroup>
-        <Button variant="outline" size="sm" onClick={() => navigatePeriod('prev')}>
-          <ChevronLeft className="h-4 w-4" />
-        </Button>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="outline" size="sm" className="min-w-[200px] text-center">
-              <CalendarIcon className="h-4 w-4 mr-2" />
-              {getViewTitle()}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="center">
-            <Calendar mode="single" selected={currentDate} onSelect={date => date && setCurrentDate(date)} initialFocus className="p-3 pointer-events-auto" />
-          </PopoverContent>
-        </Popover>
-        <Button variant="outline" size="sm" onClick={() => navigatePeriod('next')}>
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-        <Button variant="outline" size="sm" onClick={() => setCurrentDate(new Date())}>
-          Today
-        </Button>
-      </div>
+    <div className="relative min-h-[600px]">
+      <div className="relative z-10">
+        {/* Calendar Navigation */}
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <ToggleGroup type="single" value={calendarViewMode} onValueChange={value => value && setCalendarViewMode(value)}>
+            <ToggleGroupItem value="day" aria-label="Day view">Day</ToggleGroupItem>
+            <ToggleGroupItem value="week" aria-label="Week view">Week</ToggleGroupItem>
+            <ToggleGroupItem value="month" aria-label="Month view">Month</ToggleGroupItem>
+          </ToggleGroup>
+          <Button variant="outline" size="sm" onClick={() => navigatePeriod('prev')}>
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" size="sm" className="min-w-[200px] text-center">
+                <CalendarIcon className="h-4 w-4 mr-2" />
+                {getViewTitle()}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="center">
+              <Calendar mode="single" selected={currentDate} onSelect={date => date && setCurrentDate(date)} initialFocus className="p-3 pointer-events-auto" />
+            </PopoverContent>
+          </Popover>
+          <Button variant="outline" size="sm" onClick={() => navigatePeriod('next')}>
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => setCurrentDate(new Date())}>
+            Today
+          </Button>
+        </div>
 
-      {/* Course count */}
-      <div className="mb-4 text-sm text-muted-foreground">
-        {getCoursesForPeriod.length} course{getCoursesForPeriod.length !== 1 ? 's' : ''} in this {calendarViewMode}
-      </div>
+        {/* Course count */}
+        <div className="mb-4 text-sm text-muted-foreground">
+          {getCoursesForPeriod.length} course{getCoursesForPeriod.length !== 1 ? 's' : ''} in this {calendarViewMode}
+        </div>
 
-      {/* Calendar View */}
-      <div className="bg-card rounded-lg border p-4">
-        {renderCalendarView()}
+        {/* Calendar View */}
+        <div className="bg-card rounded-lg border p-4">
+          {renderCalendarView()}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -12,24 +11,26 @@ const USPsSection = () => {
   return (
     <section 
       ref={uspsAnimation.ref}
-      className="py-20 bg-muted/50 relative overflow-hidden"
+      className={`py-20 w-full max-w-[1800px] mx-auto bg-gradient-to-r from-[#475569] via-primary/10 to-[#334155] rounded-[20px] transition-all duration-700 ${
+        uspsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
+      }`}
     >
-      <div className="container px-4 mx-auto relative">
+      <div className="container px-4 mx-auto">
         {/* Corner Images */}
         <div 
-          className={`absolute top-0 left-0 hidden lg:block transition-all duration-1000 delay-300 ${
+          className={`absolute  lg:block transition-all duration-1000 delay-300 ${
             uspsAnimation.isVisible ? 'animate-fade-in-right opacity-100' : 'opacity-0 translate-x-full'
           }`} 
-          style={{marginTop: '-90px'}}
+          style={{marginTop: '-40px', marginLeft: '20px'}}
         >
           <img src="/lovable-uploads/14c1d102-af1f-4765-be76-42b00c50c8e3.png" alt="100% Quality Badge" className="w-48 h-48 object-contain" />
         </div>
         
         <div 
-          className={`absolute top-0 right-0 hidden lg:block transition-all duration-1000 delay-500 ${
+          className={`absolute right-0  lg:block transition-all duration-1000 delay-500 ${
             uspsAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-full'
           }`} 
-          style={{marginTop: '-90px'}}
+          style={{marginTop: '-40px', marginRight: '290px'}}
         >
           <img src="/lovable-uploads/7aa0ba35-0c3f-47dc-a574-f6ff47194b94.png" alt="Success Key Illustration" className="w-48 h-48 object-contain" />
         </div>
@@ -65,7 +66,7 @@ const USPsSection = () => {
           </div>
 
           {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10 !p-[20px]" style={{ marginTop: '100px'}}>
             {usps.map((usp, index) => (
               <Card 
                 key={index} 

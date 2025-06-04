@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -69,46 +68,18 @@ export const Header: React.FC = () => {
     if (location.pathname === href) {
       return true;
     }
-    
+
     // Special case: if we're on a course view page and it came from Home, highlight Home tab
     if (href === '/' && location.pathname.startsWith('/courses/')) {
       const storedReferrer = sessionStorage.getItem('courseViewReferrer');
       return storedReferrer === '/';
     }
-    
+
     return false;
   };
 
   return (
     <>
-      <style>{`
-        .tab-curved {
-          position: relative;
-        }
-        .tab-curved::before,
-        .tab-curved::after {
-            content: '';
-            position: absolute;
-            bottom: -7px;
-            width: 25px;
-            height: 25px;
-          background: hsl(var(--primary));
-        }
-        .tab-curved::before {
-      left: -15px;
-      border-bottom-right-radius: 25px;
-      border: 10px solid hsl(var(--background));
-      border-top: none;
-      border-left: none;
-        }
-        .tab-curved::after {
-          right: -15px;
-          border-bottom-left-radius: 25px;
-          border: 10px solid hsl(var(--background));
-          border-top: none;
-          border-right: none;
-        }
-      `}</style>
       <header className={`w-full bg-primary ${getSkinClasses()} relative z-10 mt-0`} style={{ height: '80px' }}>
         <div className="w-full max-w-none flex items-center justify-between px-6 lg:px-[32px] h-full">
           {/* Logo Section - Left */}
@@ -117,8 +88,8 @@ export const Header: React.FC = () => {
           </div>
 
           {/* Navigation Section - Center */}
-          <div className="flex-1 flex justify-left" style={{marginLeft: '40px'}}>
-            <MainMenuNavigation 
+          <div className="flex-1 flex justify-left" style={{ marginLeft: '40px' }}>
+            <MainMenuNavigation
               mainNavItems={mainNavItems}
               moreMenuItems={moreMenuItems}
               isActiveRoute={isActiveRoute}
@@ -131,7 +102,7 @@ export const Header: React.FC = () => {
               <SecondaryMenuNavigation setIsMenuOpen={setIsMenuOpen} />
             </div>
 
-            <MobileNavigation 
+            <MobileNavigation
               isMenuOpen={isMenuOpen}
               setIsMenuOpen={setIsMenuOpen}
               mainNavItems={mainNavItems}

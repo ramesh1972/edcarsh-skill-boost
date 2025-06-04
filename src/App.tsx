@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-ro
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Header } from "@/components/Header";
 import Index from "./pages/Index";
-import Courses from "./pages/Courses";
+import BasicFour from "./pages/BasicFour";
 import CourseView from "@/components/Courses/CourseView";
 import Dashboard from "./pages/Dashboard";
 import ExpressIntent from "./pages/ExpressIntent";
@@ -20,6 +20,7 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import ToolsNavigation from "@/components/ToolsNavigation";
 import Calendar from "./pages/Calendar";
+import Courses from "./pages/Courses";
 
 const queryClient = new QueryClient();
 
@@ -51,7 +52,7 @@ const AppContent = () => {
         
         {/* Inner div - with wavy bezier curve on bottom left */}
         <div 
-          className="relative overflow-auto bg-gradient-to-r from-cyan-400 to-blue-500 !rounded-tl-[48px] !rounded-bl-[20px]" 
+          className="relative overflow-auto !rounded-tl-[48px] !rounded-bl-[20px]" 
           style={{ 
             left: '20px',
             right: '20px',

@@ -12,6 +12,8 @@ import CourseCard from '@/components/Courses/CourseCard';
 import LongCourseCard from '@/components/Courses/LongCourseCard';
 import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
 import PopularCoursesMapView from '@/components/Courses/PopularCoursesMapView';
+import TitleComponent from '@/components/TitleComponent';
+
 const Courses = () => {
   const {
     theme,
@@ -55,7 +57,7 @@ const Courses = () => {
 
   // Filter and sort courses for card/list view
   const filteredAndSortedCourses = useMemo(() => {
-    let filtered = courses.filter(course => {
+    const filtered = courses.filter(course => {
       const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
       const subjectMatch = subjectFilter === 'all' || course.subject === subjectFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
@@ -88,19 +90,19 @@ const Courses = () => {
   const toggleSortDirection = () => {
     setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
   };
-  return <div className={`min-h-full bg-background ${getBackground()}`}>
-      <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
-        <div className="mb-8">
-          <h1 className={`text-4xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
-            {getIcon('course')} Available Courses
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Short, practical crash courses designed for busy professionals
-          </p>
+  return (
+    <div className="min-h-full bg-background bg-gradient-to-br from-background/100 to-primary/55 dark:from-background dark:to-primary/80 duration-500">
+      <div className={`container mx-auto px-4 py-12 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
+        <div className="mb-10">
+          <TitleComponent
+            title="Available Courses"
+            subtitle="Short, practical crash courses designed for busy professionals"
+            iconName="course"
+          />
         </div>
 
         {/* Filters, Sort Controls and View Mode Toggle */}
-        <div className="flex flex-wrap gap-4 mb-6 p-4 bg-card rounded-lg border relative">
+        <div className="flex flex-wrap gap-4 mb-8 p-4 bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl hover:scale-[1.025] transition-transform duration-200 relative">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4" />
             <span className="font-medium">Filters</span>
@@ -201,13 +203,13 @@ const Courses = () => {
         </div>
 
         {/* Card View */}
-        {viewMode === 'card' && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredAndSortedCourses.map(course => <CourseCard key={course.id} course={course} />)}
+        {viewMode === 'card' && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredAndSortedCourses.map(course => <CourseCard key={course.id} course={course} cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" />)}
           </div>}
 
         {/* List View */}
-        {viewMode === 'list' && <div className="space-y-4">
-            {filteredAndSortedCourses.map(course => <LongCourseCard key={course.id} course={course} />)}
+        {viewMode === 'list' && <div className="space-y-6">
+            {filteredAndSortedCourses.map(course => <LongCourseCard key={course.id} course={course} cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" />)}
           </div>}
 
         {/* Calendar View */}
@@ -216,6 +218,7 @@ const Courses = () => {
         {/* Map View */}
         {viewMode === 'map' && <PopularCoursesMapView courses={filteredAndSortedCourses} />}
       </div>
-    </div>;
+    </div>
+  );
 };
 export default Courses;

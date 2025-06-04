@@ -1,88 +1,37 @@
 import React from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { faqs } from '../data/mockData'; // Adjust the import path as necessary
+import TitleComponent from '@/components/TitleComponent';
 
 const FAQ = () => {
-  const faqs = [
-    {
-      question: "How long are the crash courses?",
-      answer: "Our crash courses typically range from 8 to 30 hours, designed to be completed over a few days to a few weeks depending on your schedule. Most courses are structured as 2-8 hour daily live sessions."
-    },
-    {
-      question: "What makes EdCrash different from other online courses?",
-      answer: "EdCrash focuses on practical, tool-oriented learning with live interactive sessions. Our courses are short, intensive, and extremely affordable at just $25 per course. We emphasize real-world skills over lengthy theoretical lectures."
-    },
-    {
-      question: "Are the sessions really live?",
-      answer: "Yes! All our sessions are conducted live with expert instructors. This allows for real-time interaction, Q&A, and personalized guidance. Sessions are typically scheduled outside regular office hours for working professionals."
-    },
-    {
-      question: "What if I miss a live session?",
-      answer: "All live sessions are recorded and made available to enrolled students within 24 hours. You can catch up at your own pace, though we highly recommend attending live for the best learning experience."
-    },
-    {
-      question: "How much do courses cost?",
-      answer: "Most of our crash courses are priced at just $25, making quality education accessible to everyone. Some specialized or longer courses may be priced slightly higher, but we maintain our commitment to affordability."
-    },
-    {
-      question: "Are courses available in multiple languages?",
-      answer: "Yes! We offer courses in multiple languages including English, Spanish, French, German, and others. Check the course description for available language options."
-    },
-    {
-      question: "What tools and software will I need?",
-      answer: "Each course uses industry-standard tools relevant to the subject. All required software and tools are listed in the course description, and we provide guidance on setup during the first session."
-    },
-    {
-      question: "Do I get a certificate upon completion?",
-      answer: "Yes, you'll receive a certificate of completion for each course you finish. Our certificates are recognized by many employers and can be added to your LinkedIn profile."
-    }
-  ];
 
   return (
-    <div className="min-h-full bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to know about EdCrash crash courses
-          </p>
-        </div>
-
-        <div className="max-w-3xl mx-auto">
-          <Card>
+    <div className="min-h-full bg-background bg-gradient-to-br from-background/100 to-primary/55 dark:from-background dark:to-primary/80 duration-500">
+      <div className="container mx-auto px-4 py-12 space-y-8">
+        <TitleComponent
+          title="Frequently Asked Questions"
+          subtitle="Find answers to common questions about our courses, instructors, and platform."
+          iconName="help"
+        />
+          <div className="max-w-3xl mx-auto">
             <CardContent className="pt-6">
               <Accordion type="single" collapsible className="w-full">
                 {faqs.map((faq, index) => (
                   <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">
+                    <AccordionTrigger className="text-left p-4">{faq.question}</AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground p-4">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
             </CardContent>
-          </Card>
-
-          <div className="mt-8 text-center">
-            <Card>
-              <CardHeader>
-                <CardTitle>Still have questions?</CardTitle>
-                <CardDescription>
-                  Our support team is here to help you succeed
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Contact us at support@edcrash.com or use our live chat
-                </p>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default FAQ;

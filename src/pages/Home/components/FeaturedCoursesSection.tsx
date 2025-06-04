@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -20,7 +19,9 @@ const FeaturedCoursesSection = ({ courses }: FeaturedCoursesSectionProps) => {
   return (
     <section 
       ref={coursesAnimation.ref}
-      className="py-20 round-b-[20px] border-[10px] border-secondary" 
+      className={`py-20 round-b-[20px] border-[10px] border-primary transition-all duration-700 ${
+        coursesAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
+      }`}
       style={{
         backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.8)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
         backgroundSize: 'cover',
@@ -28,7 +29,7 @@ const FeaturedCoursesSection = ({ courses }: FeaturedCoursesSectionProps) => {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      <div className="container px-4 mx-auto round-b-[20px]">
+      <div className="container px-4 mx-auto">
         <div 
           className={`flex justify-between items-center mb-12 transition-all duration-700 delay-200 ${
             coursesAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'

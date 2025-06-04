@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
@@ -26,39 +25,86 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
   const { getIcon } = useTheme();
 
   return (
-    <nav className="hidden lg:flex items-center justify-left space-x-2 mt-[34px]">
-      {mainNavItems.map(item => 
-        <div key={item.name} className={`flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap !rounded-t-lg relative ${isActiveRoute(item.href) ? 'bg-background text-foreground shadow-lg tab-curved' : 'text-primary-foreground hover:bg-primary-foreground/10'}`} style={isActiveRoute(item.href) ? {
-          marginBottom: '-6px',
-          paddingBottom: '11px',
-          zIndex: 20
-        } : {}}>
-          <Link to={item.href} className="flex items-center gap-2">
-            {getIcon(item.icon)}
-            {item.name}
-          </Link>
-        </div>
-      )}
-      
-      {/* More Dropdown */}
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="flex items-center gap-1 px-3 py-2 text-sm font-medium whitespace-nowrap text-primary-foreground hover:bg-primary-foreground/10">
-            More
-            <ChevronDown className="w-4 h-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-48">
-          {moreMenuItems.map(item => 
-            <DropdownMenuItem key={item.name} asChild>
-              <Link to={item.href} className="flex items-center gap-2 w-full">
+    <>
+      <style>{`
+            .tab-curved {
+              position: relative;
+            }
+            .tab-curved::before,
+            .tab-curved::after {
+                content: '';
+                position: absolute;
+                bottom: -7px;
+                width: 25px;
+                height: 21px;
+                /* Gradient background for corners */
+                background: bg-background linear-gradient(to bottom, hsl(var(--background)/1), hsl(var(--primary)/1));
+            }
+            .tab-curved::before {
+          left: -15px;
+          border-bottom-right-radius: 25px;
+          border: 10px solid hsl(var(--background));
+          border-top: none;
+          border-left: none;
+            }
+            .tab-curved::after {
+              right: -15px;
+              border-bottom-left-radius: 25px;
+              border: 10px solid hsl(var(--background));
+              border-top: none;
+              border-right: none;
+            }
+          `}</style>
+
+      <div className="fixed left-[350px]  bg-primary z-10 overflow-hidden px-[15px]" style={{ marginTop: '-12px' }}>
+        <nav className="hidden lg:flex items-center justify-left">
+          {mainNavItems.map(item =>
+            <div
+              key={item.name}
+              className={`flex items-center gap-2 px-3 py-2 text-xs font-medium whitespace-nowrap !rounded-t-lg relative ${isActiveRoute(item.href) ?
+                'bg-background bg-gradient-to-b from-primary/25 to-background/100 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 text-foreground tab-curved' :
+                'text-primary-foreground hover:bg-primary-foreground/10'
+                }`}
+              style={isActiveRoute(item.href) ? {
+                marginTop: '12px',
+                marginBottom: '-6px',
+                paddingBottom: '18px',
+                zIndex: 20
+              } : {
+                marginTop: '12px',
+                marginBottom: '-6px',
+                paddingBottom: '18px',
+                zIndex: 18
+              }}
+            >
+              <Link to={item.href} className="flex items-center gap-2">
                 {getIcon(item.icon)}
                 {item.name}
               </Link>
-            </DropdownMenuItem>
+            </div>
           )}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </nav>
+
+          {/* More Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="flex items-center gap-1 px-6 mt-2 text-sm font-medium whitespace-nowrap text-primary-foreground hover:bg-primary-foreground/10">
+                More
+                <ChevronDown className="w-4 h-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              {moreMenuItems.map(item =>
+                <DropdownMenuItem key={item.name} asChild>
+                  <Link to={item.href} className="flex items-center gap-2 w-full">
+                    {getIcon(item.icon)}
+                    {item.name}
+                  </Link>
+                </DropdownMenuItem>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </nav>
+      </div>
+    </>
   );
 };

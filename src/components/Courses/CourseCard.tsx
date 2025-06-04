@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -43,12 +42,14 @@ interface CourseCardProps {
   course: Course;
   referrerRoute?: string;
   referrerName?: string;
+  cardClassName?: string;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
   course,
   referrerRoute = '/courses',
-  referrerName = 'Courses'
+  referrerName = 'Courses',
+  cardClassName = '',
 }) => {
   const { theme, getIcon } = useTheme();
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
     });
   };
   
-  return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+  return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''} ${cardClassName}`}>
       {/* Course Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-0">
         <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-0" />

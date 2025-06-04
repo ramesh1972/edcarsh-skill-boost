@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
@@ -17,9 +16,8 @@ const Home = () => {
   // Calendar state
   const [calendarViewMode, setCalendarViewMode] = useState('month');
   const [currentDate, setCurrentDate] = useState(new Date());
-
   return (
-    <div className={`min-h-full bg-background ${getPageLayoutClasses()}`}>
+    <div className="flex flex-col min-h-full gap-16 justify-center items-center"> 
       <HeroSection />
       <USPsSection />
       <FeaturedCoursesSection courses={courses} />

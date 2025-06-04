@@ -6,6 +6,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Clock, Users, DollarSign, UserPlus, Eye } from 'lucide-react';
 import { parseISO, addDays, isSameDay, parse, addMinutes, subMinutes, isWithinInterval, addHours, isAfter, isBefore } from 'date-fns';
 import ActionButtons from '@/components/Courses/ActionButtons';
+import { getSubjectColor as getSubjectColorHex } from '@/data/masterData';
 
 interface Course {
   id: number;
@@ -37,17 +38,29 @@ interface CourseCalendarEventProps {
 const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewMode, currentDay }) => {
   const { getIcon } = useTheme();
 
+  // Vibrant subject color chips for calendar
   const getSubjectColor = (subject: string) => {
-    const colors = {
-      'Frontend': 'bg-blue-100 text-blue-800',
-      'Backend': 'bg-green-100 text-green-800',
-      'Data Science': 'bg-purple-100 text-purple-800',
-      'Marketing': 'bg-orange-100 text-orange-800',
-      'Design': 'bg-pink-100 text-pink-800',
-      'Mobile': 'bg-cyan-100 text-cyan-800',
-      'DevOps': 'bg-red-100 text-red-800',
-    };
-    return colors[subject as keyof typeof colors] || 'bg-gray-100 text-gray-800';
+    const color = getSubjectColorHex(subject);
+    // Map hex color to glassmorphism/gradient classes
+    switch (subject) {
+      case 'Frontend':
+        return 'bg-gradient-to-r from-blue-290 via-blue-200 to-blue-100 text-blue-900 shadow-sm';
+      case 'Backend':
+        return 'bg-gradient-to-r from-green-290 via-green-200 to-green-100 text-green-900 shadow-sm';
+      case 'Data Science':
+        return 'bg-gradient-to-r from-purple-290 via-purple-200 to-purple-100 text-purple-900 shadow-sm';
+      case 'Marketing':
+        return 'bg-gradient-to-r from-orange-290 via-orange-200 to-orange-100 text-orange-900 shadow-sm';
+      case 'Design':
+        return 'bg-gradient-to-r from-pink-290 via-pink-200 to-pink-100 text-pink-900 shadow-sm';
+      case 'Mobile':
+        return 'bg-gradient-to-r from-cyan-290 via-cyan-200 to-cyan-100 text-cyan-900 shadow-sm';
+      case 'DevOps':
+        return 'bg-gradient-to-r from-red-290 via-red-200 to-red-100 text-red-900 shadow-sm';
+      default:
+        // Fallback: use the color from masterData as a border/outline
+        return `border-2 border-[${color}] text-[${color}] bg-white/60`;
+    }
   };
 
   // Calculate session number if currentDay is provided
@@ -137,35 +150,44 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   const cardHeight = getCardHeight();
   const isSessionPast = isPastSession();
 
+  // Fix: Ensure all blocks above are properly closed before variable declarations
+
+  const cardBase =
+    'relative overflow-hidden rounded-xl shadow-xl border-0 bg-[rgba(255,255,255,0.15)] backdrop-blur-lg transition-transform duration-200 hover:scale-[1.015]';
+  const calendarGlow =
+    'shadow-[0_4px_32px_0_rgba(80,120,255,0.18),0_1.5px_8px_0_rgba(0,0,0,0.10)]';
+  const jazzyBar =
+    'absolute left-0 top-0 h-full w-2 rounded-l-xl bg-gradient-to-b from-primary via-pink-290 to-violet-500 animate-pulse';
+
   if (viewMode === 'month') {
     return (
       <div 
-        className={`text-xs p-1 !rounded !border-4 !border-black ${getSubjectColor(course.subject)} ${
-          isSessionPast ? 'opacity-50 bg-gray-100' : ''
-        }`}
-        style={{ minHeight: `${Math.max(40, cardHeight / 3)}px`, border: '2px solid black !important' }}
+        className={`relative ${cardBase} ${calendarGlow} px-2 py-1 min-h-[48px] flex flex-col gap-0.5 ${getSubjectColor(course.subject)} ${isSessionPast ? 'opacity-50 grayscale' : ''}`}
+        style={{ minHeight: `${Math.max(40, cardHeight / 3)}px`, justifySelf:'normal' }}
       >
-        <div className="font-medium truncate">{course.title}</div>
-        <div className="text-xs opacity-75">{course.startTime}</div>
-        <div className="text-xs opacity-75">{course.dailySessionDuration}h</div>
-        <div className={`text-xs font-semibold mt-1 ${isSessionPast ? 'text-gray-500' : 'text-red-600'}`}>
-          Session - {sessionNumber}
+        <div className={jazzyBar} style={{ opacity: 0.7}} />
+        <div className="font-semibold truncate text-sm drop-shadow-sm pl-2">{course.title}</div>
+        <div className="flex items-center gap-1 text-xs opacity-80 pl-2">
+          <Clock className="h-3 w-3" />
+          {course.startTime}
+          <span className="ml-2">{course.dailySessionDuration}h</span>
         </div>
-        <div className="flex gap-1 mt-1">
+        <div className={`text-xs font-semibold pl-2 mt-0.5 ${isSessionPast ? 'text-gray-500' : 'text-pink-600'}`}>Session {sessionNumber}</div>
+        <div className="flex gap-1 mt-1 pl-2">
           {joinButtonState.show && (
             <Button 
               size="sm" 
-              className="text-xs h-5 px-2"
+              className="text-xs h-5 px-2 bg-gradient-to-r from-pink-290 to-violet-500 text-white shadow-md hover:scale-105"
               disabled={!joinButtonState.enabled || isSessionPast}
             >
-              Join Now
+              Join
             </Button>
           )}
           {showJoinAsGuest && (
             <Button 
               variant="outline" 
               size="sm" 
-              className="text-xs h-5 px-1 flex items-center gap-1"
+              className="text-xs h-5 px-1 flex items-center gap-1 border-pink-300 hover:bg-pink-50"
               disabled={isSessionPast}
             >
               <UserPlus className="h-2 w-2" />
@@ -188,36 +210,27 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
   if (viewMode === 'week') {
     return (
       <div 
-        className={`text-xs p-2 rounded border-4 border-black ${getSubjectColor(course.subject)} ${
-          isSessionPast ? 'opacity-50 bg-gray-100' : ''
-        }`}
+        className={`relative ${cardBase} ${calendarGlow} px-3 py-2 min-h-[80px] flex flex-col gap-1 ${getSubjectColor(course.subject)} ${isSessionPast ? 'opacity-50 grayscale' : ''}`}
         style={{ minHeight: `${Math.max(80, cardHeight / 2)}px` }}
       >
-        <div className="font-medium text-xs mb-1 line-clamp-2">{course.title}</div>
-        <div className="flex items-center gap-1 text-xs opacity-75">
+        <div className={jazzyBar} style={{ opacity: 0.7 }} />
+        <div className="font-semibold text-base mb-1 line-clamp-2 drop-shadow-sm">{course.title}</div>
+        <div className="flex items-center gap-2 text-xs opacity-80">
           <Clock className="h-3 w-3" />
           {course.startTime}
-        </div>
-        <div className="flex items-center gap-1 text-xs opacity-75">
-          <span>{course.dailySessionDuration}h duration</span>
-        </div>
-        <div className="flex items-center gap-1 text-xs opacity-75">
-          <Users className="h-3 w-3" />
+          <span className="ml-2">{course.dailySessionDuration}h</span>
+          <Users className="h-3 w-3 ml-2" />
           {course.students}
         </div>
-        <Badge variant="outline" className="text-xs mt-1">
+        <Badge variant="outline" className="text-xs mt-1 border-pink-300 bg-white/60 text-pink-700 shadow-sm">
           {course.level}
         </Badge>
-        <div className={`text-xs font-semibold mt-1 px-1 py-0.5 rounded ${
-          isSessionPast ? 'text-gray-500 bg-gray-50' : 'text-red-600 bg-red-50'
-        }`}>
-          Session - {sessionNumber}
-        </div>
+        <div className={`text-xs font-semibold mt-1 px-1 py-0.5 rounded ${isSessionPast ? 'text-gray-500 bg-gray-50' : 'text-pink-600 bg-pink-50'}`}>Session {sessionNumber}</div>
         <div className="flex gap-1 mt-1">
           {joinButtonState.show && (
             <Button 
               size="sm" 
-              className="text-xs h-6 px-1 flex-1"
+              className="text-xs h-6 px-2 flex-1 bg-gradient-to-r from-pink-290 to-violet-500 text-white shadow-md hover:scale-105"
               disabled={!joinButtonState.enabled || isSessionPast}
             >
               Join
@@ -227,7 +240,7 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
             <Button 
               variant="outline" 
               size="sm" 
-              className="text-xs h-6 px-1 flex-1 flex items-center gap-1"
+              className="text-xs h-6 px-1 flex-1 flex items-center gap-1 border-pink-300 hover:bg-pink-50"
               disabled={isSessionPast}
             >
               <UserPlus className="h-2 w-2" />
@@ -249,17 +262,14 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
 
   // Day view - full detail
   return (
-    <Card className={`w-full border-4 border-black ${isSessionPast ? 'opacity-60 bg-gray-50' : ''}`} style={{ minHeight: `${cardHeight}px` }}>
+    <Card className={`relative ${cardBase} ${calendarGlow} w-full min-h-[${cardHeight}px] ${isSessionPast ? 'opacity-60 grayscale' : ''}`}> 
+      <div className={jazzyBar} style={{ opacity: 0.7 }} />
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
-          <CardTitle className="text-lg leading-tight">{course.title}</CardTitle>
+          <CardTitle className="text-lg leading-tight font-bold drop-shadow-sm">{course.title}</CardTitle>
           <div className="flex flex-col gap-1">
-            <Badge variant="secondary">{course.level}</Badge>
-            <Badge className={`font-semibold ${
-              isSessionPast ? 'bg-gray-100 text-gray-600 border-gray-200' : 'bg-red-100 text-red-800 border-red-200'
-            }`}>
-              Session - {sessionNumber}
-            </Badge>
+            <Badge variant="secondary" className="bg-white/60 text-pink-700 border-pink-300 shadow-sm">{course.level}</Badge>
+            <Badge className={`font-semibold ${isSessionPast ? 'bg-gray-100 text-gray-600 border-gray-200' : 'bg-pink-100 text-pink-800 border-pink-200'}`}>Session {sessionNumber}</Badge>
           </div>
         </div>
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -280,30 +290,22 @@ const CourseCalendarEvent: React.FC<CourseCalendarEventProps> = ({ course, viewM
           </div>
         </div>
       </CardHeader>
-      
       <CardContent className="pt-0">
-        <p className="text-sm text-muted-foreground mb-3">{course.description}</p>
-        
+        <p className="text-sm text-muted-foreground mb-3 line-clamp-3">{course.description}</p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Badge className={getSubjectColor(course.subject)}>
-              {course.subject}
-            </Badge>
-            <span className="text-sm text-muted-foreground">
-              {course.durationHours}h total duration
-            </span>
+            <Badge className={`font-semibold shadow-md ${getSubjectColor(course.subject)}`}>{course.subject}</Badge>
+            <span className="text-sm text-muted-foreground">{course.durationHours}h total duration</span>
           </div>
-          
           <div className="flex items-center gap-2">
             <img 
               src={course.instructor.image} 
               alt={course.instructor.name}
-              className="w-6 h-6 rounded-full"
+              className="w-7 h-7 rounded-full border-2 border-pink-300 shadow-md"
             />
-            <span className="text-sm font-medium">{course.instructor.name}</span>
+            <span className="text-sm font-medium text-pink-700">{course.instructor.name}</span>
           </div>
         </div>
-        
         <div className="mt-3">
           <ActionButtons 
             showJoinNow={joinButtonState.show}

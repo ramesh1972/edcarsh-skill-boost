@@ -43,12 +43,14 @@ interface LongCourseCardProps {
   course: Course;
   referrerRoute?: string;
   referrerName?: string;
+  cardClassName?: string;
 }
 
 const LongCourseCard: React.FC<LongCourseCardProps> = ({ 
   course,
   referrerRoute = '/courses',
-  referrerName = 'Courses'
+  referrerName = 'Courses',
+  cardClassName = '',
 }) => {
   const { theme, getIcon } = useTheme();
   const navigate = useNavigate();
@@ -60,7 +62,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
   };
   
   return (
-    <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+    <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : '${cardClassName}'}`}>
       <div className="flex">
         {/* Left side - Image and stats */}
         <div className="w-64 flex-shrink-0 flex flex-col">
