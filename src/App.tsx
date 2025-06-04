@@ -51,12 +51,33 @@ const AppContent = () => {
         
         {/* Inner div - with wavy bezier curve on bottom left */}
         <div 
-          className="relative overflow-auto !rounded-tl-[40px]" 
+          className="relative overflow-auto bg-gradient-to-r from-cyan-400 to-blue-500" 
           style={{ 
             left: '20px',
-            right: '20px',
-            width: 'calc(100vw - 40px)',
-            height: 'calc(100vh - 132px)'
+            width: 'calc(100vw - 30px)',
+            height: 'calc(100vh - 132px)',
+            borderTopLeftRadius: '40px !important',
+            clipPath: `polygon(
+              40px 0%,
+              100% 0%,
+              100% 100%,
+              15% 100%,
+              10% 98%,
+              8% 95%,
+              12% 92%,
+              18% 90%,
+              15% 87%,
+              8% 85%,
+              5% 82%,
+              10% 80%,
+              15% 78%,
+              8% 75%,
+              3% 72%,
+              8% 70%,
+              0% 68%,
+              0% 40px,
+              40px 0%
+            )`,
           }}
         >
           <Toaster />
