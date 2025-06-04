@@ -54,7 +54,7 @@ const AppContent = () => {
           className="relative overflow-auto bg-gradient-to-r from-cyan-400 to-blue-500 !rounded-tl-[48px] !rounded-bl-[20px]" 
           style={{ 
             left: '20px',
-            right: '20px'
+            right: '20px',
             width: 'calc(100vw - 40px)',
             height: 'calc(100vh - 132px)'
           }}
