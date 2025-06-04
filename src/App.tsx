@@ -55,7 +55,7 @@ const AppContent = () => {
           style={{ 
             left: '20px',
             width: 'calc(100vw - 30px)',
-            height: 'calc(100vh - 136px)'
+            height: 'calc(100vh - 132px)'
           }}
         >
           <Toaster />
