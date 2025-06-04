@@ -57,10 +57,11 @@ const AppContent = () => {
             width: 'calc(100vw - 30px)',
             height: 'calc(100vh - 132px)',
             borderRadius: '40px 40px 0 0',
-            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 150px 100%, 100px calc(100% - 20px), 60px calc(100% - 50px), 30px calc(100% - 80px), 0 calc(100% - 120px))'
+            background: 'linear-gradient(to right, #00c6ff, #0072ff)',
+            clipPath: 'path("M0 0 L100% 0 L100% 100% C 100% 100%, 150px 100%, 150px 100% C 120px 95%, 90px 90%, 60px 85% C 45px 80%, 30px 75%, 0 60% Z")''
           }}
         >
-          <svg style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '300px'}} viewBox="0 0 1000 300" preserveAspectRatio="none">
+          <svg style={{position: 'absolute', bottom: 0, left: 0, width: '290px', height: '100px'}} viewBox="0 0 1000 300" preserveAspectRatio="none">
             <path d="M0,0 H1000 V300 C900,300 800,280 700,260 C600,240 500,220 400,200 C300,180 200,160 100,140 C50,120 25,100 0,80 Z" fill="#0072ff"/>
           </svg>
           <Toaster />
