@@ -51,13 +51,12 @@ const AppContent = () => {
         
         {/* Inner div - with proper border radius and positioning */}
         <div 
-          className="relative overflow-auto bg-gradient-to-r from-cyan-400 to-blue-500" 
+          className="relative overflow-auto bg-gradient-to-r from-cyan-400 to-blue-500 !rounded-tl-[40px]" 
           style={{ 
             left: '15px',
-            top: '80px',
             width: 'calc(100vw - 30px)',
             height: 'calc(100vh - 140px)',
-            borderRadius: '40px 40px 0 0'
+            clipPath: 'path("M0 0 L100% 0 L100% 100% C 100% 100%, 150px 100%, 150px 100% C 120px 95%, 90px 90%, 60px 85% C 45px 80%, 30px 75%, 0 60% Z")'
           }}
         >
           <Toaster />
