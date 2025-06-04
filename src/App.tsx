@@ -51,16 +51,16 @@ const AppContent = () => {
         
         {/* Inner div - absolute positioned with 15px left/right, adjusted for 80px header, 60px bottom for tabs */}
         <div 
-          className="relative overflow-auto !left-[15px] right-[15px] !rounded-tl-[40px]" 
+          className="relative overflow-auto wavy-container" 
           style={{ 
+            left: '15px',
             width: 'calc(100vw - 30px)',
-            height: 'calc(100vh - 132px)',
-            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 150px 100%, 100px calc(100% - 20px), 60px calc(100% - 50px), 30px calc(100% - 80px), 0 calc(100% - 120px))'
+            height: 'calc(100vh - 132px)'
           }}
         >
-          <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 300px;" viewBox="0 0 1000 300" preserveAspectRatio="none">
-    <path d="M0,0 H1000 V300 C900,300 800,280 700,260 C600,240 500,220 400,200 C300,180 200,160 100,140 C50,120 25,100 0,80 Z" fill="#0072ff"/>
-  </svg>
+          <svg style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '300px'}} viewBox="0 0 1000 300" preserveAspectRatio="none">
+            <path d="M0,0 H1000 V300 C900,300 800,280 700,260 C600,240 500,220 400,200 C300,180 200,160 100,140 C50,120 25,100 0,80 Z" fill="#0072ff"/>
+          </svg>
           <Toaster />
           <Sonner />
           <Routes>
@@ -83,6 +83,13 @@ const AppContent = () => {
         {/* Bottom Tabs */}
         <ToolsNavigation />
       </div>
+
+      <style jsx>{`
+        .wavy-container {
+          border-radius: 40px 40px 0 0;
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 150px 100%, 100px calc(100% - 20px), 60px calc(100% - 50px), 30px calc(100% - 80px), 0 calc(100% - 120px));
+        }
+      `}</style>
     </>
   );
 };
