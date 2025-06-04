@@ -52,14 +52,18 @@ const AppContent = () => {
         {/* Inner div - absolute positioned with 15px left/right, adjusted for 80px header, 60px bottom for tabs */}
         <div 
           className="relative overflow-auto" 
-          style={{ 
-            left: '15px',
-            width: 'calc(100vw - 30px)',
-            height: 'calc(100vh - 132px)',
-            borderRadius: '40px 40px 0 0',
-            background: 'linear-gradient(to right, #00c6ff, #0072ff)',
-            clipPath: "path('M0 0 L100% 0 L100% 100% C 100% 100%, 150px 100%, 150px 100% C 120px 95%, 90px 90%, 60px 85% C 45px 80%, 30px 75%, 0 60% Z')"
-          }}
+          style={{
+              position: 'absolute', // or 'relative' based on layout
+              left: '15px',
+              width: 'calc(100vw - 30px)',
+              height: 'calc(100vh - 132px)',
+              borderRadius: '40px 40px 0 0',
+              background: 'linear-gradient(to right, #00c6ff, #0072ff)',
+              clipPath: `path("M0 0 L100% 0 L100% 100% C 100% 100%, 150px 100%, 150px 100% C 120px 95%, 90px 90%, 60px 85% C 45px 80%, 30px 75%, 0 60% Z")`,
+              WebkitClipPath: `path("M0 0 L100% 0 L100% 100% C 100% 100%, 150px 100%, 150px 100% C 120px 95%, 90px 90%, 60px 85% C 45px 80%, 30px 75%, 0 60% Z")`, // for Safari support
+              overflow: 'hidden'
+            }}
+
         >
           <Toaster />
           <Sonner />
