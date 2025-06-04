@@ -58,6 +58,9 @@ const AppContent = () => {
             clipPath: 'polygon(0 0, 100% 0, 100% 100%, 150px 100%, 100px calc(100% - 20px), 60px calc(100% - 50px), 30px calc(100% - 80px), 0 calc(100% - 120px))'
           }}
         >
+          <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 300px;" viewBox="0 0 1000 300" preserveAspectRatio="none">
+    <path d="M0,0 H1000 V300 C900,300 800,280 700,260 C600,240 500,220 400,200 C300,180 200,160 100,140 C50,120 25,100 0,80 Z" fill="#0072ff"/>
+  </svg>
           <Toaster />
           <Sonner />
           <Routes>
