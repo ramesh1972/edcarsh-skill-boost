@@ -56,11 +56,7 @@ const AppContent = () => {
             left: '20px',
             width: 'calc(100vw - 30px)',
             height: 'calc(100vh - 132px)',
-            borderTopLeftRadius: '40px',
-            clipPath: `polygon(
-              45% 90%,
-              55% 95%
-            )`
+            borderTopLeftRadius: '40px'
           }}
         >
           <Toaster />
