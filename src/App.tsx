@@ -54,9 +54,10 @@ const AppContent = () => {
           className="relative overflow-auto bg-gradient-to-r from-cyan-400 to-blue-500" 
           style={{ 
             left: '20px',
-            width: 'calc(100vw - 30px)',
+            right: '20px',
+            width: 'calc(100vw - 40px)',
             height: 'calc(100vh - 132px)',
-            borderTopLeftRadius: '40px'
+            borderTopLeftRadius: '40px !important'
           }}
         >
           <Toaster />
