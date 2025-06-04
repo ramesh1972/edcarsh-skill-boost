@@ -57,8 +57,7 @@ const AppContent = () => {
             width: 'calc(100vw - 30px)',
             height: 'calc(100vh - 132px)',
             borderRadius: '40px 40px 0 0',
-            background: 'linear-gradient(to right, #00c6ff, #0072ff)',
-            clipPath: "path('M0 0 L100% 0 L100% 100% C 100% 100%, 150px 100%, 150px 100% C 120px 95%, 90px 90%, 60px 85% C 45px 80%, 30px 75%, 0 60% Z')""
+            background: 'linear-gradient(to right, #00c6ff, #0072ff)'
           }}
         >
           <Toaster />
