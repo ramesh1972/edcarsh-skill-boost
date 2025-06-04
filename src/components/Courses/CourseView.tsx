@@ -197,6 +197,7 @@ const CourseView: React.FC = () => {
                     showJoinNow={true}
                     joinNowEnabled={true}
                     showJoinAsGuest={true}
+                    showView={false}
                     nextSession={course.nextSession}
                   />
                 </div>

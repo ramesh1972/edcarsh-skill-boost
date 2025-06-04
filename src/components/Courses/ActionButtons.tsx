@@ -9,6 +9,7 @@ interface ActionButtonsProps {
   showJoinNow?: boolean;
   joinNowEnabled?: boolean;
   showJoinAsGuest?: boolean;
+  showView?: boolean;
   isDisabled?: boolean;
   courseId?: number;
   nextSession?: string;
@@ -19,6 +20,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   showJoinNow = false, 
   joinNowEnabled = false,
   showJoinAsGuest = true,
+  showView = true,
   isDisabled = false,
   courseId,
   nextSession,
@@ -76,16 +78,18 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           Join as Guest
         </Button>
       )}
-      <Button 
-        variant="secondary" 
-        size="sm" 
-        className="flex items-center gap-1"
-        disabled={isDisabled}
-        onClick={handleViewClick}
-      >
-        <Eye className="h-3 w-3" />
-        View
-      </Button>
+      {showView && (
+        <Button 
+          variant="secondary" 
+          size="sm" 
+          className="flex items-center gap-1"
+          disabled={isDisabled}
+          onClick={handleViewClick}
+        >
+          <Eye className="h-3 w-3" />
+          View
+        </Button>
+      )}
       <Button 
         size="sm" 
         className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}
