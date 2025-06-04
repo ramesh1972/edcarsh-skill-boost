@@ -51,13 +51,12 @@ const AppContent = () => {
         
         {/* Inner div - with wavy bezier curve on bottom left */}
         <div 
-          className="relative overflow-auto bg-gradient-to-r from-cyan-400 to-blue-500" 
+          className="relative overflow-auto !rounded-tl-[40px]" 
           style={{ 
             left: '20px',
             right: '20px',
             width: 'calc(100vw - 40px)',
-            height: 'calc(100vh - 132px)',
-            borderTopLeftRadius: '40px !important'
+            height: 'calc(100vh - 132px)'
           }}
         >
           <Toaster />
