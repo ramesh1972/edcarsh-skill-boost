@@ -50,7 +50,7 @@ const AppContent = () => {
         <Header />
         
         {/* Inner div - absolute positioned with 15px left/right, adjusted for 80px header, 60px bottom for tabs */}
-        <div className="relative overflow-auto !left-[15px] right-[15px] !rounded-l-[40px]" style={{ 
+        <div className="relative overflow-auto !left-[15px] right-[15px] !rounded-lt-[40px]" style={{ 
           width: 'calc(100vw - 30px)',
           height: 'calc(100vh - 132px)'
         }}>
