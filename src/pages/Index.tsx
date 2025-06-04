@@ -77,7 +77,7 @@ const CourseCard3D = ({ course, position }: { course: any; position: [number, nu
         fontSize={0.2}
         color="white"
         anchorX="center"
-        anchorY="center"
+        anchorY="middle"
         maxWidth={1.8}
       >
         {course.title}
@@ -139,7 +139,7 @@ const Scene = () => {
           fontSize={viewport.width > 10 ? 1.5 : 1}
           color="#ffffff"
           anchorX="center"
-          anchorY="center"
+          anchorY="middle"
           maxWidth={10}
         >
           Master Skills Fast with Crash Courses
@@ -149,7 +149,7 @@ const Scene = () => {
           fontSize={0.4}
           color="#fbbf24"
           anchorX="center"
-          anchorY="center"
+          anchorY="middle"
           maxWidth={8}
         >
           Learn new skills with short, practical crash courses
@@ -163,7 +163,7 @@ const Scene = () => {
           fontSize={0.8}
           color="#ffffff"
           anchorX="center"
-          anchorY="center"
+          anchorY="middle"
         >
           Featured Courses
         </Text>
@@ -187,7 +187,7 @@ const Scene = () => {
           fontSize={0.8}
           color="#ffffff"
           anchorX="center"
-          anchorY="center"
+          anchorY="middle"
         >
           Our Impact
         </Text>
