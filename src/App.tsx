@@ -58,7 +58,6 @@ const AppContent = () => {
             height: 'calc(100vh - 132px)',
             borderTopLeftRadius: '40px',
             clipPath: `polygon(
-              40px 0%,
               100% 0%,
               100% 100%,
               60% 100%,
@@ -70,10 +69,7 @@ const AppContent = () => {
               25% 100%,
               35% 95%,
               45% 90%,
-              55% 95%,
-              40px 100%,
-              0% 100%,
-              0% 40px
+              55% 95%
             )`
           }}
         >
