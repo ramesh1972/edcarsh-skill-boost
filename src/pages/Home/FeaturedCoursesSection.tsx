@@ -22,12 +22,6 @@ const FeaturedCoursesSection = ({ courses }: FeaturedCoursesSectionProps) => {
       className={`py-20 round-b-[20px] border-[10px] border-primary transition-all duration-700 ${
         coursesAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
       }`}
-      style={{
-        backgroundImage: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.8)), url('/lovable-uploads/901e6741-eb3f-451a-a824-a3e03780f569.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
     >
       <div className="container px-4 mx-auto">
         <div 

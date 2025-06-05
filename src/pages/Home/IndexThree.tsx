@@ -63,8 +63,8 @@ export const IndexTwo = () => {
 }
 
 // create array  of components in components folder
-import CourseCalendarSection from './components/CourseCalendarSection';
-import HeroSection from './components/HeroSection';
+import CourseCalendarSection from './CourseCalendarSection';
+import HeroSection from './HeroSection';
 
 const IndexThree = () => {
     const [selected, setSelected] = useState(null);

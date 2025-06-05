@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
-import HeroSection from './components/HeroSection';
-import USPsSection from './components/USPsSection';
-import FeaturedCoursesSection from './components/FeaturedCoursesSection';
-import CourseCalendarSection from './components/CourseCalendarSection';
-import StatsSection from './components/StatsSection';
-import TestimonialsSection from './components/TestimonialsSection';
-import CTASection from './components/CTASection';
-import FooterSection from './components/FooterSection';
+import HeroSection from './Home/HeroSection';
+import USPsSection from './Home/USPsSection';
+import FeaturedCoursesSection from './Home/FeaturedCoursesSection';
+import CourseCalendarSection from './Home/CourseCalendarSection';
+import StatsSection from './Home/StatsSection';
+import TestimonialsSection from './Home/TestimonialsSection';
+import CTASection from './Home/CTASection';
+import FooterSection from './Home/FooterSection';
 
 const Home = () => {
   const { getPageLayoutClasses } = useTheme();
