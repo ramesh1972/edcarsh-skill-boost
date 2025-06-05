@@ -56,7 +56,7 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
             }
           `}</style>
 
-      <div className="fixed left-[350px]  bg-primary z-10 overflow-hidden px-[15px]" style={{ marginTop: '-12px' }}>
+      <div className="fixed bg-primary z-10 overflow-hidden px-[15px]" style={{ marginTop: '-12px' }}>
         <nav className="hidden lg:flex items-center justify-left">
           {mainNavItems.map(item =>
             <div
