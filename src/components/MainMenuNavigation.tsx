@@ -28,7 +28,7 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
     <>
       <style>{`
             .tab-curved {
-              position: relative;
+                position: relative;
             }
             .tab-curved::before,
             .tab-curved::after {
@@ -41,18 +41,18 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
                 background: bg-background linear-gradient(to bottom, hsl(var(--background)/1), hsl(var(--primary)/1));
             }
             .tab-curved::before {
-          left: -15px;
-          border-bottom-right-radius: 25px;
-          border: 10px solid hsl(var(--background));
-          border-top: none;
-          border-left: none;
+                left: -15px;
+                border-bottom-right-radius: 25px;
+                border: 10px solid hsl(var(--background));
+                border-top: none;
+                border-left: none;
             }
             .tab-curved::after {
-              right: -15px;
-              border-bottom-left-radius: 25px;
-              border: 10px solid hsl(var(--background));
-              border-top: none;
-              border-right: none;
+                right: -15px;
+                border-bottom-left-radius: 25px;
+                border: 10px solid hsl(var(--background));
+                border-top: none;
+                border-right: none;
             }
           `}</style>
 
@@ -61,16 +61,18 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
           {mainNavItems.map(item =>
             <div
               key={item.name}
-              className={`flex items-center gap-2 px-3 py-2 text-xs font-medium whitespace-nowrap !rounded-t-lg relative ${isActiveRoute(item.href) ?
+              className={`flex items-center gap-2 px-3 py-2 text-xs  whitespace-nowrap !rounded-t-lg relative ${isActiveRoute(item.href) ?
                 'bg-background bg-gradient-to-b from-primary/25 to-background/100 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 text-foreground tab-curved' :
                 'text-primary-foreground hover:bg-primary-foreground/10'
                 }`}
               style={isActiveRoute(item.href) ? {
+                fontSize: '.93rem',
                 marginTop: '12px',
                 marginBottom: '-6px',
                 paddingBottom: '18px',
                 zIndex: 20
               } : {
+                fontSize: '.93rem',
                 marginTop: '12px',
                 marginBottom: '-6px',
                 paddingBottom: '18px',

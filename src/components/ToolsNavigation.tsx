@@ -94,16 +94,18 @@ const ToolsNavigation: React.FC = () => {
           {tabItems.map(item => (
             <div
               key={item.name}
-              className={`flex items-center gap-2 px-3 py-2 text-xs font-medium whitespace-nowrap !rounded-b-lg relative ${isActiveRoute(item.href)
+              className={`flex items-center gap-2 px-3 py-2 text-xs  whitespace-nowrap !rounded-b-lg relative ${isActiveRoute(item.href)
                   ? 'bg-background text-foreground shadow-lg bottom-tab-curved'
                   : 'text-primary-foreground hover:bg-primary-foreground/10'
                 }`}
               style={isActiveRoute(item.href) ? {
+                fontSize: '1rem',
                 marginTop: '-6px',
                 marginBottom: '12px',
                 paddingTop: '18px',
                 zIndex: 20
               } : {
+                fontSize: '1rem',
                 marginTop: '-6px',
                 marginBottom: '12px',
                 paddingTop: '18px',
