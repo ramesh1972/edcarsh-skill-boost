@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -52,12 +51,13 @@ const AppContent = () => {
         
         {/* Inner div - with wavy bezier curve on bottom left */}
         <div 
-          className="relative overflow-auto !rounded-tl-[48px] !rounded-bl-[20px]" 
+          className="relative overflow-auto !rounded-tl-[48px] !rounded-bl-[20px] border border-[hsl(var(--border))] shadow-xl bg-white/70 dark:bg-black/40 backdrop-blur-md transition-all duration-300"
           style={{ 
             left: '20px',
             right: '20px',
-            width: 'calc(100vw - 40px)',
-            height: 'calc(100vh - 132px)'
+            width: 'calc(100vw - 440x)',
+            height: 'calc(100vh - 132px)',
+
           }}
         >
           <Toaster />
