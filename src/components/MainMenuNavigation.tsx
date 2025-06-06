@@ -62,7 +62,7 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
             <div
               key={item.name}
               className={`flex items-center gap-2 px-3 py-2 text-xs  whitespace-nowrap !rounded-t-lg relative ${isActiveRoute(item.href) ?
-                'bg-background bg-gradient-to-b from-primary/25 to-background/100 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 text-foreground tab-curved' :
+                'bg-background bg-gradient-to-b from-primary/25 to-background/1 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 text-foreground tab-curved' :
                 'text-primary-foreground hover:bg-primary-foreground/10'
                 }`}
               style={isActiveRoute(item.href) ? {
