@@ -72,7 +72,7 @@ const ToolsNavigation: React.FC = () => {
           top: -7px;
           width: 25px;
           height: 21px;
-          background: hsl(var(--primary));
+          background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary))/0.8 100%);
         }
         .bottom-tab-curved::before {
           left: -15px;
@@ -89,14 +89,14 @@ const ToolsNavigation: React.FC = () => {
           border-right: none;
         }
       `}</style>
-      <div className="fixed bottom-0 left-0 right-0 bg-primary z-10 overflow-x-auto px-[15px]">
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-primary/90 via-primary/80 to-primary/90 backdrop-blur-md border-t border-white/20 z-10 overflow-x-auto px-[15px]">
         <nav className="flex items-stretch justify-end min-w-max px-4">
           {tabItems.map(item => (
             <div
               key={item.name}
-              className={`flex items-center gap-2 px-3 py-2 text-xs  whitespace-nowrap !rounded-b-lg relative ${isActiveRoute(item.href)
-                  ? 'bg-background text-foreground shadow-lg bottom-tab-curved'
-                  : 'text-primary-foreground hover:bg-primary-foreground/10'
+              className={`flex items-center gap-2 px-3 py-2 text-xs whitespace-nowrap !rounded-b-lg relative ${isActiveRoute(item.href)
+                  ? 'bg-white/70 dark:bg-black/40 text-foreground shadow-xl backdrop-blur-md bottom-tab-curved border border-[hsl(var(--border))]'
+                  : 'text-primary-foreground hover:bg-white/10 backdrop-blur-sm'
                 }`}
               style={isActiveRoute(item.href) ? {
                 fontSize: '1rem',
