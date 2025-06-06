@@ -11,6 +11,7 @@
 @layer base {
   :root {
     --background: 210 40% 98%;
+    --background-hue: 210;
     --foreground: 210 40% 15%;
 
     --card: 0 0% 100%;
@@ -85,6 +86,7 @@
   .ocean {
     /* Ocean theme: Deep blues with coral and teal accents */
     --background: 210 45% 96%;
+    --background-hue: 210;
     --foreground: 220 40% 18%;
     --primary: 210 85% 40%;
     --primary-foreground: 0 0% 100%;
@@ -104,6 +106,7 @@
   .sunset {
     /* Sunset theme: Warm oranges with purple and pink accents */
     --background: 30 60% 95%;
+    --background-hue: 30;
     --foreground: 25 40% 18%;
     --primary: 20 85% 55%;
     --primary-foreground: 0 0% 100%;
@@ -123,6 +126,7 @@
   .forest {
     /* Forest theme: Rich greens with earth browns and golden accents */
     --background: 125 30% 94%;
+    --background-hue: 125;
     --foreground: 125 35% 16%;
     --primary: 140 60% 35%;
     --primary-foreground: 0 0% 100%;
@@ -142,6 +146,7 @@
   .lavender {
     /* Lavender theme: Soft purples with mint green and rose accents */
     --background: 285 40% 95%;
+    --background-hue: 285;
     --foreground: 270 25% 18%;
     --primary: 275 65% 50%;
     --primary-foreground: 0 0% 100%;
@@ -161,6 +166,7 @@
   .monochrome {
     /* Monochrome theme: Rich blacks and whites with blue accent */
     --background: 0 0% 97%;
+    --background-hue: 0;
     --foreground: 0 0% 8%;
     --primary: 0 0% 15%;
     --primary-foreground: 0 0% 100%;
@@ -180,6 +186,7 @@
   .aurora {
     /* Aurora theme: Vibrant teal, magenta, and blue-green gradients */
     --background: 168 80% 96%;
+    --background-hue: 168;
     --foreground: 282 40% 18%;
     --primary: 168 90% 45%;
     --primary-foreground: 0 0% 100%;
@@ -199,6 +206,7 @@
   .citrus {
     /* Citrus theme: Bright yellow, lime, and orange */
     --background: 60 90% 97%;
+    --background-hue: 60;
     --foreground: 40 60% 18%;
     --primary: 90 95% 50%;
     --primary-foreground: 0 0% 100%;
@@ -218,6 +226,7 @@
   .flamingo {
     /* Flamingo theme: Hot pink, coral, and purple */
     --background: 330 80% 97%;
+    --background-hue: 330;
     --foreground: 330 40% 18%;
     --primary: 340 90% 60%;
     --primary-foreground: 0 0% 100%;
@@ -237,6 +246,7 @@
   .galaxy {
     /* Galaxy theme: Deep indigo, violet, and neon blue */
     --background: 248 60% 10%;
+    --background-hue: 248;
     --foreground: 220 40% 95%;
     --primary: 265 90% 60%;
     --primary-foreground: 0 0% 100%;

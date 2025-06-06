@@ -29,30 +29,38 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
       <style>{`
             .tab-curved {
                 position: relative;
+                /* Gradient border using border-image for active tab */
+                border-top: 3px solid;
+                border-image: linear-gradient(90deg, hsl(var(--primary) / 0.85) 0%, hsl(var(--background-hue) 60% 80% / 0.85) 100%) 1;
+                /* Optionally, add a subtle box-shadow for elevation */
+                box-shadow: 0 4px 24px 0 hsl(var(--background-hue) 30% 40% / 0.10), 0 1.5px 0 0 hsl(var(--background-hue) 30% 80% / 0.25);
             }
             .tab-curved::before,
             .tab-curved::after {
                 content: '';
                 position: absolute;
-                bottom: -7px;
+                bottom: -6px;
                 width: 25px;
-                height: 21px;
-                /* Gradient background for corners */
-                background: bg-background linear-gradient(to bottom, hsl(var(--background)/1), hsl(var(--primary)/1));
+                height: 25px;
+                z-index: 1;
+                /* Gradient border for the curved ends */
+                border-top: 3px solid;
+                border-image: linear-gradient(90deg, hsl(var(--primary) / 0.85) 0%, hsl(var(--background-hue) 60% 80% / 0.85) 100%) 1;
+                background: none;
             }
             .tab-curved::before {
                 left: -15px;
                 border-bottom-right-radius: 25px;
-                border: 10px solid hsl(var(--background));
-                border-top: none;
                 border-left: none;
+                border-right: none;
+                border-bottom: none;
             }
             .tab-curved::after {
                 right: -15px;
                 border-bottom-left-radius: 25px;
-                border: 10px solid hsl(var(--background));
-                border-top: none;
+                border-left: none;
                 border-right: none;
+                border-bottom: none;
             }
           `}</style>
 
@@ -62,8 +70,8 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
             <div
               key={item.name}
               className={`flex items-center gap-2 px-3 py-2 text-xs  whitespace-nowrap !rounded-t-lg relative ${isActiveRoute(item.href) ?
-                'bg-background bg-gradient-to-b from-primary/25 to-background/100 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 text-foreground tab-curved' :
-                'text-primary-foreground hover:bg-primary-foreground/10'
+                'bg-background bg-gradient-to-b from-primary/40 to-background/100 border-0 text-foreground ' :
+                'text-primary-foreground hover:bg-primary-foreground/30'
                 }`}
               style={isActiveRoute(item.href) ? {
                 fontSize: '.93rem',

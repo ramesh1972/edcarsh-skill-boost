@@ -23,7 +23,7 @@ const CourseCalendarSection = ({
   return (
     <section 
       ref={calendarAnimation.ref}
-      className={`py-20 bg-primary/15 transition-all duration-700 ${
+      className={`py-20 bg-primary/20  transition-all duration-700 ${
         calendarAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
       }`}
     >

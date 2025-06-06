@@ -10,15 +10,10 @@ const HeroSection = () => {
   return (
     <section 
       ref={heroAnimation.ref}
-      className={`relative overflow-hidden bg-gradient-to-br from-primary/5 to-blue-600/5 py-20 sm:py-32 rounded-t-[20px] transition-all duration-1000 ${
+      className={`relative overflow-hidden bg-gradient-to-br from-primary/100 to-blue-600/30 py-20 sm:py-32 rounded-t-[40px] transition-all duration-1000 ${
         heroAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
       }`}
-      style={{
-        backgroundImage: `radial-gradient(circle at center, rgba(0,0,0,0.8) 20%, rgba(0,0,0,0.4) 50%, rgba(155,155,155,0.2) 70%), url('/lovable-uploads/4046cf4d-c9d6-454a-9102-15024ca94163.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+     
     >
       <div className="container px-4 mx-auto">
         <div className="text-center">
@@ -43,11 +38,10 @@ const HeroSection = () => {
           </h1>
           <p 
             style={{
-              color: 'orange',
               fontSize: '30px',
               marginTop: '30px',
             }} 
-            className={`mb-8 max-w-3xl mx-auto text-3xl font-semibold text-yellow-200 mt-[20px] transition-all duration-700 delay-500 ${
+            className={`mb-8 max-w-3xl mx-auto text-4xl font-semibold text-destructive-foreground text-secondary-foreground drop-shadow-lg mt-[20px] transition-all duration-700 delay-500 ${
               heroAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
             }`}
           >

@@ -11,7 +11,7 @@ const USPsSection = () => {
   return (
     <section 
       ref={uspsAnimation.ref}
-      className={`py-20 w-full max-w-[1800px] mx-auto bg-gradient-to-r from-[#475569] via-primary/10 to-[#334155] rounded-[20px] transition-all duration-700 ${
+      className={`py-20 w-full mx-auto bg-gradient-to-r from-[#475569] via-primary/10 to-[#334155] transition-all duration-700 ${
         uspsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
       }`}
     >

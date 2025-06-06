@@ -7,7 +7,7 @@ const StatsSection = () => {
   return (
     <section
       ref={statsAnimation.ref}
-      className={`py-20 w-full max-w-[1800px] mx-auto bg-gradient-to-r from-[#1e293b] via-primary/40 to-[#0f172a] rounded-[20px] shadow-xl transition-all duration-700 ${
+      className={`py-20 w-full max-w-[1800px] mx-auto bg-gradient-to-r from-[#1e293b] via-primary/40 to-[#0f172a]  shadow-xl transition-all duration-700 ${
         statsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
       }`}
     >

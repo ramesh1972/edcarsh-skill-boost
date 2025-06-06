@@ -8,7 +8,7 @@ const FooterSection = () => {
   return (
     <footer 
       ref={footerAnimation.ref}
-      className={`py-12 bg-background border-t transition-all duration-700 ${
+      className={`py-12 bg-background border-t rounded-b-[40px] transition-all duration-700 ${
         footerAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
       }`}
     >

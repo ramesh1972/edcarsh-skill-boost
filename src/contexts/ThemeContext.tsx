@@ -408,6 +408,41 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.style.setProperty('--selection-bg', '210 100% 45% / 0.2');
     root.style.setProperty('--selection-foreground', '210 40% 15%');
 
+    // Set --background-hue to match the hue of --background for each theme
+    // This must be kept in sync with the values in index.css
+    switch (colorTheme) {
+      case 'ocean':
+        root.style.setProperty('--background-hue', '210');
+        break;
+      case 'sunset':
+        root.style.setProperty('--background-hue', '30');
+        break;
+      case 'forest':
+        root.style.setProperty('--background-hue', '125');
+        break;
+      case 'lavender':
+        root.style.setProperty('--background-hue', '285');
+        break;
+      case 'monochrome':
+        root.style.setProperty('--background-hue', '0');
+        break;
+      case 'aurora':
+        root.style.setProperty('--background-hue', '168');
+        break;
+      case 'citrus':
+        root.style.setProperty('--background-hue', '60');
+        break;
+      case 'flamingo':
+        root.style.setProperty('--background-hue', '330');
+        break;
+      case 'galaxy':
+        root.style.setProperty('--background-hue', '248');
+        break;
+      default:
+        root.style.setProperty('--background-hue', '210');
+        break;
+    }
+
     switch (colorTheme) {
       case 'ocean':
         // Ocean theme: Deep blues with coral and teal accents
@@ -426,6 +461,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--border', '180 25% 82%');
         root.style.setProperty('--input', '210 25% 90%');
         root.style.setProperty('--ring', '14 80% 65%');
+        root.style.setProperty('--background-hue', '210');
         break;
       case 'sunset':
         // Sunset theme: Warm oranges with purple and pink accents
@@ -444,6 +480,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--border', '45 40% 80%');
         root.style.setProperty('--input', '35 40% 88%');
         root.style.setProperty('--ring', '290 70% 65%');
+        root.style.setProperty('--background-hue', '30');
         break;
       case 'forest':
         // Forest theme: Rich greens with earth browns and golden accents
@@ -462,6 +499,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--border', '115 18% 80%');
         root.style.setProperty('--input', '120 18% 87%');
         root.style.setProperty('--ring', '45 75% 55%');
+        root.style.setProperty('--background-hue', '125');
         break;
       case 'lavender':
         // Lavender theme: Soft purples with mint green and rose accents
@@ -480,6 +518,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--border', '295 20% 82%');
         root.style.setProperty('--input', '285 20% 88%');
         root.style.setProperty('--ring', '160 45% 65%');
+        root.style.setProperty('--background-hue', '285');
         break;
       case 'monochrome':
         // Monochrome theme: Rich blacks and whites with blue accent
@@ -498,6 +537,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--border', '0 0% 80%');
         root.style.setProperty('--input', '0 0% 88%');
         root.style.setProperty('--ring', '210 100% 50%');
+        root.style.setProperty('--background-hue', '0');
         break;
       case 'aurora':
         root.style.setProperty('--background', '168 80% 96%');
@@ -515,6 +555,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--border', '168 30% 80%');
         root.style.setProperty('--input', '168 30% 90%');
         root.style.setProperty('--ring', '312 80% 65%');
+        root.style.setProperty('--background-hue', '168');
         break;
       case 'citrus':
         root.style.setProperty('--background', '60 90% 97%');
@@ -532,6 +573,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--border', '90 30% 80%');
         root.style.setProperty('--input', '60 30% 90%');
         root.style.setProperty('--ring', '30 95% 60%');
+        root.style.setProperty('--background-hue', '60');
         break;
       case 'flamingo':
         root.style.setProperty('--background', '330 80% 97%');
@@ -549,6 +591,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--border', '340 30% 80%');
         root.style.setProperty('--input', '340 30% 90%');
         root.style.setProperty('--ring', '270 80% 65%');
+        root.style.setProperty('--background-hue', '330');
         break;
       case 'galaxy':
         root.style.setProperty('--background', '248 60% 10%');
@@ -566,6 +609,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         root.style.setProperty('--border', '265 30% 40%');
         root.style.setProperty('--input', '248 30% 20%');
         root.style.setProperty('--ring', '200 100% 60%');
+        root.style.setProperty('--background-hue', '248');
         break;
     }
   };

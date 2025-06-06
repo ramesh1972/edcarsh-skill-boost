@@ -10,7 +10,7 @@ const TestimonialsSection = () => {
   return (
     <section 
       ref={testimonialsAnimation.ref}
-      className={`py-20 bg-muted/50 round-[10px] border-[10px] border-primary transition-all duration-700 ${
+      className={`py-20 bg-muted/50 round-[px] border-[2px] border-primary transition-all duration-700 ${
         testimonialsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
       }`}
       style={{

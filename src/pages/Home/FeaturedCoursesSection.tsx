@@ -19,7 +19,7 @@ const FeaturedCoursesSection = ({ courses }: FeaturedCoursesSectionProps) => {
   return (
     <section 
       ref={coursesAnimation.ref}
-      className={`py-20 round-b-[20px] border-[10px] border-primary transition-all duration-700 ${
+      className={`py-20  bg-primary/20 transition-all duration-700 ${
         coursesAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
       }`}
     >

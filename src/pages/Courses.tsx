@@ -91,7 +91,7 @@ const Courses = () => {
     setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
   };
   return (
-    <div className="min-h-full bg-background bg-gradient-to-br from-background/100 to-primary/55 dark:from-background dark:to-primary/80 duration-500">
+    <div className="min-h-full ">
       <div className={`container mx-auto px-4 py-12 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
         <div className="mb-10">
           <TitleComponent
@@ -107,7 +107,7 @@ const Courses = () => {
             <Filter className="h-4 w-4" />
             <span className="font-medium">Filters</span>
           </div>
-          
+
           <div className="flex flex-wrap gap-4 flex-1">
             <div className="min-w-[150px]">
               <Select value={industryFilter} onValueChange={handleIndustryChange}>
@@ -116,8 +116,8 @@ const Courses = () => {
                 </SelectTrigger>
                 <SelectContent>
                   {industries.map(industry => <SelectItem key={industry} value={industry}>
-                      {industry === 'all' ? 'All Industries' : industry}
-                    </SelectItem>)}
+                    {industry === 'all' ? 'All Industries' : industry}
+                  </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -129,8 +129,8 @@ const Courses = () => {
                 </SelectTrigger>
                 <SelectContent>
                   {availableSubjects.map(subject => <SelectItem key={subject} value={subject}>
-                      {subject === 'all' ? 'All Subjects' : subject}
-                    </SelectItem>)}
+                    {subject === 'all' ? 'All Subjects' : subject}
+                  </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -142,8 +142,8 @@ const Courses = () => {
                 </SelectTrigger>
                 <SelectContent>
                   {levels.map(level => <SelectItem key={level} value={level}>
-                      {level === 'all' ? 'All Levels' : level}
-                    </SelectItem>)}
+                    {level === 'all' ? 'All Levels' : level}
+                  </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -154,23 +154,23 @@ const Courses = () => {
             </div>
 
             {viewMode !== 'calendar' && viewMode !== 'map' && <div className="flex items-center gap-2">
-                <div className="min-w-[150px]">
-                  <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Sort by" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="title">Title</SelectItem>
-                      <SelectItem value="price">Price</SelectItem>
-                      <SelectItem value="students">Students</SelectItem>
-                      <SelectItem value="duration">Duration</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <Button variant="outline" size="icon" onClick={toggleSortDirection} className="h-10 w-10" title={`Sort ${sortDirection === 'asc' ? 'ascending' : 'descending'}`}>
-                  {sortDirection === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
-                </Button>
-              </div>}
+              <div className="min-w-[150px]">
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="title">Title</SelectItem>
+                    <SelectItem value="price">Price</SelectItem>
+                    <SelectItem value="students">Students</SelectItem>
+                    <SelectItem value="duration">Duration</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button variant="outline" size="icon" onClick={toggleSortDirection} className="h-10 w-10" title={`Sort ${sortDirection === 'asc' ? 'ascending' : 'descending'}`}>
+                {sortDirection === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
+              </Button>
+            </div>}
           </div>
 
           {/* View Mode Toggle - aligned to the right */}
@@ -204,13 +204,13 @@ const Courses = () => {
 
         {/* Card View */}
         {viewMode === 'card' && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredAndSortedCourses.map(course => <CourseCard key={course.id} course={course} cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" />)}
-          </div>}
+          {filteredAndSortedCourses.map(course => <CourseCard key={course.id} course={course} cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" />)}
+        </div>}
 
         {/* List View */}
         {viewMode === 'list' && <div className="space-y-6">
-            {filteredAndSortedCourses.map(course => <LongCourseCard key={course.id} course={course} cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" />)}
-          </div>}
+          {filteredAndSortedCourses.map(course => <LongCourseCard key={course.id} course={course} cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" />)}
+        </div>}
 
         {/* Calendar View */}
         {viewMode === 'calendar' && <CoursesCalendarView courses={courses} industryFilter={industryFilter} subjectFilter={subjectFilter} levelFilter={levelFilter} calendarViewMode={calendarViewMode} setCalendarViewMode={setCalendarViewMode} currentDate={currentDate} setCurrentDate={setCurrentDate} />}

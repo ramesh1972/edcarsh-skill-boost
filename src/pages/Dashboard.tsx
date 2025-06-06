@@ -6,7 +6,7 @@ import { BookOpen, Clock, TrendingUp, Calendar } from 'lucide-react';
 
 const Dashboard = () => {
   return (
-    <div className="min-h-full bg-background bg-gradient-to-br from-background/100 to-primary/55 dark:from-background dark:to-primary/80 duration-100">
+    <div className="min-h-full">
       <div className="container mx-auto px-4 py-12">
         <div className="mb-10">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight text-foreground drop-shadow-lg">My Dashboard</h1>

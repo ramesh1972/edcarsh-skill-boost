@@ -7,7 +7,7 @@ import TitleComponent from '@/components/TitleComponent';
 const FAQ = () => {
 
   return (
-    <div className="min-h-full bg-background bg-gradient-to-br from-background/100 to-primary/55 dark:from-background dark:to-primary/80 duration-500">
+    <div className="min-h-full ">
       <div className="container mx-auto px-4 py-12 space-y-8">
         <TitleComponent
           title="Frequently Asked Questions"

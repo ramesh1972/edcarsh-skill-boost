@@ -51,7 +51,7 @@ const AppContent = () => {
         
         {/* Inner div - with wavy bezier curve on bottom left */}
         <div 
-          className="relative overflow-auto !rounded-tl-[48px] !rounded-bl-[20px] border border-[hsl(var(--border))] shadow-xl bg-white/70 dark:bg-black/40 backdrop-blur-md transition-all duration-300"
+          className="relative overflow-auto !rounded-tl-[48px] !rounded-bl-[20px] bg-background bg-gradient-to-br from-background to-primary/20 dark:from-background dark:to-primary/80 transition-all duration-500"
           style={{ 
             left: '20px',
             right: '20px',
