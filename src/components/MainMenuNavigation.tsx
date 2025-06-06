@@ -38,7 +38,7 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
                 width: 25px;
                 height: 21px;
                 /* Gradient background for corners */
-                background: bg-background linear-gradient(to top, hsl(var(--background)/100), hsl(var(--primary)/10));
+                background: bg-background linear-gradient(to bottom, hsl(var(--background)/1), hsl(var(--primary)/1));
             }
             .tab-curved::before {
                 left: -15px;
