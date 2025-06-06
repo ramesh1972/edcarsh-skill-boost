@@ -72,7 +72,11 @@ const ToolsNavigation: React.FC = () => {
           top: -7px;
           width: 25px;
           height: 21px;
-          background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary))/0.8 100%);
+          background: rgba(255, 255, 255, 0.7);
+        }
+        .dark .bottom-tab-curved::before,
+        .dark .bottom-tab-curved::after {
+          background: rgba(0, 0, 0, 0.4);
         }
         .bottom-tab-curved::before {
           left: -15px;
