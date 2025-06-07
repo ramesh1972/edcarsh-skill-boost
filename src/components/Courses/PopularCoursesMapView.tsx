@@ -267,6 +267,30 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           viewBox={`${-1000 * zoomLevel} ${-800 * zoomLevel} ${2000 * zoomLevel} ${1600 * zoomLevel}`} 
           className="absolute inset-0"
         >
+          {/* Radial lines from center */}
+          <g className="opacity-30">
+            {Array.from({ length: 16 }, (_, i) => {
+              const angle = (i * 22.5) * (Math.PI / 180); // 16 lines at 22.5° intervals
+              const length = 1200; // Line length
+              const x2 = Math.cos(angle) * length;
+              const y2 = Math.sin(angle) * length;
+              
+              return (
+                <line
+                  key={i}
+                  x1="0"
+                  y1="0"
+                  x2={x2}
+                  y2={y2}
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeDasharray="8,4"
+                  className="text-muted-foreground"
+                />
+              );
+            })}
+          </g>
+
           {/* Range circles */}
           {processedData.ranges.map((range, index) => (
             <circle
