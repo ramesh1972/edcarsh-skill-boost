@@ -3,7 +3,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 import { Info } from 'lucide-react';
+import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/masterData';
 
 interface Instructor {
   id?: number;
@@ -15,6 +17,8 @@ interface Instructor {
   country: string;
   flag: string;
   description: string;
+  industries?: number[];
+  subjects?: { industryId: number; subjectIds: number[] }[];
 }
 
 interface InstructorCardProps {
@@ -25,6 +29,7 @@ interface InstructorCardProps {
   hideAboutButton?: boolean;
   hideLocation?: boolean;
   hideExperience?: boolean;
+  hideSubjects?: boolean;
   size?: 'sm' | 'md' | 'lg';
   layout?: 'horizontal' | 'vertical';
   showTitle?: boolean;
@@ -41,6 +46,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
   hideAboutButton = false,
   hideLocation = false,
   hideExperience = false,
+  hideSubjects = false,
   size = 'md',
   layout = 'horizontal',
   showTitle = true,
@@ -62,7 +68,8 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
       button: 'h-5 px-1 text-xs',
       icon: 'h-2 w-2',
       spacing: 'gap-2 mb-2',
-      padding: 'p-2'
+      padding: 'p-2',
+      badge: 'text-xs px-1 py-0.5'
     },
     md: {
       avatar: 'h-12 w-12',
@@ -72,7 +79,8 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
       button: 'h-6 px-2 text-xs',
       icon: 'h-3 w-3',
       spacing: 'gap-3 mb-3',
-      padding: 'p-'
+      padding: 'p-',
+      badge: 'text-xs px-2 py-1'
     },
     lg: {
       avatar: 'h-16 w-16',
@@ -82,7 +90,8 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
       button: 'h-8 px-3 text-sm',
       icon: 'h-4 w-4',
       spacing: 'gap-4 mb-4',
-      padding: 'p-1'
+      padding: 'p-1',
+      badge: 'text-sm px-3 py-1'
     }
   };
 
@@ -125,6 +134,46 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
     );
   };
 
+  const renderSubjects = () => {
+    if (hideSubjects || !instructor.subjects || instructor.subjects.length === 0) {
+      return null;
+    }
+
+    const allSubjects: { name: string; color: string }[] = [];
+    
+    instructor.subjects.forEach(industrySubjects => {
+      industrySubjects.subjectIds.forEach(subjectId => {
+        const subjectName = getSubjectNameById(industrySubjects.industryId, subjectId);
+        const subject = getSubjectById(industrySubjects.industryId, subjectId);
+        if (subjectName !== 'Unknown Subject') {
+          allSubjects.push({
+            name: subjectName,
+            color: subject?.color || '#6b7280'
+          });
+        }
+      });
+    });
+
+    if (allSubjects.length === 0) return null;
+
+    return (
+      <div className="mt-2">
+        <h6 className={`font-medium mb-1 ${config.details}`}>Teaches:</h6>
+        <div className="flex flex-wrap gap-1">
+          {allSubjects.map((subject, index) => (
+            <Badge 
+              key={index} 
+              customColor={subject.color}
+              className={`text-white ${config.badge}`}
+            >
+              {subject.name}
+            </Badge>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   if (layout === 'vertical') {
     return (
       <div className={`flex flex-col items-center text-center ${config.padding} ${className}`}>
@@ -139,7 +188,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
             {instructor.name.split(' ').map(n => n[0]).join('')}
           </AvatarFallback>
         </Avatar>
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 w-full">
           <div className="flex items-center justify-center gap-2 mb-1">
             <h5 className={`font-medium ${config.name}`}>{instructor.name}</h5>
             <span className={config.details}>{instructor.flag}</span>
@@ -152,7 +201,10 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
               {!hideLocation && `${instructor.city}, ${instructor.country}`}
             </p>
           )}
-          <AboutButton />
+          {renderSubjects()}
+          <div className="mt-3">
+            <AboutButton />
+          </div>
         </div>
         {!hideDescription && (
           <p className={`text-muted-foreground line-clamp-4 mt-3 ${config.details}`}>
@@ -191,6 +243,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
               {!hideLocation && `${instructor.city}, ${instructor.country}`}
             </p>
           )}
+          {renderSubjects()}
         </div>
       </div>
       {!hideDescription && (
