@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
@@ -243,7 +244,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           <ZoomControls zoomLevel={zoomLevel} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
         </div>
         
-        {/* Funky Grid Background */}
+        {/* Funky Grid Background with Radial Grid */}
         <div className="absolute inset-0">
           <svg width="100%" height="100%" className="opacity-20">
             <defs>
@@ -255,9 +256,31 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
               <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
                 <circle cx="10" cy="10" r="1.5" fill="currentColor" className="text-secondary/40"/>
               </pattern>
+              <radialGradient id="radialGrid" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="transparent"/>
+                <stop offset="20%" stopColor="currentColor" stopOpacity="0.1"/>
+                <stop offset="40%" stopColor="transparent"/>
+                <stop offset="60%" stopColor="currentColor" stopOpacity="0.1"/>
+                <stop offset="80%" stopColor="transparent"/>
+                <stop offset="100%" stopColor="currentColor" stopOpacity="0.1"/>
+              </radialGradient>
             </defs>
             <rect width="100%" height="100%" fill="url(#funkyGrid)"/>
             <rect width="100%" height="100%" fill="url(#dots)"/>
+            {/* Radial grid circles */}
+            <g className="text-primary/20">
+              <circle cx="50%" cy="50%" r="150" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4"/>
+              <circle cx="50%" cy="50%" r="300" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4"/>
+              <circle cx="50%" cy="50%" r="450" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4"/>
+              <circle cx="50%" cy="50%" r="600" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4"/>
+              <circle cx="50%" cy="50%" r="750" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="4,4"/>
+              {/* Radial lines */}
+              <line x1="50%" y1="0%" x2="50%" y2="100%" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2,2"/>
+              <line x1="0%" y1="50%" x2="100%" y2="50%" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2,2"/>
+              <line x1="14.6%" y1="14.6%" x2="85.4%" y2="85.4%" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2,2"/>
+              <line x1="85.4%" y1="14.6%" x2="14.6%" y2="85.4%" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2,2"/>
+            </g>
+            <rect width="100%" height="100%" fill="url(#radialGrid)"/>
           </svg>
         </div>
         
