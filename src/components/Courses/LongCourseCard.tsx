@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/hooks/useTheme';
-import { getSubjectColor } from '@/data/masterData';
+import { getSubjectById, getIndustryNameById, getSubjectNameById } from '@/data/masterData';
 import { useNavigate } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
@@ -40,6 +40,10 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
   if (!instructor) {
     return null; // Don't render if instructor not found
   }
+
+  const industryName = getIndustryNameById(course.industryId);
+  const subjectName = getSubjectNameById(course.industryId, course.subjectId);
+  const subject = getSubjectById(course.industryId, course.subjectId);
   
   return (
     <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : '${cardClassName}'}`}>
@@ -50,10 +54,10 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
             <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-none" />
             <div className="absolute top-2 left-2 flex flex-col gap-1">
               <Badge variant="outline" className="bg-white/90 text-black text-xs">
-                {course.industry}
+                {industryName}
               </Badge>
-              <Badge customColor={getSubjectColor(course.subject)} className="text-white text-xs">
-                {course.subject}
+              <Badge customColor={subject?.color} className="text-white text-xs">
+                {subjectName}
               </Badge>
             </div>
             <div className="absolute top-2 right-2 flex gap-1 flex-col">

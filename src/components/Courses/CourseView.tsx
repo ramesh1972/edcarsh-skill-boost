@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -5,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/hooks/useTheme';
-import { getSubjectColor } from '@/data/masterData';
+import { getSubjectById, getIndustryNameById, getSubjectNameById } from '@/data/masterData';
 import { courses } from '@/data/courses';
 import { getInstructorById } from '@/data/instructors';
 import { ArrowLeft, Wifi, WifiOff, Wrench, Calendar, Clock } from 'lucide-react';
@@ -60,6 +61,10 @@ const CourseView: React.FC = () => {
     );
   }
 
+  const industryName = getIndustryNameById(course.industryId);
+  const subjectName = getSubjectNameById(course.industryId, course.subjectId);
+  const subject = getSubjectById(course.industryId, course.subjectId);
+
   return (
     <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className="container mx-auto px-4 py-8">
@@ -86,10 +91,10 @@ const CourseView: React.FC = () => {
                 />
                 <div className="absolute top-4 left-4 flex flex-col gap-2">
                   <Badge variant="outline" className="bg-white/90 text-black">
-                    {course.industry}
+                    {industryName}
                   </Badge>
-                  <Badge customColor={getSubjectColor(course.subject)} className="text-white">
-                    {course.subject}
+                  <Badge customColor={subject?.color} className="text-white">
+                    {subjectName}
                   </Badge>
                 </div>
                 <div className="absolute top-4 right-4 flex gap-2 flex-col">

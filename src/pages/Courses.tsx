@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTheme } from '@/hooks/useTheme';
 import { courses } from '@/data/courses';
-import { getAllIndustries, getSubjectsByIndustry } from '@/data/masterData';
+import { masterData, getIndustryNameById, getSubjectNameById } from '@/data/masterData';
 import { Filter, ArrowUpDown, LayoutGrid, List, Calendar as CalendarIcon, MapPin, ArrowUp, ArrowDown } from 'lucide-react';
 import { isAfter, parseISO, isSameDay } from 'date-fns';
 import CourseCard from '@/components/Courses/CourseCard';
@@ -28,8 +28,18 @@ const Courses = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   // Get industries and subjects from master data
-  const industries = ['all', ...getAllIndustries()];
-  const availableSubjects = industryFilter === 'all' ? ['all', ...Array.from(new Set(courses.map(course => course.subject)))] : ['all', ...getSubjectsByIndustry(industryFilter).map(subject => subject.name)];
+  const industries = ['all', ...masterData.map(industry => industry.name)];
+  
+  // Get available subjects based on selected industry
+  const availableSubjects = useMemo(() => {
+    if (industryFilter === 'all') {
+      const allSubjects = masterData.flatMap(industry => industry.subjects.map(subject => subject.name));
+      return ['all', ...Array.from(new Set(allSubjects))];
+    } else {
+      const selectedIndustry = masterData.find(industry => industry.name === industryFilter);
+      return selectedIndustry ? ['all', ...selectedIndustry.subjects.map(subject => subject.name)] : ['all'];
+    }
+  }, [industryFilter]);
 
   // Reset subject filter when industry changes
   const handleIndustryChange = (value: string) => {
@@ -46,8 +56,8 @@ const Courses = () => {
     today.setHours(0, 0, 0, 0);
     return courses.filter(course => {
       const courseStartDate = parseISO(course.startDate);
-      const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
-      const subjectMatch = subjectFilter === 'all' || course.subject === subjectFilter;
+      const industryMatch = industryFilter === 'all' || getIndustryNameById(course.industryId) === industryFilter;
+      const subjectMatch = subjectFilter === 'all' || getSubjectNameById(course.industryId, course.subjectId) === subjectFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
       return industryMatch && subjectMatch && levelMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
     });
@@ -56,8 +66,8 @@ const Courses = () => {
   // Filter and sort courses for card/list view
   const filteredAndSortedCourses = useMemo(() => {
     const filtered = courses.filter(course => {
-      const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
-      const subjectMatch = subjectFilter === 'all' || course.subject === subjectFilter;
+      const industryMatch = industryFilter === 'all' || getIndustryNameById(course.industryId) === industryFilter;
+      const subjectMatch = subjectFilter === 'all' || getSubjectNameById(course.industryId, course.subjectId) === subjectFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
       return industryMatch && subjectMatch && levelMatch;
     });
