@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Star, Users, BookOpen, Award, MapPin, Mail, Phone, Globe, Calendar, Clock, GraduationCap } from 'lucide-react';
-import LongCourseCard from '@/components/Courses/LongCourseCard';
+import ShortCourseCard from '@/components/Courses/ShortCourseCard';
 import { getInstructorCourses } from '@/data/instructors';
 
 interface Instructor {
