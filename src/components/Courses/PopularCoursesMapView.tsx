@@ -37,7 +37,53 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     }
     if (currentLine) lines.push(currentLine);
     
-    return lines.slice(0, 2); // Max 2 lines
+    return lines.slice(0, 3); // Max 3 lines for better wrapping
+  };
+
+  // Function to create dynamic ranges based on data distribution
+  const createDynamicRanges = (studentCounts: number[]) => {
+    if (studentCounts.length === 0) return [];
+    
+    const sortedCounts = [...studentCounts].sort((a, b) => b - a);
+    const max = sortedCounts[0];
+    const min = sortedCounts[sortedCounts.length - 1];
+    
+    if (max === min) {
+      return [{ min, max, label: `${min}`, radius: 400 }];
+    }
+    
+    // Determine number of ranges based on data spread
+    const dataRange = max - min;
+    const uniqueValues = new Set(sortedCounts).size;
+    const rangeCount = Math.min(Math.max(5, Math.min(uniqueValues, 7)), 7);
+    
+    const ranges = [];
+    const step = dataRange / rangeCount;
+    const baseRadius = 200;
+    const radiusIncrement = 120;
+    
+    for (let i = 0; i < rangeCount; i++) {
+      const rangeMin = i === rangeCount - 1 ? min : Math.ceil(max - (step * (i + 1)));
+      const rangeMax = i === 0 ? max : Math.ceil(max - (step * i));
+      
+      let label;
+      if (i === 0) {
+        label = `${rangeMin}+`;
+      } else if (rangeMin === rangeMax) {
+        label = `${rangeMin}`;
+      } else {
+        label = `${rangeMin}-${rangeMax}`;
+      }
+      
+      ranges.push({
+        min: rangeMin,
+        max: rangeMax,
+        label,
+        radius: baseRadius + (i * radiusIncrement)
+      });
+    }
+    
+    return ranges;
   };
 
   const processedData = useMemo(() => {
@@ -105,26 +151,31 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       }));
     }
 
-    // Create ranges based on student counts
-    const studentCounts = items.map(item => item.students).sort((a, b) => b - a);
-    const max = studentCounts[0] || 0;
-    const min = studentCounts[studentCounts.length - 1] || 0;
-    
-    const ranges = [
-      { min: Math.ceil(max * 0.75), max: max, label: 'High', radius: 220 },
-      { min: Math.ceil(max * 0.5), max: Math.ceil(max * 0.75) - 1, label: 'Medium-High', radius: 340 },
-      { min: Math.ceil(max * 0.25), max: Math.ceil(max * 0.5) - 1, label: 'Medium', radius: 460 },
-      { min: min, max: Math.ceil(max * 0.25) - 1, label: 'Low', radius: 580 }
-    ];
+    // Create dynamic ranges based on student counts
+    const studentCounts = items.map(item => item.students);
+    const ranges = createDynamicRanges(studentCounts);
 
     // Assign items to ranges and calculate positions
     const itemsWithPositions = items.map((item, index) => {
-      const range = ranges.find(r => item.students >= r.min && item.students <= r.max) || ranges[ranges.length - 1];
+      const range = ranges.find(r => {
+        if (ranges.indexOf(r) === 0) {
+          return item.students >= r.min;
+        } else {
+          return item.students >= r.min && item.students <= r.max;
+        }
+      }) || ranges[ranges.length - 1];
+      
       const rangeIndex = ranges.indexOf(range);
       
       // Items in the same range
       const itemsInRange = items.filter(i => {
-        const r = ranges.find(rng => i.students >= rng.min && i.students <= rng.max) || ranges[ranges.length - 1];
+        const r = ranges.find(rng => {
+          if (ranges.indexOf(rng) === 0) {
+            return i.students >= rng.min;
+          } else {
+            return i.students >= rng.min && i.students <= rng.max;
+          }
+        }) || ranges[ranges.length - 1];
         return r === range;
       });
       
@@ -135,13 +186,20 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       const x = Math.cos(angle) * range.radius;
       const y = Math.sin(angle) * range.radius;
       
+      // Calculate circle radius based on relative student count within range
+      const maxInRange = Math.max(...itemsInRange.map(i => i.students));
+      const minInRange = Math.min(...itemsInRange.map(i => i.students));
+      const relativeSize = maxInRange === minInRange ? 1 : (item.students - minInRange) / (maxInRange - minInRange);
+      const circleRadius = 40 + (relativeSize * 30); // 40-70 range
+      
       return {
         ...item,
         x,
         y,
         range: range.label,
         color: COLORS[rangeIndex % COLORS.length],
-        radius: range.radius
+        radius: range.radius,
+        circleRadius
       };
     });
 
@@ -156,8 +214,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     <div className="w-full space-y-6">
       <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
       
-      <div className="relative w-full h-[1200px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
-        <svg width="100%" height="100%" viewBox="-700 -600 1400 1200" className="absolute inset-0">
+      <div className="relative w-full h-[1400px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
+        <svg width="100%" height="100%" viewBox="-800 -700 1600 1400" className="absolute inset-0">
           {/* Range circles */}
           {processedData.ranges.map((range, index) => (
             <circle
@@ -174,15 +232,14 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           
           {/* Data items */}
           {processedData.items.map((item, index) => {
-            const wrappedLines = wrapText(item.name, 12);
-            const circleRadius = Math.max(45, Math.min(70, item.students / 2));
+            const wrappedLines = wrapText(item.name, 10);
             
             return (
               <g key={index}>
                 <circle
                   cx={item.x}
                   cy={item.y}
-                  r={circleRadius}
+                  r={item.circleRadius}
                   fill={item.color}
                   stroke="white"
                   strokeWidth="3"
@@ -197,10 +254,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                   <text
                     key={lineIndex}
                     x={item.x}
-                    y={item.y - 12 + (lineIndex * 12)}
+                    y={item.y - 15 + (lineIndex * 10)}
                     textAnchor="middle"
                     className="font-bold fill-white pointer-events-none"
-                    style={{ fontSize: '10px' }}
+                    style={{ fontSize: '8px' }}
                   >
                     {line}
                   </text>
@@ -209,10 +266,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 {/* Student count */}
                 <text
                   x={item.x}
-                  y={item.y + (wrappedLines.length > 1 ? 8 : 16)}
+                  y={item.y + (wrappedLines.length > 1 ? 5 : 12)}
                   textAnchor="middle"
                   className="font-semibold fill-white pointer-events-none"
-                  style={{ fontSize: '10px' }}
+                  style={{ fontSize: '9px' }}
                 >
                   {item.students.toLocaleString()}
                 </text>
@@ -228,7 +285,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
               {viewMode === 'courses' ? 'Courses' : viewMode}
             </div>
             <div className="text-lg text-muted-foreground">
-              {processedData.items.length} items
+              {processedData.items.length} items • {processedData.ranges.length} ranges
             </div>
           </div>
         </div>
@@ -256,14 +313,14 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
               style={{ backgroundColor: COLORS[index % COLORS.length] }}
             />
             <span className="text-base text-muted-foreground">
-              {range.label} ({range.min}-{range.max === processedData.ranges[0].max ? `${range.max}+` : range.max})
+              {range.label} students
             </span>
           </div>
         ))}
       </div>
 
       <div className="text-base text-muted-foreground text-center">
-        {processedData.items.length} {viewMode === 'courses' ? 'courses' : viewMode === 'industry' ? 'industries' : viewMode === 'subject' ? 'subjects' : 'topics'} displayed in concentric circles
+        {processedData.items.length} {viewMode === 'courses' ? 'courses' : viewMode === 'industry' ? 'industries' : viewMode === 'subject' ? 'subjects' : 'topics'} displayed in {processedData.ranges.length} concentric ranges
       </div>
     </div>
   );
