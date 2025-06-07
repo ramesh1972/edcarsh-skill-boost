@@ -7,20 +7,6 @@ import { Info } from 'lucide-react';
 import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/masterData';
 import { Instructor } from '@/types/instructor.types';
 
-interface Instructor {
-  id?: number;
-  name: string;
-  image: string;
-  experience: string;
-  specialty: string;
-  city: string;
-  country: string;
-  flag: string;
-  description: string;
-  industries?: number[];
-  subjects?: { industryId: number; subjectIds: number[] }[];
-}
-
 interface InstructorCardProps {
   instructor: Instructor | null | undefined;
   referrerRoute?: string;
