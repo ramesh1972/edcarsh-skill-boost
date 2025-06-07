@@ -69,7 +69,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
             {course.title}
           </CardTitle>
         </div>
-        <CardDescription className="text-xs line-clamp-1 flex-1 flex items-start max-h-4 overflow-hidden">{course.description}</CardDescription>
+        <CardDescription className="text-xs line-clamp-2 flex-1 flex items-start max-h-4 overflow-hidden">{course.description}</CardDescription>
       </CardHeader>
 
       <CardContent className="flex-1 flex flex-col gap-1">
@@ -91,7 +91,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
 
         {/* Action Buttons aligned to bottom */}
-        <div className="mt-auto p-0">
+        <div className="mt-6 p-0">
           <ActionButtons 
             courseId={course.id} 
             nextSession={course.nextSession}
