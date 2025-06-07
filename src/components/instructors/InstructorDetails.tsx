@@ -1,7 +1,5 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Star, Users, BookOpen, Award, MapPin } from 'lucide-react';
@@ -99,15 +97,6 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
               {instructor.description}
             </p>
           </div>
-
-          {/* Action Buttons */}
-          {onClose && (
-            <div className="flex justify-center pt-6">
-              <Button variant="outline" size="lg" onClick={onClose}>
-                Close
-              </Button>
-            </div>
-          )}
         </CardContent>
       </Card>
 
@@ -118,19 +107,7 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
           {instructorCourses.map((course) => (
             <LongCourseCard 
               key={course.id} 
-              course={{
-                ...course,
-                instructor: {
-                  name: instructor.name,
-                  image: instructor.image,
-                  experience: instructor.experience,
-                  specialty: instructor.specialty,
-                  city: instructor.city,
-                  country: instructor.country,
-                  flag: instructor.flag,
-                  description: instructor.description
-                }
-              }}
+              course={course}
               referrerRoute={`/instructors/${instructor.id}`}
               referrerName={instructor.name}
             />

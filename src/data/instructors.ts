@@ -1,19 +1,6 @@
 
-export interface Instructor {
-  id: number;
-  name: string;
-  image: string;
-  experience: string;
-  specialty: string;
-  city: string;
-  country: string;
-  flag: string;
-  description: string;
-  rating: number;
-  students: number;
-  courses: number;
-  expertise: string;
-}
+import { Instructor } from '@/types';
+import { getCoursesByInstructorId } from './courses';
 
 export const instructors: Instructor[] = [
   {
@@ -68,83 +55,5 @@ export const getInstructorById = (id: number): Instructor | undefined => {
 };
 
 export const getInstructorCourses = (instructorId: number) => {
-  // Mock courses data associated with instructors
-  const coursesByInstructor: Record<number, any[]> = {
-    1: [ // Sarah Chen
-      {
-        id: 1,
-        title: "React Fundamentals Crash Course",
-        longDescription: "Master the fundamentals of React including components, state management, hooks, and modern development practices. This comprehensive course covers everything you need to know to build professional React applications from scratch.",
-        duration: "2 hours",
-        price: "$99",
-        students: 45,
-        nextSession: "2024-12-15 14:00",
-        image: "/placeholder.svg",
-        longTopics: ["JSX Syntax", "Component Architecture", "State & Props", "Event Handling", "Hooks (useState, useEffect)", "Context API", "Router Integration", "Performance Optimization"],
-        level: "Beginner",
-        subject: "Web Development",
-        industry: "Technology",
-        mode: "live" as const,
-        tools: true,
-        instructorId: 1
-      },
-      {
-        id: 2,
-        title: "Advanced TypeScript Patterns",
-        longDescription: "Dive deep into advanced TypeScript concepts and design patterns. Learn how to leverage TypeScript's powerful type system to build robust, maintainable applications with confidence.",
-        duration: "3 hours",
-        price: "$149",
-        students: 32,
-        nextSession: "2024-12-18 16:00",
-        image: "/placeholder.svg",
-        longTopics: ["Generic Types", "Conditional Types", "Mapped Types", "Template Literals", "Decorators", "Advanced Interfaces", "Type Guards", "Utility Types"],
-        level: "Advanced",
-        subject: "Programming",
-        industry: "Technology",
-        mode: "live" as const,
-        tools: true,
-        instructorId: 1
-      }
-    ],
-    2: [ // Dr. Marcus Johnson
-      {
-        id: 3,
-        title: "Python Data Science Fundamentals",
-        longDescription: "Learn the fundamentals of data science using Python. This course covers pandas, numpy, matplotlib, and scikit-learn to help you analyze and visualize data effectively.",
-        duration: "4 hours",
-        price: "$199",
-        students: 67,
-        nextSession: "2024-12-16 10:00",
-        image: "/placeholder.svg",
-        longTopics: ["Python Basics", "Pandas DataFrames", "NumPy Arrays", "Data Visualization", "Statistical Analysis", "Machine Learning Basics", "Model Evaluation", "Data Cleaning"],
-        level: "Beginner",
-        subject: "Data Science",
-        industry: "Technology",
-        mode: "live" as const,
-        tools: true,
-        instructorId: 2
-      }
-    ],
-    3: [ // Lisa Rodriguez
-      {
-        id: 4,
-        title: "Digital Marketing Strategy",
-        longDescription: "Comprehensive digital marketing course covering social media marketing, content strategy, SEO, and paid advertising. Learn how to create effective marketing campaigns that drive results.",
-        duration: "3.5 hours",
-        price: "$179",
-        students: 89,
-        nextSession: "2024-12-17 14:00",
-        image: "/placeholder.svg",
-        longTopics: ["Social Media Strategy", "Content Marketing", "SEO Optimization", "Google Ads", "Facebook Advertising", "Analytics & Tracking", "Email Marketing", "Conversion Optimization"],
-        level: "Intermediate",
-        subject: "Marketing",
-        industry: "Business",
-        mode: "offline" as const,
-        tools: false,
-        instructorId: 3
-      }
-    ]
-  };
-
-  return coursesByInstructor[instructorId] || [];
+  return getCoursesByInstructorId(instructorId);
 };
