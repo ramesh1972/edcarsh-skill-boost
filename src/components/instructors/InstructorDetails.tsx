@@ -175,7 +175,7 @@ const InstructorDetails: React.FC = () => {
         )}
       </div>
     </div>
-   </div
+   </div>
   );
 };
 
