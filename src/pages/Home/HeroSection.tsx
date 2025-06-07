@@ -18,7 +18,7 @@ const HeroSection = () => {
       <div className="container px-4 mx-auto">
         <div className="text-center">
           <Badge 
-            className={`mb-4 transition-all duration-700 delay-100 ${
+            className={`mb-4 h-8 transition-all duration-700 delay-100 ${
               heroAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-5'
             }`} 
             variant="secondary" 
