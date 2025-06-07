@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -7,6 +8,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getSubjectColor } from '@/data/masterData';
 import { courses } from '@/data/courses';
+import { getInstructorById } from '@/data/instructors';
 import { ArrowLeft, Calendar, Clock, Users, DollarSign, Wifi, WifiOff, Wrench, MapPin, Star } from 'lucide-react';
 import CourseInfoCard from './CourseInfoCard';
 import ActionButtons from './ActionButtons';
@@ -20,6 +22,7 @@ const CourseView: React.FC = () => {
   const [referrerName, setReferrerName] = useState('Courses');
   
   const course = courses.find(c => c.id === parseInt(id || '0'));
+  const instructor = course ? getInstructorById(course.instructorId) : null;
 
   useEffect(() => {
     // Get the referrer from location state or session storage
@@ -45,7 +48,7 @@ const CourseView: React.FC = () => {
     navigate(referrerRoute);
   };
 
-  if (!course) {
+  if (!course || !instructor) {
     return (
       <div className={`min-h-full bg-background ${getBackground()} flex items-center justify-center`}>
         <Card className="p-8 text-center">
@@ -147,25 +150,25 @@ const CourseView: React.FC = () => {
               <CardContent>
                 <div className="flex items-start gap-4">
                   <Avatar className="w-16 h-16">
-                    <AvatarImage src={course.instructor.image} alt={course.instructor.name} />
+                    <AvatarImage src={instructor.image} alt={instructor.name} />
                     <AvatarFallback className="bg-gradient-to-br from-primary to-blue-600 text-white font-bold">
-                      {course.instructor.name.split(' ').map(n => n[0]).join('')}
+                      {instructor.name.split(' ').map(n => n[0]).join('')}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold">{course.instructor.name}</h3>
-                    <p className="text-muted-foreground mb-2">{course.instructor.specialty}</p>
+                    <h3 className="text-xl font-semibold">{instructor.name}</h3>
+                    <p className="text-muted-foreground mb-2">{instructor.specialty}</p>
                     <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
                       <span className="flex items-center gap-1">
                         <MapPin className="w-3 h-3" />
-                        {course.instructor.city}, {course.instructor.country} {course.instructor.flag}
+                        {instructor.city}, {instructor.country} {instructor.flag}
                       </span>
                       <span className="flex items-center gap-1">
                         <Star className="w-3 h-3" />
-                        {course.instructor.experience}
+                        {instructor.experience}
                       </span>
                     </div>
-                    <p className="text-sm">{course.instructor.description}</p>
+                    <p className="text-sm">{instructor.description}</p>
                   </div>
                 </div>
               </CardContent>
