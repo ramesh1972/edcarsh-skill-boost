@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 import { Star, Users, BookOpen, Award } from 'lucide-react';
+import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/masterData';
 import { Instructor } from '@/types';
 
 interface InstructorMediumCardProps {
@@ -12,6 +14,51 @@ interface InstructorMediumCardProps {
 }
 
 const InstructorMediumCard: React.FC<InstructorMediumCardProps> = ({ instructor }) => {
+  const renderSubjects = () => {
+    if (!instructor.subjects || instructor.subjects.length === 0) {
+      return null;
+    }
+
+    const allSubjects: { name: string; color: string }[] = [];
+    
+    instructor.subjects.forEach(industrySubjects => {
+      industrySubjects.subjectIds.forEach(subjectId => {
+        const subjectName = getSubjectNameById(industrySubjects.industryId, subjectId);
+        const subject = getSubjectById(industrySubjects.industryId, subjectId);
+        if (subjectName !== 'Unknown Subject') {
+          allSubjects.push({
+            name: subjectName,
+            color: subject?.color || '#6b7280'
+          });
+        }
+      });
+    });
+
+    if (allSubjects.length === 0) return null;
+
+    return (
+      <div className="mt-3">
+        <h6 className="text-xs font-medium mb-2">Teaches:</h6>
+        <div className="flex flex-wrap gap-1">
+          {allSubjects.slice(0, 4).map((subject, index) => (
+            <Badge 
+              key={index} 
+              customColor={subject.color}
+              className="text-white text-xs px-2 py-1"
+            >
+              {subject.name}
+            </Badge>
+          ))}
+          {allSubjects.length > 4 && (
+            <Badge variant="secondary" className="text-xs px-2 py-1">
+              +{allSubjects.length - 4} more
+            </Badge>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Card className="hover:shadow-lg transition-shadow">
       <CardHeader className="text-center">
@@ -58,6 +105,8 @@ const InstructorMediumCard: React.FC<InstructorMediumCardProps> = ({ instructor 
             <p className="font-medium text-xs">{instructor.experience}</p>
           </div>
         </div>
+
+        {renderSubjects()}
 
         <Link to={`/instructors/${instructor.id}`}>
           <Button className="w-full mt-6" variant="outline">

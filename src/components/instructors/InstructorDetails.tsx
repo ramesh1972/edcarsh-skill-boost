@@ -6,6 +6,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Star, Users, BookOpen, Award, MapPin, Mail, Phone, Globe, Calendar, Clock, GraduationCap, ArrowLeft } from 'lucide-react';
 import ShortCourseCard from '@/components/Courses/ShortCourseCard';
 import { getInstructorById, getInstructorCourses } from '@/data/instructors';
+import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/masterData';
 import { useTheme } from '@/hooks/useTheme';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -53,6 +54,71 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor: propI
       sessionStorage.removeItem('instructorViewReferrerName');
       navigate(referrerRoute);
     }
+  };
+
+  const renderSubjects = () => {
+    if (!instructor?.subjects || instructor.subjects.length === 0) {
+      return null;
+    }
+
+    const allSubjects: { name: string; color: string }[] = [];
+    
+    instructor.subjects.forEach(industrySubjects => {
+      industrySubjects.subjectIds.forEach(subjectId => {
+        const subjectName = getSubjectNameById(industrySubjects.industryId, subjectId);
+        const subject = getSubjectById(industrySubjects.industryId, subjectId);
+        if (subjectName !== 'Unknown Subject') {
+          allSubjects.push({
+            name: subjectName,
+            color: subject?.color || '#6b7280'
+          });
+        }
+      });
+    });
+
+    if (allSubjects.length === 0) return null;
+
+    return (
+      <Card className="border-2 border-primary/20 mt-8">
+        <CardHeader>
+          <CardTitle className="text-2xl">Teaching Expertise</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div>
+              <h4 className="text-lg font-semibold mb-3">Subjects</h4>
+              <div className="flex flex-wrap gap-2">
+                {allSubjects.map((subject, index) => (
+                  <Badge 
+                    key={index} 
+                    customColor={subject.color}
+                    className="text-white text-sm px-3 py-1"
+                  >
+                    {subject.name}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+            {instructor.industries && instructor.industries.length > 0 && (
+              <div>
+                <h4 className="text-lg font-semibold mb-3">Industries</h4>
+                <div className="flex flex-wrap gap-2">
+                  {instructor.industries.map((industryId, index) => (
+                    <Badge 
+                      key={index} 
+                      variant="secondary"
+                      className="text-sm px-3 py-1"
+                    >
+                      {getIndustryNameById(industryId)}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    );
   };
 
   if (!instructor) {
@@ -146,8 +212,11 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor: propI
         </CardContent>
       </Card>
 
+      {/* Teaching Expertise Section */}
+      {renderSubjects()}
+
       {/* Courses Section Enhanced */}
-      <div className="space-y-6">
+      <div className="space-y-6 mt-8">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-3xl font-bold">Courses by {instructor.name}</h3>
