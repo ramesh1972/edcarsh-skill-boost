@@ -1,4 +1,8 @@
+
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import ShortCourseCard from '@/components/Courses/ShortCourseCard';
 import { Course } from '@/types';
