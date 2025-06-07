@@ -53,7 +53,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   const displayJoinNow = showJoinNow && shouldShowJoinNow();
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-nowrap gap-2">
       {displayJoinNow && (
         <Button 
           size="sm" 
