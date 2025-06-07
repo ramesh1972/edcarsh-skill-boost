@@ -1,26 +1,64 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Star, Users, BookOpen, Award, MapPin, Mail, Phone, Globe, Calendar, Clock, GraduationCap, ArrowLeft } from 'lucide-react';
+import { Star, Users, BookOpen, Award, MapPin, GraduationCap } from 'lucide-react';
 import ShortCourseCard from '@/components/Courses/ShortCourseCard';
-import { getInstructorById, getInstructorCourses } from '@/data/instructors';
-import { useTheme } from '@/hooks/useTheme';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+import { getInstructorCourses } from '@/data/instructors';
 import { Instructor } from '@/types';
 
-interface InstructorDetailsProps {
-  instructor: Instructor;
-  onClose?: () => void;
-}
-
-const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClose }) => {
+const InstructorDetails: React.FC = () => {
   const instructorCourses = getInstructorCourses(instructor.id || 0);
 
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { theme } = useTheme();
+  const [referrerRoute, setReferrerRoute] = useState('/instructors');
+  const [referrerName, setReferrerName] = useState('Instructors');
+
+  const id1 = parseInt(id || null);
+  const instructor = getInstructorById(id1);
+
+  const instructorCourses = getInstructorCourses(instructor.id || 0);
+
+  useEffect(() => {
+    const state = location.state as { from?: string; fromName?: string } | null;
+    const storedReferrer = sessionStorage.getItem('instructorViewReferrer');
+    const storedReferrerName = sessionStorage.getItem('instructorViewReferrerName');
+
+    if (state?.from) {
+      setReferrerRoute(state.from);
+      setReferrerName(state.fromName || 'Back');
+      sessionStorage.setItem('instructorViewReferrer', state.from);
+      sessionStorage.setItem('instructorViewReferrerName', state.fromName || 'Back');
+    } else if (storedReferrer) {
+      setReferrerRoute(storedReferrer);
+      setReferrerName(storedReferrerName || 'Back');
+    }
+  }, [location]);
+
+  const handleBackClick = () => {
+    // Clear the stored referrer
+    sessionStorage.removeItem('instructorViewReferrer');
+    sessionStorage.removeItem('instructorViewReferrerName');
+    navigate(referrerRoute);
+  };
+  
   return (
-    <div className="max-w-8xl mx-auto p-6">
+   <div className={`min-h-full bg-background`}>
+      <div className="container mx-auto px-4 py-8">
+        {/* Back button */}
+        <Button
+          variant="outline"
+          onClick={handleBackClick}
+          className="mb-6"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to {referrerName}
+        </Button>
+
       {/* Main Profile Card */}
       <Card className="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 mb-8">
         <CardHeader className="text-center pb-6">
@@ -134,6 +172,7 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
         )}
       </div>
     </div>
+   </div
   );
 };
 
