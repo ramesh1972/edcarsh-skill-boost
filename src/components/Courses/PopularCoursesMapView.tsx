@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
@@ -195,6 +196,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       const maxRadius = 120;
       const circleRadius = minRadius + (studentRatio * (maxRadius - minRadius));
       
+      // Calculate font sizes based on circle radius
+      const titleFontSize = Math.max(8, Math.min(16, (circleRadius / maxRadius) * 12 + 6));
+      const countFontSize = Math.max(10, Math.min(18, (circleRadius / maxRadius) * 14 + 8));
+      
       return {
         ...item,
         x,
@@ -202,7 +207,9 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         range: range.label,
         color: COLORS[rangeIndex % COLORS.length],
         radius: range.radius,
-        circleRadius
+        circleRadius,
+        titleFontSize,
+        countFontSize
       };
     });
 
@@ -257,10 +264,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                   <text
                     key={lineIndex}
                     x={item.x}
-                    y={item.y - 12 + (lineIndex * 10)}
+                    y={item.y - 12 + (lineIndex * (item.titleFontSize * 1.2))}
                     textAnchor="middle"
                     className="font-bold fill-white pointer-events-none"
-                    style={{ fontSize: '10px' }}
+                    style={{ fontSize: `${item.titleFontSize}px` }}
                   >
                     {line}
                   </text>
@@ -269,10 +276,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 {/* Student count - positioned clearly below title */}
                 <text
                   x={item.x}
-                  y={item.y + (wrappedLines.length * 5) + 12}
+                  y={item.y + (wrappedLines.length * (item.titleFontSize * 0.6)) + 15}
                   textAnchor="middle"
                   className="font-semibold fill-white pointer-events-none"
-                  style={{ fontSize: '12px' }}
+                  style={{ fontSize: `${item.countFontSize}px` }}
                 >
                   {item.students.toLocaleString()}
                 </text>
