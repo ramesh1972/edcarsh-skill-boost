@@ -18,7 +18,7 @@ interface Instructor {
 }
 
 interface InstructorCardProps {
-  instructor: Instructor;
+  instructor: Instructor | null | undefined;
   hideDescription?: boolean;
   hideAboutButton?: boolean;
   hideLocation?: boolean;
@@ -44,6 +44,11 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
   className = '',
   onAboutClick
 }) => {
+  // Return null if instructor is not found
+  if (!instructor) {
+    return null;
+  }
+
   const sizeConfig = {
     sm: {
       avatar: 'h-8 w-8',
