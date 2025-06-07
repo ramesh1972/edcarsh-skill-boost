@@ -1,146 +1,175 @@
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { getSubjectColor } from '@/data/masterData';
+import { getInstructorById } from '@/data/instructors';
+import { MapPin, Users, Clock, DollarSign, TrendingUp } from 'lucide-react';
 import { Course } from '@/types';
-import { ViewMode } from './MapView/types';
-import { useMapData } from './MapView/hooks/useMapData';
-import { ViewModeSelector } from './MapView/components/ViewModeSelector';
-import { MapLegend } from './MapView/components/MapLegend';
-import { ZoomControls } from './MapView/components/ZoomControls';
-import { MapItemCard } from './MapView/components/MapItemCard';
-import { MapTooltip } from './MapView/components/MapTooltip';
 
 interface PopularCoursesMapViewProps {
   courses: Course[];
 }
 
-const COLORS = [
-  '#dc2626', '#ea580c', '#d97706', '#ca8a04', '#65a30d', 
-  '#059669', '#0891b2', '#0284c7', '#3b82f6'
-];
-
 const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }) => {
-  const [viewMode, setViewMode] = useState<ViewMode>('courses');
-  const [zoomLevel, setZoomLevel] = useState(1);
+  const [selectedRegion, setSelectedRegion] = useState('all');
+  
+  // Group courses by instructor location
+  const coursesByLocation = useMemo(() => {
+    const locationMap = new Map();
+    
+    courses.forEach(course => {
+      const instructor = getInstructorById(course.instructorId);
+      if (!instructor) return;
+      
+      const locationKey = `${instructor.city}, ${instructor.country}`;
+      
+      if (!locationMap.has(locationKey)) {
+        locationMap.set(locationKey, {
+          city: instructor.city,
+          country: instructor.country,
+          flag: instructor.flag,
+          courses: [],
+          totalStudents: 0,
+          instructors: new Set()
+        });
+      }
+      
+      const location = locationMap.get(locationKey);
+      location.courses.push(course);
+      location.totalStudents += course.students;
+      location.instructors.add(instructor.name);
+    });
+    
+    return Array.from(locationMap.entries()).map(([key, value]) => ({
+      location: key,
+      ...value,
+      instructorCount: value.instructors.size
+    }));
+  }, [courses]);
 
-  const handleZoomIn = () => {
-    setZoomLevel(prev => Math.min(prev + 0.2, 3));
-  };
+  // Get unique countries for filter
+  const countries = ['all', ...Array.from(new Set(coursesByLocation.map(loc => loc.country)))];
 
-  const handleZoomOut = () => {
-    setZoomLevel(prev => Math.max(prev - 0.2, 0.3));
-  };
-
-  const mapData = useMapData(courses, viewMode, zoomLevel);
-
-  const getTitle = () => {
-    switch (viewMode) {
-      case 'courses': return 'Popular Courses Map';
-      case 'industry': return 'Industry Overview Map';
-      case 'subject': return 'Subject Distribution Map';
-      case 'topic': return 'Topic Categories Map';
-      default: return 'Courses Map';
-    }
-  };
+  const filteredLocations = selectedRegion === 'all' 
+    ? coursesByLocation 
+    : coursesByLocation.filter(loc => loc.country === selectedRegion);
 
   return (
-    <div className="flex flex-col items-center justify-center p-8 w-full h-full min-h-screen">
-      <h2 className="text-2xl font-bold mb-6 text-center">
-        {getTitle()}
-      </h2>
-
-      <ViewModeSelector viewMode={viewMode} onViewModeChange={setViewMode} />
-      
-      <MapLegend ranges={mapData.ranges} />
-
-      <ZoomControls 
-        zoomLevel={zoomLevel}
-        onZoomIn={handleZoomIn}
-        onZoomOut={handleZoomOut}
-      />
-      
-      {/* Radial Map */}
-      <div className="flex justify-center items-center w-full h- flex-1 bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden">
-        <div 
-          className="relative inset-0 transition-transform duration-500 ease-out"
-          style={{ 
-            transform: `scale(${zoomLevel})`,
-            transformOrigin: 'center center'
-          }}
-        >
-          <div className="relative w-full h-full min-h-[1000px]">
-            {/* Center point */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-gray-800 rounded-full z-10"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xs font-semibold text-gray-800 mt-6 whitespace-nowrap">
-              Center
-            </div>
-            
-            {/* Dynamic concentric circles */}
-            {mapData.ranges && mapData.ranges.map((_, index) => {
-              const baseDistance = viewMode === 'courses' ? 120 + (index * 80) :
-                                  viewMode === 'industry' ? 150 + (index * 60) :
-                                  viewMode === 'subject' ? 120 + (index * 50) :
-                                  100 + (index * 40);
-              const diameter = (baseDistance * 2) * zoomLevel;
-              
-              return (
-                <div 
-                  key={index}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 rounded-full opacity-30"
-                  style={{
-                    width: `${diameter}px`,
-                    height: `${diameter}px`,
-                    borderColor: COLORS[index] || '#6b7280'
-                  }}
-                ></div>
-              );
-            })}
-            
-            {/* Map items positioned radially */}
-            {mapData.data.map((item) => (
-              <div
-                key={item.id}
-                className="absolute cursor-pointer hover:opacity-80 transition-opacity group"
-                style={{
-                  left: `calc(50% + ${item.x}px)`,
-                  top: `calc(50% + ${item.y}px)`,
-                  transform: 'translate(-50%, -50%)',
-                  fontSize: `${item.fontSize}px`,
-                  color: item.color,
-                  fontWeight: 'bold',
-                  textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-                  maxWidth: '100px',
-                  height: 'auto'
-                }}
-              >
-                <MapItemCard item={item} viewMode={viewMode} />
-                <MapTooltip item={item} viewMode={viewMode} />
-              </div>
+    <div className="space-y-6">
+      {/* Filter Controls */}
+      <div className="flex items-center gap-4 p-4 bg-card rounded-lg border">
+        <MapPin className="h-5 w-5 text-primary" />
+        <span className="font-medium">Filter by Region:</span>
+        <Select value={selectedRegion} onValueChange={setSelectedRegion}>
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Select region" />
+          </SelectTrigger>
+          <SelectContent>
+            {countries.map(country => (
+              <SelectItem key={country} value={country}>
+                {country === 'all' ? 'All Regions' : country}
+              </SelectItem>
             ))}
-          </div>
+          </SelectContent>
+        </Select>
+        <div className="ml-auto text-sm text-muted-foreground">
+          {filteredLocations.length} location{filteredLocations.length !== 1 ? 's' : ''}
         </div>
       </div>
-      
-      {/* Summary stats */}
-      <div className="mt-6 text-center text-sm text-gray-600">
-        {viewMode === 'courses' && (
-          <>
-            <p>Total Courses: {courses.length}</p>
-            <p>Total Students: {courses.reduce((sum, course) => sum + course.students, 0).toLocaleString()}</p>
-            <p>Average Students per Course: {Math.round(courses.reduce((sum, course) => sum + course.students, 0) / courses.length)}</p>
-          </>
-        )}
-        {viewMode === 'industry' && (
-          <>
-            <p>Total Students: {courses.reduce((sum, course) => sum + course.students, 0).toLocaleString()}</p>
-          </>
-        )}
-        {viewMode === 'subject' && (
-          <>
-            <p>Total Subjects: {mapData.data.length}</p>
-            <p>Total Students: {courses.reduce((sum, course) => sum + course.students, 0).toLocaleString()}</p>
-          </>
-        )}
+
+      {/* Map View - Visual representation */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredLocations
+          .sort((a, b) => b.totalStudents - a.totalStudents)
+          .map((location, index) => (
+            <Card key={location.location} className="hover:shadow-lg transition-shadow">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <span>{location.flag}</span>
+                    <span>{location.city}</span>
+                  </CardTitle>
+                  <Badge variant="secondary" className="flex items-center gap-1">
+                    <TrendingUp className="w-3 h-3" />
+                    #{index + 1}
+                  </Badge>
+                </div>
+                <p className="text-sm text-muted-foreground">{location.country}</p>
+              </CardHeader>
+              
+              <CardContent className="space-y-4">
+                {/* Location Stats */}
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-blue-500" />
+                    <span>{location.totalStudents} students</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-green-500" />
+                    <span>{location.courses.length} courses</span>
+                  </div>
+                </div>
+
+                {/* Top Courses Preview */}
+                <div>
+                  <h4 className="font-medium text-sm mb-2">Popular Courses:</h4>
+                  <div className="space-y-2">
+                    {location.courses
+                      .sort((a, b) => b.students - a.students)
+                      .slice(0, 3)
+                      .map(course => {
+                        const instructor = getInstructorById(course.instructorId);
+                        return (
+                          <div key={course.id} className="p-2 bg-muted/50 rounded text-xs">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="font-medium truncate flex-1">{course.title}</span>
+                              <Badge 
+                                customColor={getSubjectColor(course.subject)} 
+                                className="text-white text-xs ml-2"
+                              >
+                                {course.subject}
+                              </Badge>
+                            </div>
+                            <div className="flex items-center justify-between text-muted-foreground">
+                              <span>{instructor?.name}</span>
+                              <span className="flex items-center gap-1">
+                                <Users className="w-3 h-3" />
+                                {course.students}
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+
+                {/* Action Button */}
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => {
+                    // This could navigate to a filtered view of courses by location
+                    console.log(`View all courses in ${location.city}`);
+                  }}
+                >
+                  View All Courses
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
       </div>
+
+      {filteredLocations.length === 0 && (
+        <div className="text-center py-12 text-muted-foreground">
+          <MapPin className="w-12 h-12 mx-auto mb-4 opacity-50" />
+          <h3 className="text-lg font-medium mb-2">No courses found</h3>
+          <p>No courses available in the selected region.</p>
+        </div>
+      )}
     </div>
   );
 };
