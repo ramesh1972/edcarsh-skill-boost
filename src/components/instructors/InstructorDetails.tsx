@@ -174,9 +174,9 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
         </div>
         
         {instructorCourses.length > 0 ? (
-          <div className="space-y-6">
+          <div className="space-y-6 w-full">
             {instructorCourses.map((course) => (
-              <LongCourseCard 
+              <LongCourseCard cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" 
                 key={course.id} 
                 course={course}
                 referrerRoute={`/instructors/${instructor.id}`}
