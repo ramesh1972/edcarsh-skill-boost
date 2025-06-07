@@ -20,7 +20,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   const [viewMode, setViewMode] = useState<ViewMode>('industry');
   const [hoveredItem, setHoveredItem] = useState<any>(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-  const [zoomLevel, setZoomLevel] = useState(1);
+  const [zoomLevel, setZoomLevel] = useState(0.7);
 
   // Helper function to wrap text
   const wrapText = (text: string, maxLength: number) => {
