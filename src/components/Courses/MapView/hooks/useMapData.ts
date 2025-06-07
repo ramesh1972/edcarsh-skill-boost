@@ -7,7 +7,8 @@ import { calculateDynamicRanges } from '../utils/rangeCalculator';
 
 const COLORS = [
   '#dc2626', '#ea580c', '#d97706', '#ca8a04', '#65a30d', 
-  '#059669', '#0891b2', '#0284c7', '#3b82f6'
+  '#059669', '#0891b2', '#0284c7', '#3b82f6', '#7c3aed',
+  '#be185d', '#374151', '#1f2937', '#0f172a'
 ];
 
 export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: number): MapData => {
@@ -52,7 +53,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
             x,
             y,
             fontSize,
-            color: COLORS[rangeIndex] || '#6b7280',
+            color: COLORS[allCourseData.length % COLORS.length],
             studentRatio,
             range: range.label
           });
@@ -101,7 +102,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
           x,
           y,
           fontSize,
-          color: COLORS[rangeIndex] || '#1e40af',
+          color: COLORS[index % COLORS.length],
           range: ranges[rangeIndex]?.label || ''
         };
       });
@@ -151,7 +152,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
           x,
           y,
           fontSize,
-          color: COLORS[rangeIndex] || '#7c3aed',
+          color: COLORS[index % COLORS.length],
           range: ranges[rangeIndex]?.label || ''
         };
       });
@@ -204,7 +205,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
           x,
           y,
           fontSize,
-          color: COLORS[rangeIndex] || '#059669',
+          color: COLORS[index % COLORS.length],
           range: ranges[rangeIndex]?.label || ''
         };
       });
