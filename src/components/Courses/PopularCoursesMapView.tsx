@@ -1,7 +1,8 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Course } from '@/types';
 import { getInstructorById } from '@/data/instructors';
-import { ViewModeSelector } from '../common/ViewModeSelector';
+import { ViewModeSelector } from './MapView/components/ViewModeSelector';
 import { MapPin } from 'lucide-react';
 
 interface PopularCoursesMapViewProps {
@@ -9,7 +10,7 @@ interface PopularCoursesMapViewProps {
 }
 
 const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }) => {
-  const [viewMode, setViewMode] = useState<'geo' | 'network'>('geo');
+  const [viewMode, setViewMode] = useState<'industry' | 'subject' | 'courses'>('courses');
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
@@ -18,7 +19,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   const [tooltipContent, setTooltipContent] = useState<{ title: string; instructor: string; } | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
-  const handleViewModeChange = (mode: 'geo' | 'network') => {
+  const handleViewModeChange = (mode: 'industry' | 'subject' | 'courses') => {
     setViewMode(mode);
   };
 
@@ -87,24 +88,6 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     }
   };
 
-  const processedCourses = courses.map(course => {
-    const instructor = getInstructorById(course.instructorId);
-    return {
-      ...course,
-      instructor: instructor || {
-        id: 0,
-        name: 'Unknown Instructor',
-        image: '/placeholder.svg',
-        experience: '',
-        specialty: '',
-        city: '',
-        country: '',
-        flag: '',
-        description: ''
-      }
-    };
-  });
-
   return (
     <div className="w-full h-[600px] relative bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden">
       <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
@@ -127,8 +110,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           <rect width="100%" height="100%" fill="url(#grid)" />
           
           {/* Course nodes */}
-          {processedCourses.map((course, index) => {
-            const angle = (index / processedCourses.length) * 2 * Math.PI;
+          {courses.map((course, index) => {
+            const angle = (index / courses.length) * 2 * Math.PI;
             const radius = 200;
             const nodeX = 300 + radius * Math.cos(angle);
             const nodeY = 300 + radius * Math.sin(angle);
