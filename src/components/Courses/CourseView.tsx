@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -9,9 +8,10 @@ import { useTheme } from '@/hooks/useTheme';
 import { getSubjectColor } from '@/data/masterData';
 import { courses } from '@/data/courses';
 import { getInstructorById } from '@/data/instructors';
-import { ArrowLeft, Calendar, Clock, Users, DollarSign, Wifi, WifiOff, Wrench, MapPin, Star } from 'lucide-react';
+import { ArrowLeft, Wifi, WifiOff, Wrench, Calendar, Clock } from 'lucide-react';
 import CourseInfoCard from './CourseInfoCard';
 import ActionButtons from './ActionButtons';
+import InstructorCard from '@/components/instructors/InstructorCard';
 
 const CourseView: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -142,35 +142,20 @@ const CourseView: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* Instructor details */}
+            {/* Instructor details using InstructorCard */}
             <Card>
               <CardHeader>
                 <CardTitle>Your Instructor</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-start gap-4">
-                  <Avatar className="w-16 h-16">
-                    <AvatarImage src={instructor.image} alt={instructor.name} />
-                    <AvatarFallback className="bg-gradient-to-br from-primary to-blue-600 text-white font-bold">
-                      {instructor.name.split(' ').map(n => n[0]).join('')}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold">{instructor.name}</h3>
-                    <p className="text-muted-foreground mb-2">{instructor.specialty}</p>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground mb-2">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-3 h-3" />
-                        {instructor.city}, {instructor.country} {instructor.flag}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Star className="w-3 h-3" />
-                        {instructor.experience}
-                      </span>
-                    </div>
-                    <p className="text-sm">{instructor.description}</p>
-                  </div>
-                </div>
+                <InstructorCard 
+                  instructor={instructor}
+                  size="lg"
+                  layout="horizontal"
+                  showTitle={false}
+                  referrerRoute={`/courses/${course.id}`}
+                  referrerName={course.title}
+                />
               </CardContent>
             </Card>
           </div>
