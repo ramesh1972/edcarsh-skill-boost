@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { useTheme } from '@/contexts/ThemeContext';
+import { useTheme } from '@/hooks/useTheme';
 import { getSubjectColor } from '@/data/masterData';
 import { useNavigate } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
@@ -116,7 +116,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
             {/* Column 3: Instructor Details */}
             <div className="flex flex-col justify-between h-full">
               <InstructorCard instructor={instructor} />
-              <div className="mt-auto -ml-[85px] w-200">
+              <div className="mt-auto -ml-[45px]">
                 <ActionButtons 
                   courseId={course.id} 
                   nextSession={course.nextSession}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Settings, Palette, Type, Image, Layout, Brush, Layers, X } from 'lucide-react';
-import { useTheme } from '@/contexts/ThemeContext';
+
+import {  Palette, Type, Image, Layout, Brush, Layers, X } from 'lucide-react';
+import { useTheme } from '@/hooks/useTheme';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,13 +38,13 @@ export const ThemeSelector: React.FC = () => {
     { key: 'glassmorphism', label: 'Glass', description: 'Frosted glass effect' }
   ];
 
-  const handleThemeChange = (themeUpdate: any) => {
+  const handleThemeChange = (themeUpdate: unknown) => {
     updateTheme(themeUpdate);
     console.log('Theme updated:', themeUpdate);
     // Don't close the menu, keep it open for multiple changes
   };
 
-  const handleItemClick = (themeUpdate: any, event: React.MouseEvent) => {
+  const handleItemClick = (themeUpdate: unknown, event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
     handleThemeChange(themeUpdate);
@@ -105,7 +106,7 @@ export const ThemeSelector: React.FC = () => {
               <DropdownMenuItem
                 key={designSystem.key}
                 onSelect={(e) => e.preventDefault()}
-                onClick={(e) => handleItemClick({ designSystem: designSystem.key as any }, e)}
+                onClick={(e) => handleItemClick({ designSystem: designSystem.key as unknown }, e)}
                 className={theme.designSystem === designSystem.key ? 'bg-primary text-primary-foreground' : ''}
               >
                 {designSystem.label}
@@ -128,7 +129,7 @@ export const ThemeSelector: React.FC = () => {
               <DropdownMenuItem
                 key={color.key}
                 onSelect={(e) => e.preventDefault()}
-                onClick={(e) => handleItemClick({ colorTheme: color.key as any }, e)}
+                onClick={(e) => handleItemClick({ colorTheme: color.key as unknown }, e)}
                 className={`flex flex-col items-start gap-1 p-3 ${theme.colorTheme === color.key ? 'bg-primary text-primary-foreground' : ''}`}
               >
                 <div className="font-medium">{color.label}</div>
@@ -152,7 +153,7 @@ export const ThemeSelector: React.FC = () => {
               <DropdownMenuItem
                 key={typography}
                 onSelect={(e) => e.preventDefault()}
-                onClick={(e) => handleItemClick({ typography: typography as any }, e)}
+                onClick={(e) => handleItemClick({ typography: typography as unknown }, e)}
                 className={theme.typography === typography ? 'bg-primary text-primary-foreground' : ''}
               >
                 {typography.charAt(0).toUpperCase() + typography.slice(1)}
@@ -175,7 +176,7 @@ export const ThemeSelector: React.FC = () => {
               <DropdownMenuItem
                 key={iconScheme}
                 onSelect={(e) => e.preventDefault()}
-                onClick={(e) => handleItemClick({ iconScheme: iconScheme as any }, e)}
+                onClick={(e) => handleItemClick({ iconScheme: iconScheme as unknown }, e)}
                 className={theme.iconScheme === iconScheme ? 'bg-primary text-primary-foreground' : ''}
               >
                 {iconScheme.charAt(0).toUpperCase() + iconScheme.slice(1)}
@@ -198,7 +199,7 @@ export const ThemeSelector: React.FC = () => {
               <DropdownMenuItem
                 key={layout}
                 onSelect={(e) => e.preventDefault()}
-                onClick={(e) => handleItemClick({ layout: layout as any }, e)}
+                onClick={(e) => handleItemClick({ layout: layout as unknown }, e)}
                 className={theme.layout === layout ? 'bg-primary text-primary-foreground' : ''}
               >
                 {layout.charAt(0).toUpperCase() + layout.slice(1)}
@@ -221,7 +222,7 @@ export const ThemeSelector: React.FC = () => {
               <DropdownMenuItem
                 key={skin.key}
                 onSelect={(e) => e.preventDefault()}
-                onClick={(e) => handleItemClick({ skin: skin.key as any }, e)}
+                onClick={(e) => handleItemClick({ skin: skin.key as unknown }, e)}
                 className={`flex flex-col items-start gap-1 p-3 ${theme.skin === skin.key ? 'bg-primary text-primary-foreground' : ''}`}
               >
                 <div className="font-medium">{skin.label}</div>

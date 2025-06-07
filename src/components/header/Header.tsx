@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useTheme } from '@/contexts/ThemeContext';
-import { HeaderLogo } from './HeaderLogo';
+import { useTheme } from '@/hooks/useTheme';
+import { HeaderLogo } from '../common/HeaderLogo';
 import { MainMenuNavigation } from '../menu/MainMenuNavigation';
 import { SecondaryMenuNavigation } from '../menu/SecondaryMenuNavigation';
 import { MobileNavigation } from '../menu/MobileNavigation';

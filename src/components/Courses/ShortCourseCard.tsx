@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useTheme } from '@/contexts/ThemeContext';
+import { useTheme } from '@/hooks/useTheme';
 import { getSubjectColor } from '@/data/masterData';
 import { useNavigate } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
@@ -34,7 +34,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
   };
 
   return (
-    <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col gap-1 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+    <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col gap-1 w-fit ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       {/* Course Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-none">
         <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-none" />
@@ -91,7 +91,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
 
         {/* Action Buttons aligned to bottom */}
-        <div className="mt-6 p-0">
+        <div className="mt-4 p-0">
           <ActionButtons 
             courseId={course.id} 
             nextSession={course.nextSession}

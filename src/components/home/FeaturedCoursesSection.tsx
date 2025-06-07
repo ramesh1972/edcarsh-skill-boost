@@ -1,11 +1,12 @@
 
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import ShortCourseCard from '@/components/Courses/ShortCourseCard';
 import { Course } from '@/types';
+
+import ShortCourseCard from '@/components/Courses/ShortCourseCard';
 
 interface FeaturedCoursesSectionProps {
   courses: Course[];
@@ -26,23 +27,26 @@ const FeaturedCoursesSection = ({ courses }: FeaturedCoursesSectionProps) => {
     >
       <div className="container px-4 mx-auto">
         <div 
-          className={`flex justify-between items-center mb-12 transition-all duration-700 delay-200 ${
-            coursesAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-10'
+          className={`text-center mb-16 transition-all duration-700 delay-300  ${
+            coursesAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
           }`}
         >
-          <div>
-            <h2 className="text-3xl font-bold mb-4">Upcoming Courses</h2>
-            <p className="text-xl text-muted-foreground">
-              Start your learning journey with these popular courses
-            </p>
+          <div className="flex items-center justify-center gap-8 mb-4">
+            <h2 className="text-3xl font-bold">Upcoming Courses</h2>
           </div>
+          <p className=" text-center animate-pulse text-2xl font-bold-800" style={{ fontVariant: 'small-caps' }}>
+            Start your learning journey with these popular courses
+          </p>
+
+          
           <Link to="/courses">
-            <Button variant="outline" className="gap-2">
+            <Button variant="outline" className="gap-2 mt-6">
               View All Courses
               <ArrowRight className="w-4 h-4" />
             </Button>
           </Link>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {upcomingCourses.map((course, index) => (
             <div

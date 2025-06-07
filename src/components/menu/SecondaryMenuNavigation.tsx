@@ -1,9 +1,10 @@
 
 import React from 'react';
 import { Bell, User, Settings, LogOut, Palette, Mail, Archive, Star, Trash2, CreditCard, KeyRound, MessageCircle } from 'lucide-react';
-import { ThemeSelector } from './ThemeSelector';
+
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator, DropdownMenuLabel } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { ThemeSelector } from './ThemeSelector';
 
 interface SecondaryMenuNavigationProps {
   setIsMenuOpen: (open: boolean) => void;

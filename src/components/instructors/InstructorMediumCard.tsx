@@ -60,7 +60,7 @@ const InstructorMediumCard: React.FC<InstructorMediumCardProps> = ({ instructor 
         </div>
 
         <Link to={`/instructors/${instructor.id}`}>
-          <Button className="w-full" variant="outline">
+          <Button className="w-full mt-6" variant="outline">
             View Profile
           </Button>
         </Link>

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Star } from 'lucide-react';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+
 import { homeTestimonials } from '@/data/testimonials';
 
 const TestimonialsSection = () => {

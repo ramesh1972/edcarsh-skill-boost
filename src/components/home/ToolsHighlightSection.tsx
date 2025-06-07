@@ -1,7 +1,8 @@
 import React from 'react';
-import { useTheme } from '@/contexts/ThemeContext';
+import { useTheme } from '@/hooks/useTheme';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import ToolsList from '../tools/ToolsList';
+
+import ToolsList from '@/components/tools/ToolsList';
 
 const ToolsHighlightSection = () => {
   const { getIcon } = useTheme();
@@ -32,7 +33,7 @@ const ToolsHighlightSection = () => {
             </span>
             <a
               href="https://demo.edcarsh.com" target="_blank" rel="noopener noreferrer"
-              className="inline-block mt-2 px-6 py-2 rounded-lg bg-gradient-to-r from-primary to-blue-500 text-white font-bold shadow hover:scale-105 transition-transform duration-200"
+              className="inline-block mt-6 px-6 py-2 rounded-lg bg-gradient-to-r from-primary to-blue-500 text-white font-bold shadow hover:scale-105 transition-transform duration-200"
             >
               🎬 Try the Live Demo
             </a>

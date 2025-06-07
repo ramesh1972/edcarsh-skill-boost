@@ -19,6 +19,8 @@ interface Instructor {
 
 interface InstructorCardProps {
   instructor: Instructor | null | undefined;
+  referrerRoute?: string;
+  referrerName?: string;
   hideDescription?: boolean;
   hideAboutButton?: boolean;
   hideLocation?: boolean;
@@ -33,6 +35,8 @@ interface InstructorCardProps {
 
 const InstructorCard: React.FC<InstructorCardProps> = ({
   instructor,
+  referrerRoute = '/instructors',
+  referrerName = 'Instructors',
   hideDescription = false,
   hideAboutButton = false,
   hideLocation = false,
@@ -58,7 +62,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
       button: 'h-5 px-1 text-xs',
       icon: 'h-2 w-2',
       spacing: 'gap-2 mb-2',
-      padding: 'p-0'
+      padding: 'p-2'
     },
     md: {
       avatar: 'h-12 w-12',
@@ -68,7 +72,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
       button: 'h-6 px-2 text-xs',
       icon: 'h-3 w-3',
       spacing: 'gap-3 mb-3',
-      padding: 'p-0'
+      padding: 'p-'
     },
     lg: {
       avatar: 'h-16 w-16',
@@ -92,12 +96,12 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
 
   const AboutButton = () => {
     if (hideAboutButton) return null;
-    
+
     if (onAboutClick) {
       return (
-        <Button 
-          variant="outline" 
-          size="sm" 
+        <Button
+          variant="outline"
+          size="sm"
           className={config.button}
           onClick={handleAboutClick}
         >
@@ -109,9 +113,9 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
 
     return (
       <Link to={`/instructors/${instructor.id}`}>
-        <Button 
-          variant="outline" 
-          size="sm" 
+        <Button
+          variant="outline"
+          size="sm"
           className={config.button}
         >
           <Info className={`${config.icon} mr-1`} />

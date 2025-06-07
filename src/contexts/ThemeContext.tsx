@@ -1,34 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import * as LucideIcons from 'lucide-react';
-
-export interface ThemeConfig {
-  colorTheme: 'ocean' | 'sunset' | 'forest' | 'lavender' | 'monochrome' | 'aurora' | 'citrus' | 'flamingo' | 'galaxy';
-  typography: 'technical' | 'professional' | 'elegant' | 'modern' | 'playful';
-  iconScheme: 'normal' | 'cartoon' | 'emoji' | 'avatars';
-  designSystem: 'material' | 'human' | 'fluent' | 'ant' | 'carbon' | 'atlassian' | 'bootstrap' | 'polaris' | 'lightning' | 'tailwind';
-  layout: 'default' | 'compact' | 'spacious' | 'modern';
-  skin: 'default' | 'gradient' | 'textured' | 'glassmorphism';
-}
-
-interface ThemeContextType {
-  theme: ThemeConfig;
-  updateTheme: (updates: Partial<ThemeConfig>) => void;
-  resetTheme: () => void;
-  getIcon: (iconName: string) => React.ReactNode;
-  getAvatar: (avatarName: string) => string;
-  getBackground: () => string;
-  getSkinClasses: () => string;
-  getPageLayoutClasses: () => string;
-}
-
-const defaultTheme: ThemeConfig = {
-  colorTheme: 'ocean',
-  typography: 'modern',
-  iconScheme: 'normal',
-  designSystem: 'tailwind',
-  layout: 'default',
-  skin: 'default'
-};
+import { defaultTheme, ThemeConfig, ThemeContext, ThemeContextType } from '@/hooks/useTheme';
 
 // Updated icon libraries with only Lucide icons
 const iconLibraries = {
@@ -46,7 +18,8 @@ const iconLibraries = {
     help: () => <LucideIcons.HelpCircle className="w-4 h-4" />,
     contact: () => <LucideIcons.Mail className="w-4 h-4" />,
     about: () => <LucideIcons.Info className="w-4 h-4" />,
-    tools: () => <LucideIcons.Wrench className="w-5 h-5" />
+    tools: () => <LucideIcons.Wrench className="w-5 h-5" />,
+    calendar: () => <LucideIcons.Calendar className="w-5 h-5" />
   },
   cartoon: {
     course: () => <LucideIcons.BookOpenCheck className="w-5 h-5" />,
@@ -62,7 +35,8 @@ const iconLibraries = {
     help: () => <LucideIcons.CircleHelp className="w-4 h-4" />,
     contact: () => <LucideIcons.MailOpen className="w-4 h-4" />,
     about: () => <LucideIcons.InfoIcon className="w-4 h-4" />,
-    tools: () => <LucideIcons.Settings className="w-5 h-5" />
+    tools: () => <LucideIcons.Settings className="w-5 h-5" />,
+    calendar: () => <LucideIcons.CalendarCheck className="w-5 h-5" />
   },
   emoji: {
     course: () => <span className="text-lg">📚</span>,
@@ -78,7 +52,8 @@ const iconLibraries = {
     help: () => <span className="text-lg">❓</span>,
     contact: () => <span className="text-lg">📧</span>,
     about: () => <span className="text-lg">ℹ️</span>,
-    tools: () => <span className="text-lg">🔧</span>
+    tools: () => <span className="text-lg">🔧</span>,
+    calendar: () => <span className="text-lg">📅</span>
   },
   avatars: {
     course: () => <LucideIcons.Library className="w-5 h-5" />,
@@ -94,7 +69,8 @@ const iconLibraries = {
     help: () => <LucideIcons.LifeBuoy className="w-4 h-4" />,
     contact: () => <LucideIcons.AtSign className="w-4 h-4" />,
     about: () => <LucideIcons.FileText className="w-4 h-4" />,
-    tools: () => <LucideIcons.Hammer className="w-5 h-5" />
+    tools: () => <LucideIcons.Hammer className="w-5 h-5" />,
+    calendar: () => <LucideIcons.CalendarIcon className="w-5 h-5" />
   }
 };
 
@@ -148,16 +124,6 @@ const skinStyles = {
     controlBackground: 'bg-primary/80 backdrop-blur-md border border-white/30 hover:bg-primary/90 shadow-lg',
     classes: 'skin-glassmorphism'
   }
-};
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
 };
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -653,17 +619,19 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const resetTheme = () => {
     setTheme(defaultTheme);
   };
-
+ 
   return (
     <ThemeContext.Provider value={{ 
       theme, 
+      setTheme,
       updateTheme, 
       resetTheme, 
       getIcon, 
       getAvatar, 
       getBackground,
       getSkinClasses,
-      getPageLayoutClasses
+      getPageLayoutClasses,
+      themeStr: JSON.stringify(theme)
     }}>
       {children}
     </ThemeContext.Provider>

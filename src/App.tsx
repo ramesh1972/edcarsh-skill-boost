@@ -6,14 +6,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { Header } from "@/components/common/Header";
+import { Header } from "@/components/header/Header";
 import Index from "./pages/Index";
 import BasicFour from "./components/threejs/BasicFour";
 import CourseView from "@/components/Courses/CourseView";
 import Dashboard from "./pages/Dashboard";
 import ExpressIntent from "./pages/ExpressIntent";
 import Instructors from "./pages/Instructors";
-import InstructorDetail from "./pages/InstructorDetail";
+import InstructorDetails from "@/components/instructors/InstructorDetails";
 import Testimonials from "./pages/Testimonials";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
@@ -72,7 +72,7 @@ const AppContent = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/express-intent" element={<ExpressIntent />} />
             <Route path="/instructors" element={<Instructors />} />
-            <Route path="/instructors/:id" element={<InstructorDetail />} />
+            <Route path="/instructors/:id" element={<InstructorDetails />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />

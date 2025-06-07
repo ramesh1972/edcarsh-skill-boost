@@ -1,5 +1,5 @@
-import React from 'react';
 import { Target, Calendar } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 

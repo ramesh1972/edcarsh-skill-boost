@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useTheme } from '@/contexts/ThemeContext';
+import { useTheme } from '@/hooks/useTheme';
 import TitleComponent from '@/components/common/TitleComponent';
 import ToolsList from '@/components/tools/ToolsList';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
-import { useTheme } from '@/contexts/ThemeContext';
+import { useTheme } from '@/hooks/useTheme';
 
 interface CourseInfoCardProps {
   duration: string;
@@ -21,9 +21,9 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
   const { getIcon } = useTheme();
   
   return (
-    <div className={`grid grid-cols-1 grid-rows-2 gap-2 p-0 ${className}`} style={{fontSize: '12px'}}>
+    <div className={`grid grid-cols-1 p-1  gap-2 !rounded-md ${className}`} style={{fontSize: '13px'}}>
       {/* Course Details */}
-      <div className="flex items-center justify-between text-sm border-b">
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           {getIcon('time')}
           {duration}
@@ -35,13 +35,13 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
       </div>
 
       {/* Price and Session */}
-      <div className="flex items-center justify-between text-sm border-b">
-        <Badge variant="outline" className="flex items-center gap-1 p-2 rounded-lg" style={{fontSize:'20px', backgroundColor: 'lightgreen', color: 'primary'}}>
+      <div className="flex items-center justify-between">
+        <Badge variant="outline" className="flex items-center p-2 rounded-lg" style={{fontSize:'16px', backgroundColor: 'lightgreen', color: 'primary'}}>
           {getIcon('price')}
           {price}
         </Badge>
-        <div className="flex items-center gap-1 text-sm text-muted-foreground">
-          📅
+        <div className="flex items-center gap-1 text-muted-foreground">
+          {getIcon('calendar')}
           {nextSession}
         </div>
       </div>
