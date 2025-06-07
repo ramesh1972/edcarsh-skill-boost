@@ -1,6 +1,6 @@
 
 export interface Instructor {
-  id?: number;
+  id: number; // Changed from optional to required
   name: string;
   image: string;
   experience: string;
