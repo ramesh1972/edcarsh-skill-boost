@@ -55,7 +55,7 @@ const AppContent = () => {
           style={{ 
             left: '20px',
             right: '20px',
-            width: 'calc(100vw - 440x)',
+            width: 'calc(100vw - 440px)',
             height: 'calc(100vh - 132px)',
 
           }}
