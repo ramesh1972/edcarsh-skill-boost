@@ -1,11 +1,14 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Star, Users, BookOpen, Award, MapPin, GraduationCap } from 'lucide-react';
+import { Star, Users, BookOpen, Award, MapPin, Mail, Phone, Globe, Calendar, Clock, GraduationCap, ArrowLeft } from 'lucide-react';
 import ShortCourseCard from '@/components/Courses/ShortCourseCard';
-import { getInstructorCourses } from '@/data/instructors';
+import { getInstructorById, getInstructorCourses } from '@/data/instructors';
+import { useTheme } from '@/hooks/useTheme';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 import { Instructor } from '@/types';
 
 const InstructorDetails: React.FC = () => {
