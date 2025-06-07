@@ -235,12 +235,14 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
   return (
     <div className="w-full space-y-6">
-      <div className="flex justify-between items-center">
-        <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
-        <ZoomControls zoomLevel={zoomLevel} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
-      </div>
+      <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
       
-      <div className="relative w-full h-[1600px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
+      <div className="relative w-full h-[1600px] rounded-lg overflow-hidden border">
+        {/* Zoom Controls positioned in top right corner */}
+        <div className="absolute top-4 right-4 z-10">
+          <ZoomControls zoomLevel={zoomLevel} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
+        </div>
+        
         {/* Funky Grid Background */}
         <div className="absolute inset-0">
           <svg width="100%" height="100%" className="opacity-20">
