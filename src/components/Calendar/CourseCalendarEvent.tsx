@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -5,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Clock, Users, DollarSign, UserPlus, Eye } from 'lucide-react';
 import { parseISO, addDays, isSameDay, parse, addMinutes, subMinutes, isWithinInterval, addHours, isAfter, isBefore } from 'date-fns';
-import ActionButtons from '@/components/courses/ActionButtons';
+import ActionButtons from '@/components/Courses/ActionButtons';
 import { getSubjectColor as getSubjectColorHex } from '@/data/masterData';
 
 interface Course {

@@ -1,3 +1,4 @@
+
 import React, { useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
@@ -5,7 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Calendar } from '@/components/ui/calendar';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, addDays, addWeeks, addMonths, subDays, subWeeks, subMonths, isSameDay, parseISO } from 'date-fns';
-import CourseCalendarEvent from '@/components/calendar/CourseCalendarEvent';
+import CourseCalendarEvent from '@/components/Calendar/CourseCalendarEvent';
 import { Course } from '@/types';
 import CoursesCalendarBackground from './CoursesCalendarBackground';
 

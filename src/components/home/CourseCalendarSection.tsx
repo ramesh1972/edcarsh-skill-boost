@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import CoursesCalendarView from '@/components/courses/CoursesCalendarView';
+import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
 import { Course } from '@/types';
 
 interface CourseCalendarSectionProps {
