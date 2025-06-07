@@ -49,7 +49,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     const min = sortedCounts[sortedCounts.length - 1];
     
     if (max === min) {
-      return [{ min, max, label: `${min}`, radius: 400 }];
+      return [{ min, max, label: `${min}`, radius: 300 }];
     }
     
     // Determine number of ranges based on data spread
@@ -59,8 +59,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     
     const ranges = [];
     const step = dataRange / rangeCount;
-    const baseRadius = 200;
-    const radiusIncrement = 120;
+    const baseRadius = 150;
+    const radiusIncrement = 100;
     
     for (let i = 0; i < rangeCount; i++) {
       const rangeMin = i === rangeCount - 1 ? min : Math.ceil(max - (step * (i + 1)));
@@ -155,6 +155,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     const studentCounts = items.map(item => item.students);
     const ranges = createDynamicRanges(studentCounts);
 
+    // Find global min and max for proportional circle sizing
+    const globalMax = Math.max(...studentCounts);
+    const globalMin = Math.min(...studentCounts);
+
     // Assign items to ranges and calculate positions
     const itemsWithPositions = items.map((item, index) => {
       const range = ranges.find(r => {
@@ -186,11 +190,11 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       const x = Math.cos(angle) * range.radius;
       const y = Math.sin(angle) * range.radius;
       
-      // Calculate circle radius based on relative student count within range
-      const maxInRange = Math.max(...itemsInRange.map(i => i.students));
-      const minInRange = Math.min(...itemsInRange.map(i => i.students));
-      const relativeSize = maxInRange === minInRange ? 1 : (item.students - minInRange) / (maxInRange - minInRange);
-      const circleRadius = 40 + (relativeSize * 30); // 40-70 range
+      // Calculate circle radius based on student count proportionally across all data
+      const studentRatio = globalMax === globalMin ? 1 : (item.students - globalMin) / (globalMax - globalMin);
+      const minRadius = 25;
+      const maxRadius = 80;
+      const circleRadius = minRadius + (studentRatio * (maxRadius - minRadius));
       
       return {
         ...item,
@@ -232,7 +236,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           
           {/* Data items */}
           {processedData.items.map((item, index) => {
-            const wrappedLines = wrapText(item.name, 10);
+            const wrappedLines = wrapText(item.name, 12);
             
             return (
               <g key={index}>
@@ -254,19 +258,19 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                   <text
                     key={lineIndex}
                     x={item.x}
-                    y={item.y - 15 + (lineIndex * 10)}
+                    y={item.y - 10 + (lineIndex * 8)}
                     textAnchor="middle"
                     className="font-bold fill-white pointer-events-none"
-                    style={{ fontSize: '8px' }}
+                    style={{ fontSize: '7px' }}
                   >
                     {line}
                   </text>
                 ))}
                 
-                {/* Student count */}
+                {/* Student count - positioned clearly below title */}
                 <text
                   x={item.x}
-                  y={item.y + (wrappedLines.length > 1 ? 5 : 12)}
+                  y={item.y + (wrappedLines.length * 4) + 8}
                   textAnchor="middle"
                   className="font-semibold fill-white pointer-events-none"
                   style={{ fontSize: '9px' }}
