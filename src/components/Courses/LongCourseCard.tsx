@@ -104,7 +104,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
             <div className="col-span-1" style={{ maxWidth: '280px' }}>
               <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                {course.longTopics.slice(0, 8).map((topic, index) => (
+                {course.longTopics.slice(0, 7).map((topic, index) => (
                   <li key={index} className="flex items-start gap-2">
                     <span className="text-primary mt-1">•</span>
                     <span>{topic}</span>
@@ -114,9 +114,9 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
             </div>
 
             {/* Column 3: Instructor Details */}
-            <div className="flex flex-col justify-between h-full -ml-[65px]">
+            <div className="flex flex-col justify-between h-full">
               <InstructorCard instructor={instructor} />
-              <div className="mt-auto">
+              <div className="mt-auto -ml-[65px]">
                 <ActionButtons 
                   courseId={course.id} 
                   nextSession={course.nextSession}
