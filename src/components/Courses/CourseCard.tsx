@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,12 +12,14 @@ import InstructorCard from '@/components/instructors/InstructorCard';
 import { getInstructorById } from '@/data/instructors';
 import { Heart, Eye, UserPlus, Wifi, WifiOff, Wrench } from 'lucide-react';
 import { Course } from '@/types';
+
 interface CourseCardProps {
   course: Course;
   referrerRoute?: string;
   referrerName?: string;
   cardClassName?: string;
 }
+
 const CourseCard: React.FC<CourseCardProps> = ({
   course,
   referrerRoute = '/courses',
@@ -29,6 +32,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   } = useTheme();
   const navigate = useNavigate();
   const instructor = getInstructorById(course.instructorId);
+
   const handleViewClick = () => {
     navigate(`/courses/${course.id}`, {
       state: {
@@ -37,13 +41,17 @@ const CourseCard: React.FC<CourseCardProps> = ({
       }
     });
   };
+
   if (!instructor) {
     return null; // Don't render if instructor not found
   }
+
   const industryName = getIndustryNameById(course.industryId);
   const subjectName = getSubjectNameById(course.industryId, course.subjectId);
   const subject = getSubjectById(course.industryId, course.subjectId);
-  return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''} ${cardClassName}`}>
+
+  return (
+    <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''} ${cardClassName}`}>
       {/* Course Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-0">
         <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-0" />
@@ -79,31 +87,45 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start max-h-30 overflow-hidden">{course.mediumDescription}</CardDescription>
       </CardHeader>
 
-      <CardContent className="flex-1 flex flex-col items-start">
+      <CardContent className="flex-1 flex flex-col p-6 pt-0">
         {/* Topics Covered - Fixed height for alignment, max 6 topics */}
-        <div className="mb-1 ">
+        <div className="mb-3">
           <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
           <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
-            {course.topics.slice(0, 6).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
+            {course.topics.slice(0, 6).map((topic, index) => (
+              <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                 {topic}
-              </Badge>)}
+              </Badge>
+            ))}
           </div>
         </div>
 
-        {/* Instructor Section - using InstructorCard component */}
-        <div className="mt-auto items-start justify-start">
-          <div className="mb-4 p-0">
-            <InstructorCard instructor={instructor} hideDescription={true} />
-          </div>
-  {/* Course Info Card - moved below image */}
-      <CourseInfoCard className="mb-2" duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
+        {/* Instructor Section - aligned to top */}
+        <div className="mb-4">
+          <InstructorCard instructor={instructor} hideDescription={true} size="sm" />
+        </div>
 
-          {/* Action Buttons - using ActionButtons component */}
-          <div className="p-0 pt-3">
-            <ActionButtons courseId={course.id} nextSession={course.nextSession} onViewClick={handleViewClick} />
-          </div>
+        {/* Spacer to push content to bottom */}
+        <div className="flex-1"></div>
+
+        {/* Bottom section - Course Info and Action Buttons */}
+        <div className="mt-auto space-y-3">
+          <CourseInfoCard 
+            duration={course.duration} 
+            students={course.students} 
+            price={course.price} 
+            nextSession={course.nextSession} 
+          />
+          
+          <ActionButtons 
+            courseId={course.id} 
+            nextSession={course.nextSession} 
+            onViewClick={handleViewClick} 
+          />
         </div>
       </CardContent>
-    </Card>;
+    </Card>
+  );
 };
+
 export default CourseCard;
