@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
@@ -23,8 +22,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState(1);
 
-  // Helper function to wrap text
-  const wrapText = (text: string, maxLength: number) => {
+  // Helper function to wrap text with word breaking
+  const wrapText = (text: string, maxLength: number, maxLines: number = 3) => {
     if (text.length <= maxLength) return [text];
     
     const words = text.split(' ');
@@ -32,16 +31,30 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     let currentLine = '';
     
     for (const word of words) {
-      if ((currentLine + word).length <= maxLength) {
-        currentLine += (currentLine ? ' ' : '') + word;
+      const testLine = currentLine ? `${currentLine} ${word}` : word;
+      if (testLine.length <= maxLength) {
+        currentLine = testLine;
       } else {
-        if (currentLine) lines.push(currentLine);
+        if (currentLine) {
+          lines.push(currentLine);
+          if (lines.length >= maxLines - 1) {
+            // Add ellipsis to the last line if we're at max lines
+            const remainingWords = words.slice(words.indexOf(word));
+            const lastLine = remainingWords.join(' ');
+            if (lastLine.length > maxLength) {
+              lines.push(lastLine.substring(0, maxLength - 3) + '...');
+            } else {
+              lines.push(lastLine);
+            }
+            break;
+          }
+        }
         currentLine = word;
       }
     }
-    if (currentLine) lines.push(currentLine);
+    if (currentLine && lines.length < maxLines) lines.push(currentLine);
     
-    return lines.slice(0, 3); // Max 3 lines for better wrapping
+    return lines.slice(0, maxLines);
   };
 
   // Function to create dynamic ranges based on data distribution
@@ -64,7 +77,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     const ranges = [];
     const step = dataRange / rangeCount;
     const baseRadius = 120;
-    const radiusIncrement = 80;
+    const radiusIncrement = 100; // Increased spacing between ranges
     
     for (let i = 0; i < rangeCount; i++) {
       const rangeMin = i === rangeCount - 1 ? min : Math.ceil(max - (step * (i + 1)));
@@ -90,6 +103,47 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     return ranges;
   };
 
+  // Function to check if two circles overlap
+  const circlesOverlap = (x1: number, y1: number, r1: number, x2: number, y2: number, r2: number) => {
+    const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+    return distance < (r1 + r2 + 20); // Added 20px buffer
+  };
+
+  // Function to find non-overlapping position
+  const findNonOverlappingPosition = (
+    baseAngle: number, 
+    radius: number, 
+    circleRadius: number, 
+    existingPositions: Array<{x: number, y: number, radius: number}>
+  ) => {
+    const maxAttempts = 36; // Try every 10 degrees
+    const angleStep = (2 * Math.PI) / maxAttempts;
+    
+    for (let i = 0; i < maxAttempts; i++) {
+      const angle = baseAngle + (i * angleStep);
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+      
+      let hasOverlap = false;
+      for (const pos of existingPositions) {
+        if (circlesOverlap(x, y, circleRadius, pos.x, pos.y, pos.radius)) {
+          hasOverlap = true;
+          break;
+        }
+      }
+      
+      if (!hasOverlap) {
+        return { x, y };
+      }
+    }
+    
+    // If no non-overlapping position found, try slightly larger radius
+    const newRadius = radius + 50;
+    const x = Math.cos(baseAngle) * newRadius;
+    const y = Math.sin(baseAngle) * newRadius;
+    return { x, y };
+  };
+
   // Zoom handlers
   const handleZoomIn = () => {
     setZoomLevel(prev => Math.min(prev + 0.2, 3));
@@ -104,6 +158,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
     let items: any[] = [];
 
+    // ... keep existing code (viewMode processing logic)
     if (viewMode === 'industry') {
       const industryMap = new Map();
       
@@ -185,6 +240,9 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     const globalMax = Math.max(...studentCounts);
     const globalMin = Math.min(...studentCounts);
 
+    // Track positions to prevent overlaps
+    const existingPositions: Array<{x: number, y: number, radius: number}> = [];
+
     // Assign items to ranges and calculate positions
     const itemsWithPositions = items.map((item, index) => {
       const range = ranges.find(r => {
@@ -209,30 +267,31 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         return r === range;
       });
       
-      const angleStep = (2 * Math.PI) / itemsInRange.length;
+      const angleStep = (2 * Math.PI) / Math.max(itemsInRange.length, 1);
       const itemIndexInRange = itemsInRange.indexOf(item);
-      const angle = angleStep * itemIndexInRange;
-      
-      const x = Math.cos(angle) * range.radius;
-      const y = Math.sin(angle) * range.radius;
+      const baseAngle = angleStep * itemIndexInRange;
       
       // Calculate circle radius based on student count proportionally across all data
       const studentRatio = globalMax === globalMin ? 1 : (item.students - globalMin) / (globalMax - globalMin);
-      const minRadius = 30;
-      const maxRadius = 80;
+      const minRadius = 25;
+      const maxRadius = 60;
       const circleRadius = minRadius + (studentRatio * (maxRadius - minRadius));
       
+      // Find non-overlapping position
+      const position = findNonOverlappingPosition(baseAngle, range.radius, circleRadius, existingPositions);
+      existingPositions.push({ x: position.x, y: position.y, radius: circleRadius });
+      
       // Calculate font sizes based on circle radius
-      const titleFontSize = Math.max(8, Math.min(14, (circleRadius / maxRadius) * 12 + 6));
-      const countFontSize = Math.max(10, Math.min(16, (circleRadius / maxRadius) * 14 + 8));
+      const titleFontSize = Math.max(7, Math.min(12, (circleRadius / maxRadius) * 10 + 5));
+      const countFontSize = Math.max(8, Math.min(14, (circleRadius / maxRadius) * 12 + 6));
       
       // Assign color based on item index for colorful variety
       const itemColor = COLORS[index % COLORS.length];
       
       return {
         ...item,
-        x,
-        y,
+        x: position.x,
+        y: position.y,
         range: range.label,
         color: itemColor,
         radius: range.radius,
@@ -263,6 +322,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     setHoveredItem(item);
   };
 
+  // ... keep existing code (getTooltipContent function)
   const getTooltipContent = (item: any) => {
     if (viewMode === 'courses' && item.course) {
       const course = item.course;
@@ -398,7 +458,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           
           {/* Data items */}
           {processedData.items.map((item, index) => {
-            const wrappedLines = wrapText(item.name, 14);
+            const wrappedLines = wrapText(item.name, 12, 2); // Max 12 chars per line, 2 lines max
             
             return (
               <g key={index}>
@@ -408,19 +468,19 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                   r={item.circleRadius}
                   fill={item.color}
                   stroke="white"
-                  strokeWidth="3"
+                  strokeWidth="2"
                   className="cursor-pointer transition-all duration-200 hover:opacity-80"
                   onMouseEnter={(e) => handleItemHover(item, e)}
                   onMouseLeave={() => setHoveredItem(null)}
                   opacity="0.9"
                 />
                 
-                {/* Multi-line title */}
+                {/* Multi-line title with word breaking */}
                 {wrappedLines.map((line, lineIndex) => (
                   <text
                     key={lineIndex}
                     x={item.x}
-                    y={item.y - 8 + (lineIndex * (item.titleFontSize * 1.2))}
+                    y={item.y - 6 + (lineIndex * (item.titleFontSize * 1.1))}
                     textAnchor="middle"
                     className="font-bold fill-white pointer-events-none"
                     style={{ fontSize: `${item.titleFontSize}px` }}
@@ -429,10 +489,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                   </text>
                 ))}
                 
-                {/* Student count - positioned with more gap below title */}
+                {/* Student count - positioned with proper spacing below title */}
                 <text
                   x={item.x}
-                  y={item.y + (wrappedLines.length * (item.titleFontSize * 0.6)) + 15}
+                  y={item.y + (wrappedLines.length * (item.titleFontSize * 0.6)) + 12}
                   textAnchor="middle"
                   className="font-semibold fill-white pointer-events-none"
                   style={{ fontSize: `${item.countFontSize}px` }}
