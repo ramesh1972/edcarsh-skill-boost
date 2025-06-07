@@ -89,7 +89,7 @@ const ToolsNavigation: React.FC = () => {
           border-right: none;
         }
       `}</style>
-      <div className="fixed bottom-0 left-0 right-0 bg-primary z-10 overflow-x-auto px-[15px]">
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-primary/90 via-primary/80 to-primary/90 backdrop-blur-md border-t border-white/20 z-10 overflow-x-auto px-[15px]">
         <nav className="flex items-stretch justify-end min-w-max px-4">
           {tabItems.map(item => (
             <div

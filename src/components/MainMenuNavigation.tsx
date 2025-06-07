@@ -41,6 +41,9 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
                 position: absolute;
                 bottom: -6px;
                 width: 25px;
+                height: 21px;
+                /* Gradient background for corners */
+                background: bg-background linear-gradient(to bottom, hsl(var(--background)/100), hsl(var(--primary)/10));
                 height: 25px;
                 z-index: 1;
                 /* Gradient border for the curved ends */
@@ -70,6 +73,8 @@ export const MainMenuNavigation: React.FC<MainMenuNavigationProps> = ({
             <div
               key={item.name}
               className={`flex items-center gap-2 px-3 py-2 text-xs  whitespace-nowrap !rounded-t-lg relative ${isActiveRoute(item.href) ?
+                'bg-background bg-gradient-to-b from-primary/25 to-background/100 dark:bg-black/40 border-0 text-foreground tab-curved' :
+                'text-primary-foreground hover:bg-primary-foreground/10'
                 'bg-background bg-gradient-to-b from-primary/40 to-background/100 border-0 text-foreground ' :
                 'text-primary-foreground hover:bg-primary-foreground/30'
                 }`}
