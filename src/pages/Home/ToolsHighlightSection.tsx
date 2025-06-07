@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+
 const ToolsHighlightSection = () => {
   const {
     getIcon
@@ -54,6 +55,7 @@ const ToolsHighlightSection = () => {
     title: "Articles",
     description: "Curated industry insights, best practices, and latest trends to complement your practical learning experience."
   }];
+  
   return <section ref={toolsAnimation.ref} className={`py-20 w-full mx-auto bg-gradient-to-r from-[#0f172a] via-primary/30 to-[#1e293b] transition-all duration-700 ${toolsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'}`}>
       <div className="container px-4 mx-auto">
         <div className={`text-center mb-16 transition-all duration-700 delay-300 ${toolsAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'}`}>
@@ -69,7 +71,7 @@ const ToolsHighlightSection = () => {
 
         {/* Tools List */}
         <div className="max-w-6xl mx-auto space-y-4">
-          {tools.map((tool, index) => <div key={index} className={`bg-background/95 backdrop-blur-md border-2 border-primary/30 rounded-xl p-4 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02] hover:border-primary/60 group relative overflow-hidden ${toolsAnimation.isVisible ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}` : 'opacity-0 translate-y-10'}`} style={{
+          {tools.map((tool, index) => <div key={index} className={`rounded-xl p-4 hover:scale-[1.02] transition-all duration-500 group relative overflow-hidden ${toolsAnimation.isVisible ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}` : 'opacity-0 translate-y-10'}`} style={{
           transitionDelay: toolsAnimation.isVisible ? `${400 + index * 80}ms` : '0ms'
         }}>
               
@@ -127,4 +129,5 @@ const ToolsHighlightSection = () => {
       </div>
     </section>;
 };
+
 export default ToolsHighlightSection;
