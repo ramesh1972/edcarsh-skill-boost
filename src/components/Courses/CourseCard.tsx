@@ -99,32 +99,37 @@ const CourseCard: React.FC<CourseCardProps> = ({
             ))}
           </div>
         </div>
-      </CardContent>
-      
+
+        <CardContent className="flex-1 flex flex-col p-6 pt-0 pb-0">
         {/* Instructor Section - aligned to top */}
         <div className="mb-4">
           <InstructorCard instructor={instructor} hideDescription={true} size="sm" />
         </div>
-
+        </CardContent>
+        
+        
         {/* Spacer to push content to bottom */}
         <div className="flex-1"></div>
 
+        <CardContent className="flex-1 flex flex-col p-6 pt-0 pb-0">
         {/* Bottom section - Course Info and Action Buttons */}
-        <div className="mt-auto space-y-3 pb-3">
+        <div className="mt-auto space-y-3">
           <CourseInfoCard 
             duration={course.duration} 
             students={course.students} 
             price={course.price} 
             nextSession={course.nextSession} 
           />
-          
+        </div>
+        </CardContent>
+          <CardContent className="flex-1 flex flex-col p-6 pt-0 pb-0">
           <ActionButtons 
             courseId={course.id} 
             nextSession={course.nextSession} 
             onViewClick={handleViewClick} 
           />
-        </div>
-
+        
+      </CardContent>
     </Card>
   );
 };
