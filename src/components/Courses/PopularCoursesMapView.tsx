@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
@@ -49,7 +48,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     const min = sortedCounts[sortedCounts.length - 1];
     
     if (max === min) {
-      return [{ min, max, label: `${min}`, radius: 300 }];
+      return [{ min, max, label: `${min}`, radius: 450 }];
     }
     
     // Determine number of ranges based on data spread
@@ -59,8 +58,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     
     const ranges = [];
     const step = dataRange / rangeCount;
-    const baseRadius = 150;
-    const radiusIncrement = 100;
+    const baseRadius = 200;
+    const radiusIncrement = 150;
     
     for (let i = 0; i < rangeCount; i++) {
       const rangeMin = i === rangeCount - 1 ? min : Math.ceil(max - (step * (i + 1)));
@@ -192,8 +191,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       
       // Calculate circle radius based on student count proportionally across all data
       const studentRatio = globalMax === globalMin ? 1 : (item.students - globalMin) / (globalMax - globalMin);
-      const minRadius = 25;
-      const maxRadius = 80;
+      const minRadius = 40;
+      const maxRadius = 120;
       const circleRadius = minRadius + (studentRatio * (maxRadius - minRadius));
       
       return {
@@ -236,7 +235,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           
           {/* Data items */}
           {processedData.items.map((item, index) => {
-            const wrappedLines = wrapText(item.name, 12);
+            const wrappedLines = wrapText(item.name, 14);
             
             return (
               <g key={index}>
@@ -258,10 +257,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                   <text
                     key={lineIndex}
                     x={item.x}
-                    y={item.y - 10 + (lineIndex * 8)}
+                    y={item.y - 12 + (lineIndex * 10)}
                     textAnchor="middle"
                     className="font-bold fill-white pointer-events-none"
-                    style={{ fontSize: '7px' }}
+                    style={{ fontSize: '10px' }}
                   >
                     {line}
                   </text>
@@ -270,10 +269,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 {/* Student count - positioned clearly below title */}
                 <text
                   x={item.x}
-                  y={item.y + (wrappedLines.length * 4) + 8}
+                  y={item.y + (wrappedLines.length * 5) + 12}
                   textAnchor="middle"
                   className="font-semibold fill-white pointer-events-none"
-                  style={{ fontSize: '9px' }}
+                  style={{ fontSize: '12px' }}
                 >
                   {item.students.toLocaleString()}
                 </text>
