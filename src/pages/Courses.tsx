@@ -8,10 +8,10 @@ import { courses } from '@/data/courses';
 import { getAllIndustries, getSubjectsByIndustry } from '@/data/masterData';
 import { Filter, ArrowUpDown, LayoutGrid, List, Calendar as CalendarIcon, MapPin, ArrowUp, ArrowDown } from 'lucide-react';
 import { isAfter, parseISO, isSameDay } from 'date-fns';
-import CourseCard from '@/components/courses/CourseCard';
-import LongCourseCard from '@/components/courses/LongCourseCard';
-import CoursesCalendarView from '@/components/courses/CoursesCalendarView';
-import PopularCoursesMapView from '@/components/courses/PopularCoursesMapView';
+import CourseCard from '@/components/Courses/CourseCard';
+import LongCourseCard from '@/components/Courses/LongCourseCard';
+import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
+import PopularCoursesMapView from '@/components/Courses/PopularCoursesMapView';
 import TitleComponent from '@/components/common/TitleComponent';
 
 const Courses = () => {
