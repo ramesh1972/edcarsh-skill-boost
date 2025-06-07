@@ -32,7 +32,7 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
   const instructorCourses = getInstructorCourses(instructor.id || 0);
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="max-w-8xl mx-auto p-6">
       {/* Main Profile Card */}
       <Card className="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 mb-8">
         <CardHeader className="text-center pb-6">
