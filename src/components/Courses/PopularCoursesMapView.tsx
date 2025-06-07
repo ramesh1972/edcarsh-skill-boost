@@ -3,8 +3,6 @@ import React, { useState, useMemo } from 'react';
 import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
 import { ViewMode } from './MapView/types';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { getIndustryNameById, getSubjectNameById } from '@/data/masterData';
 
 interface PopularCoursesMapViewProps {
@@ -19,9 +17,12 @@ const COLORS = [
 
 const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('industry');
+  const [hoveredItem, setHoveredItem] = useState<any>(null);
 
-  const sunburstData = useMemo(() => {
-    if (!courses.length) return [];
+  const processedData = useMemo(() => {
+    if (!courses.length) return { ranges: [], items: [] };
+
+    let items: any[] = [];
 
     if (viewMode === 'industry') {
       const industryMap = new Map();
@@ -34,14 +35,12 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         industryMap.set(industryName, industryMap.get(industryName) + course.students);
       });
 
-      return Array.from(industryMap.entries()).map(([name, students], index) => ({
+      items = Array.from(industryMap.entries()).map(([name, students]) => ({
         name,
-        value: students,
-        fill: COLORS[index % COLORS.length]
+        students,
+        type: 'industry'
       }));
-    }
-
-    if (viewMode === 'subject') {
+    } else if (viewMode === 'subject') {
       const subjectMap = new Map();
       
       courses.forEach(course => {
@@ -55,14 +54,12 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         subjectMap.set(fullName, subjectMap.get(fullName) + course.students);
       });
 
-      return Array.from(subjectMap.entries()).map(([name, students], index) => ({
+      items = Array.from(subjectMap.entries()).map(([name, students]) => ({
         name,
-        value: students,
-        fill: COLORS[index % COLORS.length]
+        students,
+        type: 'subject'
       }));
-    }
-
-    if (viewMode === 'topic') {
+    } else if (viewMode === 'topic') {
       const topicMap = new Map();
       
       courses.forEach(course => {
@@ -74,62 +71,65 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         });
       });
 
-      return Array.from(topicMap.entries()).map(([name, students], index) => ({
+      items = Array.from(topicMap.entries()).map(([name, students]) => ({
         name,
-        value: students,
-        fill: COLORS[index % COLORS.length]
+        students,
+        type: 'topic'
       }));
-    }
-
-    if (viewMode === 'courses') {
-      return courses.map((course, index) => ({
+    } else if (viewMode === 'courses') {
+      items = courses.map(course => ({
         name: course.title,
-        value: course.students,
-        fill: COLORS[index % COLORS.length]
+        students: course.students,
+        type: 'course'
       }));
     }
 
-    return [];
-  }, [courses, viewMode]);
+    // Create ranges based on student counts
+    const studentCounts = items.map(item => item.students).sort((a, b) => b - a);
+    const max = studentCounts[0] || 0;
+    const min = studentCounts[studentCounts.length - 1] || 0;
+    
+    const rangeSize = Math.max(1, Math.ceil((max - min) / 4));
+    const ranges = [
+      { min: Math.ceil(max * 0.75), max: max, label: 'High', radius: 120 },
+      { min: Math.ceil(max * 0.5), max: Math.ceil(max * 0.75) - 1, label: 'Medium-High', radius: 160 },
+      { min: Math.ceil(max * 0.25), max: Math.ceil(max * 0.5) - 1, label: 'Medium', radius: 200 },
+      { min: min, max: Math.ceil(max * 0.25) - 1, label: 'Low', radius: 240 }
+    ];
 
-  const chartConfig = useMemo(() => {
-    const config: any = {};
-    sunburstData.forEach((item, index) => {
-      config[item.name] = {
-        label: item.name,
-        color: item.fill
+    // Assign items to ranges and calculate positions
+    const itemsWithPositions = items.map((item, index) => {
+      const range = ranges.find(r => item.students >= r.min && item.students <= r.max) || ranges[ranges.length - 1];
+      const rangeIndex = ranges.indexOf(range);
+      
+      // Items in the same range
+      const itemsInRange = items.filter(i => {
+        const r = ranges.find(rng => i.students >= rng.min && i.students <= rng.max) || ranges[ranges.length - 1];
+        return r === range;
+      });
+      
+      const angleStep = (2 * Math.PI) / itemsInRange.length;
+      const itemIndexInRange = itemsInRange.indexOf(item);
+      const angle = angleStep * itemIndexInRange;
+      
+      const x = Math.cos(angle) * range.radius;
+      const y = Math.sin(angle) * range.radius;
+      
+      return {
+        ...item,
+        x,
+        y,
+        range: range.label,
+        color: COLORS[rangeIndex % COLORS.length],
+        radius: range.radius
       };
     });
-    return config;
-  }, [sunburstData]);
+
+    return { ranges, items: itemsWithPositions };
+  }, [courses, viewMode]);
 
   const handleViewModeChange = (mode: ViewMode) => {
     setViewMode(mode);
-  };
-
-  const renderCustomLabel = (entry: any) => {
-    const { cx, cy, midAngle, innerRadius, outerRadius, name, value } = entry;
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * Math.PI / 180);
-    const y = cy + radius * Math.sin(-midAngle * Math.PI / 180);
-
-    // Only show label if the slice is large enough
-    const percentage = (value / sunburstData.reduce((sum, item) => sum + item.value, 0)) * 100;
-    if (percentage < 5) return null;
-
-    return (
-      <text 
-        x={x} 
-        y={y} 
-        fill="white" 
-        textAnchor={x > cx ? 'start' : 'end'} 
-        dominantBaseline="central"
-        fontSize="12"
-        fontWeight="bold"
-      >
-        {name.length > 15 ? `${name.substring(0, 12)}...` : name}
-      </text>
-    );
   };
 
   return (
@@ -137,49 +137,91 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
       
       <div className="relative w-full h-[600px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
-        <ChartContainer config={chartConfig} className="w-full h-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={sunburstData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={renderCustomLabel}
-                outerRadius={250}
-                innerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-                stroke="#ffffff"
-                strokeWidth={2}
-              >
-                {sunburstData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.fill} />
-                ))}
-              </Pie>
-              <ChartTooltip 
-                content={({ active, payload, label }) => {
-                  if (active && payload && payload.length) {
-                    const data = payload[0].payload;
-                    return (
-                      <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border">
-                        <p className="font-semibold">{data.name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {data.value.toLocaleString()} students
-                        </p>
-                      </div>
-                    );
-                  }
-                  return null;
-                }}
+        <svg width="100%" height="100%" viewBox="-300 -300 600 600" className="absolute inset-0">
+          {/* Range circles */}
+          {processedData.ranges.map((range, index) => (
+            <circle
+              key={index}
+              cx="0"
+              cy="0"
+              r={range.radius}
+              fill="none"
+              stroke="rgba(156, 163, 175, 0.3)"
+              strokeWidth="1"
+              strokeDasharray="5,5"
+            />
+          ))}
+          
+          {/* Data items */}
+          {processedData.items.map((item, index) => (
+            <g key={index}>
+              <circle
+                cx={item.x}
+                cy={item.y}
+                r={Math.max(8, Math.min(20, item.students / 5))}
+                fill={item.color}
+                stroke="white"
+                strokeWidth="2"
+                className="cursor-pointer transition-all duration-200 hover:opacity-80"
+                onMouseEnter={() => setHoveredItem(item)}
+                onMouseLeave={() => setHoveredItem(null)}
               />
-            </PieChart>
-          </ResponsiveContainer>
-        </ChartContainer>
+              <text
+                x={item.x}
+                y={item.y + 4}
+                textAnchor="middle"
+                className="text-xs font-semibold fill-white pointer-events-none"
+                style={{ fontSize: Math.max(8, Math.min(12, item.students / 10)) }}
+              >
+                {item.name.length > 10 ? `${item.name.substring(0, 8)}...` : item.name}
+              </text>
+            </g>
+          ))}
+        </svg>
+        
+        {/* Center label */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="text-center">
+            <div className="text-lg font-semibold text-muted-foreground capitalize">
+              {viewMode === 'courses' ? 'Courses' : viewMode}
+            </div>
+            <div className="text-sm text-muted-foreground">
+              {processedData.items.length} items
+            </div>
+          </div>
+        </div>
+        
+        {/* Hover tooltip */}
+        {hoveredItem && (
+          <div className="absolute top-4 left-4 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border max-w-xs">
+            <p className="font-semibold">{hoveredItem.name}</p>
+            <p className="text-sm text-muted-foreground">
+              {hoveredItem.students.toLocaleString()} students
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Range: {hoveredItem.range}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Legend */}
+      <div className="flex flex-wrap justify-center gap-4">
+        {processedData.ranges.map((range, index) => (
+          <div key={index} className="flex items-center gap-2">
+            <div 
+              className="w-4 h-4 rounded-full"
+              style={{ backgroundColor: COLORS[index % COLORS.length] }}
+            />
+            <span className="text-sm text-muted-foreground">
+              {range.label} ({range.min}-{range.max === processedData.ranges[0].max ? `${range.max}+` : range.max})
+            </span>
+          </div>
+        ))}
       </div>
 
       <div className="text-sm text-muted-foreground text-center">
-        {sunburstData.length} {viewMode === 'courses' ? 'courses' : viewMode === 'industry' ? 'industries' : viewMode === 'subject' ? 'subjects' : 'topics'} displayed
+        {processedData.items.length} {viewMode === 'courses' ? 'courses' : viewMode === 'industry' ? 'industries' : viewMode === 'subject' ? 'subjects' : 'topics'} displayed in concentric circles
       </div>
     </div>
   );
