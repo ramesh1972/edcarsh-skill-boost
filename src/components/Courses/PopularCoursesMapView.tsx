@@ -1,175 +1,203 @@
-
-import React, { useState, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { getSubjectColor } from '@/data/masterData';
-import { getInstructorById } from '@/data/instructors';
-import { MapPin, Users, Clock, DollarSign, TrendingUp } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Course } from '@/types';
+import { getInstructorById } from '@/data/instructors';
+import { ViewModeSelector } from '../common/ViewModeSelector';
+import { MapPin } from 'lucide-react';
 
 interface PopularCoursesMapViewProps {
   courses: Course[];
 }
 
 const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }) => {
-  const [selectedRegion, setSelectedRegion] = useState('all');
-  
-  // Group courses by instructor location
-  const coursesByLocation = useMemo(() => {
-    const locationMap = new Map();
-    
-    courses.forEach(course => {
-      const instructor = getInstructorById(course.instructorId);
-      if (!instructor) return;
-      
-      const locationKey = `${instructor.city}, ${instructor.country}`;
-      
-      if (!locationMap.has(locationKey)) {
-        locationMap.set(locationKey, {
-          city: instructor.city,
-          country: instructor.country,
-          flag: instructor.flag,
-          courses: [],
-          totalStudents: 0,
-          instructors: new Set()
-        });
-      }
-      
-      const location = locationMap.get(locationKey);
-      location.courses.push(course);
-      location.totalStudents += course.students;
-      location.instructors.add(instructor.name);
-    });
-    
-    return Array.from(locationMap.entries()).map(([key, value]) => ({
-      location: key,
-      ...value,
-      instructorCount: value.instructors.size
+  const [viewMode, setViewMode] = useState<'geo' | 'network'>('geo');
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
+  const svgRef = useRef<SVGSVGElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const [tooltipContent, setTooltipContent] = useState<{ title: string; instructor: string; } | null>(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+
+  const handleViewModeChange = (mode: 'geo' | 'network') => {
+    setViewMode(mode);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent<SVGSVGElement>) => {
+    setIsDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<SVGSVGElement>) => {
+    if (!isDragging) return;
+
+    const deltaX = e.clientX - dragStart.x;
+    const deltaY = e.clientY - dragStart.y;
+
+    setTransform(prev => ({
+      ...prev,
+      x: prev.x + deltaX,
+      y: prev.y + deltaY,
     }));
-  }, [courses]);
 
-  // Get unique countries for filter
-  const countries = ['all', ...Array.from(new Set(coursesByLocation.map(loc => loc.country)))];
+    setDragStart({ x: e.clientX, y: e.clientY });
+  };
 
-  const filteredLocations = selectedRegion === 'all' 
-    ? coursesByLocation 
-    : coursesByLocation.filter(loc => loc.country === selectedRegion);
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleWheel = (e: React.WheelEvent<SVGSVGElement>) => {
+    e.preventDefault();
+    const scaleFactor = e.deltaY > 0 ? 0.9 : 1.1;
+
+    setTransform(prev => ({
+      ...prev,
+      scale: Math.max(0.5, Math.min(2, prev.scale * scaleFactor)),
+    }));
+  };
+
+  const handleNodeHover = (e: React.MouseEvent<SVGCircleElement>, course: Course) => {
+    const instructor = getInstructorById(course.instructorId);
+    if (!instructor) return;
+
+    setTooltipContent({
+      title: course.title,
+      instructor: instructor.name,
+    });
+
+    const svgRect = svgRef.current?.getBoundingClientRect();
+    if (!svgRect) return;
+
+    setTooltipPosition({
+      x: e.clientX - svgRect.left + 10,
+      y: e.clientY - svgRect.top - 20,
+    });
+
+    if (tooltipRef.current) {
+      tooltipRef.current.style.opacity = '1';
+      tooltipRef.current.style.visibility = 'visible';
+    }
+  };
+
+  const handleNodeLeave = () => {
+    setTooltipContent(null);
+    if (tooltipRef.current) {
+      tooltipRef.current.style.opacity = '0';
+      tooltipRef.current.style.visibility = 'hidden';
+    }
+  };
+
+  const processedCourses = courses.map(course => {
+    const instructor = getInstructorById(course.instructorId);
+    return {
+      ...course,
+      instructor: instructor || {
+        id: 0,
+        name: 'Unknown Instructor',
+        image: '/placeholder.svg',
+        experience: '',
+        specialty: '',
+        city: '',
+        country: '',
+        flag: '',
+        description: ''
+      }
+    };
+  });
 
   return (
-    <div className="space-y-6">
-      {/* Filter Controls */}
-      <div className="flex items-center gap-4 p-4 bg-card rounded-lg border">
-        <MapPin className="h-5 w-5 text-primary" />
-        <span className="font-medium">Filter by Region:</span>
-        <Select value={selectedRegion} onValueChange={setSelectedRegion}>
-          <SelectTrigger className="w-[200px]">
-            <SelectValue placeholder="Select region" />
-          </SelectTrigger>
-          <SelectContent>
-            {countries.map(country => (
-              <SelectItem key={country} value={country}>
-                {country === 'all' ? 'All Regions' : country}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <div className="ml-auto text-sm text-muted-foreground">
-          {filteredLocations.length} location{filteredLocations.length !== 1 ? 's' : ''}
-        </div>
-      </div>
-
-      {/* Map View - Visual representation */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredLocations
-          .sort((a, b) => b.totalStudents - a.totalStudents)
-          .map((location, index) => (
-            <Card key={location.location} className="hover:shadow-lg transition-shadow">
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <span>{location.flag}</span>
-                    <span>{location.city}</span>
-                  </CardTitle>
-                  <Badge variant="secondary" className="flex items-center gap-1">
-                    <TrendingUp className="w-3 h-3" />
-                    #{index + 1}
-                  </Badge>
-                </div>
-                <p className="text-sm text-muted-foreground">{location.country}</p>
-              </CardHeader>
-              
-              <CardContent className="space-y-4">
-                {/* Location Stats */}
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4 text-blue-500" />
-                    <span>{location.totalStudents} students</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-green-500" />
-                    <span>{location.courses.length} courses</span>
-                  </div>
-                </div>
-
-                {/* Top Courses Preview */}
-                <div>
-                  <h4 className="font-medium text-sm mb-2">Popular Courses:</h4>
-                  <div className="space-y-2">
-                    {location.courses
-                      .sort((a, b) => b.students - a.students)
-                      .slice(0, 3)
-                      .map(course => {
-                        const instructor = getInstructorById(course.instructorId);
-                        return (
-                          <div key={course.id} className="p-2 bg-muted/50 rounded text-xs">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="font-medium truncate flex-1">{course.title}</span>
-                              <Badge 
-                                customColor={getSubjectColor(course.subject)} 
-                                className="text-white text-xs ml-2"
-                              >
-                                {course.subject}
-                              </Badge>
-                            </div>
-                            <div className="flex items-center justify-between text-muted-foreground">
-                              <span>{instructor?.name}</span>
-                              <span className="flex items-center gap-1">
-                                <Users className="w-3 h-3" />
-                                {course.students}
-                              </span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
-                </div>
-
-                {/* Action Button */}
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-full"
-                  onClick={() => {
-                    // This could navigate to a filtered view of courses by location
-                    console.log(`View all courses in ${location.city}`);
+    <div className="w-full h-[600px] relative bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden">
+      <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
+      
+      <div className="absolute inset-0 pt-16">
+        <svg
+          ref={svgRef}
+          className="w-full h-full cursor-move"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onWheel={handleWheel}
+        >
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M40 0H0V40H40 0ZM0 0L40 40M0 40L40 0" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="1" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+          
+          {/* Course nodes */}
+          {processedCourses.map((course, index) => {
+            const angle = (index / processedCourses.length) * 2 * Math.PI;
+            const radius = 200;
+            const nodeX = 300 + radius * Math.cos(angle);
+            const nodeY = 300 + radius * Math.sin(angle);
+            
+            return (
+              <g key={course.id} transform={`translate(${nodeX}, ${nodeY})`}>
+                <circle
+                  cx={0}
+                  cy={0}
+                  r={10}
+                  fill="rgba(255, 255, 255, 0.8)"
+                  stroke="rgba(0, 0, 0, 0.7)"
+                  strokeWidth="2"
+                  style={{
+                    transform: `scale(${transform.scale}) translate(${transform.x}px, ${transform.y}px)`,
+                    transition: 'transform 0.3s ease-out',
                   }}
-                >
-                  View All Courses
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-      </div>
-
-      {filteredLocations.length === 0 && (
-        <div className="text-center py-12 text-muted-foreground">
-          <MapPin className="w-12 h-12 mx-auto mb-4 opacity-50" />
-          <h3 className="text-lg font-medium mb-2">No courses found</h3>
-          <p>No courses available in the selected region.</p>
+                  onMouseEnter={(e) => handleNodeHover(e, course)}
+                  onMouseLeave={handleNodeLeave}
+                />
+              </g>
+            );
+          })}
+          
+          {/* Connections rendering */}
+        </svg>
+        
+        {/* Tooltip */}
+        <div
+          ref={tooltipRef}
+          className="absolute z-10 bg-white border border-gray-300 rounded shadow-md p-2 text-sm opacity-0 transition-opacity duration-200 pointer-events-none"
+          style={{
+            top: tooltipPosition.y,
+            left: tooltipPosition.x,
+            visibility: 'hidden',
+          }}
+        >
+          {tooltipContent && (
+            <>
+              <div className="font-semibold">{tooltipContent.title}</div>
+              <div>Instructor: {tooltipContent.instructor}</div>
+            </>
+          )}
         </div>
-      )}
+        
+        {/* Zoom Controls */}
+        <div className="absolute bottom-4 left-4 bg-white bg-opacity-70 rounded-md shadow-md p-2 flex flex-col gap-2">
+          <button
+            className="p-1 rounded-full hover:bg-gray-200"
+            onClick={() => setTransform(prev => ({ ...prev, scale: Math.min(2, prev.scale * 1.1) }))}
+          >
+            +
+          </button>
+          <button
+            className="p-1 rounded-full hover:bg-gray-200"
+            onClick={() => setTransform(prev => ({ ...prev, scale: Math.max(0.5, prev.scale * 0.9) }))}
+          >
+            -
+          </button>
+        </div>
+        
+        {/* Map Legend */}
+        <div className="absolute bottom-4 right-4 bg-white bg-opacity-70 rounded-md shadow-md p-3">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+            <span>Course Location</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
