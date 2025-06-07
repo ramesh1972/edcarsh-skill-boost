@@ -33,10 +33,6 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
     });
   };
 
-  if (!instructor) {
-    return null; // Don't render if instructor not found
-  }
-  
   return (
     <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       {/* Course Image */}
