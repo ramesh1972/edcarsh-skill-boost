@@ -6,33 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Star, Users, BookOpen, Award, MapPin } from 'lucide-react';
 import LongCourseCard from '@/components/Courses/LongCourseCard';
-
-interface Course {
-  id: number;
-  title: string;
-  longDescription: string;
-  duration: string;
-  price: string;
-  students: number;
-  nextSession: string;
-  image: string;
-  longTopics: string[];
-  level: string;
-  subject: string;
-  industry: string;
-  mode: 'live' | 'offline';
-  tools: boolean;
-  instructor: {
-    name: string;
-    image: string;
-    experience: string;
-    specialty: string;
-    city: string;
-    country: string;
-    flag: string;
-    description: string;
-  };
-}
+import { getInstructorCourses } from '@/data/instructors';
 
 interface Instructor {
   id?: number;
@@ -56,60 +30,7 @@ interface InstructorDetailsProps {
 }
 
 const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClose }) => {
-  // Mock courses data - in a real app, this would come from an API
-  const instructorCourses: Course[] = [
-    {
-      id: 1,
-      title: "React Fundamentals Crash Course",
-      longDescription: "Master the fundamentals of React including components, state management, hooks, and modern development practices. This comprehensive course covers everything you need to know to build professional React applications from scratch.",
-      duration: "2 hours",
-      price: "$99",
-      students: 45,
-      nextSession: "2024-12-15 14:00",
-      image: "/placeholder.svg",
-      longTopics: ["JSX Syntax", "Component Architecture", "State & Props", "Event Handling", "Hooks (useState, useEffect)", "Context API", "Router Integration", "Performance Optimization"],
-      level: "Beginner",
-      subject: "Web Development",
-      industry: "Technology",
-      mode: "live",
-      tools: true,
-      instructor: instructor
-    },
-    {
-      id: 2,
-      title: "Advanced TypeScript Patterns",
-      longDescription: "Dive deep into advanced TypeScript concepts and design patterns. Learn how to leverage TypeScript's powerful type system to build robust, maintainable applications with confidence.",
-      duration: "3 hours",
-      price: "$149",
-      students: 32,
-      nextSession: "2024-12-18 16:00",
-      image: "/placeholder.svg",
-      longTopics: ["Generic Types", "Conditional Types", "Mapped Types", "Template Literals", "Decorators", "Advanced Interfaces", "Type Guards", "Utility Types"],
-      level: "Advanced",
-      subject: "Programming",
-      industry: "Technology",
-      mode: "live",
-      tools: true,
-      instructor: instructor
-    },
-    {
-      id: 3,
-      title: "Frontend Architecture Best Practices",
-      longDescription: "Learn how to design and implement scalable frontend architectures. Understand patterns, principles, and practices that will help you build maintainable and performant web applications.",
-      duration: "2.5 hours",
-      price: "$129",
-      students: 28,
-      nextSession: "2024-12-20 10:00",
-      image: "/placeholder.svg",
-      longTopics: ["Component Design", "State Management", "Code Organization", "Performance Patterns", "Testing Strategies", "Build Optimization", "Deployment Strategies", "Monitoring & Analytics"],
-      level: "Intermediate",
-      subject: "Architecture",
-      industry: "Technology",
-      mode: "offline",
-      tools: false,
-      instructor: instructor
-    }
-  ];
+  const instructorCourses = getInstructorCourses(instructor.id || 0);
 
   return (
     <div className="max-w-6xl mx-auto p-6">
@@ -197,7 +118,19 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
           {instructorCourses.map((course) => (
             <LongCourseCard 
               key={course.id} 
-              course={course}
+              course={{
+                ...course,
+                instructor: {
+                  name: instructor.name,
+                  image: instructor.image,
+                  experience: instructor.experience,
+                  specialty: instructor.specialty,
+                  city: instructor.city,
+                  country: instructor.country,
+                  flag: instructor.flag,
+                  description: instructor.description
+                }
+              }}
               referrerRoute={`/instructors/${instructor.id}`}
               referrerName={instructor.name}
             />

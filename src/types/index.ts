@@ -1,5 +1,6 @@
 
 export interface Instructor {
+  id?: number;
   name: string;
   image: string;
   experience: string;
@@ -8,6 +9,10 @@ export interface Instructor {
   country: string;
   flag: string;
   description: string;
+  rating?: number;
+  students?: number;
+  courses?: number;
+  expertise?: string;
 }
 
 export interface Course {
@@ -34,4 +39,5 @@ export interface Course {
   mode: 'live' | 'offline';
   tools: boolean;
   instructor: Instructor;
+  instructorId?: number;
 }
