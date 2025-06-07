@@ -91,7 +91,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         {/* Topics Covered - Fixed height for alignment, max 6 topics */}
         <div className="mb-3">
           <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
-          <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
+          <div className="flex flex-wrap mb-2 gap-1 h-[45px] content-start overflow-hidden">
             {course.topics.slice(0, 6).map((topic, index) => (
               <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                 {topic}
@@ -109,7 +109,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <div className="flex-1"></div>
 
         {/* Bottom section - Course Info and Action Buttons */}
-        <div className="mt-auto space-y-3 pb-3">
+        <div className="mt-auto space-y-3">
           <CourseInfoCard 
             duration={course.duration} 
             students={course.students} 
