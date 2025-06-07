@@ -82,7 +82,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start max-h-30 overflow-hidden">{course.mediumDescription}</CardDescription>
       </CardHeader>
 
-      <CardContent className="flex-1 flex flex-col ">
+      <CardContent className="flex-1 flex flex-col h-100">
         {/* Topics Covered - Fixed height for alignment, max 6 topics */}
         <div className="flex-shrink-0 mb-1 ">
           <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
