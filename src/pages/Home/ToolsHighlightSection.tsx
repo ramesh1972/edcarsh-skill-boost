@@ -1,13 +1,11 @@
 import React from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+
 const ToolsHighlightSection = () => {
-  const {
-    getIcon
-  } = useTheme();
-  const toolsAnimation = useScrollAnimation({
-    threshold: 0.1
-  });
+  const { getIcon } = useTheme();
+  const toolsAnimation = useScrollAnimation({ threshold: 0.1 });
+
   const tools = [{
     iconName: "course",
     iconColor: "text-blue-500",
@@ -54,7 +52,14 @@ const ToolsHighlightSection = () => {
     title: "Articles",
     description: "Curated industry insights, best practices, and latest trends to complement your practical learning experience."
   }];
-  return <section ref={toolsAnimation.ref} className={`py-20 w-full mx-auto bg-gradient-to-r from-[#0f172a] via-primary/30 to-[#1e293b] transition-all duration-700 ${toolsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'}`}>
+
+  return (
+    <section 
+      ref={toolsAnimation.ref} 
+      className={`py-20 w-full mx-auto bg-gradient-to-r from-[#0f172a] via-primary/30 to-[#1e293b] transition-all duration-700 ${
+        toolsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
+      }`}
+    >
       <div className="container px-4 mx-auto">
         <div className={`text-center mb-16 transition-all duration-700 delay-300 ${toolsAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl font-bold mb-6 text-white">🚀 Hands-On Tools for Live Learning</h2>
@@ -69,9 +74,18 @@ const ToolsHighlightSection = () => {
 
         {/* Tools List */}
         <div className="max-w-6xl mx-auto space-y-4">
-          {tools.map((tool, index) => <div key={index} className={`bg-background/95 backdrop-blur-md border-2 border-primary/30 rounded-xl p-4 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02] hover:border-primary/60 group relative overflow-hidden ${toolsAnimation.isVisible ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}` : 'opacity-0 translate-y-10'}`} style={{
-          transitionDelay: toolsAnimation.isVisible ? `${400 + index * 80}ms` : '0ms'
-        }}>
+          {tools.map((tool, index) => (
+            <div
+              key={index}
+              className={`rounded-xl p-4 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02] group relative overflow-hidden ${
+                toolsAnimation.isVisible 
+                  ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}` 
+                  : 'opacity-0 translate-y-10'
+              }`}
+              style={{
+                transitionDelay: toolsAnimation.isVisible ? `${400 + index * 80}ms` : '0ms'
+              }}
+            >
               {/* Animated background glow */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-blue-600/10 to-purple-600/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-blue-600/20 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500 bg-transparent"></div>
@@ -99,7 +113,7 @@ const ToolsHighlightSection = () => {
 
                 {/* Tool Description */}
                 <div className="flex-1">
-                  <div className="bg-muted/60 rounded-lg p-4 border border-muted/40 group-hover:border-muted/60 transition-all duration-300">
+                  <div className="rounded-lg p-4 border border-muted/40 group-hover:border-muted/60 transition-all duration-300">
                     <p className="text-base text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
                       ✨ {tool.description}
                     </p>
@@ -114,7 +128,8 @@ const ToolsHighlightSection = () => {
               <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                 <div className="w-1.5 h-1.5 bg-blue-400/60 rounded-full animate-pulse"></div>
               </div>
-            </div>)}
+            </div>
+          ))}
         </div>
 
         {/* Bottom CTA */}
@@ -128,6 +143,8 @@ const ToolsHighlightSection = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default ToolsHighlightSection;
