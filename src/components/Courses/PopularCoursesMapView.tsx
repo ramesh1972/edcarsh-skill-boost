@@ -338,10 +338,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                   </text>
                 ))}
                 
-                {/* Student count - positioned clearly below title */}
+                {/* Student count - positioned with more gap below title */}
                 <text
                   x={item.x}
-                  y={item.y + (wrappedLines.length * (item.titleFontSize * 0.6)) + 15}
+                  y={item.y + (wrappedLines.length * (item.titleFontSize * 0.6)) + 25}
                   textAnchor="middle"
                   className="font-semibold fill-white pointer-events-none"
                   style={{ fontSize: `${item.countFontSize}px` }}
