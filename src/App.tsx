@@ -13,6 +13,7 @@ import CourseView from "@/components/Courses/CourseView";
 import Dashboard from "./pages/Dashboard";
 import ExpressIntent from "./pages/ExpressIntent";
 import Instructors from "./pages/Instructors";
+import InstructorDetail from "./pages/InstructorDetail";
 import Testimonials from "./pages/Testimonials";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
@@ -71,6 +72,7 @@ const AppContent = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/express-intent" element={<ExpressIntent />} />
             <Route path="/instructors" element={<Instructors />} />
+            <Route path="/instructors/:id" element={<InstructorDetail />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/contact" element={<Contact />} />

@@ -1,11 +1,12 @@
 
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Info } from 'lucide-react';
-import InstructorDetailsModal from './InstructorDetailsModal';
 
 interface Instructor {
+  id?: number;
   name: string;
   image: string;
   experience: string;
@@ -43,8 +44,6 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
   className = '',
   onAboutClick
 }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const sizeConfig = {
     sm: {
       avatar: 'h-8 w-8',
@@ -83,106 +82,68 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
   const handleAboutClick = () => {
     if (onAboutClick) {
       onAboutClick();
-    } else {
-      setIsModalOpen(true);
     }
+  };
+
+  const AboutButton = () => {
+    if (hideAboutButton) return null;
+    
+    if (onAboutClick) {
+      return (
+        <Button 
+          variant="outline" 
+          size="sm" 
+          className={config.button}
+          onClick={handleAboutClick}
+        >
+          <Info className={`${config.icon} mr-1`} />
+          About
+        </Button>
+      );
+    }
+
+    return (
+      <Link to={`/instructors/${instructor.id}`}>
+        <Button 
+          variant="outline" 
+          size="sm" 
+          className={config.button}
+        >
+          <Info className={`${config.icon} mr-1`} />
+          About
+        </Button>
+      </Link>
+    );
   };
 
   if (layout === 'vertical') {
     return (
-      <>
-        <div className={`flex flex-col items-center text-center ${config.padding} ${className}`}>
-          {showTitle && (
-            <h4 className={`font-medium ${config.title} ${config.spacing.split(' ')[1]}`}>
-              {titleText}
-            </h4>
-          )}
-          <Avatar className={`${config.avatar} flex-shrink-0 mb-2`}>
-            <AvatarImage src={instructor.image} alt={instructor.name} className="rounded-full object-cover" />
-            <AvatarFallback className="rounded-full">
-              {instructor.name.split(' ').map(n => n[0]).join('')}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-center gap-2 mb-1">
-              <h5 className={`font-medium ${config.name}`}>{instructor.name}</h5>
-              <span className={config.details}>{instructor.flag}</span>
-            </div>
-            <p className={`text-muted-foreground mb-1 ${config.details}`}>{instructor.specialty}</p>
-            {!hideExperience && !hideLocation && (
-              <p className={`text-muted-foreground mb-2 ${config.details}`}>
-                {!hideExperience && instructor.experience}
-                {!hideExperience && !hideLocation && ' • '}
-                {!hideLocation && `${instructor.city}, ${instructor.country}`}
-              </p>
-            )}
-            {!hideAboutButton && (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className={config.button}
-                onClick={handleAboutClick}
-              >
-                <Info className={`${config.icon} mr-1`} />
-                About
-              </Button>
-            )}
-          </div>
-          {!hideDescription && (
-            <p className={`text-muted-foreground line-clamp-4 mt-3 ${config.details}`}>
-              {instructor.description}
-            </p>
-          )}
-        </div>
-        <InstructorDetailsModal 
-          instructor={instructor}
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
-      </>
-    );
-  }
-
-  return (
-    <>
-      <div className={`flex flex-col ${config.padding} ${className}`}>
+      <div className={`flex flex-col items-center text-center ${config.padding} ${className}`}>
         {showTitle && (
           <h4 className={`font-medium ${config.title} ${config.spacing.split(' ')[1]}`}>
             {titleText}
           </h4>
         )}
-        <div className={`flex items-start ${config.spacing.split(' ')[0]}`}>
-          <Avatar className={`${config.avatar} flex-shrink-0`}>
-            <AvatarImage src={instructor.image} alt={instructor.name} className="rounded-full object-cover" />
-            <AvatarFallback className="rounded-full">
-              {instructor.name.split(' ').map(n => n[0]).join('')}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <h5 className={`font-medium ${config.name}`}>{instructor.name}</h5>
-              <span className={config.details}>{instructor.flag}</span>
-              {!hideAboutButton && (
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className={config.button}
-                  onClick={handleAboutClick}
-                >
-                  <Info className={`${config.icon} mr-1`} />
-                  About
-                </Button>
-              )}
-            </div>
-            <p className={`text-muted-foreground mb-1 ${config.details}`}>{instructor.specialty}</p>
-            {!hideExperience && !hideLocation && (
-              <p className={`text-muted-foreground ${config.details}`}>
-                {!hideExperience && instructor.experience}
-                {!hideExperience && !hideLocation && ' • '}
-                {!hideLocation && `${instructor.city}, ${instructor.country}`}
-              </p>
-            )}
+        <Avatar className={`${config.avatar} flex-shrink-0 mb-2`}>
+          <AvatarImage src={instructor.image} alt={instructor.name} className="rounded-full object-cover" />
+          <AvatarFallback className="rounded-full">
+            {instructor.name.split(' ').map(n => n[0]).join('')}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center justify-center gap-2 mb-1">
+            <h5 className={`font-medium ${config.name}`}>{instructor.name}</h5>
+            <span className={config.details}>{instructor.flag}</span>
           </div>
+          <p className={`text-muted-foreground mb-1 ${config.details}`}>{instructor.specialty}</p>
+          {!hideExperience && !hideLocation && (
+            <p className={`text-muted-foreground mb-2 ${config.details}`}>
+              {!hideExperience && instructor.experience}
+              {!hideExperience && !hideLocation && ' • '}
+              {!hideLocation && `${instructor.city}, ${instructor.country}`}
+            </p>
+          )}
+          <AboutButton />
         </div>
         {!hideDescription && (
           <p className={`text-muted-foreground line-clamp-4 mt-3 ${config.details}`}>
@@ -190,12 +151,45 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
           </p>
         )}
       </div>
-      <InstructorDetailsModal 
-        instructor={instructor}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
-    </>
+    );
+  }
+
+  return (
+    <div className={`flex flex-col ${config.padding} ${className}`}>
+      {showTitle && (
+        <h4 className={`font-medium ${config.title} ${config.spacing.split(' ')[1]}`}>
+          {titleText}
+        </h4>
+      )}
+      <div className={`flex items-start ${config.spacing.split(' ')[0]}`}>
+        <Avatar className={`${config.avatar} flex-shrink-0`}>
+          <AvatarImage src={instructor.image} alt={instructor.name} className="rounded-full object-cover" />
+          <AvatarFallback className="rounded-full">
+            {instructor.name.split(' ').map(n => n[0]).join('')}
+          </AvatarFallback>
+        </Avatar>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1">
+            <h5 className={`font-medium ${config.name}`}>{instructor.name}</h5>
+            <span className={config.details}>{instructor.flag}</span>
+            <AboutButton />
+          </div>
+          <p className={`text-muted-foreground mb-1 ${config.details}`}>{instructor.specialty}</p>
+          {!hideExperience && !hideLocation && (
+            <p className={`text-muted-foreground ${config.details}`}>
+              {!hideExperience && instructor.experience}
+              {!hideExperience && !hideLocation && ' • '}
+              {!hideLocation && `${instructor.city}, ${instructor.country}`}
+            </p>
+          )}
+        </div>
+      </div>
+      {!hideDescription && (
+        <p className={`text-muted-foreground line-clamp-4 mt-3 ${config.details}`}>
+          {instructor.description}
+        </p>
+      )}
+    </div>
   );
 };
 

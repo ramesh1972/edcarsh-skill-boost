@@ -1,16 +1,12 @@
 
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Star, Users, BookOpen, Award } from 'lucide-react';
 import TitleComponent from '@/components/common/TitleComponent';
-import InstructorDetailsModal from '@/components/instructors/InstructorDetailsModal';
 
 const Instructors = () => {
-  const [selectedInstructor, setSelectedInstructor] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const instructors = [
     {
       id: 1,
@@ -20,12 +16,7 @@ const Instructors = () => {
       students: 1250,
       courses: 8,
       experience: "5+ years at Google",
-      image: "/placeholder.svg",
-      specialty: "React & Frontend Development",
-      city: "San Francisco",
-      country: "USA",
-      flag: "🇺🇸",
-      description: "Sarah is a senior frontend developer with extensive experience at Google. She specializes in React, TypeScript, and modern web development practices. Sarah has mentored hundreds of developers and is passionate about teaching clean code principles and scalable architecture patterns."
+      image: "/placeholder.svg"
     },
     {
       id: 2,
@@ -35,12 +26,7 @@ const Instructors = () => {
       students: 980,
       courses: 12,
       experience: "PhD in Data Science",
-      image: "/placeholder.svg",
-      specialty: "Data Science & Python",
-      city: "Boston",
-      country: "USA",
-      flag: "🇺🇸",
-      description: "Dr. Johnson holds a PhD in Data Science from MIT and has over 10 years of experience in machine learning and data analytics. He has worked with Fortune 500 companies to implement AI solutions and is an expert in Python, R, and statistical modeling."
+      image: "/placeholder.svg"
     },
     {
       id: 3,
@@ -50,19 +36,9 @@ const Instructors = () => {
       students: 2100,
       courses: 15,
       experience: "Marketing Director at Meta",
-      image: "/placeholder.svg",
-      specialty: "Digital Marketing",
-      city: "Los Angeles",
-      country: "USA",
-      flag: "🇺🇸",
-      description: "Lisa is a seasoned digital marketing professional who has led marketing initiatives at Meta (Facebook). She specializes in social media marketing, growth hacking, and digital advertising strategies. Lisa has helped numerous startups scale their user acquisition and retention."
+      image: "/placeholder.svg"
     }
   ];
-
-  const handleViewProfile = (instructor) => {
-    setSelectedInstructor(instructor);
-    setIsModalOpen(true);
-  };
 
   return (
     <div className="min-h-full ">
@@ -112,13 +88,11 @@ const Instructors = () => {
                     </div>
                   </div>
 
-                  <Button 
-                    className="w-full" 
-                    variant="outline"
-                    onClick={() => handleViewProfile(instructor)}
-                  >
-                    View Profile
-                  </Button>
+                  <Link to={`/instructors/${instructor.id}`}>
+                    <Button className="w-full" variant="outline">
+                      View Profile
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -138,12 +112,6 @@ const Instructors = () => {
             </Card>
           </div>
         </div>
-        
-        <InstructorDetailsModal 
-          instructor={selectedInstructor}
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
       </div>
   );
 };
