@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
@@ -59,8 +58,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     
     const ranges = [];
     const step = dataRange / rangeCount;
-    const baseRadius = 200;
-    const radiusIncrement = 150;
+    const baseRadius = 250;
+    const radiusIncrement = 180;
     
     for (let i = 0; i < rangeCount; i++) {
       const rangeMin = i === rangeCount - 1 ? min : Math.ceil(max - (step * (i + 1)));
@@ -192,20 +191,23 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       
       // Calculate circle radius based on student count proportionally across all data
       const studentRatio = globalMax === globalMin ? 1 : (item.students - globalMin) / (globalMax - globalMin);
-      const minRadius = 40;
-      const maxRadius = 120;
+      const minRadius = 50;
+      const maxRadius = 140;
       const circleRadius = minRadius + (studentRatio * (maxRadius - minRadius));
       
       // Calculate font sizes based on circle radius
-      const titleFontSize = Math.max(8, Math.min(16, (circleRadius / maxRadius) * 12 + 6));
-      const countFontSize = Math.max(10, Math.min(18, (circleRadius / maxRadius) * 14 + 8));
+      const titleFontSize = Math.max(10, Math.min(18, (circleRadius / maxRadius) * 14 + 8));
+      const countFontSize = Math.max(12, Math.min(20, (circleRadius / maxRadius) * 16 + 10));
+      
+      // Assign color based on item index within all items for variety
+      const itemColor = COLORS[index % COLORS.length];
       
       return {
         ...item,
         x,
         y,
         range: range.label,
-        color: COLORS[rangeIndex % COLORS.length],
+        color: itemColor,
         radius: range.radius,
         circleRadius,
         titleFontSize,
@@ -224,8 +226,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     <div className="w-full space-y-6">
       <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
       
-      <div className="relative w-full h-[1400px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
-        <svg width="100%" height="100%" viewBox="-800 -700 1600 1400" className="absolute inset-0">
+      <div className="relative w-full h-[1600px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
+        <svg width="100%" height="100%" viewBox="-1000 -800 2000 1600" className="absolute inset-0">
           {/* Range circles */}
           {processedData.ranges.map((range, index) => (
             <circle
