@@ -27,6 +27,10 @@ export const ViewModeSelector: React.FC<ViewModeSelectorProps> = ({ viewMode, on
           <Label htmlFor="subject" className="text-sm cursor-pointer">By Subject</Label>
         </div>
         <div className="flex items-center space-x-2">
+          <RadioGroupItem value="topic" id="topic" />
+          <Label htmlFor="topic" className="text-sm cursor-pointer">By Topic</Label>
+        </div>
+        <div className="flex items-center space-x-2">
           <RadioGroupItem value="courses" id="courses" />
           <Label htmlFor="courses" className="text-sm cursor-pointer">Individual Courses</Label>
         </div>
