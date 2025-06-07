@@ -157,7 +157,7 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
       </Card>
 
       {/* Courses Section Enhanced */}
-      <div className="space-y-6">
+      <div className="space-y-6 w-full">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-3xl font-bold">Courses by {instructor.name}</h3>
