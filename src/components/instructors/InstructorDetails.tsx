@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Star, Users, BookOpen, Award, MapPin, Mail, Phone, Globe, Calendar, Clock, GraduationCap } from 'lucide-react';
-import LongCourseCard from '@/components/Courses/LongCourseCard';
+import CourseCard from '@/components/Courses/CourseCard';
 import { getInstructorCourses } from '@/data/instructors';
 
 interface Instructor {
@@ -174,9 +174,10 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
         </div>
         
         {instructorCourses.length > 0 ? (
-          <div className="space-y-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {instructorCourses.map((course) => (
-              <LongCourseCard cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" 
+              <CourseCard 
+                cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" 
                 key={course.id} 
                 course={course}
                 referrerRoute={`/instructors/${instructor.id}`}
