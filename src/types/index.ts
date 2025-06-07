@@ -13,6 +13,8 @@ export interface Instructor {
   students?: number;
   courses?: number;
   expertise?: string;
+  industries: number[]; // Array of industry IDs the instructor can teach
+  subjects: { industryId: number; subjectIds: number[] }[]; // Array of subjects by industry
 }
 
 export interface Course {

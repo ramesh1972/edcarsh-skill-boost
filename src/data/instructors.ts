@@ -16,7 +16,11 @@ export const instructors: Instructor[] = [
     city: "San Francisco",
     country: "USA",
     flag: "🇺🇸",
-    description: "Sarah is a senior frontend developer with extensive experience at Google. She specializes in React, TypeScript, and modern web development practices. Sarah has mentored hundreds of developers and is passionate about teaching clean code principles and scalable architecture patterns."
+    description: "Sarah is a senior frontend developer with extensive experience at Google. She specializes in React, TypeScript, and modern web development practices. Sarah has mentored hundreds of developers and is passionate about teaching clean code principles and scalable architecture patterns.",
+    industries: [1], // Software
+    subjects: [
+      { industryId: 1, subjectIds: [1, 6] } // Frontend, Design
+    ]
   },
   {
     id: 2,
@@ -31,7 +35,12 @@ export const instructors: Instructor[] = [
     city: "Boston",
     country: "USA",
     flag: "🇺🇸",
-    description: "Dr. Johnson holds a PhD in Data Science from MIT and has over 10 years of experience in machine learning and data analytics. He has worked with Fortune 500 companies to implement AI solutions and is an expert in Python, R, and statistical modeling."
+    description: "Dr. Johnson holds a PhD in Data Science from MIT and has over 10 years of experience in machine learning and data analytics. He has worked with Fortune 500 companies to implement AI solutions and is an expert in Python, R, and statistical modeling.",
+    industries: [1, 4], // Software, Healthcare
+    subjects: [
+      { industryId: 1, subjectIds: [4] }, // Data Science
+      { industryId: 4, subjectIds: [3] }  // Healthcare IT
+    ]
   },
   {
     id: 3,
@@ -46,7 +55,12 @@ export const instructors: Instructor[] = [
     city: "Los Angeles",
     country: "USA",
     flag: "🇺🇸",
-    description: "Lisa is a seasoned digital marketing professional who has led marketing initiatives at Meta (Facebook). She specializes in social media marketing, growth hacking, and digital advertising strategies. Lisa has helped numerous startups scale their user acquisition and retention."
+    description: "Lisa is a seasoned digital marketing professional who has led marketing initiatives at Meta (Facebook). She specializes in social media marketing, growth hacking, and digital advertising strategies. Lisa has helped numerous startups scale their user acquisition and retention.",
+    industries: [2, 3], // Marketing, Business
+    subjects: [
+      { industryId: 2, subjectIds: [1, 2, 3, 4] }, // All marketing subjects
+      { industryId: 3, subjectIds: [1, 3] }         // Management, Strategy
+    ]
   }
 ];
 
