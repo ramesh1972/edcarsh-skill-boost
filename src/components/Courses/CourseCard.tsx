@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,35 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
+import { getInstructorById } from '@/data/instructors';
 import { Heart, Eye, UserPlus, Wifi, WifiOff, Wrench } from 'lucide-react';
-
-interface Course {
-  id: number;
-  title: string;
-  description: string;
-  mediumDescription: string;
-  duration: string;
-  price: string;
-  students: number;
-  nextSession: string;
-  image: string;
-  topics: string[];
-  level: string;
-  subject: string;
-  industry: string;
-  mode: 'live' | 'offline';
-  tools: boolean;
-  instructor: {
-    name: string;
-    image: string;
-    experience: string;
-    specialty: string;
-    city: string;
-    country: string;
-    flag: string;
-    description: string;
-  };
-}
+import { Course } from '@/types';
 
 interface CourseCardProps {
   course: Course;
@@ -53,12 +28,17 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
   const { theme, getIcon } = useTheme();
   const navigate = useNavigate();
+  const instructor = getInstructorById(course.instructorId);
 
   const handleViewClick = () => {
     navigate(`/courses/${course.id}`, {
       state: { from: referrerRoute, fromName: referrerName }
     });
   };
+
+  if (!instructor) {
+    return null; // Don't render if instructor not found
+  }
   
   return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''} ${cardClassName}`}>
       {/* Course Image */}
@@ -112,7 +92,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         {/* Instructor Section - using InstructorCard component */}
         <div className="mt-auto">
           <div className="mb-4 p-0">
-            <InstructorCard instructor={course.instructor} hideDescription={true} />
+            <InstructorCard instructor={instructor} hideDescription={true} />
           </div>
   {/* Course Info Card - moved below image */}
       <CourseInfoCard className="mb-2" duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
