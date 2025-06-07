@@ -87,9 +87,11 @@ const Courses = () => {
     });
     return filtered;
   }, [industryFilter, subjectFilter, levelFilter, sortBy, sortDirection]);
+
   const toggleSortDirection = () => {
     setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
   };
+
   return (
     <div className="min-h-full ">
       <div className={`container mx-auto px-4 py-12 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
@@ -215,7 +217,7 @@ const Courses = () => {
         {/* Calendar View */}
         {viewMode === 'calendar' && <CoursesCalendarView courses={courses} industryFilter={industryFilter} subjectFilter={subjectFilter} levelFilter={levelFilter} calendarViewMode={calendarViewMode} setCalendarViewMode={setCalendarViewMode} currentDate={currentDate} setCurrentDate={setCurrentDate} />}
 
-        {/* Map View */}
+        {/* Map View - Pass the correct courses array */}
         {viewMode === 'map' && <PopularCoursesMapView courses={filteredAndSortedCourses} />}
       </div>
     </div>
