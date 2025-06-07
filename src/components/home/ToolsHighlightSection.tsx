@@ -27,7 +27,7 @@ const ToolsHighlightSection = () => {
           </p>
           <div className="mt-6 flex flex-col items-center gap-2">
             <span className="inline-block px-4 py-2 rounded-full bg-green-100 text-green-600 font-semibold text-base shadow-sm border border-green-200" style={{fontSize: '22px'}}>
-              All tools are <strong className="text-3xl font-bold text-foreground/80 animate-pulse">100% FREE</strong> for learners!
+              All tools are <span className="text-3xl font-bold text-primary/80 animate-pulse">100% FREE</span> for learners!
               <br></br><br></br>
               Free For Lifetime!
             </span>

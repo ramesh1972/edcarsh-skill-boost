@@ -1,8 +1,7 @@
-import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { BookOpen, Clock, TrendingUp, Calendar } from 'lucide-react';
+import { BookOpen, Clock, Calendar } from 'lucide-react';
 
 const Dashboard = () => {
   return (

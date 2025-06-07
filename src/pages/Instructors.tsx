@@ -1,5 +1,3 @@
-
-import React, { useState } from 'react';
 import TitleComponent from '@/components/common/TitleComponent';
 import InstructorMediumCard from '@/components/instructors/InstructorMediumCard';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';

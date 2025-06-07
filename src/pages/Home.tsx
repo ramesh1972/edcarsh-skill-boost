@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { useTheme } from '@/hooks/useTheme';
-
 import HeroSection from '@/components/Home/HeroSection';
 import USPsSection from '@/components/Home/USPsSection';
 import ToolsHighlightSection from '@/components/Home/ToolsHighlightSection';
@@ -11,7 +10,6 @@ import StatsSection from '@/components/Home/StatsSection';
 import TestimonialsSection from '@/components/Home/TestimonialsSection';
 import CTASection from '@/components/Home/CTASection';
 import FooterSection from '@/components/Home/FooterSection';
-
 import { courses } from '@/data/courses';
 
 const Home = () => {

@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,7 +8,6 @@ import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-ro
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { Header } from "@/components/header/Header";
 import Index from "./pages/Index";
-import BasicFour from "./components/threejs/BasicFour";
 import CourseView from "@/components/Courses/CourseView";
 import Dashboard from "./pages/Dashboard";
 import ExpressIntent from "./pages/ExpressIntent";
@@ -20,7 +19,6 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import ToolsNavigation from "@/components/menu/ToolsNavigation";
-import Calendar from "./pages/Calendar";
 import Courses from "./pages/Courses";
 
 const queryClient = new QueryClient();
@@ -32,11 +30,11 @@ const AppContent = () => {
   useEffect(() => {
     // Check if this is a fresh app load (not a navigation within the app)
     const isAppInitialization = !sessionStorage.getItem('app_initialized');
-    
+
     if (isAppInitialization) {
       // Mark the app as initialized
       sessionStorage.setItem('app_initialized', 'true');
-      
+
       // If not already on home page, navigate to home
       if (location.pathname !== '/') {
         navigate('/', { replace: true });
@@ -50,11 +48,11 @@ const AppContent = () => {
       <div className="fixed inset-0 w-full h-full bg-primary overflow-hidden">
         {/* Header positioned at the top with same background */}
         <Header />
-        
+
         {/* Inner div - with wavy bezier curve on bottom left */}
-        <div 
+        <div
           className="relative overflow-auto !rounded-tl-[48px] !rounded-bl-[20px] bg-background bg-gradient-to-br from-background to-primary/20 dark:from-background dark:to-primary/80 transition-all duration-500"
-          style={{ 
+          style={{
             left: '20px',
             right: '20px',
             width: 'calc(100vw - 40px)',
@@ -68,7 +66,6 @@ const AppContent = () => {
             <Route path="/" element={<Index />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:id" element={<CourseView />} />
-            <Route path="/calendar" element={<Calendar />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/express-intent" element={<ExpressIntent />} />
             <Route path="/instructors" element={<Instructors />} />
@@ -81,7 +78,7 @@ const AppContent = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
-        
+
         {/* Bottom Tabs */}
         <ToolsNavigation />
       </div>

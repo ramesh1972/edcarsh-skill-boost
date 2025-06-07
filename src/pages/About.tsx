@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/hooks/useTheme';
@@ -6,44 +5,15 @@ import TitleComponent from '@/components/common/TitleComponent';
 import ToolsList from '@/components/tools/ToolsList';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
+import { usps } from '@/data/usps';
+
 const About = () => {
   const { theme, getIcon, getBackground } = useTheme();
 
   const toolsAnimation = useScrollAnimation({ threshold: 0.1 });
   toolsAnimation.isVisible = true; // Force visibility for demo purposes
 
-  const values = [
-    {
-      iconName: "course",
-      title: "Focused Learning",
-      description: "Short, intensive courses that get straight to the point"
-    },
-    {
-      iconName: "time",
-      title: "Time Efficient",
-      description: "Learn valuable skills in hours, not months"
-    },
-    {
-      iconName: "price",
-      title: "Affordable Access",
-      description: "Quality education at just $25 per course"
-    },
-    {
-      iconName: "instructor",
-      title: "Expert Instructors",
-      description: "Learn from industry professionals with real experience"
-    },
-    {
-      iconName: "student",
-      title: "Global Accessibility",
-      description: "Multi-lingual courses available worldwide"
-    },
-    {
-      iconName: "live",
-      title: "Live & Interactive",
-      description: "Real-time learning with immediate feedback"
-    }
-  ];
+  const values = usps;
 
   return (
     <div className="min-h-full ">
@@ -150,7 +120,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className={`text-center mb-16 transition-all duration-700 delay-300 ${toolsAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'}`}>
+          <div className={`text-center mb-16 transition-all duration-700 delay-300 ${toolsAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'} border-2 border-primary/30 rounded-2xl shadow-lg backdrop-blur-md`}> 
             <h2 className="text-3xl font-bold mb-6 text-blue">🚀 Free! Hands-On Tools for Live Learning</h2>
             <p className="text-xl text-black-400 mb-4">
               Experience the <span className="font-bold text-primary-600 animate-pulse">CORE of upskilling</span> through our comprehensive toolkit
@@ -161,13 +131,13 @@ const About = () => {
             </p>
             <div className="mt-6 flex flex-col items-center gap-2">
               <span className="inline-block px-4 py-2 rounded-full bg-green-100 text-green-600 font-semibold text-base shadow-sm border border-green-200" style={{ fontSize: '22px' }}>
-                All tools are <strong className="text-3xl font-bold text-foreground/80 animate-pulse">100% FREE</strong> for learners!
+                All tools are <span className="text-3xl font-bold text-primary/80 animate-pulse">100% FREE</span> for learners!
                 <br></br><br></br>
                 Free For Lifetime!
               </span>
               <a
                 href="https://demo.edcarsh.com" target="_blank" rel="noopener noreferrer"
-                className="inline-block mt-2 px-6 py-2 rounded-lg bg-gradient-to-r from-primary to-blue-500 text-white font-bold shadow hover:scale-105 transition-transform duration-200"
+                className="inline-block mt-6 px-6 py-2 rounded-lg bg-gradient-to-r from-primary to-blue-500 text-white font-bold shadow hover:scale-105 transition-transform duration-200"
               >
                 🎬 Try the Live Demo
               </a>

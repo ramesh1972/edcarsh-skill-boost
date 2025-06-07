@@ -1,6 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useTheme } from '@/hooks/useTheme';
@@ -17,8 +16,6 @@ import TitleComponent from '@/components/common/TitleComponent';
 const Courses = () => {
   const {
     theme,
-    getIcon,
-    getBackground
   } = useTheme();
   const [industryFilter, setIndustryFilter] = useState('all');
   const [subjectFilter, setSubjectFilter] = useState('all');

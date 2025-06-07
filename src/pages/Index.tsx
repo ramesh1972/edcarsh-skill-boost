@@ -1,5 +1,4 @@
 import Home from './Home';
-
 import TitleComponent from '@/components/common/TitleComponent';
 
 const Index = () => {

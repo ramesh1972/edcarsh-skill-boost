@@ -22,7 +22,7 @@ const ToolsList: React.FC<ToolsListProps> = ({  toolsAnimation }) => {
       {toolsData.map((tool, index) => (
         <div
           key={index}
-          className={`rounded-xl p-4 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02] group relative overflow-hidden ${toolsAnimation.isVisible
+          className={`rounded-xl p-4 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02] group relative overflow-hidden border-2 ${toolsAnimation.isVisible
             ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}`
             : 'opacity-0 translate-y-10'
             }`}

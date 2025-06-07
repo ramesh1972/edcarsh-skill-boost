@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Target, Lightbulb, Clock } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
 import TitleComponent from '@/components/common/TitleComponent';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { set } from 'date-fns';
 
 const ExpressIntent = () => {
   const { theme, getIcon, getBackground } = useTheme();
@@ -82,16 +80,16 @@ const ExpressIntent = () => {
           <CardContent className="grid space-y-1 gap-3">
             <label className="block text-base font-semibold">Describe your learning intent or goal</label>
             <div className="w-full inline-flex items-center !mt-[-4px]">
-              <input
+              <Input
                 type="text"
-                className="w-full p-2 rounded-lg border border-primary/30 focus:border-primary/60 bg-white/80 dark:bg-black/30"
+                className="w-full p-2 rounded-lg border border-primary/80 focus:border-primary/60 bg-white/80 dark:bg-black/30"
                 placeholder="e.g., I want to learn Python for data analysis"
                 value={prompt}
                 onChange={handlePromptChange}
               />
+              
               <Button
-                type="button"
-                className="ml-2 text-primary-foreground hover:text-red-500 focus:outline-none"
+                className="ml-5" variant="default" size="sm"
                 onClick={() => fetchTopics()}
                 aria-label="Fetch Topics"
               >
@@ -104,8 +102,7 @@ const ExpressIntent = () => {
                   <span key={topic} className="inline-flex items-center px-2 py-1 rounded-full bg-primary/10 text-primary font-medium text-sm border border-primary/30">
                     {topic}
                     <Button
-                      type="button"
-                      className="ml-2 text-primary-foreground hover:text-red-500 focus:outline-none"
+                      className="ml-3" variant="destructive" size="sm"
                       onClick={() => handleRemoveTopic(topic)}
                       aria-label={`Remove ${topic}`}
                     >
@@ -115,10 +112,10 @@ const ExpressIntent = () => {
                 ))}
               </div>
             )}
-            <div className="flex gap-2 mt-2">
-              <input
+            <div className="flex gap-2 mt-2 items-center">
+              <Input
                 type="text"
-                className="flex-1 p-2 rounded border border-primary/20 bg-white/70 dark:bg-black/20"
+                className="w-full p-2 rounded-lg border border-primary/80 focus:border-primary/60 bg-white/80 dark:bg-black/3"
                 placeholder="Add another topic..."
                 value={newTopic}
                 onChange={e => setNewTopic(e.target.value)}
@@ -126,7 +123,7 @@ const ExpressIntent = () => {
               />
               <Button
                 type="button"
-                className="px-4 py-2 rounded bg-primary text-white font-semibold hover:bg-primary/80 transition"
+                className="ml-3" variant="default" size="sm"
                 onClick={handleAddTopic}
               >
                 Add
