@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
+import { ZoomControls } from './MapView/components/ZoomControls';
 import { ViewMode } from './MapView/types';
 import { getIndustryNameById, getSubjectNameById } from '@/data/masterData';
 
@@ -17,6 +18,7 @@ const COLORS = [
 const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('industry');
   const [hoveredItem, setHoveredItem] = useState<any>(null);
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   // Helper function to wrap text
   const wrapText = (text: string, maxLength: number) => {
@@ -83,6 +85,15 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     }
     
     return ranges;
+  };
+
+  // Zoom handlers
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 0.2, 3));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 0.2, 0.3));
   };
 
   const processedData = useMemo(() => {
@@ -199,8 +210,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       const titleFontSize = Math.max(10, Math.min(18, (circleRadius / maxRadius) * 14 + 8));
       const countFontSize = Math.max(12, Math.min(20, (circleRadius / maxRadius) * 16 + 10));
       
-      // Assign color based on item index within all items for variety
-      const itemColor = COLORS[index % COLORS.length];
+      // Assign color based on range for different colors per range
+      const itemColor = COLORS[rangeIndex % COLORS.length];
       
       return {
         ...item,
@@ -224,10 +235,36 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
   return (
     <div className="w-full space-y-6">
-      <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
+      <div className="flex justify-between items-center">
+        <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
+        <ZoomControls zoomLevel={zoomLevel} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
+      </div>
       
       <div className="relative w-full h-[1600px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
-        <svg width="100%" height="100%" viewBox="-1000 -800 2000 1600" className="absolute inset-0">
+        {/* Funky Grid Background */}
+        <div className="absolute inset-0">
+          <svg width="100%" height="100%" className="opacity-20">
+            <defs>
+              <pattern id="funkyGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" className="text-primary/30"/>
+                <circle cx="20" cy="20" r="2" fill="currentColor" className="text-primary/20"/>
+                <path d="M 10 10 L 30 30 M 30 10 L 10 30" stroke="currentColor" strokeWidth="0.5" className="text-accent/30"/>
+              </pattern>
+              <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="10" cy="10" r="1.5" fill="currentColor" className="text-secondary/40"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#funkyGrid)"/>
+            <rect width="100%" height="100%" fill="url(#dots)"/>
+          </svg>
+        </div>
+        
+        <svg 
+          width="100%" 
+          height="100%" 
+          viewBox={`${-1000 * zoomLevel} ${-800 * zoomLevel} ${2000 * zoomLevel} ${1600 * zoomLevel}`} 
+          className="absolute inset-0"
+        >
           {/* Range circles */}
           {processedData.ranges.map((range, index) => (
             <circle
