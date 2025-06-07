@@ -1,58 +1,65 @@
 
 export interface Subject {
+  id: number;
   name: string;
   color: string;
 }
 
 export interface Industry {
+  id: number;
   name: string;
   subjects: Subject[];
 }
 
 export const masterData: Industry[] = [
   {
+    id: 1,
     name: "Software",
     subjects: [
-      { name: "Frontend", color: "#3b82f6" }, // blue
-      { name: "Backend", color: "#059669" }, // emerald
-      { name: "Mobile", color: "#8b5cf6" }, // violet
-      { name: "Data Science", color: "#dc2626" }, // red
-      { name: "DevOps", color: "#ea580c" }, // orange
-      { name: "Design", color: "#db2777" }, // pink
+      { id: 1, name: "Frontend", color: "#3b82f6" }, // blue
+      { id: 2, name: "Backend", color: "#059669" }, // emerald
+      { id: 3, name: "Mobile", color: "#8b5cf6" }, // violet
+      { id: 4, name: "Data Science", color: "#dc2626" }, // red
+      { id: 5, name: "DevOps", color: "#ea580c" }, // orange
+      { id: 6, name: "Design", color: "#db2777" }, // pink
     ]
   },
   {
+    id: 2,
     name: "Marketing",
     subjects: [
-      { name: "Marketing", color: "#0891b2" }, // cyan
-      { name: "Digital Marketing", color: "#0d9488" }, // teal
-      { name: "Content Marketing", color: "#7c3aed" }, // violet
-      { name: "Social Media", color: "#be185d" }, // pink
+      { id: 1, name: "Marketing", color: "#0891b2" }, // cyan
+      { id: 2, name: "Digital Marketing", color: "#0d9488" }, // teal
+      { id: 3, name: "Content Marketing", color: "#7c3aed" }, // violet
+      { id: 4, name: "Social Media", color: "#be185d" }, // pink
     ]
   },
   {
+    id: 3,
     name: "Business",
     subjects: [
-      { name: "Management", color: "#374151" }, // gray
-      { name: "Finance", color: "#065f46" }, // emerald
-      { name: "Strategy", color: "#1e40af" }, // blue
-      { name: "Operations", color: "#7c2d12" }, // amber
+      { id: 1, name: "Management", color: "#374151" }, // gray
+      { id: 2, name: "Finance", color: "#065f46" }, // emerald
+      { id: 3, name: "Strategy", color: "#1e40af" }, // blue
+      { id: 4, name: "Operations", color: "#7c2d12" }, // amber
     ]
   },
   {
+    id: 4,
     name: "Healthcare",
     subjects: [
-      { name: "Medical", color: "#dc2626" }, // red
-      { name: "Nursing", color: "#059669" }, // emerald
-      { name: "Healthcare IT", color: "#3b82f6" }, // blue
+      { id: 1, name: "Medical", color: "#dc2626" }, // red
+      { id: 2, name: "Nursing", color: "#059669" }, // emerald
+      { id: 3, name: "Healthcare IT", color: "#3b82f6" }, // blue
     ]
   },
   {
+    id: 5,
     name: "Education",
     subjects: [
-      { name: "Teaching", color: "#7c3aed" }, // violet
-      { name: "Educational Technology", color: "#0891b2" }, // cyan
-      { name: "Curriculum Design", color: "#ea580c" }, // orange
+      { id: 1, name: "Teaching", color: "#7c3aed" }, // violet
+      { id: 2, name: "Educational Technology", color: "#0891b2" }, // cyan
+      { id: 3, name: "Curriculum Design", color: "#ea580c" }, // orange
     ]
   }
 ];
@@ -89,4 +96,24 @@ export const getIndustryBySubject = (subjectName: string): string | null => {
     }
   }
   return null;
+};
+
+// New helper functions for ID-based lookups
+export const getIndustryById = (id: number): Industry | undefined => {
+  return masterData.find(industry => industry.id === id);
+};
+
+export const getSubjectById = (industryId: number, subjectId: number): Subject | undefined => {
+  const industry = getIndustryById(industryId);
+  return industry?.subjects.find(subject => subject.id === subjectId);
+};
+
+export const getIndustryNameById = (id: number): string => {
+  const industry = getIndustryById(id);
+  return industry ? industry.name : 'Unknown Industry';
+};
+
+export const getSubjectNameById = (industryId: number, subjectId: number): string => {
+  const subject = getSubjectById(industryId, subjectId);
+  return subject ? subject.name : 'Unknown Subject';
 };

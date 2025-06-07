@@ -35,7 +35,9 @@ export interface Course {
   longTopics: string[];
   level: string;
   subject: string; // This is the category
+  subjectId: number; // New field
   industry: string;
+  industryId: number; // New field
   mode: 'live' | 'offline';
   tools: boolean;
   instructorId: number;
