@@ -210,8 +210,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       const titleFontSize = Math.max(10, Math.min(18, (circleRadius / maxRadius) * 14 + 8));
       const countFontSize = Math.max(12, Math.min(20, (circleRadius / maxRadius) * 16 + 10));
       
-      // Assign color based on range for different colors per range
-      const itemColor = COLORS[rangeIndex % COLORS.length];
+      // Assign color based on item index for colorful variety
+      const itemColor = COLORS[index % COLORS.length];
       
       return {
         ...item,
