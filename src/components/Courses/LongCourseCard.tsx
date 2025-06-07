@@ -118,9 +118,9 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
             </div>
 
             {/* Column 3: Instructor Details */}
-            <div className="flex flex-col justify-between h-full mt-3">
+            <div className="flex flex-col justify-between h-full">
               <InstructorCard instructor={instructor} />
-              <div className="mt-auto -ml-[45px]">
+              <div className="mt-auto -ml-[45px] mt-4">
                 <ActionButtons 
                   courseId={course.id} 
                   nextSession={course.nextSession}
