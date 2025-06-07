@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -56,17 +57,17 @@ const ToolsHighlightSection = () => {
   return (
     <section 
       ref={toolsAnimation.ref} 
-      className={`py-20 w-full mx-auto bg-gradient-to-r from-[#0f172a] via-primary/30 to-[#1e293b] transition-all duration-700 ${
+      className={`py-20 w-full mx-auto bg-gradient-to-r from-slate-100 via-primary/10 to-slate-200 transition-all duration-700 ${
         toolsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
       }`}
     >
       <div className="container px-4 mx-auto">
         <div className={`text-center mb-16 transition-all duration-700 delay-300 ${toolsAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-4xl font-bold mb-6 text-white">🚀 Hands-On Tools for Live Learning</h2>
-          <p className="text-xl text-gray-200 mb-4">
+          <h2 className="text-4xl font-bold mb-6 text-foreground">🚀 Hands-On Tools for Live Learning</h2>
+          <p className="text-xl text-muted-foreground mb-4">
             Experience the <span className="font-bold text-primary animate-pulse">CORE of upskilling</span> through our comprehensive toolkit
           </p>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Each live session is powered by industry-grade tools that provide real-world experience, 
             ensuring you're job-ready from day one.
           </p>
@@ -135,8 +136,8 @@ const ToolsHighlightSection = () => {
         {/* Bottom CTA */}
         <div className={`text-center mt-12 transition-all duration-700 delay-1000 ${toolsAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'}`}>
           <div className="bg-gradient-to-r from-primary/20 to-blue-600/20 backdrop-blur-md rounded-2xl p-8 border-2 border-primary/30 hover:border-primary/50 transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-white">🎯 Ready to Experience Hands-On Learning?</h3>
-            <p className="text-gray-200 text-lg">
+            <h3 className="text-2xl font-bold mb-4 text-foreground">🎯 Ready to Experience Hands-On Learning?</h3>
+            <p className="text-muted-foreground text-lg">
               Join thousands of professionals who've accelerated their careers through our 
               <span className="font-bold text-primary"> tool-focused approach</span> to upskilling! 🚀
             </p>
