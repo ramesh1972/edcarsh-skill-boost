@@ -63,7 +63,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
       </div>
 
-      <CardHeader className=" flex flex-col justify-start flex-shrink-0">
+      <CardHeader className=" flex flex-col justify-start flex-shrink-0 gap-1">
         <div className="flex items-start justify-between">
           <CardTitle className={`text-base leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-sm font-medium' : 'text-base'}`}>
             {course.title}
@@ -74,9 +74,9 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
 
       <CardContent className="flex-1 flex flex-col gap-1">
         {/* Topics Covered - Reduced height for alignment, max 6 topics */}
-        <div className="flex-shrink-0 p-0 mb-2">
+        <div className="flex-shrink-0 p-0>
           <h4 className="text-xs font-medium mb-1">Topics Covered:</h4>
-          <div className="flex flex-wrap mb-2 gap-1 h-[50px] content-start overflow-hidden">
+          <div className="flex flex-wrap mb-2 gap-1 content-start overflow-hidden">
             {course.topics.slice(0, 6).map((topic, index) => (
               <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
                 {topic}
