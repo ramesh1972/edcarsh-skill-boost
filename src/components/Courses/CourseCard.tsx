@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,38 +11,38 @@ import InstructorCard from '@/components/instructors/InstructorCard';
 import { getInstructorById } from '@/data/instructors';
 import { Heart, Eye, UserPlus, Wifi, WifiOff, Wrench } from 'lucide-react';
 import { Course } from '@/types';
-
 interface CourseCardProps {
   course: Course;
   referrerRoute?: string;
   referrerName?: string;
   cardClassName?: string;
 }
-
 const CourseCard: React.FC<CourseCardProps> = ({
   course,
   referrerRoute = '/courses',
   referrerName = 'Courses',
-  cardClassName = '',
+  cardClassName = ''
 }) => {
-  const { theme, getIcon } = useTheme();
+  const {
+    theme,
+    getIcon
+  } = useTheme();
   const navigate = useNavigate();
   const instructor = getInstructorById(course.instructorId);
-
   const handleViewClick = () => {
     navigate(`/courses/${course.id}`, {
-      state: { from: referrerRoute, fromName: referrerName }
+      state: {
+        from: referrerRoute,
+        fromName: referrerName
+      }
     });
   };
-
   if (!instructor) {
     return null; // Don't render if instructor not found
   }
-
   const industryName = getIndustryNameById(course.industryId);
   const subjectName = getSubjectNameById(course.industryId, course.subjectId);
   const subject = getSubjectById(course.industryId, course.subjectId);
-  
   return <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''} ${cardClassName}`}>
       {/* Course Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-0">
@@ -64,12 +63,10 @@ const CourseCard: React.FC<CourseCardProps> = ({
             {course.mode === 'live' ? <Wifi className="w-3 h-3 mr-1" /> : <WifiOff className="w-3 h-3 mr-1" />}
             {course.mode}
           </Badge>
-          {course.tools && (
-            <Badge variant="outline" className="bg-blue-100 text-blue-800 text-xs">
+          {course.tools && <Badge variant="outline" className="bg-blue-100 text-blue-800 text-xs">
               <Wrench className="w-3 h-3 mr-1" />
               Tools
-            </Badge>
-          )}
+            </Badge>}
         </div>
       </div>
 
@@ -84,7 +81,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
       <CardContent className="flex-1 flex flex-col min-h-60">
         {/* Topics Covered - Fixed height for alignment, max 6 topics */}
-        <div className="flex-shrink-0 mb-1 ">
+        <div className="mb-1 ">
           <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
           <div className="flex flex-wrap mb-2 gap-1 h-[60px] content-start overflow-hidden">
             {course.topics.slice(0, 6).map((topic, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
@@ -103,15 +100,10 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
           {/* Action Buttons - using ActionButtons component */}
           <div className="p-0 pt-3">
-            <ActionButtons 
-              courseId={course.id} 
-              nextSession={course.nextSession}
-              onViewClick={handleViewClick}
-            />
+            <ActionButtons courseId={course.id} nextSession={course.nextSession} onViewClick={handleViewClick} />
           </div>
         </div>
       </CardContent>
     </Card>;
 };
-
 export default CourseCard;
