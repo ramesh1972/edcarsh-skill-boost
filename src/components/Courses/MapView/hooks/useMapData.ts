@@ -102,7 +102,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
           x,
           y,
           fontSize,
-          color: COLORS[index % COLORS.length],
+          color: COLORS[(index + 2) % COLORS.length], // Offset by 2 for industry
           range: ranges[rangeIndex]?.label || ''
         };
       });
@@ -152,7 +152,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
           x,
           y,
           fontSize,
-          color: COLORS[index % COLORS.length],
+          color: COLORS[(index + 5) % COLORS.length], // Offset by 5 for subjects
           range: ranges[rangeIndex]?.label || ''
         };
       });
@@ -205,7 +205,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
           x,
           y,
           fontSize,
-          color: COLORS[index % COLORS.length],
+          color: COLORS[(index + 8) % COLORS.length], // Offset by 8 for topics
           range: ranges[rangeIndex]?.label || ''
         };
       });
