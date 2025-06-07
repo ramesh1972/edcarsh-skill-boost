@@ -157,7 +157,7 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
       </Card>
 
       {/* Courses Section Enhanced */}
-      <div className="space-y-6 w-full">
+      <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-3xl font-bold">Courses by {instructor.name}</h3>
@@ -174,8 +174,7 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
         </div>
         
         {instructorCourses.length > 0 ? (
-          <div className="space-y-6 w-full">
-            {instructorCourses.map((course) => (
+          <div className="space-y-6") => (
               <ShortCourseCard cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" 
                 key={course.id} 
                 course={course}
