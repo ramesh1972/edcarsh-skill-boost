@@ -91,7 +91,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         </div>
 
         {/* Instructor Section - using InstructorCard component */}
-        <div className="mt-auto">
+        <div className="mt-auto items-start justify-start">
           <div className="mb-4 p-0">
             <InstructorCard instructor={instructor} hideDescription={true} />
           </div>
