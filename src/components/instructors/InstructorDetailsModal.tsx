@@ -1,23 +1,8 @@
 
 import React from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Instructor } from '@/types';
 import InstructorDetails from './InstructorDetails';
-
-interface Instructor {
-  id?: number;
-  name: string;
-  image: string;
-  experience: string;
-  specialty: string;
-  city: string;
-  country: string;
-  flag: string;
-  description: string;
-  rating?: number;
-  students?: number;
-  courses?: number;
-  expertise?: string;
-}
 
 interface InstructorDetailsModalProps {
   instructor: Instructor | null;

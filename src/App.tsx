@@ -12,7 +12,7 @@ import CourseView from "@/components/Courses/CourseView";
 import Dashboard from "./pages/Dashboard";
 import ExpressIntent from "./pages/ExpressIntent";
 import Instructors from "./pages/Instructors";
-import InstructorDetails from "@/components/instructors/InstructorDetails";
+import InstructorDetailsPage from "./pages/InstructorDetailsPage";
 import Testimonials from "./pages/Testimonials";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
