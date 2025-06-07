@@ -77,9 +77,9 @@ const ToolsHighlightSection = () => {
             toolsAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
           }`}
         >
-          <h2 className="text-4xl font-bold mb-6 text-white">Hands-On Tools for Live Learning</h2>
+          <h2 className="text-4xl font-bold mb-6 text-white">🚀 Hands-On Tools for Live Learning</h2>
           <p className="text-xl text-gray-200 mb-4">
-            Experience the <span className="font-bold text-primary">CORE of upskilling</span> through our comprehensive toolkit
+            Experience the <span className="font-bold text-primary animate-pulse">CORE of upskilling</span> through our comprehensive toolkit
           </p>
           <p className="text-lg text-gray-300 max-w-3xl mx-auto">
             Each live session is powered by industry-grade tools that provide real-world experience, 
@@ -88,11 +88,11 @@ const ToolsHighlightSection = () => {
         </div>
 
         {/* Tools List */}
-        <div className="max-w-4xl mx-auto space-y-6">
+        <div className="max-w-6xl mx-auto space-y-4">
           {tools.map((tool, index) => (
             <div 
               key={index} 
-              className={`bg-background/90 backdrop-blur-sm border border-primary/20 rounded-lg p-6 hover:shadow-2xl transition-all duration-700 hover:scale-[1.02] hover:border-primary/50 group relative ${
+              className={`bg-background/95 backdrop-blur-md border-2 border-primary/30 rounded-xl p-4 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02] hover:border-primary/60 group relative overflow-hidden ${
                 toolsAnimation.isVisible 
                   ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}` 
                   : 'opacity-0 translate-y-10'
@@ -101,36 +101,47 @@ const ToolsHighlightSection = () => {
                 transitionDelay: toolsAnimation.isVisible ? `${400 + index * 80}ms` : '0ms'
               }}
             >
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-blue-600/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              {/* Animated background glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-blue-600/10 to-purple-600/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-blue-600/20 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
               
-              <div className="relative z-10 flex items-start gap-6">
+              {/* Horizontal Layout: Icon + Tool Name Square + Description */}
+              <div className="relative z-10 flex items-center gap-6">
                 {/* Icon */}
                 <div className="flex-shrink-0">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-600/20 rounded-full blur-xl group-hover:blur-2xl transition-all"></div>
-                    <div className={`relative z-10 ${tool.iconColor} [&>svg]:w-12 [&>svg]:h-12`}>
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-blue-600/30 rounded-full blur-lg group-hover:blur-xl transition-all duration-300"></div>
+                    <div className={`relative z-10 ${tool.iconColor} [&>svg]:w-10 [&>svg]:h-10 transform group-hover:scale-110 transition-transform duration-300`}>
                       {getIcon(tool.iconName)}
                     </div>
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 space-y-3">
-                  {/* Tool Name Block */}
-                  <div className="bg-primary/10 rounded-lg p-4 border border-primary/20">
-                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
+                {/* Tool Name Square */}
+                <div className="flex-shrink-0">
+                  <div className="bg-gradient-to-br from-primary/80 to-blue-600/80 rounded-lg p-4 min-w-[180px] h-[80px] flex items-center justify-center border-2 border-primary/40 group-hover:border-primary/70 transition-all duration-300 transform group-hover:scale-105">
+                    <h3 className="text-lg font-bold text-white text-center leading-tight">
                       {tool.title}
                     </h3>
                   </div>
+                </div>
 
-                  {/* Tool Description Block */}
-                  <div className="bg-muted/50 rounded-lg p-4 border border-muted/30">
+                {/* Tool Description */}
+                <div className="flex-1">
+                  <div className="bg-muted/60 rounded-lg p-4 border border-muted/40 group-hover:border-muted/60 transition-all duration-300">
                     <p className="text-base text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
-                      {tool.description}
+                      ✨ {tool.description}
                     </p>
                   </div>
                 </div>
+              </div>
+
+              {/* Sparkle effect on hover */}
+              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="w-2 h-2 bg-primary/60 rounded-full animate-ping"></div>
+              </div>
+              <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                <div className="w-1.5 h-1.5 bg-blue-400/60 rounded-full animate-pulse"></div>
               </div>
             </div>
           ))}
@@ -142,11 +153,11 @@ const ToolsHighlightSection = () => {
             toolsAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
           }`}
         >
-          <div className="bg-primary/10 backdrop-blur-sm rounded-2xl p-8 border border-primary/20">
-            <h3 className="text-2xl font-bold mb-4 text-white">Ready to Experience Hands-On Learning?</h3>
+          <div className="bg-gradient-to-r from-primary/20 to-blue-600/20 backdrop-blur-md rounded-2xl p-8 border-2 border-primary/30 hover:border-primary/50 transition-all duration-300">
+            <h3 className="text-2xl font-bold mb-4 text-white">🎯 Ready to Experience Hands-On Learning?</h3>
             <p className="text-gray-200 text-lg">
               Join thousands of professionals who've accelerated their careers through our 
-              <span className="font-bold text-primary"> tool-focused approach</span> to upskilling.
+              <span className="font-bold text-primary"> tool-focused approach</span> to upskilling! 🚀
             </p>
           </div>
         </div>
