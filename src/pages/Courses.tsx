@@ -112,7 +112,7 @@ const Courses = () => {
         </div>
 
         {/* Filters, Sort Controls and View Mode Toggle */}
-        <div className="flex flex-wrap gap-4 mb-8 p-4 bg-primary/10 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl transition-transform duration-200 relative">
+        <div className="flex flex-wrap gap-4 mb-8 p-4 bg-primary/50 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl transition-transform duration-200 relative">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4" />
             <span className="font-medium">Filters</span>
@@ -184,22 +184,22 @@ const Courses = () => {
           </div>
 
           {/* View Mode Toggle - aligned to the right */}
-          <div className="flex items-center gap-4 ml-auto ">
+          <div className="flex items-center bg-transparent gap-2">
             <span className="font-medium">View</span>
-            <ToggleGroup type="single" value={viewMode} className="gap-3 pr-2 pl-2 p-2" onValueChange={value => value && setViewMode(value)}>
-              <ToggleGroupItem value="card" aria-label="Card view" className="gap-1">
+            <ToggleGroup type="single" value={viewMode} className="gap-2 !bg-primary/10 p-2" onValueChange={value => value && setViewMode(value)}>
+              <ToggleGroupItem value="card" aria-label="Card view" className="gap-1 bg-secondary hover:bg-secondary/80">
                 <LayoutGrid className="h-4 w-4" />
                 Card
               </ToggleGroupItem>
-              <ToggleGroupItem value="list" aria-label="List view" className="gap-1">
+              <ToggleGroupItem value="list" aria-label="List view" className="gap-1 bg-secondary hover:bg-secondary/80">
                 <List className="h-4 w-4" />
                 List
               </ToggleGroupItem>
-              <ToggleGroupItem value="calendar" aria-label="Calendar view" className="gap-1">
+              <ToggleGroupItem value="calendar" aria-label="Calendar view" className="gap-1 bg-secondary hover:bg-secondary/80">
                 <CalendarIcon className="h-4 w-4" />
                 Calendar
               </ToggleGroupItem>
-              <ToggleGroupItem value="map" aria-label="Map view" className="gap-1">
+              <ToggleGroupItem value="map" aria-label="Map view" className="gap-1 bg-secondary hover:bg-secondary/80">
                 <MapPin className="h-4 w-4" />
                 Map
               </ToggleGroupItem>

@@ -1,4 +1,3 @@
-
 import { Course } from '@/types/course.types';
 
 export const courses: Course[] = [
@@ -8,7 +7,7 @@ export const courses: Course[] = [
     title: "React Fundamentals Crash Course",
     description: "Master the fundamentals of React in just 2 hours",
     mediumDescription: "Learn React components, state management, hooks, and modern development practices in this intensive crash course.",
-    longDescription: "Master the fundamentals of React including components, state management, hooks, and modern development practices. This comprehensive course covers everything you need to know to build professional React applications from scratch.",
+    longDescription: "Master the fundamentals of React including components, state management, hooks, and modern development practices. This comprehensive course covers everything you need to know to build professional React applications from scratch. Master the fundamentals of React including components, state management, hooks, and modern developMaster the fundamentals of React including components, state management, hooks, and modern develop",
     duration: "2 hours",
     durationHours: 2,
     dailySessionDuration: 2,
@@ -20,7 +19,10 @@ export const courses: Course[] = [
     startTime: "14:00",
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&h=300&fit=crop",
     topics: ["JSX", "Components", "State", "Hooks"],
-    longTopics: ["JSX Syntax", "Component Architecture", "State & Props", "Event Handling", "Hooks (useState, useEffect)", "Context API", "Router Integration", "Performance Optimization"],
+    longTopics: [
+      "JSX Syntax", "Component Architecture", "State & Props", "Event Handling", "Hooks (useState, useEffect)", "Context API", "Router Integration", "Performance Optimization",
+      "Testing with React Testing Library", "Error Boundaries", "Code Splitting", "React Suspense", "Custom Hooks", "PropTypes & TypeScript Integration", "Accessibility in React", "React DevTools", "Deployment Best Practices"
+    ],
     level: "Beginner",
     subject: "Frontend",
     subjectId: 1,
@@ -47,7 +49,10 @@ export const courses: Course[] = [
     startTime: "16:00",
     image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=500&h=300&fit=crop",
     topics: ["Generics", "Types", "Patterns", "Advanced"],
-    longTopics: ["Generic Types", "Conditional Types", "Mapped Types", "Template Literals", "Decorators", "Advanced Interfaces", "Type Guards", "Utility Types"],
+    longTopics: [
+      "Generic Types", "Conditional Types", "Mapped Types", "Template Literals", "Decorators", "Advanced Interfaces", "Type Guards", "Utility Types",
+      "Type Inference", "Type Compatibility", "Discriminated Unions", "Intersection & Union Types", "Type Manipulation", "TypeScript with React", "TypeScript Compiler Options", "Refactoring to TypeScript", "TypeScript Tooling"
+    ],
     level: "Advanced",
     subject: "Backend",
     subjectId: 2,
@@ -74,7 +79,10 @@ export const courses: Course[] = [
     startTime: "10:00",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&h=300&fit=crop",
     topics: ["Python", "Pandas", "NumPy", "ML"],
-    longTopics: ["Python Basics", "Pandas DataFrames", "NumPy Arrays", "Data Visualization", "Statistical Analysis", "Machine Learning Basics", "Model Evaluation", "Data Cleaning"],
+    longTopics: [
+      "Python Basics", "Pandas DataFrames", "NumPy Arrays", "Data Visualization", "Statistical Analysis", "Machine Learning Basics", "Model Evaluation", "Data Cleaning",
+      "Exploratory Data Analysis", "Feature Engineering", "Data Wrangling", "Matplotlib & Seaborn", "Regression Analysis", "Classification Techniques", "Clustering Algorithms", "Dimensionality Reduction", "Model Deployment"
+    ],
     level: "Beginner",
     subject: "Data Science",
     subjectId: 4,
@@ -101,7 +109,10 @@ export const courses: Course[] = [
     startTime: "09:00",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop",
     topics: ["Node.js", "Express", "MongoDB", "APIs"],
-    longTopics: ["Node.js Fundamentals", "Express Framework", "Database Integration", "Authentication & Authorization", "RESTful APIs", "Error Handling", "Testing", "Deployment"],
+    longTopics: [
+      "Node.js Fundamentals", "Express Framework", "Database Integration", "Authentication & Authorization", "RESTful APIs", "Error Handling", "Testing", "Deployment",
+      "Middleware in Express", "Routing Strategies", "Data Validation", "Security Best Practices", "API Documentation", "Versioning APIs", "Rate Limiting", "CORS", "Environment Variables", "Logging and Monitoring"
+    ],
     level: "Intermediate",
     subject: "Backend",
     subjectId: 2,
@@ -128,7 +139,10 @@ export const courses: Course[] = [
     startTime: "10:00",
     image: "https://images.unsplash.com/photo-1485833077593-4278bba3f11f?w=500&h=300&fit=crop",
     topics: ["ML", "Neural Networks", "Python", "AI"],
-    longTopics: ["Supervised Learning", "Unsupervised Learning", "Neural Networks", "Feature Engineering", "Model Selection", "Cross-validation", "Deep Learning", "Model Deployment"],
+    longTopics: [
+      "Supervised Learning", "Unsupervised Learning", "Neural Networks", "Feature Engineering", "Model Selection", "Cross-validation", "Deep Learning", "Model Deployment",
+      "Ensemble Methods", "Dimensionality Reduction", "Hyperparameter Tuning", "Pipelines in Scikit-learn", "TensorFlow Basics", "Keras for Neural Networks", "NLP with Python", "Time Series Analysis", "Anomaly Detection", "Reinforcement Learning Basics"
+    ],
     level: "Advanced",
     subject: "Data Science",
     subjectId: 4,
@@ -155,7 +169,10 @@ export const courses: Course[] = [
     startTime: "13:00",
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=300&fit=crop",
     topics: ["Design", "UX", "Prototyping", "Research"],
-    longTopics: ["Design Thinking", "User Research", "Wireframing", "Prototyping", "Visual Design", "Usability Testing", "Design Systems", "Accessibility"],
+    longTopics: [
+      "Design Thinking", "User Research", "Wireframing", "Prototyping", "Visual Design", "Usability Testing", "Design Systems", "Accessibility",
+      "Interaction Design", "Information Architecture", "User Flows", "Personas & Scenarios", "Design Critique", "Responsive Design", "Mobile-First Design", "Design Handoff to Developers", "Collaboration with Stakeholders", "Continuous Design Improvement"
+    ],
     level: "Beginner",
     subject: "Design",
     subjectId: 6,
@@ -184,7 +201,10 @@ export const courses: Course[] = [
     startTime: "14:00",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop",
     topics: ["SEO", "Social Media", "Ads", "Analytics"],
-    longTopics: ["Social Media Strategy", "Content Marketing", "SEO Optimization", "Google Ads", "Facebook Advertising", "Analytics & Tracking", "Email Marketing", "Conversion Optimization"],
+    longTopics: [
+      "Social Media Strategy", "Content Marketing", "SEO Optimization", "Google Ads", "Facebook Advertising", "Analytics & Tracking", "Email Marketing", "Conversion Optimization",
+      "Digital Marketing Trends", "Branding & Positioning", "Customer Journey Mapping", "Marketing Automation", "Lead Generation Strategies", "Sales Funnel Optimization", "ROI Measurement", "A/B Testing", "Competitor Analysis", "Market Research Techniques"
+    ],
     level: "Intermediate",
     subject: "Digital Marketing",
     subjectId: 2,
@@ -211,7 +231,10 @@ export const courses: Course[] = [
     startTime: "15:00",
     image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500&h=300&fit=crop",
     topics: ["Instagram", "TikTok", "LinkedIn", "Content"],
-    longTopics: ["Platform Strategies", "Content Planning", "Influencer Marketing", "Community Management", "Social Commerce", "Analytics", "Paid Social", "Crisis Management"],
+    longTopics: [
+      "Platform Strategies", "Content Planning", "Influencer Marketing", "Community Management", "Social Commerce", "Analytics", "Paid Social", "Crisis Management",
+      "Viral Content Creation", "Brand Storytelling", "User-Generated Content", "Social Media Advertising", "Engagement Tactics", "Social Media Analytics Tools", "Campaign Performance Measurement", "Social Media Policy & Compliance", "Reputation Management", "Crisis Communication"
+    ],
     level: "Beginner",
     subject: "Social Media",
     subjectId: 1,
@@ -238,7 +261,10 @@ export const courses: Course[] = [
     startTime: "11:00",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=500&h=300&fit=crop",
     topics: ["Email", "Automation", "Segmentation", "Funnels"],
-    longTopics: ["Email Strategy", "List Building", "Automation Workflows", "Segmentation", "A/B Testing", "Personalization", "Deliverability", "Analytics"],
+    longTopics: [
+      "Email Strategy", "List Building", "Automation Workflows", "Segmentation", "A/B Testing", "Personalization", "Deliverability", "Analytics",
+      "Drip Campaigns", "Behavioral Targeting", "Dynamic Content", "Email Design Best Practices", "Mobile Optimization for Email", "Spam Compliance", "Email Marketing Metrics", "Conversion Rate Optimization", "Customer Retention Strategies", "Re-engagement Campaigns"
+    ],
     level: "Intermediate",
     subject: "Email Marketing",
     subjectId: 3,
@@ -265,7 +291,10 @@ export const courses: Course[] = [
     startTime: "10:00",
     image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=500&h=300&fit=crop",
     topics: ["Google Ads", "PPC", "Keywords", "ROI"],
-    longTopics: ["Search Campaigns", "Display Advertising", "Shopping Ads", "YouTube Ads", "Keyword Research", "Bid Strategies", "Quality Score", "Conversion Tracking"],
+    longTopics: [
+      "Search Campaigns", "Display Advertising", "Shopping Ads", "YouTube Ads", "Keyword Research", "Bid Strategies", "Quality Score", "Conversion Tracking",
+      "Ad Extensions", "Negative Keywords", "Geotargeting", "Remarketing Strategies", "Ad Scheduling", "Mobile Advertising", "Performance Analysis", "A/B Testing for Ads", "Scaling Campaigns", "Google Ads Editor", "Reporting and Analytics"
+    ],
     level: "Intermediate",
     subject: "Paid Advertising",
     subjectId: 4,
@@ -294,7 +323,10 @@ export const courses: Course[] = [
     startTime: "09:00",
     image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&h=300&fit=crop",
     topics: ["Agile", "Scrum", "Planning", "Leadership"],
-    longTopics: ["Project Planning", "Agile Methodologies", "Scrum Framework", "Risk Management", "Team Leadership", "Budget Management", "Quality Assurance", "Stakeholder Management"],
+    longTopics: [
+      "Project Planning", "Agile Methodologies", "Scrum Framework", "Risk Management", "Team Leadership", "Budget Management", "Quality Assurance", "Stakeholder Management",
+      "Waterfall vs Agile", "Scrum Roles and Responsibilities", "Sprint Planning and Review", "Daily Stand-ups", "Retrospectives", "Kanban Method", "Project Charter Development", "Work Breakdown Structure", "Gantt Charts and Timelines", "Critical Path Method"
+    ],
     level: "Intermediate",
     subject: "Management",
     subjectId: 1,
@@ -321,7 +353,10 @@ export const courses: Course[] = [
     startTime: "14:00",
     image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=500&h=300&fit=crop",
     topics: ["Lean Startup", "Validation", "MVP", "Strategy"],
-    longTopics: ["Market Research", "Customer Discovery", "Business Model Canvas", "MVP Development", "Product-Market Fit", "Funding Strategies", "Growth Hacking", "Scaling"],
+    longTopics: [
+      "Market Research", "Customer Discovery", "Business Model Canvas", "MVP Development", "Product-Market Fit", "Funding Strategies", "Growth Hacking", "Scaling",
+      "Lean Principles", "Value Proposition Design", "Customer Segmentation", "Competitive Analysis", "Revenue Streams", "Cost Structure", "Key Metrics", "Channels", "Customer Relationships", "Risk Assessment and Mitigation"
+    ],
     level: "Beginner",
     subject: "Entrepreneurship",
     subjectId: 2,
@@ -348,7 +383,10 @@ export const courses: Course[] = [
     startTime: "08:00",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop",
     topics: ["Strategy", "Planning", "Analysis", "Growth"],
-    longTopics: ["Strategic Planning", "SWOT Analysis", "Market Positioning", "Competitive Strategy", "Business Development", "Performance Metrics", "Change Management", "Innovation"],
+    longTopics: [
+      "Strategic Planning", "SWOT Analysis", "Market Positioning", "Competitive Strategy", "Business Development", "Performance Metrics", "Change Management", "Innovation",
+      "Strategic Vision and Mission", "Objectives and Key Results (OKRs)", "Balanced Scorecard", "Porter's Five Forces", "PESTEL Analysis", "Value Chain Analysis", "Blue Ocean Strategy", "Strategic Alliances", "Mergers and Acquisitions", "Crisis Management and Recovery"
+    ],
     level: "Advanced",
     subject: "Strategy",
     subjectId: 3,
@@ -375,7 +413,10 @@ export const courses: Course[] = [
     startTime: "09:00",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=300&fit=crop",
     topics: ["Operations", "Lean", "Supply Chain", "Quality"],
-    longTopics: ["Process Optimization", "Lean Manufacturing", "Supply Chain Management", "Quality Control", "Inventory Management", "Performance Monitoring", "Cost Reduction", "Automation"],
+    longTopics: [
+      "Process Optimization", "Lean Manufacturing", "Supply Chain Management", "Quality Control", "Inventory Management", "Performance Monitoring", "Cost Reduction", "Automation",
+      "Operations Strategy", "Capacity Planning", "Production Scheduling", "Materials Requirement Planning (MRP)", "Just-in-Time (JIT) Production", "Total Quality Management (TQM)", "Six Sigma", "Kaizen", "Value Stream Mapping", "Root Cause Analysis"
+    ],
     level: "Intermediate",
     subject: "Operations",
     subjectId: 4,
@@ -404,7 +445,10 @@ export const courses: Course[] = [
     startTime: "08:00",
     image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=300&fit=crop",
     topics: ["Medical Devices", "FDA", "Design", "Innovation"],
-    longTopics: ["Regulatory Compliance", "Design Controls", "Risk Management", "Clinical Trials", "Quality Systems", "Biocompatibility", "User Research", "Market Access"],
+    longTopics: [
+      "Regulatory Compliance", "Design Controls", "Risk Management", "Clinical Trials", "Quality Systems", "Biocompatibility", "User Research", "Market Access",
+      "Medical Device Development Process", "Pre-market Notification [510(k)]", "Premarket Approval (PMA)", "Investigational Device Exemption (IDE)", "Clinical Evaluation", "Post-market Surveillance", "Medical Device Reporting (MDR)", "Unique Device Identification (UDI)", "Design History File (DHF)", "Device Master Record (DMR)"
+    ],
     level: "Advanced",
     subject: "Medical Devices",
     subjectId: 1,
@@ -431,7 +475,10 @@ export const courses: Course[] = [
     startTime: "09:00",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=500&h=300&fit=crop",
     topics: ["Clinical Trials", "Research", "GCP", "Statistics"],
-    longTopics: ["Study Design", "Protocol Development", "Good Clinical Practice", "Data Management", "Statistical Analysis", "Regulatory Submissions", "Ethics", "Publication"],
+    longTopics: [
+      "Study Design", "Protocol Development", "Good Clinical Practice", "Data Management", "Statistical Analysis", "Regulatory Submissions", "Ethics", "Publication",
+      "Clinical Research Phases", "Site Selection and Management", "Informed Consent Process", "Data Collection Methods", "Monitoring and Auditing", "Adverse Event Reporting", "Clinical Trial Registries", "Statistical Software for Data Analysis", "Interpreting Clinical Research Results", "Writing Clinical Study Reports"
+    ],
     level: "Advanced",
     subject: "Clinical Research",
     subjectId: 2,
@@ -458,7 +505,10 @@ export const courses: Course[] = [
     startTime: "10:00",
     image: "https://images.unsplash.com/photo-1576669801975-4dc6cca8e6c6?w=500&h=300&fit=crop",
     topics: ["EMR", "HIPAA", "Healthcare IT", "Data"],
-    longTopics: ["Electronic Health Records", "Healthcare Standards", "Data Security", "HIPAA Compliance", "System Integration", "Workflow Optimization", "Telemedicine", "Analytics"],
+    longTopics: [
+      "Electronic Health Records", "Healthcare Standards", "Data Security", "HIPAA Compliance", "System Integration", "Workflow Optimization", "Telemedicine", "Analytics",
+      "Healthcare IT Infrastructure", "Interoperability Standards (HL7, FHIR)", "Data Exchange Protocols", "Patient Portals", "Telehealth Technologies", "Healthcare Cybersecurity", "Health Information Management", "Clinical Decision Support Systems", "Healthcare Data Analytics", "Regulatory Compliance in Healthcare IT"
+    ],
     level: "Intermediate",
     subject: "Healthcare IT",
     subjectId: 3,
@@ -485,7 +535,10 @@ export const courses: Course[] = [
     startTime: "11:00",
     image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=500&h=300&fit=crop",
     topics: ["Epidemiology", "Analytics", "Surveillance", "Health"],
-    longTopics: ["Disease Surveillance", "Epidemiological Methods", "Health Outcomes", "Data Visualization", "Statistical Analysis", "Population Health", "Intervention Design", "Health Policy"],
+    longTopics: [
+      "Disease Surveillance", "Epidemiological Methods", "Health Outcomes", "Data Visualization", "Statistical Analysis", "Population Health", "Intervention Design", "Health Policy",
+      "Outbreak Investigation", "Surveillance Systems", "Data Sources for Public Health", "Health Informatics", "Geographic Information Systems (GIS) in Public Health", "Program Evaluation", "Health Economics", "Policy Analysis", "Stakeholder Engagement", "Public Health Communication", "Crisis Response in Public Health"
+    ],
     level: "Advanced",
     subject: "Public Health",
     subjectId: 4,
@@ -514,7 +567,10 @@ export const courses: Course[] = [
     startTime: "07:00",
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=500&h=300&fit=crop",
     topics: ["Algorithms", "Trading", "Python", "Risk"],
-    longTopics: ["Quantitative Analysis", "Strategy Development", "Backtesting", "Risk Management", "Portfolio Optimization", "Market Microstructure", "Execution Algorithms", "Performance Analytics"],
+    longTopics: [
+      "Quantitative Analysis", "Strategy Development", "Backtesting", "Risk Management", "Portfolio Optimization", "Market Microstructure", "Execution Algorithms", "Performance Analytics",
+      "Statistical Arbitrage", "Pairs Trading", "Market Making", "High-Frequency Trading", "Algorithmic Execution", "Slippage and Transaction Costs", "Backtesting Frameworks", "Risk Parity", "Maximum Drawdown", "Sharpe Ratio Optimization", "Portfolio Diversification Strategies"
+    ],
     level: "Advanced",
     subject: "Trading",
     subjectId: 1,
@@ -541,7 +597,10 @@ export const courses: Course[] = [
     startTime: "08:00",
     image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=500&h=300&fit=crop",
     topics: ["Valuation", "DCF", "Analysis", "Investing"],
-    longTopics: ["Financial Statement Analysis", "DCF Modeling", "Comparable Analysis", "Portfolio Theory", "Risk Assessment", "Market Analysis", "Investment Strategy", "Performance Measurement"],
+    longTopics: [
+      "Financial Statement Analysis", "DCF Modeling", "Comparable Analysis", "Portfolio Theory", "Risk Assessment", "Market Analysis", "Investment Strategy", "Performance Measurement",
+      "Earnings Quality Analysis", "Cash Flow Analysis", "Balance Sheet Analysis", "Valuation Multiples", "Precedent Transactions", "Market Capitalization", "Cost of Capital", "Capital Asset Pricing Model (CAPM)", "Weighted Average Cost of Capital (WACC)", "Dividend Discount Model (DDM)", "Residual Income Model"
+    ],
     level: "Intermediate",
     subject: "Investment",
     subjectId: 2,
@@ -568,7 +627,10 @@ export const courses: Course[] = [
     startTime: "15:00",
     image: "https://images.unsplash.com/photo-1518544866980-aec5e4d23a64?w=500&h=300&fit=crop",
     topics: ["Blockchain", "Crypto", "DeFi", "Smart Contracts"],
-    longTopics: ["Blockchain Technology", "Cryptocurrency Analysis", "DeFi Protocols", "Smart Contracts", "NFTs", "Tokenomics", "Yield Farming", "Risk Management"],
+    longTopics: [
+      "Blockchain Technology", "Cryptocurrency Analysis", "DeFi Protocols", "Smart Contracts", "NFTs", "Tokenomics", "Yield Farming", "Risk Management",
+      "Decentralized Finance (DeFi) Basics", "Automated Market Makers (AMMs)", "Liquidity Pools", "Flash Loans", "Staking and Yield Farming", "Crypto Wallets and Security", "Blockchain Explorers", "Gas Fees and Transaction Costs", "Crypto Taxation and Compliance", "Future of DeFi and Challenges"
+    ],
     level: "Intermediate",
     subject: "Cryptocurrency",
     subjectId: 3,
@@ -595,7 +657,10 @@ export const courses: Course[] = [
     startTime: "08:00",
     image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=500&h=300&fit=crop",
     topics: ["Risk", "Derivatives", "Hedging", "Compliance"],
-    longTopics: ["Options Pricing", "Futures Trading", "Swap Contracts", "VaR Models", "Credit Risk", "Market Risk", "Operational Risk", "Basel III"],
+    longTopics: [
+      "Options Pricing", "Futures Trading", "Swap Contracts", "VaR Models", "Credit Risk", "Market Risk", "Operational Risk", "Basel III",
+      "Derivatives Market Overview", "Hedging Strategies with Derivatives", "Exotic Options", "Interest Rate Swaps", "Currency Swaps", "Commodity Futures", "Risk Management Frameworks", "Stress Testing", "Backtesting VaR Models", "Regulatory Capital Requirements"
+    ],
     level: "Advanced",
     subject: "Risk Management",
     subjectId: 4,
@@ -624,7 +689,10 @@ export const courses: Course[] = [
     startTime: "09:00",
     image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=500&h=300&fit=crop",
     topics: ["Solar", "Wind", "Batteries", "Sustainability"],
-    longTopics: ["Solar Technology", "Wind Energy", "Energy Storage", "Grid Integration", "Power Electronics", "Energy Efficiency", "Sustainability Analysis", "Project Economics"],
+    longTopics: [
+      "Solar Technology", "Wind Energy", "Energy Storage", "Grid Integration", "Power Electronics", "Energy Efficiency", "Sustainability Analysis", "Project Economics",
+      "Photovoltaic Systems", "Solar Thermal Systems", "Wind Turbine Technology", "Battery Energy Storage Systems", "Hydrogen Fuel Cells", "Geothermal Energy", "Biomass Energy", "Energy Policy and Regulation", "Environmental Impact Assessment", "Renewable Energy Certificates (RECs)"
+    ],
     level: "Advanced",
     subject: "Renewable Energy",
     subjectId: 1,
@@ -651,7 +719,10 @@ export const courses: Course[] = [
     startTime: "10:00",
     image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=500&h=300&fit=crop",
     topics: ["CAD", "SolidWorks", "Design", "Manufacturing"],
-    longTopics: ["3D Modeling", "Technical Drawings", "Design for Manufacturing", "Materials Selection", "Finite Element Analysis", "Assembly Design", "Tolerance Analysis", "Product Development"],
+    longTopics: [
+      "3D Modeling", "Technical Drawings", "Design for Manufacturing", "Materials Selection", "Finite Element Analysis", "Assembly Design", "Tolerance Analysis", "Product Development",
+      "SolidWorks Sketching and Features", "Assembly Modeling", "Detail Drawings and GD&T", "Sheet Metal Design", "Plastic Part Design", "Casting and Forging", "Machining and CNC", "Design for Assembly and Disassembly", "Design for Cost", "Sustainable Design Principles"
+    ],
     level: "Intermediate",
     subject: "Mechanical Design",
     subjectId: 2,
@@ -678,7 +749,10 @@ export const courses: Course[] = [
     startTime: "11:00",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&h=300&fit=crop",
     topics: ["Circuits", "PCB", "Electronics", "Design"],
-    longTopics: ["Analog Circuits", "Digital Systems", "PCB Layout", "Circuit Simulation", "Component Selection", "Signal Processing", "Power Electronics", "Embedded Systems"],
+    longTopics: [
+      "Analog Circuits", "Digital Systems", "PCB Layout", "Circuit Simulation", "Component Selection", "Signal Processing", "Power Electronics", "Embedded Systems",
+      "Op-Amp Circuits", "Filter Design", "Oscillator Design", "Data Acquisition Systems", "Microcontroller Interfacing", "Wireless Communication Basics", "Circuit Protection", "Thermal Management in Circuits", "Design for Testability", "Troubleshooting and Debugging Techniques"
+    ],
     level: "Intermediate",
     subject: "Electrical",
     subjectId: 3,
@@ -705,7 +779,10 @@ export const courses: Course[] = [
     startTime: "08:00",
     image: "https://images.unsplash.com/photo-1565352285315-aaa8cb35940f?w=500&h=300&fit=crop",
     topics: ["Lean", "Six Sigma", "Automation", "Quality"],
-    longTopics: ["Lean Manufacturing", "Six Sigma", "Process Automation", "Quality Control", "Statistical Process Control", "Value Stream Mapping", "Continuous Improvement", "Industry 4.0"],
+    longTopics: [
+      "Lean Manufacturing", "Six Sigma", "Process Automation", "Quality Control", "Statistical Process Control", "Value Stream Mapping", "Continuous Improvement", "Industry 4.0",
+      "5S System", "Kaizen Events", "Poka-Yoke (Error Proofing)", "Kanban Scheduling", "Gemba Walks", "Root Cause Analysis", "Failure Mode and Effects Analysis (FMEA)", "Control Charts", "Process Capability Analysis", "Lean Metrics and KPIs"
+    ],
     level: "Advanced",
     subject: "Manufacturing",
     subjectId: 4,
@@ -734,7 +811,10 @@ export const courses: Course[] = [
     startTime: "10:00",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&h=300&fit=crop",
     topics: ["Flutter", "Dart", "Mobile", "Cross-platform"],
-    longTopics: ["Flutter Framework", "Dart Language", "Widget System", "State Management", "Navigation", "API Integration", "Local Storage", "App Store Deployment"],
+    longTopics: [
+      "Flutter Framework", "Dart Language", "Widget System", "State Management", "Navigation", "API Integration", "Local Storage", "App Store Deployment",
+      "Flutter for Web and Desktop", "Responsive Design in Flutter", "Flutter Animations", "Testing Flutter Apps", "Debugging Flutter Applications", "Performance Optimization in Flutter", "Internationalization and Localization", "Accessibility in Flutter Apps", "Integrating with Firebase", "Using Packages and Plugins"
+    ],
     level: "Intermediate",
     subject: "Frontend",
     subjectId: 1,
@@ -761,7 +841,10 @@ export const courses: Course[] = [
     startTime: "09:00",
     image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=500&h=300&fit=crop",
     topics: ["Docker", "Kubernetes", "AWS", "CI/CD"],
-    longTopics: ["Containerization", "Container Orchestration", "Cloud Computing", "Infrastructure as Code", "Monitoring", "Security", "Scalability", "Automation"],
+    longTopics: [
+      "Containerization", "Container Orchestration", "Cloud Computing", "Infrastructure as Code", "Monitoring", "Security", "Scalability", "Automation",
+      "Docker Images and Containers", "Kubernetes Pods and Services", "AWS EC2 and S3", "CI/CD with Jenkins", "GitLab CI/CD", "Docker Compose", "Kubernetes Deployments", "Helm Charts", "AWS Lambda and Serverless", "CloudFormation and Terraform"
+    ],
     level: "Advanced",
     subject: "DevOps",
     subjectId: 3,
@@ -788,7 +871,10 @@ export const courses: Course[] = [
     startTime: "11:00",
     image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&h=300&fit=crop",
     topics: ["Security", "Ethical Hacking", "Penetration Testing", "Compliance"],
-    longTopics: ["Network Security", "Web Application Security", "Ethical Hacking", "Penetration Testing", "Incident Response", "Risk Assessment", "Compliance", "Security Architecture"],
+    longTopics: [
+      "Network Security", "Web Application Security", "Ethical Hacking", "Penetration Testing", "Incident Response", "Risk Assessment", "Compliance", "Security Architecture",
+      "Security Policies and Procedures", "Access Control Models", "Cryptography Basics", "Public Key Infrastructure (PKI)", "Firewalls and VPNs", "Intrusion Detection and Prevention Systems (IDPS)", "Security Information and Event Management (SIEM)", "Incident Management and Response", "Disaster Recovery and Business Continuity", "Security Auditing and Compliance"
+    ],
     level: "Intermediate",
     subject: "Security",
     subjectId: 5,
@@ -815,7 +901,10 @@ export const courses: Course[] = [
     startTime: "08:00",
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500&h=300&fit=crop",
     topics: ["AI", "Deep Learning", "TensorFlow", "Neural Networks"],
-    longTopics: ["Neural Networks", "Convolutional Networks", "Recurrent Networks", "Computer Vision", "Natural Language Processing", "Transfer Learning", "Model Deployment", "AI Ethics"],
+    longTopics: [
+      "Neural Networks", "Convolutional Networks", "Recurrent Networks", "Computer Vision", "Natural Language Processing", "Transfer Learning", "Model Deployment", "AI Ethics",
+      "Deep Learning Frameworks Overview", "Building Neural Networks with TensorFlow", "PyTorch for Deep Learning", "CNN Architectures (LeNet, AlexNet, VGG, ResNet)", "RNN Architectures (LSTM, GRU)", "Attention Mechanisms and Transformers", "BERT and GPT Models", "Fine-tuning Pre-trained Models", "Deploying AI Models with TensorFlow Serving", "AI in Healthcare, Finance, and Autonomous Systems"
+    ],
     level: "Advanced",
     subject: "Data Science",
     subjectId: 4,

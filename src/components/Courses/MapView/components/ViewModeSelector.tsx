@@ -1,7 +1,6 @@
 
 import React from 'react';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { ViewMode } from '../types';
 
 interface ViewModeSelectorProps {
@@ -11,30 +10,18 @@ interface ViewModeSelectorProps {
 
 export const ViewModeSelector: React.FC<ViewModeSelectorProps> = ({ viewMode, onViewModeChange }) => {
   return (
-    <div className="mb-6 p-4 bg-card rounded-lg border">
-      <h3 className="text-sm font-medium mb-3">View Mode:</h3>
-      <RadioGroup 
-        value={viewMode} 
-        onValueChange={(value: ViewMode) => onViewModeChange(value)} 
-        className="flex flex-wrap gap-6"
+    <div className="mb-6 flex items-center gap-2 w-full justify-center">
+      <ToggleGroup
+        type="single"
+        className="gap-2 bg-transparent !border-none !shadow-none items-center"
+        value={viewMode}
+        onValueChange={value => value && onViewModeChange(value as ViewMode)}
       >
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="industry" id="industry" />
-          <Label htmlFor="industry" className="text-sm cursor-pointer">By Industry</Label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="subject" id="subject" />
-          <Label htmlFor="subject" className="text-sm cursor-pointer">By Subject</Label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="topic" id="topic" />
-          <Label htmlFor="topic" className="text-sm cursor-pointer">By Topic</Label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="courses" id="courses" />
-          <Label htmlFor="courses" className="text-sm cursor-pointer">Individual Courses</Label>
-        </div>
-      </RadioGroup>
+        <ToggleGroupItem className="bg-secondary" value="industry" aria-label="By Industry">Industry</ToggleGroupItem>
+        <ToggleGroupItem className="bg-secondary" value="subject" aria-label="By Subject">Subject</ToggleGroupItem>
+        <ToggleGroupItem className="bg-secondary" value="courses" aria-label="Individual Courses">Courses</ToggleGroupItem>
+        <ToggleGroupItem className="bg-secondary" value="topic" aria-label="By Topic">Topic</ToggleGroupItem>
+      </ToggleGroup>
     </div>
   );
 };

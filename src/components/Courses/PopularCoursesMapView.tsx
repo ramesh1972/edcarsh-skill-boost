@@ -18,7 +18,12 @@ const COLORS = [
 
 const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('industry');
-  const [hoveredItem, setHoveredItem] = useState<any>(null);
+  type MapViewItem = 
+    | { name: string; students: number; type: 'industry' | 'subject' | 'topic'; courses: Course[] }
+    | { name: string; students: number; type: 'course'; course: Course }
+    | null;
+
+  const [hoveredItem, setHoveredItem] = useState<MapViewItem>(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState(1);
 
@@ -156,7 +161,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   const processedData = useMemo(() => {
     if (!courses.length) return { ranges: [], items: [] };
 
-    let items: any[] = [];
+    let items: MapViewItem[] = [];
 
     // ... keep existing code (viewMode processing logic)
     if (viewMode === 'industry') {
@@ -302,13 +307,14 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     });
 
     return { ranges, items: itemsWithPositions };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courses, viewMode]);
 
   const handleViewModeChange = (mode: ViewMode) => {
     setViewMode(mode);
   };
 
-  const handleItemHover = (item: any, event: React.MouseEvent) => {
+  const handleItemHover = (item: MapViewItem, event: React.MouseEvent) => {
     const rect = event.currentTarget.getBoundingClientRect();
     const containerRect = (event.currentTarget as Element).closest('.relative')?.getBoundingClientRect();
     
@@ -323,8 +329,14 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   };
 
   // ... keep existing code (getTooltipContent function)
-  const getTooltipContent = (item: any) => {
-    if (viewMode === 'courses' && item.course) {
+  const getTooltipContent = (item: MapViewItem) => {
+    if (
+      viewMode === 'courses' &&
+      item &&
+      item.type === 'course' &&
+      'course' in item &&
+      item.course
+    ) {
       const course = item.course;
       const instructor = getInstructorById(course.instructorId);
       return (
@@ -346,7 +358,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       );
     }
     
-    if (item.courses && item.courses.length > 0) {
+    if (item && 'courses' in item && item.courses && item.courses.length > 0) {
       const sampleCourses = item.courses.slice(0, 3);
       return (
         <div className="max-w-sm">
@@ -532,18 +544,27 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap justify-center gap-6">
-        {processedData.ranges.map((range, index) => (
-          <div key={index} className="flex items-center gap-3">
-            <div 
-              className="w-5 h-5 rounded-full"
-              style={{ backgroundColor: COLORS[index % COLORS.length] }}
-            />
-            <span className="text-base text-muted-foreground">
-              {range.label} students
-            </span>
+      <div className="flex justify-center mt-8">
+        <div className="bg-white/80 dark:bg-gray-900/80 border border-primary/20 rounded-xl shadow-md px-6 py-4 min-w-[320px] max-w-xl w-full">
+          <div className="mb-2 flex items-center gap-2">
+            <span className="text-lg font-semibold text-primary-700 dark:text-primary-300">Legend</span>
+            <span className="text-xs text-muted-foreground">(Student count ranges)</span>
           </div>
-        ))}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {processedData.ranges.map((range, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <span
+                  className="w-5 h-5 rounded-full border border-primary/30 shadow-sm"
+                  style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                />
+                <span className="text-sm text-foreground font-medium">
+                  {range.label}
+                  <span className="text-xs text-muted-foreground ml-1">students</span>
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="text-base text-muted-foreground text-center">

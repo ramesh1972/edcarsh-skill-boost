@@ -142,11 +142,14 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
 
     if (allSubjects.length === 0) return null;
 
+    const displayedSubjects = allSubjects.slice(0, 2);
+    const extraCount = allSubjects.length - displayedSubjects.length;
+
     return (
-      <div className="mt-2">
+      <div className="mt-2 ml-[-60px]">
         <h6 className={`font-medium mb-1 ${config.details}`}>Teaches:</h6>
         <div className="flex flex-wrap gap-1">
-          {allSubjects.map((subject, index) => (
+          {displayedSubjects.map((subject, index) => (
             <Badge 
               key={index} 
               customColor={subject.color}
@@ -155,6 +158,9 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
               {subject.name}
             </Badge>
           ))}
+          {extraCount > 0 && (
+            <Badge className={`bg-muted text-muted-foreground border border-muted-foreground/30 ${config.badge}`}>+ {extraCount} more</Badge>
+          )}
         </div>
       </div>
     );

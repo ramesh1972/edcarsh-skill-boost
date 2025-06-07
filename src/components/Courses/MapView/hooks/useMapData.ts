@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import { Course } from '@/types';
 import { getAllIndustries, getAllSubjects } from '@/data/masterData';
-import { ViewMode, MapData } from '../types';
+import { ViewMode, MapData, MapDataItem } from '../types';
 import { calculateDynamicRanges } from '../utils/rangeCalculator';
 
 const COLORS = [
@@ -17,7 +17,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
       const studentValues = courses.map(course => course.students);
       const ranges = calculateDynamicRanges(studentValues, 9);
       
-      const allCourseData: any[] = [];
+      const allCourseData: MapDataItem[] = [];
 
       ranges.forEach((range, rangeIndex) => {
         const rangeCourses = courses.filter(course => {
@@ -44,7 +44,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
           const fontSize = 8 + (studentRatio * 6);
           
           allCourseData.push({
-            id: course.id,
+            id: String(course.id),
             title: course.title,
             students: course.students,
             industry: course.industry,
