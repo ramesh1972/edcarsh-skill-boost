@@ -21,7 +21,7 @@ const CourseInfoCard: React.FC<CourseInfoCardProps> = ({
   const { getIcon } = useTheme();
   
   return (
-    <div className={`grid grid-cols-1 grid-rows-2 gap-2 p-0 ${className}`} style={{fontSize: '16px'}}>
+    <div className={`grid grid-cols-1 grid-rows-2 gap-2 p-0 ${className}`} style={{fontSize: '14px'}}>
       {/* Course Details */}
       <div className="flex items-center justify-between text-sm border-b">
         <div className="flex items-center gap-1">
