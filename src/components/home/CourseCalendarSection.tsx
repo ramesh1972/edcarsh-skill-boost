@@ -1,6 +1,6 @@
 import React from 'react';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
+import CoursesCalendarView from '@/components/courses/CoursesCalendarView';
 import { Course } from '@/types';
 
 interface CourseCalendarSectionProps {
@@ -23,7 +23,7 @@ const CourseCalendarSection = ({
   return (
     <section 
       ref={calendarAnimation.ref}
-      className={`py-20 bg-primary/20  transition-all duration-700 ${
+      className={`py-20 bg-primary/20 w-full  transition-all duration-700 ${
         calendarAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
       }`}
     >
@@ -39,7 +39,7 @@ const CourseCalendarSection = ({
           </p>
         </div>
         <div 
-          className={`transition-all duration-700 delay-400 ${
+          className={`transition-all duration-700 delay-400 w-full ${
             calendarAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
           }`}
         >

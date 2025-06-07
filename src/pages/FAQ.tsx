@@ -2,7 +2,7 @@ import React from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { faqs } from '../data/mockData'; // Adjust the import path as necessary
-import TitleComponent from '@/components/TitleComponent';
+import TitleComponent from '@/components/common/TitleComponent';
 
 const FAQ = () => {
 

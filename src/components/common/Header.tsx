@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 import { HeaderLogo } from './HeaderLogo';
-import { MainMenuNavigation } from './MainMenuNavigation';
-import { SecondaryMenuNavigation } from './SecondaryMenuNavigation';
-import { MobileNavigation } from './MobileNavigation';
+import { MainMenuNavigation } from '../menu/MainMenuNavigation';
+import { SecondaryMenuNavigation } from '../menu/SecondaryMenuNavigation';
+import { MobileNavigation } from '../menu/MobileNavigation';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

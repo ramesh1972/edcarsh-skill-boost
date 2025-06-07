@@ -8,11 +8,11 @@ import { courses } from '@/data/courses';
 import { getAllIndustries, getSubjectsByIndustry } from '@/data/masterData';
 import { Filter, ArrowUpDown, LayoutGrid, List, Calendar as CalendarIcon, MapPin, ArrowUp, ArrowDown } from 'lucide-react';
 import { isAfter, parseISO, isSameDay } from 'date-fns';
-import CourseCard from '@/components/Courses/CourseCard';
-import LongCourseCard from '@/components/Courses/LongCourseCard';
-import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
-import PopularCoursesMapView from '@/components/Courses/PopularCoursesMapView';
-import TitleComponent from '@/components/TitleComponent';
+import CourseCard from '@/components/courses/CourseCard';
+import LongCourseCard from '@/components/courses/LongCourseCard';
+import CoursesCalendarView from '@/components/courses/CoursesCalendarView';
+import PopularCoursesMapView from '@/components/courses/PopularCoursesMapView';
+import TitleComponent from '@/components/common/TitleComponent';
 
 const Courses = () => {
   const {
@@ -102,13 +102,13 @@ const Courses = () => {
         </div>
 
         {/* Filters, Sort Controls and View Mode Toggle */}
-        <div className="flex flex-wrap gap-4 mb-8 p-4 bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl hover:scale-[1.025] transition-transform duration-200 relative">
+        <div className="flex flex-wrap gap-4 mb-8 p-4 bg-primary/10 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl transition-transform duration-200 relative">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4" />
             <span className="font-medium">Filters</span>
           </div>
 
-          <div className="flex flex-wrap gap-4 flex-1">
+          <div className="flex flex-wrap gap-4 flex-1 items-center" >
             <div className="min-w-[150px]">
               <Select value={industryFilter} onValueChange={handleIndustryChange}>
                 <SelectTrigger>
@@ -122,7 +122,7 @@ const Courses = () => {
               </Select>
             </div>
 
-            <div className="min-w-[150px] mr-[20px]">
+            <div className="min-w-[150px]">
               <Select value={subjectFilter} onValueChange={setSubjectFilter}>
                 <SelectTrigger>
                   <SelectValue placeholder="Subject" />
@@ -174,9 +174,9 @@ const Courses = () => {
           </div>
 
           {/* View Mode Toggle - aligned to the right */}
-          <div className="flex items-center gap-4 ml-auto">
-            <span className="font-medium">View:</span>
-            <ToggleGroup type="single" value={viewMode} onValueChange={value => value && setViewMode(value)}>
+          <div className="flex items-center gap-4 ml-auto ">
+            <span className="font-medium">View</span>
+            <ToggleGroup type="single" value={viewMode} className="gap-3 pr-2 pl-2 p-2" onValueChange={value => value && setViewMode(value)}>
               <ToggleGroupItem value="card" aria-label="Card view" className="gap-1">
                 <LayoutGrid className="h-4 w-4" />
                 Card

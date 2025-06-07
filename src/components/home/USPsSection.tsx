@@ -11,7 +11,7 @@ const USPsSection = () => {
   return (
     <section 
       ref={uspsAnimation.ref}
-      className={`py-20 w-full mx-auto bg-gradient-to-r from-[#475569] via-primary/10 to-[#334155] transition-all duration-700 ${
+      className={`py-20 w-full mx-auto bg-gradient-to-r from-[#475569] via-[#475569]/20  via-primary/10  via-[#334155]/20 to-[#334155] transition-all duration-700 ${
         uspsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
       }`}
     >
@@ -30,7 +30,7 @@ const USPsSection = () => {
           className={`absolute right-0  lg:block transition-all duration-1000 delay-500 ${
             uspsAnimation.isVisible ? 'animate-fade-in-left opacity-100' : 'opacity-0 -translate-x-full'
           }`} 
-          style={{marginTop: '-40px', marginRight: '290px'}}
+          style={{marginTop: '-40px', marginRight: '310px'}}
         >
           <img src="/lovable-uploads/7aa0ba35-0c3f-47dc-a574-f6ff47194b94.png" alt="Success Key Illustration" className="w-48 h-48 object-contain" />
         </div>
@@ -43,34 +43,20 @@ const USPsSection = () => {
           <div className="flex items-center justify-center gap-8 mb-4">
             <h2 className="text-3xl font-bold">Why Choose EdCrash?</h2>
           </div>
-          <p className="text-xl text-muted-foreground">
-            We're revolutionizing online education with our unique approach
+          <p className=" text-center animate-pulse text-2xl font-bold-800" style={{ fontVariant: 'small-caps' }}>
+            We're revolutionizing online education with our unique live & tools oriented approach
           </p>
         </div>
         
+        <div className="hidden lg:block relative left-1/2 transform -translate-x-1/2 -translate-y-1/8 w-8 h-8 bg-gradient-to-r from-primary to-blue-600 rounded-full opacity-30 animate-pulse"></div>
         {/* Connected Cards Grid */}
         <div className="relative">
-          {/* Connection Lines - Hidden on mobile, visible on larger screens */}
-          <div className="hidden lg:block absolute inset-0 pointer-events-none">
-            {/* Horizontal lines */}
-            <div className="absolute top-1/3 left-1/3 w-1/3 h-0.5 bg-gradient-to-r from-primary/30 to-blue-500/30"></div>
-            <div className="absolute top-2/3 left-1/3 w-1/3 h-0.5 bg-gradient-to-r from-green-500/30 to-purple-500/30"></div>
-            
-            {/* Vertical lines */}
-            <div className="absolute left-1/3 top-1/3 w-0.5 h-1/3 bg-gradient-to-b from-yellow-500/30 to-green-500/30"></div>
-            <div className="absolute right-1/3 top-1/3 w-0.5 h-1/3 bg-gradient-to-b from-blue-500/30 to-red-500/30"></div>
-            
-            {/* Diagonal connections */}
-            <div className="absolute top-1/3 left-1/3 w-0.5 h-8 bg-primary/20 transform rotate-45 origin-bottom"></div>
-            <div className="absolute top-2/3 right-1/3 w-0.5 h-8 bg-primary/20 transform -rotate-45 origin-top"></div>
-          </div>
-
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10 !p-[20px]" style={{ marginTop: '100px'}}>
+                 {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10 !p-[20px]">
             {usps.map((usp, index) => (
               <Card 
                 key={index} 
-                className={`text-center hover:shadow-lg transition-all duration-700 hover:scale-105 hover:border-primary/50 group relative bg-background/80 backdrop-blur-sm ${
+                className={`text-center hover:shadow-lg transition-all duration-700 hover:scale-105 hover:border-primary/50 group relative bg-primary/20 backdrop-blur-sm ${
                   uspsAnimation.isVisible 
                     ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}` 
                     : 'opacity-0 translate-y-10'
@@ -80,14 +66,14 @@ const USPsSection = () => {
                 }}
               >
                 {/* Connection dots */}
-                <div className="hidden lg:block absolute -top-2 -left-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
-                <div className="hidden lg:block absolute -top-2 -right-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
-                <div className="hidden lg:block absolute -bottom-2 -left-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
-                <div className="hidden lg:block absolute -bottom-2 -right-2 w-4 h-4 bg-primary/20 rounded-full group-hover:bg-primary/40 transition-colors"></div>
+                <div className="hidden lg:block absolute -top-2 -left-2 w-4 h-4 bg-primary !rounded-full group-hover:bg-primary/40 transition-colors"></div>
+                <div className="hidden lg:block absolute -top-2 -right-2 w-4 h-4 bg-primary !rounded-full group-hover:bg-primary/40 transition-colors"></div>
+                <div className="hidden lg:block absolute -bottom-2 -left-2 w-4 h-4 bg-primary !rounded-full group-hover:bg-primary/40 transition-colors"></div>
+                <div className="hidden lg:block absolute -bottom-2 -right-2 w-4 h-4 bg-primary !rounded-full group-hover:bg-primary/40 transition-colors"></div>
                 
-                <CardHeader>
-                  <div className="mx-auto mb-4 relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-blue-600/10 rounded-full blur-xl group-hover:blur-2xl transition-all"></div>
+                <CardHeader className='bg-primary/40'>
+                  <div className="mx-auto mb-4 relative ">
+                    <div className="absolute inset-0 "></div>
                     <div className={`relative z-10 ${usp.iconColor}`}>
                       {getIcon(usp.iconName)}
                     </div>
@@ -95,7 +81,7 @@ const USPsSection = () => {
                   <CardTitle className="text-xl group-hover:text-primary transition-colors">{usp.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base mt-5">
                     {usp.description}
                   </CardDescription>
                 </CardContent>
@@ -104,7 +90,7 @@ const USPsSection = () => {
           </div>
 
           {/* Central connecting element */}
-          <div className="hidden lg:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-r from-primary to-blue-600 rounded-full opacity-30 animate-pulse"></div>
+          <div className="hidden lg:block relative left-1/2 transform -translate-x-1/2 -translate-y-1/8 w-8 h-8 bg-gradient-to-r from-primary to-blue-600 rounded-full opacity-30 animate-pulse"></div>
         </div>
       </div>
     </section>

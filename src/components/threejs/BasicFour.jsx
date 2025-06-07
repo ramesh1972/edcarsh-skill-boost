@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import React from 'react';
-import Courses from './Courses'
+import Courses from '../../pages/Courses'
 
 export default function BasicFour() {
     // Create a ref for the container div

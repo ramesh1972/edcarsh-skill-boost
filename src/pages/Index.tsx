@@ -2,7 +2,7 @@ import React from 'react';
 import Home from './Home';
 
 import { Card } from '../components/ui/card';
-import TitleComponent from '@/components/TitleComponent';
+import TitleComponent from '@/components/common/TitleComponent';
 
 const Index = () => {
   return (

@@ -5,7 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Calendar } from '@/components/ui/calendar';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, addDays, addWeeks, addMonths, subDays, subWeeks, subMonths, isSameDay, parseISO } from 'date-fns';
-import CourseCalendarEvent from '@/components/Calendar/CourseCalendarEvent';
+import CourseCalendarEvent from '@/components/calendar/CourseCalendarEvent';
 import { Course } from '@/types';
 import CoursesCalendarBackground from './CoursesCalendarBackground';
 
@@ -221,10 +221,10 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
       <div className="relative z-10">
         {/* Calendar Navigation */}
         <div className="flex items-center justify-center gap-2 mb-6">
-          <ToggleGroup type="single" value={calendarViewMode} onValueChange={value => value && setCalendarViewMode(value)}>
-            <ToggleGroupItem value="day" aria-label="Day view">Day</ToggleGroupItem>
-            <ToggleGroupItem value="week" aria-label="Week view">Week</ToggleGroupItem>
-            <ToggleGroupItem value="month" aria-label="Month view">Month</ToggleGroupItem>
+          <ToggleGroup type="single" className="gap-2 mr-5 bg-transparent !border-none !shadow-none" value={calendarViewMode} onValueChange={value => value && setCalendarViewMode(value)}>
+            <ToggleGroupItem className="bg-secondary" value="day" aria-label="Day view">Day</ToggleGroupItem>
+            <ToggleGroupItem className="bg-secondary" value="week" aria-label="Week view">Week</ToggleGroupItem>
+            <ToggleGroupItem className="bg-secondary"  value="month" aria-label="Month view">Month</ToggleGroupItem>
           </ToggleGroup>
           <Button variant="outline" size="sm" onClick={() => navigatePeriod('prev')}>
             <ChevronLeft className="h-4 w-4" />
@@ -243,7 +243,7 @@ const CoursesCalendarView: React.FC<CoursesCalendarViewProps> = ({
           <Button variant="outline" size="sm" onClick={() => navigatePeriod('next')}>
             <ChevronRight className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="sm" onClick={() => setCurrentDate(new Date())}>
+          <Button className="ml-5" variant="outline" size="sm" onClick={() => setCurrentDate(new Date())}>
             Today
           </Button>
         </div>

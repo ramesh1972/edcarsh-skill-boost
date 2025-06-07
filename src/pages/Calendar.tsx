@@ -6,8 +6,8 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { courses } from '@/data/courses';
 import { Calendar as CalendarIcon, LayoutGrid, List, ChevronLeft, ChevronRight } from 'lucide-react';
 import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, addDays, addWeeks, addMonths, subDays, subWeeks, subMonths, isSameDay, isAfter, isBefore, parseISO } from 'date-fns';
-import CourseCalendarEvent from '@/components/Calendar/CourseCalendarEvent';
-import TitleComponent from '@/components/TitleComponent';
+import CourseCalendarEvent from '@/components/calendar/CourseCalendarEvent';
+import TitleComponent from '@/components/common/TitleComponent';
 
 const Calendar = () => {
   const { theme, getIcon, getBackground } = useTheme();

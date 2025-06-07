@@ -111,20 +111,20 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
           {/* Top row - 3 columns now */}
           <div className="grid grid-cols-3 gap-6 flex-1">
             {/* Column 1: Title and Description */}
-            <div className="col-span-1">
+            <div className="col-span-1 mt-[-4px]">
               <div className="flex items-center gap-2 mb-2">
                 <h3 className={`text-xl font-semibold ${theme.designSystem === 'material' ? 'text-lg font-medium' : 'text-xl'}`}>
                   {course.title}
                 </h3>
               </div>
-              <p className="text-sm text-muted-foreground max-h-[165px] overflow-hidden">{course.longDescription}</p>
+              <p className="text-sm text-muted-foreground max-h-[180px] overflow-hidden">{course.longDescription}</p>
             </div>
 
             {/* Column 2: Topics as bulleted list - max 6 topics */}
             <div className="col-span-1" style={{ maxWidth: '280px' }}>
               <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
-                {course.longTopics.slice(0, 7).map((topic, index) => (
+                {course.longTopics.slice(0, 8).map((topic, index) => (
                   <li key={index} className="flex items-start gap-2">
                     <span className="text-primary mt-1">•</span>
                     <span>{topic}</span>
@@ -134,7 +134,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
             </div>
 
             {/* Column 3: Instructor Details */}
-            <div className="flex flex-col justify-between h-full -ml-[25px]">
+            <div className="flex flex-col justify-between h-full -ml-[35px]">
               <InstructorCard instructor={course.instructor} />
               <div className="mt-auto">
                 <ActionButtons 

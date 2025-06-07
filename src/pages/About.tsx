@@ -2,10 +2,15 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/contexts/ThemeContext';
-import TitleComponent from '@/components/TitleComponent';
+import TitleComponent from '@/components/common/TitleComponent';
+import ToolsList from '@/components/tools/ToolsList';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const About = () => {
   const { theme, getIcon, getBackground } = useTheme();
+
+  const toolsAnimation = useScrollAnimation({ threshold: 0.1 });
+  toolsAnimation.isVisible = true; // Force visibility for demo purposes
 
   const values = [
     {
@@ -50,7 +55,7 @@ const About = () => {
         />
         <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
           <div className="mb-12 text-center">
-            <h6 className={`text-3xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`} style={{fontVariant: 'small-caps',  color: 'darkgreen', fontOpticalSizing: 'revert-layer'}} >
+            <h6 className={`text-3xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`} style={{ fontVariant: 'small-caps', color: 'darkgreen', fontOpticalSizing: 'revert-layer' }} >
               "We're revolutionizing professional education with focused, affordable crash courses
               designed for busy professionals who want to learn new skills quickly and effectively."
             </h6>
@@ -58,8 +63,8 @@ const About = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             <Card className={`bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200 ${theme.designSystem === 'material' ? 'shadow-md' :
-                theme.designSystem === 'fluent' ? 'border-2' :
-                  'hover:shadow-lg'
+              theme.designSystem === 'fluent' ? 'border-2' :
+                'hover:shadow-lg'
               } ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
               }`}>
               <CardHeader>
@@ -84,8 +89,8 @@ const About = () => {
             </Card>
 
             <Card className={`bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200 ${theme.designSystem === 'material' ? 'shadow-md' :
-                theme.designSystem === 'fluent' ? 'border-2' :
-                  'hover:shadow-lg'
+              theme.designSystem === 'fluent' ? 'border-2' :
+                'hover:shadow-lg'
               } ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
               }`}>
               <CardHeader>
@@ -127,8 +132,8 @@ const About = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {values.map((value, index) => (
                 <Card key={index} className={`bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200 text-center ${theme.designSystem === 'material' ? 'shadow-md' :
-                    theme.designSystem === 'fluent' ? 'border-2' :
-                      'hover:shadow-lg'
+                  theme.designSystem === 'fluent' ? 'border-2' :
+                    'hover:shadow-lg'
                   } ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
                   }`}>
                   <CardHeader>
@@ -145,9 +150,35 @@ const About = () => {
             </div>
           </div>
 
+          <div className={`text-center mb-16 transition-all duration-700 delay-300 ${toolsAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'}`}>
+            <h2 className="text-3xl font-bold mb-6 text-blue">🚀 Free! Hands-On Tools for Live Learning</h2>
+            <p className="text-xl text-black-400 mb-4">
+              Experience the <span className="font-bold text-primary-600 animate-pulse">CORE of upskilling</span> through our comprehensive toolkit
+            </p>
+            <p className="text-lg text-primary max-w-4xl mx-auto">
+              Each live session is powered by industry-grade tools that provide real-world experience,
+              ensuring you're job-ready from day one.
+            </p>
+            <div className="mt-6 flex flex-col items-center gap-2">
+              <span className="inline-block px-4 py-2 rounded-full bg-green-100 text-green-600 font-semibold text-base shadow-sm border border-green-200" style={{ fontSize: '22px' }}>
+                All tools are <strong className="text-3xl font-bold text-foreground/80 animate-pulse">100% FREE</strong> for learners!
+                <br></br><br></br>
+                Free For Lifetime!
+              </span>
+              <a
+                href="https://demo.edcarsh.com" target="_blank" rel="noopener noreferrer"
+                className="inline-block mt-2 px-6 py-2 rounded-lg bg-gradient-to-r from-primary to-blue-500 text-white font-bold shadow hover:scale-105 transition-transform duration-200"
+              >
+                🎬 Try the Live Demo
+              </a>
+            </div>
+          </div>
+
+          <ToolsList toolsAnimation={toolsAnimation} />
+
           <Card className={`bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200 max-w-4xl mx-auto ${theme.designSystem === 'material' ? 'shadow-md' :
-              theme.designSystem === 'fluent' ? 'border-2' :
-                'hover:shadow-lg'
+            theme.designSystem === 'fluent' ? 'border-2' :
+              'hover:shadow-lg'
             } ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''
             }`}>
             <CardHeader className="text-center">
@@ -179,7 +210,7 @@ const About = () => {
           </Card>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -28,8 +28,8 @@ const HeroSection = () => {
             🚀 Launch Your Skills in Hours, Not Months
           </Badge>
             <br/>
-            <Badge className="mb-9 inline-block px-4 py-2 bg-secondary/70 rounded-full text-primary-600 font-semibold text-base shadow-sm border border-green-700" style={{fontSize: '22px'}}>
-              With Tools that are <strong className="text-3xl font-bold text-foreground/80 animate-pulse">100% FREE</strong> for learners!
+            <Badge className="mb-9 inline-block px-4 py-2 bg-secondary/90 rounded-full text-primary-600 font-semibold text-base shadow-sm border border-green-700 items-center" style={{fontSize: '22px', verticalAlign: 'middle'}}>
+              <span>With Tools that are</span> <span className="text-3xl font-bold text-foreground/80 delay-200 animate-pulse duration-1500"> 100% FREE </span> <span>for learners!</span>
               <br></br><br></br>
               Free For Lifetime!
             </Badge>

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
-import TitleComponent from '@/components/TitleComponent';
+import TitleComponent from '@/components/common/TitleComponent';
 
 const Contact = () => {
   return (

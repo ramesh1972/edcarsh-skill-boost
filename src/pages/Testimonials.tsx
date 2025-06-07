@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Star, Quote } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { testimonials } from '@/data/testimonials';
-import TitleComponent from '@/components/TitleComponent';
+import TitleComponent from '@/components/common/TitleComponent';
 
 const Testimonials = () => {
   const { theme, getIcon, getBackground } = useTheme();
