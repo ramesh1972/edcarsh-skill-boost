@@ -87,7 +87,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <CardDescription className="text-sm line-clamp-2 flex-1 flex items-start max-h-30 overflow-hidden">{course.mediumDescription}</CardDescription>
       </CardHeader>
 
-      <CardContent className="flex-1 flex flex-col p-6 pt-0 pb-0">
+      <CardContent className="flex-1 flex flex-col pt-0 pb-0">
         {/* Topics Covered - Fixed height for alignment, max 6 topics */}
         <div className="mb-3">
           <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
@@ -104,18 +104,19 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <div className="mb-4">
           <InstructorCard instructor={instructor} hideDescription={true} size="sm" />
         </div>
-        
+
         {/* Spacer to push content to bottom */}
         <div className="flex-1"></div>
 
         {/* Bottom section - Course Info and Action Buttons */}
-        <div className="mt-auto space-y-3">
+        <div className="mt-auto space-y-3 pb-3">
           <CourseInfoCard 
             duration={course.duration} 
             students={course.students} 
             price={course.price} 
             nextSession={course.nextSession} 
           />
+          
           <ActionButtons 
             courseId={course.id} 
             nextSession={course.nextSession} 
