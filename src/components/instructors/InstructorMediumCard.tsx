@@ -59,34 +59,6 @@ const InstructorMediumCard: React.FC<InstructorMediumCardProps> = ({ instructor 
     );
   };
 
-  const renderIndustries = () => {
-    if (!instructor.industries || instructor.industries.length === 0) {
-      return null;
-    }
-
-    return (
-      <div className="mt-3">
-        <h6 className="text-xs font-medium mb-2">Industries:</h6>
-        <div className="flex flex-wrap gap-1">
-          {instructor.industries.slice(0, 3).map((industryId, index) => (
-            <Badge 
-              key={index} 
-              variant="outline"
-              className="text-xs px-2 py-1"
-            >
-              {getIndustryNameById(industryId)}
-            </Badge>
-          ))}
-          {instructor.industries.length > 3 && (
-            <Badge variant="secondary" className="text-xs px-2 py-1">
-              +{instructor.industries.length - 3} more
-            </Badge>
-          )}
-        </div>
-      </div>
-    );
-  };
-
   return (
     <Card className="hover:shadow-lg transition-shadow h-full flex flex-col">
       <CardHeader className="text-center">
@@ -136,7 +108,6 @@ const InstructorMediumCard: React.FC<InstructorMediumCardProps> = ({ instructor 
           </div>
 
           {renderSubjects()}
-          {renderIndustries()}
         </div>
 
         <Link to={`/instructors/${instructor.id}`} className="mt-6">
