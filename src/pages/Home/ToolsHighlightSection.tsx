@@ -56,7 +56,7 @@ const ToolsHighlightSection = () => {
   return (
     <section 
       ref={toolsAnimation.ref} 
-      className={`py-20 w-full mx-auto bg-gradient-to-r from-[#0f172a] via-primary/30 to-[#1e293b] transition-all duration-700 ${
+      className={`py-20 w-full mx-auto bg-gradient-to-r from-[#0f172a] via-primary/80 to-[#1e293b] transition-all duration-700 ${
         toolsAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
       }`}
     >
