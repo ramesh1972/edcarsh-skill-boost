@@ -11,9 +11,12 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Instructor } from '@/types';
 
-const InstructorDetails: React.FC = () => {
-  const instructorCourses = getInstructorCourses(instructor.id || 0);
+interface InstructorDetailsProps {
+  instructor?: Instructor;
+  onClose?: () => void;
+}
 
+const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor: propInstructor, onClose }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,10 +24,9 @@ const InstructorDetails: React.FC = () => {
   const [referrerRoute, setReferrerRoute] = useState('/instructors');
   const [referrerName, setReferrerName] = useState('Instructors');
 
-  const id1 = parseInt(id || null);
-  const instructor = getInstructorById(id1);
-
-  const instructorCourses = getInstructorCourses(instructor.id || 0);
+  // Use prop instructor if provided, otherwise get from URL params
+  const instructor = propInstructor || (id ? getInstructorById(parseInt(id)) : null);
+  const instructorCourses = instructor ? getInstructorCourses(instructor.id || 0) : [];
 
   useEffect(() => {
     const state = location.state as { from?: string; fromName?: string } | null;
@@ -43,11 +45,19 @@ const InstructorDetails: React.FC = () => {
   }, [location]);
 
   const handleBackClick = () => {
-    // Clear the stored referrer
-    sessionStorage.removeItem('instructorViewReferrer');
-    sessionStorage.removeItem('instructorViewReferrerName');
-    navigate(referrerRoute);
+    if (onClose) {
+      onClose();
+    } else {
+      // Clear the stored referrer
+      sessionStorage.removeItem('instructorViewReferrer');
+      sessionStorage.removeItem('instructorViewReferrerName');
+      navigate(referrerRoute);
+    }
   };
+
+  if (!instructor) {
+    return <div>Instructor not found</div>;
+  }
   
   return (
    <div className={`min-h-full bg-background`}>
