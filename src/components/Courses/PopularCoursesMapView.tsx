@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
@@ -20,7 +21,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   const [viewMode, setViewMode] = useState<ViewMode>('industry');
   const [hoveredItem, setHoveredItem] = useState<any>(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-  const [zoomLevel, setZoomLevel] = useState(0.7);
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   // Helper function to wrap text
   const wrapText = (text: string, maxLength: number) => {
@@ -52,7 +53,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     const min = sortedCounts[sortedCounts.length - 1];
     
     if (max === min) {
-      return [{ min, max, label: `${min}`, radius: 450 }];
+      return [{ min, max, label: `${min}`, radius: 200 }];
     }
     
     // Determine number of ranges based on data spread
@@ -62,8 +63,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     
     const ranges = [];
     const step = dataRange / rangeCount;
-    const baseRadius = 250;
-    const radiusIncrement = 180;
+    const baseRadius = 120;
+    const radiusIncrement = 80;
     
     for (let i = 0; i < rangeCount; i++) {
       const rangeMin = i === rangeCount - 1 ? min : Math.ceil(max - (step * (i + 1)));
@@ -217,13 +218,13 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       
       // Calculate circle radius based on student count proportionally across all data
       const studentRatio = globalMax === globalMin ? 1 : (item.students - globalMin) / (globalMax - globalMin);
-      const minRadius = 50;
-      const maxRadius = 140;
+      const minRadius = 30;
+      const maxRadius = 80;
       const circleRadius = minRadius + (studentRatio * (maxRadius - minRadius));
       
       // Calculate font sizes based on circle radius
-      const titleFontSize = Math.max(10, Math.min(18, (circleRadius / maxRadius) * 14 + 8));
-      const countFontSize = Math.max(12, Math.min(20, (circleRadius / maxRadius) * 16 + 10));
+      const titleFontSize = Math.max(8, Math.min(14, (circleRadius / maxRadius) * 12 + 6));
+      const countFontSize = Math.max(10, Math.min(16, (circleRadius / maxRadius) * 14 + 8));
       
       // Assign color based on item index for colorful variety
       const itemColor = COLORS[index % COLORS.length];
@@ -354,14 +355,14 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         <svg 
           width="100%" 
           height="100%" 
-          viewBox={`${-1000 * zoomLevel} ${-680 * zoomLevel} ${2000 * zoomLevel} ${1360 * zoomLevel}`} 
+          viewBox={`${-700 * zoomLevel} ${-480 * zoomLevel} ${1400 * zoomLevel} ${960 * zoomLevel}`} 
           className="absolute inset-0"
         >
           {/* Radial lines from center */}
           <g className="opacity-30">
             {Array.from({ length: 16 }, (_, i) => {
               const angle = (i * 22.5) * (Math.PI / 180); // 16 lines at 22.5° intervals
-              const length = 1200; // Line length
+              const length = 800; // Line length
               const x2 = Math.cos(angle) * length;
               const y2 = Math.sin(angle) * length;
               
@@ -419,7 +420,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                   <text
                     key={lineIndex}
                     x={item.x}
-                    y={item.y - 12 + (lineIndex * (item.titleFontSize * 1.2))}
+                    y={item.y - 8 + (lineIndex * (item.titleFontSize * 1.2))}
                     textAnchor="middle"
                     className="font-bold fill-white pointer-events-none"
                     style={{ fontSize: `${item.titleFontSize}px` }}
@@ -431,7 +432,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                 {/* Student count - positioned with more gap below title */}
                 <text
                   x={item.x}
-                  y={item.y + (wrappedLines.length * (item.titleFontSize * 0.6)) + 25}
+                  y={item.y + (wrappedLines.length * (item.titleFontSize * 0.6)) + 15}
                   textAnchor="middle"
                   className="font-semibold fill-white pointer-events-none"
                   style={{ fontSize: `${item.countFontSize}px` }}
