@@ -1,9 +1,11 @@
+
 import React, { useState, useMemo } from 'react';
 import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
 import { ZoomControls } from './MapView/components/ZoomControls';
 import { ViewMode } from './MapView/types';
 import { getIndustryNameById, getSubjectNameById } from '@/data/masterData';
+import { getInstructorById } from '@/data/instructors';
 
 interface PopularCoursesMapViewProps {
   courses: Course[];
@@ -107,15 +109,19 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       courses.forEach(course => {
         const industryName = getIndustryNameById(course.industryId);
         if (!industryMap.has(industryName)) {
-          industryMap.set(industryName, 0);
+          industryMap.set(industryName, { students: 0, courses: [] });
         }
-        industryMap.set(industryName, industryMap.get(industryName) + course.students);
+        const industryData = industryMap.get(industryName);
+        industryData.students += course.students;
+        industryData.courses.push(course);
+        industryMap.set(industryName, industryData);
       });
 
-      items = Array.from(industryMap.entries()).map(([name, students]) => ({
+      items = Array.from(industryMap.entries()).map(([name, data]) => ({
         name,
-        students,
-        type: 'industry'
+        students: data.students,
+        type: 'industry',
+        courses: data.courses
       }));
     } else if (viewMode === 'subject') {
       const subjectMap = new Map();
@@ -126,15 +132,19 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         const fullName = `${subjectName} (${industryName})`;
         
         if (!subjectMap.has(fullName)) {
-          subjectMap.set(fullName, 0);
+          subjectMap.set(fullName, { students: 0, courses: [] });
         }
-        subjectMap.set(fullName, subjectMap.get(fullName) + course.students);
+        const subjectData = subjectMap.get(fullName);
+        subjectData.students += course.students;
+        subjectData.courses.push(course);
+        subjectMap.set(fullName, subjectData);
       });
 
-      items = Array.from(subjectMap.entries()).map(([name, students]) => ({
+      items = Array.from(subjectMap.entries()).map(([name, data]) => ({
         name,
-        students,
-        type: 'subject'
+        students: data.students,
+        type: 'subject',
+        courses: data.courses
       }));
     } else if (viewMode === 'topic') {
       const topicMap = new Map();
@@ -142,22 +152,27 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       courses.forEach(course => {
         course.topics?.forEach(topic => {
           if (!topicMap.has(topic)) {
-            topicMap.set(topic, 0);
+            topicMap.set(topic, { students: 0, courses: [] });
           }
-          topicMap.set(topic, topicMap.get(topic) + course.students);
+          const topicData = topicMap.get(topic);
+          topicData.students += course.students;
+          topicData.courses.push(course);
+          topicMap.set(topic, topicData);
         });
       });
 
-      items = Array.from(topicMap.entries()).map(([name, students]) => ({
+      items = Array.from(topicMap.entries()).map(([name, data]) => ({
         name,
-        students,
-        type: 'topic'
+        students: data.students,
+        type: 'topic',
+        courses: data.courses
       }));
     } else if (viewMode === 'courses') {
       items = courses.map(course => ({
         name: course.title,
         students: course.students,
-        type: 'course'
+        type: 'course',
+        course: course
       }));
     }
 
@@ -231,6 +246,67 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
 
   const handleViewModeChange = (mode: ViewMode) => {
     setViewMode(mode);
+  };
+
+  const getTooltipContent = (item: any) => {
+    if (viewMode === 'courses' && item.course) {
+      const course = item.course;
+      const instructor = getInstructorById(course.instructorId);
+      return (
+        <div className="max-w-xs">
+          <div className="font-bold text-base mb-2">{course.title}</div>
+          <div className="space-y-1 text-sm">
+            <div><span className="font-medium">Instructor:</span> {instructor?.name || 'TBA'}</div>
+            <div><span className="font-medium">Price:</span> {course.price}</div>
+            <div><span className="font-medium">Duration:</span> {course.duration} weeks</div>
+            <div><span className="font-medium">Level:</span> {course.level}</div>
+            <div><span className="font-medium">Students:</span> {course.students.toLocaleString()}</div>
+            <div><span className="font-medium">Industry:</span> {getIndustryNameById(course.industryId)}</div>
+            <div><span className="font-medium">Subject:</span> {getSubjectNameById(course.industryId, course.subjectId)}</div>
+            {course.topics && course.topics.length > 0 && (
+              <div><span className="font-medium">Topics:</span> {course.topics.join(', ')}</div>
+            )}
+          </div>
+        </div>
+      );
+    }
+    
+    if (item.courses && item.courses.length > 0) {
+      const sampleCourses = item.courses.slice(0, 3);
+      return (
+        <div className="max-w-sm">
+          <div className="font-bold text-base mb-2">{item.name}</div>
+          <div className="text-sm mb-2">
+            <span className="font-medium">Total Students:</span> {item.students.toLocaleString()}
+          </div>
+          <div className="text-sm mb-2">
+            <span className="font-medium">Courses ({item.courses.length}):</span>
+          </div>
+          <div className="space-y-1 text-xs">
+            {sampleCourses.map((course: Course, index: number) => (
+              <div key={course.id} className="border-l-2 border-primary/30 pl-2">
+                <div className="font-medium">{course.title}</div>
+                <div className="text-muted-foreground">
+                  {course.students.toLocaleString()} students • {course.price} • {course.duration} weeks
+                </div>
+              </div>
+            ))}
+            {item.courses.length > 3 && (
+              <div className="text-muted-foreground italic">...and {item.courses.length - 3} more courses</div>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="max-w-xs">
+        <div className="font-bold text-base">{item.name}</div>
+        <div className="text-sm">
+          <span className="font-medium">Students:</span> {item.students.toLocaleString()}
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -365,16 +441,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           </div>
         </div>
         
-        {/* Hover tooltip */}
+        {/* Enhanced hover tooltip */}
         {hoveredItem && (
-          <div className="absolute top-4 left-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border max-w-sm">
-            <p className="font-bold text-lg">{hoveredItem.name}</p>
-            <p className="text-base text-muted-foreground">
-              {hoveredItem.students.toLocaleString()} students
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Range: {hoveredItem.range}
-            </p>
+          <div className="absolute top-4 left-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border max-w-md z-50">
+            {getTooltipContent(hoveredItem)}
           </div>
         )}
       </div>
