@@ -135,8 +135,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     <div className="w-full space-y-6">
       <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
       
-      <div className="relative w-full h-[900px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
-        <svg width="100%" height="100%" viewBox="-550 -450 1100 900" className="absolute inset-0">
+      <div className="relative w-full h-[1000px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
+        <svg width="100%" height="100%" viewBox="-600 -500 1200 1000" className="absolute inset-0">
           {/* Range circles */}
           {processedData.ranges.map((range, index) => (
             <circle
@@ -157,7 +157,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
               <circle
                 cx={item.x}
                 cy={item.y}
-                r={Math.max(25, Math.min(40, item.students / 3))}
+                r={Math.max(35, Math.min(55, item.students / 2.5))}
                 fill={item.color}
                 stroke="white"
                 strokeWidth="3"
@@ -168,19 +168,19 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
               />
               <text
                 x={item.x}
-                y={item.y - 5}
+                y={item.y - 8}
                 textAnchor="middle"
                 className="font-bold fill-white pointer-events-none"
-                style={{ fontSize: '16px' }}
+                style={{ fontSize: '12px' }}
               >
-                {item.name.length > 15 ? `${item.name.substring(0, 12)}...` : item.name}
+                {item.name.length > 18 ? `${item.name.substring(0, 15)}...` : item.name}
               </text>
               <text
                 x={item.x}
-                y={item.y + 15}
+                y={item.y + 12}
                 textAnchor="middle"
                 className="font-semibold fill-white pointer-events-none"
-                style={{ fontSize: '14px' }}
+                style={{ fontSize: '11px' }}
               >
                 {item.students.toLocaleString()}
               </text>
