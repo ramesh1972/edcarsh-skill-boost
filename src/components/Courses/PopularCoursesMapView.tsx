@@ -20,6 +20,7 @@ const COLORS = [
 const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('industry');
   const [hoveredItem, setHoveredItem] = useState<any>(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [zoomLevel, setZoomLevel] = useState(1);
 
   // Helper function to wrap text
@@ -248,6 +249,20 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     setViewMode(mode);
   };
 
+  const handleItemHover = (item: any, event: React.MouseEvent) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const containerRect = (event.currentTarget as Element).closest('.relative')?.getBoundingClientRect();
+    
+    if (containerRect) {
+      setTooltipPosition({
+        x: rect.left - containerRect.left + rect.width / 2,
+        y: rect.top - containerRect.top
+      });
+    }
+    
+    setHoveredItem(item);
+  };
+
   const getTooltipContent = (item: any) => {
     if (viewMode === 'courses' && item.course) {
       const course = item.course;
@@ -395,7 +410,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
                   stroke="white"
                   strokeWidth="3"
                   className="cursor-pointer transition-all duration-200 hover:opacity-80"
-                  onMouseEnter={() => setHoveredItem(item)}
+                  onMouseEnter={(e) => handleItemHover(item, e)}
                   onMouseLeave={() => setHoveredItem(null)}
                   opacity="0.9"
                 />
@@ -441,9 +456,16 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           </div>
         </div>
         
-        {/* Enhanced hover tooltip */}
+        {/* Enhanced hover tooltip positioned next to circle */}
         {hoveredItem && (
-          <div className="absolute top-4 left-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border max-w-md z-50">
+          <div 
+            className="absolute bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border max-w-md z-50 pointer-events-none"
+            style={{
+              left: `${tooltipPosition.x}px`,
+              top: `${tooltipPosition.y - 10}px`,
+              transform: 'translateX(-50%) translateY(-100%)'
+            }}
+          >
             {getTooltipContent(hoveredItem)}
           </div>
         )}
