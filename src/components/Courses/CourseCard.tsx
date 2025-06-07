@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,7 +10,7 @@ import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
 import { getInstructorById } from '@/data/instructors';
 import { Heart, Eye, UserPlus, Wifi, WifiOff, Wrench } from 'lucide-react';
-import { Course } from '@/types';
+import { Course } from '@/types/course.types';
 
 interface CourseCardProps {
   course: Course;

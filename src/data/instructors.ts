@@ -1,5 +1,4 @@
-
-import { Instructor } from '@/types';
+import { Instructor } from '@/types/instructor.types';
 import { getCoursesByInstructorId } from './courses';
 
 export const instructors: Instructor[] = [

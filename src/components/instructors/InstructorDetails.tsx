@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -10,7 +9,7 @@ import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/
 import { useTheme } from '@/hooks/useTheme';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Instructor } from '@/types';
+import { Instructor } from '@/types/instructor.types';
 
 interface InstructorDetailsProps {
   instructor?: Instructor;

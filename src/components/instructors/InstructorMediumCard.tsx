@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -7,7 +6,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Star, Users, BookOpen, Award } from 'lucide-react';
 import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/masterData';
-import { Instructor } from '@/types';
+import { Instructor } from '@/types/instructor.types';
 
 interface InstructorMediumCardProps {
   instructor: Instructor;
