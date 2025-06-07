@@ -92,7 +92,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
         {/* Main content columns: Description, Topics, Instructor */}
         <div className="flex flex-1 min-w-0 items-stretch gap-1" style={{ maxHeight: '320px' }}>
           {/* Column 1: Title and Description */}
-          <div className="flex-1 min-w-0 flex flex-col p-4" style={{ maxWidth: '300px' }}>
+          <div className="flex-1 min-w-0 flex flex-col p-4" style={{ maxWidth: '330px' }}>
             <div className="flex items-center gap-2 mb-2">
               <h3 className={`text-xl font-semibold ${theme.designSystem === 'material' ? 'text-lg font-medium' : 'text-xl'}`}>
                 {course.title}
@@ -102,7 +102,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
           </div>
 
           {/* Column 2: Topics as bulleted list - max 8 topics */}
-          <div className="flex-1 min-w-0 flex flex-col p-4" style={{ maxWidth: '300px' }}>
+          <div className="flex-1 min-w-0 flex flex-col p-4" style={{ maxWidth: '330px' }}>
             <h4 className="text-sm font-medium mb-2">Topics Covered:</h4>
             <ul className="text-sm text-muted-foreground space-y-1">
               {course.longTopics.slice(0, 9).map((topic, index) => (
