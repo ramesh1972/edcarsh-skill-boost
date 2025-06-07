@@ -63,17 +63,19 @@ const ToolsHighlightSection = () => {
     >
       <div className="container px-4 mx-auto">
         <div className={`text-center mb-16 transition-all duration-700 delay-300 ${toolsAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-3xl font-bold mb-6 text-blue">🚀 Hands-On Tools for Live Learning</h2>
-          <p className="text-xl text-black-500 mb-4">
-            Experience the <span className="font-bold text-primary animate-pulse">CORE of upskilling</span> through our comprehensive toolkit
+          <h2 className="text-3xl font-bold mb-6 text-blue">🚀 Free! Hands-On Tools for Live Learning</h2>
+          <p className="text-xl text-black-400 mb-4">
+            Experience the <span className="font-bold text-primary-600 animate-pulse">CORE of upskilling</span> through our comprehensive toolkit
           </p>
           <p className="text-lg text-primary max-w-4xl mx-auto">
             Each live session is powered by industry-grade tools that provide real-world experience, 
             ensuring you're job-ready from day one.
           </p>
           <div className="mt-6 flex flex-col items-center gap-2">
-            <span className="inline-block px-4 py-2 rounded-full bg-green-100 text-green-700 font-semibold text-base shadow-sm border border-green-200">
-              All tools are <span className="font-bold">100% FREE</span> for learners!
+            <span className="inline-block px-4 py-2 rounded-full bg-green-100 text-green-600 font-semibold text-base shadow-sm border border-green-200" style={{fontSize: '22px'}}>
+              All tools are <strong className="text-3xl font-bold text-foreground/80 animate-pulse">100% FREE</strong> for learners!
+              <br></br><br></br>
+              Free For Lifetime!
             </span>
             <a
               href="https://demo.edcarsh.com" target="_blank" rel="noopener noreferrer"
@@ -153,7 +155,7 @@ const ToolsHighlightSection = () => {
             <h3 className="text-2xl font-bold mb-4 text-white">🎯 Ready to Experience Hands-On Learning?</h3>
             <p className="text-lg text-secondary-foreground mb-6">
               Join thousands of professionals who've accelerated their careers through our 
-              <span className="font-bold text-primary"> tool-focused approach</span> to upskilling! 🚀
+              <span className="font-bold text-primary-600 animate-pulse"> tool-focused approach</span> to upskilling! 🚀
             </p>
              <a
               href="https://demo.edcarsh.com" target="_blank" rel="noopener noreferrer"

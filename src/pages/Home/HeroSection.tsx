@@ -18,16 +18,24 @@ const HeroSection = () => {
       <div className="container px-4 mx-auto">
         <div className="text-center">
           <Badge 
-            className={`mb-4 h-8 transition-all duration-700 delay-100 ${
+            className={`mb-4 h-8 transition-all duration-700 delay-100 animate-pulse duration-400 ${
               heroAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-5'
             }`} 
             variant="secondary" 
             style={{fontSize: '16px'}}
+            
           >
             🚀 Launch Your Skills in Hours, Not Months
           </Badge>
+            <br/>
+            <Badge className="mb-9 inline-block px-4 py-2 bg-secondary/70 rounded-full text-primary-600 font-semibold text-base shadow-sm border border-green-700" style={{fontSize: '22px'}}>
+              With Tools that are <strong className="text-3xl font-bold text-foreground/80 animate-pulse">100% FREE</strong> for learners!
+              <br></br><br></br>
+              Free For Lifetime!
+            </Badge>
+    
           <h1 
-            className={`text-6xl sm:text-8xl font-bold tracking-tight mb-6 text-white transition-all duration-700 delay-300 ${
+            className={`text-6xl sm:text-8xl font-bold tracking-tight mb-6 8ext-white transition-all duration-700 delay-300 ${
               heroAnimation.isVisible ? 'animate-zoom-in opacity-100' : 'opacity-0 scale-90'
             }`}
           >
