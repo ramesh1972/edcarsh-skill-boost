@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -88,12 +87,12 @@ const ToolsHighlightSection = () => {
           </p>
         </div>
 
-        {/* Tools Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+        {/* Tools List */}
+        <div className="max-w-4xl mx-auto space-y-6">
           {tools.map((tool, index) => (
-            <Card 
+            <div 
               key={index} 
-              className={`text-center hover:shadow-2xl transition-all duration-700 hover:scale-105 hover:border-primary/50 group relative bg-background/90 backdrop-blur-sm border-primary/20 ${
+              className={`bg-background/90 backdrop-blur-sm border border-primary/20 rounded-lg p-6 hover:shadow-2xl transition-all duration-700 hover:scale-[1.02] hover:border-primary/50 group relative ${
                 toolsAnimation.isVisible 
                   ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}` 
                   : 'opacity-0 translate-y-10'
@@ -105,23 +104,35 @@ const ToolsHighlightSection = () => {
               {/* Glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-blue-600/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
-              <CardHeader className="relative z-10">
-                <div className="mx-auto mb-4 relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-600/20 rounded-full blur-xl group-hover:blur-2xl transition-all"></div>
-                  <div className={`relative z-10 ${tool.iconColor} [&>svg]:w-12 [&>svg]:h-12`}>
-                    {getIcon(tool.iconName)}
+              <div className="relative z-10 flex items-start gap-6">
+                {/* Icon */}
+                <div className="flex-shrink-0">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-blue-600/20 rounded-full blur-xl group-hover:blur-2xl transition-all"></div>
+                    <div className={`relative z-10 ${tool.iconColor} [&>svg]:w-12 [&>svg]:h-12`}>
+                      {getIcon(tool.iconName)}
+                    </div>
                   </div>
                 </div>
-                <CardTitle className="text-xl group-hover:text-primary transition-colors font-bold">
-                  {tool.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="relative z-10">
-                <CardDescription className="text-base text-muted-foreground group-hover:text-foreground transition-colors">
-                  {tool.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
+
+                {/* Content */}
+                <div className="flex-1 space-y-3">
+                  {/* Tool Name Block */}
+                  <div className="bg-primary/10 rounded-lg p-4 border border-primary/20">
+                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
+                      {tool.title}
+                    </h3>
+                  </div>
+
+                  {/* Tool Description Block */}
+                  <div className="bg-muted/50 rounded-lg p-4 border border-muted/30">
+                    <p className="text-base text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
+                      {tool.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
 
