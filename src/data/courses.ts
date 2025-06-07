@@ -25,17 +25,6 @@ export const courses: Course[] = [
     industry: "Technology",
     mode: "live" as const,
     tools: true,
-    instructor: {
-      id: 1,
-      name: "Sarah Chen",
-      image: "/placeholder.svg",
-      experience: "5+ years at Google",
-      specialty: "React & Frontend Development",
-      city: "San Francisco",
-      country: "USA",
-      flag: "🇺🇸",
-      description: "Sarah is a senior frontend developer with extensive experience at Google."
-    },
     instructorId: 1
   },
   {
@@ -61,17 +50,6 @@ export const courses: Course[] = [
     industry: "Technology",
     mode: "live" as const,
     tools: true,
-    instructor: {
-      id: 1,
-      name: "Sarah Chen",
-      image: "/placeholder.svg",
-      experience: "5+ years at Google",
-      specialty: "React & Frontend Development",
-      city: "San Francisco",
-      country: "USA",
-      flag: "🇺🇸",
-      description: "Sarah is a senior frontend developer with extensive experience at Google."
-    },
     instructorId: 1
   },
   {
@@ -97,17 +75,6 @@ export const courses: Course[] = [
     industry: "Technology",
     mode: "live" as const,
     tools: true,
-    instructor: {
-      id: 2,
-      name: "Dr. Marcus Johnson",
-      image: "/placeholder.svg",
-      experience: "PhD in Data Science",
-      specialty: "Data Science & Python",
-      city: "Boston",
-      country: "USA",
-      flag: "🇺🇸",
-      description: "Dr. Johnson holds a PhD in Data Science from MIT."
-    },
     instructorId: 2
   },
   {
@@ -133,17 +100,6 @@ export const courses: Course[] = [
     industry: "Business",
     mode: "offline" as const,
     tools: false,
-    instructor: {
-      id: 3,
-      name: "Lisa Rodriguez",
-      image: "/placeholder.svg",
-      experience: "Marketing Director at Meta",
-      specialty: "Digital Marketing",
-      city: "Los Angeles",
-      country: "USA",
-      flag: "🇺🇸",
-      description: "Lisa is a seasoned digital marketing professional."
-    },
     instructorId: 3
   }
 ];

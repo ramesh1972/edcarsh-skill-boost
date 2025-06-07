@@ -10,34 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
 import InstructorCard from '@/components/instructors/InstructorCard';
+import { getInstructorById } from '@/data/instructors';
 import { Wifi, WifiOff, Wrench } from 'lucide-react';
-
-interface Course {
-  id: number;
-  title: string;
-  longDescription: string;
-  duration: string;
-  price: string;
-  students: number;
-  nextSession: string;
-  image: string;
-  longTopics: string[];
-  level: string;
-  subject: string;
-  industry: string;
-  mode: 'live' | 'offline';
-  tools: boolean;
-  instructor: {
-    name: string;
-    image: string;
-    experience: string;
-    specialty: string;
-    city: string;
-    country: string;
-    flag: string;
-    description: string;
-  };
-}
+import { Course } from '@/types';
 
 interface LongCourseCardProps {
   course: Course;
@@ -54,12 +29,17 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
 }) => {
   const { theme, getIcon } = useTheme();
   const navigate = useNavigate();
+  const instructor = getInstructorById(course.instructorId);
 
   const handleViewClick = () => {
     navigate(`/courses/${course.id}`, {
       state: { from: referrerRoute, fromName: referrerName }
     });
   };
+
+  if (!instructor) {
+    return null; // Don't render if instructor not found
+  }
   
   return (
     <Card className={`hover:shadow-lg transition-all duration-200 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : '${cardClassName}'}`}>
@@ -135,7 +115,7 @@ const LongCourseCard: React.FC<LongCourseCardProps> = ({
 
             {/* Column 3: Instructor Details */}
             <div className="flex flex-col justify-between h-full -ml-[35px]">
-              <InstructorCard instructor={course.instructor} />
+              <InstructorCard instructor={instructor} />
               <div className="mt-auto">
                 <ActionButtons 
                   courseId={course.id} 

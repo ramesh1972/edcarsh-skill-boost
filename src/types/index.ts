@@ -1,6 +1,6 @@
 
 export interface Instructor {
-  id: number; // Changed from optional to required
+  id: number;
   name: string;
   image: string;
   experience: string;
@@ -38,6 +38,5 @@ export interface Course {
   industry: string;
   mode: 'live' | 'offline';
   tools: boolean;
-  instructor: Instructor;
-  instructorId?: number;
+  instructorId: number;
 }

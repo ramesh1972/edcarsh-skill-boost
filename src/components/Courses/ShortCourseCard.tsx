@@ -8,34 +8,9 @@ import { getSubjectColor } from '@/data/masterData';
 import { useNavigate } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
+import { getInstructorById } from '@/data/instructors';
 import { Wifi, WifiOff, Wrench } from 'lucide-react';
-
-interface Course {
-  id: number;
-  title: string;
-  description: string;
-  duration: string;
-  price: string;
-  students: number;
-  nextSession: string;
-  image: string;
-  topics: string[];
-  level: string;
-  subject: string;
-  industry: string;
-  mode: 'live' | 'offline';
-  tools: boolean;
-  instructor: {
-    name: string;
-    image: string;
-    experience: string;
-    specialty: string;
-    city: string;
-    country: string;
-    flag: string;
-    description: string;
-  };
-}
+import { Course } from '@/types';
 
 interface ShortCourseCardProps {
   course: Course;
@@ -50,12 +25,17 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
 }) => {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const instructor = getInstructorById(course.instructorId);
 
   const handleViewClick = () => {
     navigate(`/courses/${course.id}`, {
       state: { from: referrerRoute, fromName: referrerName }
     });
   };
+
+  if (!instructor) {
+    return null; // Don't render if instructor not found
+  }
   
   return (
     <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
