@@ -34,7 +34,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
   };
 
   return (
-    <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
+    <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col gap-1 ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
       {/* Course Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-none">
         <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-none" />
@@ -63,7 +63,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
       </div>
 
-      <CardHeader className=" flex flex-col justify-start flex-shrink-0 pt-4 h-[85px]">
+      <CardHeader className=" flex flex-col justify-start flex-shrink-0">
         <div className="flex items-start justify-between">
           <CardTitle className={`text-base leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-sm font-medium' : 'text-base'}`}>
             {course.title}
@@ -72,7 +72,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         <CardDescription className="text-xs line-clamp-1 flex-1 flex items-start max-h-4 overflow-hidden">{course.description}</CardDescription>
       </CardHeader>
 
-      <CardContent className="flex-1 flex flex-col">
+      <CardContent className="flex-1 flex flex-col gap-1">
         {/* Topics Covered - Reduced height for alignment, max 6 topics */}
         <div className="flex-shrink-0 p-0 mb-2">
           <h4 className="text-xs font-medium mb-1">Topics Covered:</h4>
@@ -86,7 +86,7 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         </div>
 
         {/* Course Info Card - moved below image */}
-        <div className="mb-4">
+        <div>
           <CourseInfoCard duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
         </div>
 
