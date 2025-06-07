@@ -89,12 +89,11 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     const max = studentCounts[0] || 0;
     const min = studentCounts[studentCounts.length - 1] || 0;
     
-    const rangeSize = Math.max(1, Math.ceil((max - min) / 4));
     const ranges = [
-      { min: Math.ceil(max * 0.75), max: max, label: 'High', radius: 120 },
-      { min: Math.ceil(max * 0.5), max: Math.ceil(max * 0.75) - 1, label: 'Medium-High', radius: 160 },
-      { min: Math.ceil(max * 0.25), max: Math.ceil(max * 0.5) - 1, label: 'Medium', radius: 200 },
-      { min: min, max: Math.ceil(max * 0.25) - 1, label: 'Low', radius: 240 }
+      { min: Math.ceil(max * 0.75), max: max, label: 'High', radius: 180 },
+      { min: Math.ceil(max * 0.5), max: Math.ceil(max * 0.75) - 1, label: 'Medium-High', radius: 280 },
+      { min: Math.ceil(max * 0.25), max: Math.ceil(max * 0.5) - 1, label: 'Medium', radius: 380 },
+      { min: min, max: Math.ceil(max * 0.25) - 1, label: 'Low', radius: 480 }
     ];
 
     // Assign items to ranges and calculate positions
@@ -136,8 +135,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     <div className="w-full space-y-6">
       <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
       
-      <div className="relative w-full h-[600px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
-        <svg width="100%" height="100%" viewBox="-300 -300 600 600" className="absolute inset-0">
+      <div className="relative w-full h-[900px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
+        <svg width="100%" height="100%" viewBox="-550 -450 1100 900" className="absolute inset-0">
           {/* Range circles */}
           {processedData.ranges.map((range, index) => (
             <circle
@@ -147,8 +146,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
               r={range.radius}
               fill="none"
               stroke="rgba(156, 163, 175, 0.3)"
-              strokeWidth="1"
-              strokeDasharray="5,5"
+              strokeWidth="2"
+              strokeDasharray="8,8"
             />
           ))}
           
@@ -158,22 +157,32 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
               <circle
                 cx={item.x}
                 cy={item.y}
-                r={Math.max(8, Math.min(20, item.students / 5))}
+                r={Math.max(25, Math.min(40, item.students / 3))}
                 fill={item.color}
                 stroke="white"
-                strokeWidth="2"
+                strokeWidth="3"
                 className="cursor-pointer transition-all duration-200 hover:opacity-80"
                 onMouseEnter={() => setHoveredItem(item)}
                 onMouseLeave={() => setHoveredItem(null)}
+                opacity="0.9"
               />
               <text
                 x={item.x}
-                y={item.y + 4}
+                y={item.y - 5}
                 textAnchor="middle"
-                className="text-xs font-semibold fill-white pointer-events-none"
-                style={{ fontSize: Math.max(8, Math.min(12, item.students / 10)) }}
+                className="font-bold fill-white pointer-events-none"
+                style={{ fontSize: '16px' }}
               >
-                {item.name.length > 10 ? `${item.name.substring(0, 8)}...` : item.name}
+                {item.name.length > 15 ? `${item.name.substring(0, 12)}...` : item.name}
+              </text>
+              <text
+                x={item.x}
+                y={item.y + 15}
+                textAnchor="middle"
+                className="font-semibold fill-white pointer-events-none"
+                style={{ fontSize: '14px' }}
+              >
+                {item.students.toLocaleString()}
               </text>
             </g>
           ))}
@@ -182,10 +191,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         {/* Center label */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="text-center">
-            <div className="text-lg font-semibold text-muted-foreground capitalize">
+            <div className="text-2xl font-bold text-muted-foreground capitalize">
               {viewMode === 'courses' ? 'Courses' : viewMode}
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-lg text-muted-foreground">
               {processedData.items.length} items
             </div>
           </div>
@@ -193,12 +202,12 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         
         {/* Hover tooltip */}
         {hoveredItem && (
-          <div className="absolute top-4 left-4 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border max-w-xs">
-            <p className="font-semibold">{hoveredItem.name}</p>
-            <p className="text-sm text-muted-foreground">
+          <div className="absolute top-4 left-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border max-w-sm">
+            <p className="font-bold text-lg">{hoveredItem.name}</p>
+            <p className="text-base text-muted-foreground">
               {hoveredItem.students.toLocaleString()} students
             </p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               Range: {hoveredItem.range}
             </p>
           </div>
@@ -206,21 +215,21 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex flex-wrap justify-center gap-6">
         {processedData.ranges.map((range, index) => (
-          <div key={index} className="flex items-center gap-2">
+          <div key={index} className="flex items-center gap-3">
             <div 
-              className="w-4 h-4 rounded-full"
+              className="w-5 h-5 rounded-full"
               style={{ backgroundColor: COLORS[index % COLORS.length] }}
             />
-            <span className="text-sm text-muted-foreground">
+            <span className="text-base text-muted-foreground">
               {range.label} ({range.min}-{range.max === processedData.ranges[0].max ? `${range.max}+` : range.max})
             </span>
           </div>
         ))}
       </div>
 
-      <div className="text-sm text-muted-foreground text-center">
+      <div className="text-base text-muted-foreground text-center">
         {processedData.items.length} {viewMode === 'courses' ? 'courses' : viewMode === 'industry' ? 'industries' : viewMode === 'subject' ? 'subjects' : 'topics'} displayed in concentric circles
       </div>
     </div>
