@@ -207,7 +207,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
           </div>
         </div>
         {!hideDescription && (
-          <p className={`text-muted-foreground line-clamp-4 mt-3 ${config.details}`}>
+          <p className={`text-muted-foreground line-clamp-2 mt-3 ${config.details}`}>
             {instructor.description}
           </p>
         )}
@@ -247,7 +247,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
         </div>
       </div>
       {!hideDescription && (
-        <p className={`text-muted-foreground line-clamp-4 mt-3 ${config.details}`}>
+        <p className={`text-muted-foreground line-clamp-2 mt-3 ${config.details}`}>
           {instructor.description}
         </p>
       )}
