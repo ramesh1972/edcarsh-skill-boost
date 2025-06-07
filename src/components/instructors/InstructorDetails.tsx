@@ -4,7 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Star, Users, BookOpen, Award, MapPin, Mail, Phone, Globe } from 'lucide-react';
+import { Star, Users, BookOpen, Award, MapPin, Clock, Calendar } from 'lucide-react';
+
+interface Course {
+  id: number;
+  title: string;
+  duration: string;
+  nextSession: string;
+  enrolled: number;
+}
 
 interface Instructor {
   id?: number;
@@ -28,6 +36,31 @@ interface InstructorDetailsProps {
 }
 
 const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClose }) => {
+  // Mock courses data - in a real app, this would come from an API
+  const instructorCourses: Course[] = [
+    {
+      id: 1,
+      title: "React Fundamentals Crash Course",
+      duration: "2 hours",
+      nextSession: "2024-12-15 14:00",
+      enrolled: 45
+    },
+    {
+      id: 2,
+      title: "Advanced TypeScript Patterns",
+      duration: "3 hours",
+      nextSession: "2024-12-18 16:00",
+      enrolled: 32
+    },
+    {
+      id: 3,
+      title: "Frontend Architecture Best Practices",
+      duration: "2.5 hours",
+      nextSession: "2024-12-20 10:00",
+      enrolled: 28
+    }
+  ];
+
   return (
     <div className="max-w-4xl mx-auto p-6">
       <Card className="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0">
@@ -96,36 +129,44 @@ const InstructorDetails: React.FC<InstructorDetailsProps> = ({ instructor, onClo
             </p>
           </div>
 
-          {/* Contact Section */}
+          {/* Courses Section */}
           <div className="border-t pt-6">
-            <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Button variant="outline" className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                Send Message
-              </Button>
-              <Button variant="outline" className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                Schedule Call
-              </Button>
-              <Button variant="outline" className="flex items-center gap-2">
-                <Globe className="w-4 h-4" />
-                View Profile
-              </Button>
+            <h3 className="text-xl font-semibold mb-6">Current Courses</h3>
+            <div className="grid gap-4">
+              {instructorCourses.map((course) => (
+                <Card key={course.id} className="border">
+                  <CardContent className="p-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="font-semibold text-lg">{course.title}</h4>
+                      <Badge variant="outline">{course.enrolled} enrolled</Badge>
+                    </div>
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        <span>{course.duration}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        <span>Next: {new Date(course.nextSession).toLocaleDateString()}</span>
+                      </div>
+                    </div>
+                    <Button size="sm" className="w-full">
+                      Enroll Now
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-center gap-4 pt-6">
-            <Button size="lg">
-              View Courses
-            </Button>
-            {onClose && (
+          {onClose && (
+            <div className="flex justify-center pt-6">
               <Button variant="outline" size="lg" onClick={onClose}>
                 Close
               </Button>
-            )}
-          </div>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
