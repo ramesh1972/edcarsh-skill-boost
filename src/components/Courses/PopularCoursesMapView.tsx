@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
@@ -328,7 +327,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     <div className="w-full space-y-6">
       <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
       
-      <div className="relative w-full h-[1600px] rounded-lg overflow-hidden border">
+      <div className="relative w-full h-[1360px] rounded-lg overflow-hidden border">
         {/* Zoom Controls positioned in top right corner */}
         <div className="absolute top-4 right-4 z-10">
           <ZoomControls zoomLevel={zoomLevel} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
@@ -355,7 +354,7 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
         <svg 
           width="100%" 
           height="100%" 
-          viewBox={`${-1000 * zoomLevel} ${-800 * zoomLevel} ${2000 * zoomLevel} ${1600 * zoomLevel}`} 
+          viewBox={`${-1000 * zoomLevel} ${-680 * zoomLevel} ${2000 * zoomLevel} ${1360 * zoomLevel}`} 
           className="absolute inset-0"
         >
           {/* Radial lines from center */}
