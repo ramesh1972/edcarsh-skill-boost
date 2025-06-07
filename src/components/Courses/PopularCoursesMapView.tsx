@@ -19,6 +19,27 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
   const [viewMode, setViewMode] = useState<ViewMode>('industry');
   const [hoveredItem, setHoveredItem] = useState<any>(null);
 
+  // Helper function to wrap text
+  const wrapText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return [text];
+    
+    const words = text.split(' ');
+    const lines = [];
+    let currentLine = '';
+    
+    for (const word of words) {
+      if ((currentLine + word).length <= maxLength) {
+        currentLine += (currentLine ? ' ' : '') + word;
+      } else {
+        if (currentLine) lines.push(currentLine);
+        currentLine = word;
+      }
+    }
+    if (currentLine) lines.push(currentLine);
+    
+    return lines.slice(0, 2); // Max 2 lines
+  };
+
   const processedData = useMemo(() => {
     if (!courses.length) return { ranges: [], items: [] };
 
@@ -90,10 +111,10 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     const min = studentCounts[studentCounts.length - 1] || 0;
     
     const ranges = [
-      { min: Math.ceil(max * 0.75), max: max, label: 'High', radius: 180 },
-      { min: Math.ceil(max * 0.5), max: Math.ceil(max * 0.75) - 1, label: 'Medium-High', radius: 280 },
-      { min: Math.ceil(max * 0.25), max: Math.ceil(max * 0.5) - 1, label: 'Medium', radius: 380 },
-      { min: min, max: Math.ceil(max * 0.25) - 1, label: 'Low', radius: 480 }
+      { min: Math.ceil(max * 0.75), max: max, label: 'High', radius: 220 },
+      { min: Math.ceil(max * 0.5), max: Math.ceil(max * 0.75) - 1, label: 'Medium-High', radius: 340 },
+      { min: Math.ceil(max * 0.25), max: Math.ceil(max * 0.5) - 1, label: 'Medium', radius: 460 },
+      { min: min, max: Math.ceil(max * 0.25) - 1, label: 'Low', radius: 580 }
     ];
 
     // Assign items to ranges and calculate positions
@@ -135,8 +156,8 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
     <div className="w-full space-y-6">
       <ViewModeSelector viewMode={viewMode} onViewModeChange={handleViewModeChange} />
       
-      <div className="relative w-full h-[1000px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
-        <svg width="100%" height="100%" viewBox="-600 -500 1200 1000" className="absolute inset-0">
+      <div className="relative w-full h-[1200px] bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 rounded-lg overflow-hidden border">
+        <svg width="100%" height="100%" viewBox="-700 -600 1400 1200" className="absolute inset-0">
           {/* Range circles */}
           {processedData.ranges.map((range, index) => (
             <circle
@@ -152,40 +173,52 @@ const PopularCoursesMapView: React.FC<PopularCoursesMapViewProps> = ({ courses }
           ))}
           
           {/* Data items */}
-          {processedData.items.map((item, index) => (
-            <g key={index}>
-              <circle
-                cx={item.x}
-                cy={item.y}
-                r={Math.max(35, Math.min(55, item.students / 2.5))}
-                fill={item.color}
-                stroke="white"
-                strokeWidth="3"
-                className="cursor-pointer transition-all duration-200 hover:opacity-80"
-                onMouseEnter={() => setHoveredItem(item)}
-                onMouseLeave={() => setHoveredItem(null)}
-                opacity="0.9"
-              />
-              <text
-                x={item.x}
-                y={item.y - 8}
-                textAnchor="middle"
-                className="font-bold fill-white pointer-events-none"
-                style={{ fontSize: '12px' }}
-              >
-                {item.name.length > 18 ? `${item.name.substring(0, 15)}...` : item.name}
-              </text>
-              <text
-                x={item.x}
-                y={item.y + 12}
-                textAnchor="middle"
-                className="font-semibold fill-white pointer-events-none"
-                style={{ fontSize: '11px' }}
-              >
-                {item.students.toLocaleString()}
-              </text>
-            </g>
-          ))}
+          {processedData.items.map((item, index) => {
+            const wrappedLines = wrapText(item.name, 12);
+            const circleRadius = Math.max(45, Math.min(70, item.students / 2));
+            
+            return (
+              <g key={index}>
+                <circle
+                  cx={item.x}
+                  cy={item.y}
+                  r={circleRadius}
+                  fill={item.color}
+                  stroke="white"
+                  strokeWidth="3"
+                  className="cursor-pointer transition-all duration-200 hover:opacity-80"
+                  onMouseEnter={() => setHoveredItem(item)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                  opacity="0.9"
+                />
+                
+                {/* Multi-line title */}
+                {wrappedLines.map((line, lineIndex) => (
+                  <text
+                    key={lineIndex}
+                    x={item.x}
+                    y={item.y - 12 + (lineIndex * 12)}
+                    textAnchor="middle"
+                    className="font-bold fill-white pointer-events-none"
+                    style={{ fontSize: '10px' }}
+                  >
+                    {line}
+                  </text>
+                ))}
+                
+                {/* Student count */}
+                <text
+                  x={item.x}
+                  y={item.y + (wrappedLines.length > 1 ? 8 : 16)}
+                  textAnchor="middle"
+                  className="font-semibold fill-white pointer-events-none"
+                  style={{ fontSize: '10px' }}
+                >
+                  {item.students.toLocaleString()}
+                </text>
+              </g>
+            );
+          })}
         </svg>
         
         {/* Center label */}
