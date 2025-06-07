@@ -72,9 +72,6 @@ const ToolsHighlightSection = () => {
           {tools.map((tool, index) => <div key={index} className={`bg-background/95 backdrop-blur-md border-2 border-primary/30 rounded-xl p-4 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02] hover:border-primary/60 group relative overflow-hidden ${toolsAnimation.isVisible ? `opacity-100 ${index % 2 === 0 ? 'animate-fade-in-left' : 'animate-fade-in-right'}` : 'opacity-0 translate-y-10'}`} style={{
           transitionDelay: toolsAnimation.isVisible ? `${400 + index * 80}ms` : '0ms'
         }}>
-              {/* Animated background glow */}
-              <div className="absolute rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute  rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500 bg-transparent"></div>
               
               {/* Horizontal Layout: Icon + Tool Name Square + Description */}
               <div className="relative z-10 flex items-center gap-6">
