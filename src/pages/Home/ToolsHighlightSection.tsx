@@ -73,8 +73,8 @@ const ToolsHighlightSection = () => {
           transitionDelay: toolsAnimation.isVisible ? `${400 + index * 80}ms` : '0ms'
         }}>
               {/* Animated background glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-blue-600/10 to-purple-600/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-blue-600/20 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500 bg-transparent"></div>
+              <div className="absolute rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute  rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-500 bg-transparent"></div>
               
               {/* Horizontal Layout: Icon + Tool Name Square + Description */}
               <div className="relative z-10 flex items-center gap-6">
