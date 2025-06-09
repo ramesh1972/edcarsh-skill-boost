@@ -3,8 +3,8 @@ import { Course } from '@/types';
 import { ViewModeSelector } from './MapView/components/ViewModeSelector';
 import { ZoomControls } from './MapView/components/ZoomControls';
 import { ViewMode } from './MapView/types';
-import { getIndustryNameById, getSubjectNameById } from '@/data/masterData';
-import { getInstructorById } from '@/data/instructors';
+import { getIndustryNameById, getSubjectNameById } from '@/data/masterData/industriesSubjects';
+import { getInstructorById } from '@/data/usersData/instructors';
 
 interface PopularCoursesMapViewProps {
   courses: Course[];

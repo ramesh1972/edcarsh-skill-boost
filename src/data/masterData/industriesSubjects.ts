@@ -1,17 +1,6 @@
+import { Subject, Industry } from '../../types/coreTypes/IndustrySubject.type';
 
-export interface Subject {
-  id: number;
-  name: string;
-  color: string;
-}
-
-export interface Industry {
-  id: number;
-  name: string;
-  subjects: Subject[];
-}
-
-export const masterData: Industry[] = [
+export const industriesSubjects: Industry[] = [
   {
     id: 1,
     name: "Software",
@@ -66,20 +55,20 @@ export const masterData: Industry[] = [
 
 // Helper functions to get data
 export const getAllIndustries = (): string[] => {
-  return masterData.map(industry => industry.name);
+  return industriesSubjects.map(industry => industry.name);
 };
 
 export const getAllSubjects = (): string[] => {
-  return masterData.flatMap(industry => industry.subjects.map(subject => subject.name));
+  return industriesSubjects.flatMap(industry => industry.subjects.map(subject => subject.name));
 };
 
 export const getSubjectsByIndustry = (industryName: string): Subject[] => {
-  const industry = masterData.find(ind => ind.name === industryName);
+  const industry = industriesSubjects.find(ind => ind.name === industryName);
   return industry ? industry.subjects : [];
 };
 
 export const getSubjectColor = (subjectName: string): string => {
-  for (const industry of masterData) {
+  for (const industry of industriesSubjects) {
     const subject = industry.subjects.find(sub => sub.name === subjectName);
     if (subject) {
       return subject.color;
@@ -89,7 +78,7 @@ export const getSubjectColor = (subjectName: string): string => {
 };
 
 export const getIndustryBySubject = (subjectName: string): string | null => {
-  for (const industry of masterData) {
+  for (const industry of industriesSubjects) {
     const subject = industry.subjects.find(sub => sub.name === subjectName);
     if (subject) {
       return industry.name;
@@ -100,7 +89,7 @@ export const getIndustryBySubject = (subjectName: string): string | null => {
 
 // New helper functions for ID-based lookups
 export const getIndustryById = (id: number): Industry | undefined => {
-  return masterData.find(industry => industry.id === id);
+  return industriesSubjects.find(industry => industry.id === id);
 };
 
 export const getSubjectById = (industryId: number, subjectId: number): Subject | undefined => {

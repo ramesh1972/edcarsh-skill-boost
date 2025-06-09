@@ -1,22 +1,22 @@
-
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { useTheme } from '@/hooks/useTheme';
-import { courses } from '@/data/courses';
-import { masterData, getIndustryNameById, getSubjectNameById } from '@/data/masterData';
+import { useTheme } from '@/contexts/ThemeContext';
+import { courses } from '@/data/coursesData/courses';
+import { getAllIndustries, getSubjectsByIndustry } from '@/data/masterData/industriesSubjects';
 import { Filter, ArrowUpDown, LayoutGrid, List, Calendar as CalendarIcon, MapPin, ArrowUp, ArrowDown } from 'lucide-react';
 import { isAfter, parseISO, isSameDay } from 'date-fns';
 import CourseCard from '@/components/Courses/CourseCard';
 import LongCourseCard from '@/components/Courses/LongCourseCard';
 import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
 import PopularCoursesMapView from '@/components/Courses/PopularCoursesMapView';
-import TitleComponent from '@/components/common/TitleComponent';
-
 const Courses = () => {
   const {
     theme,
+    getIcon,
+    getBackground
   } = useTheme();
   const [industryFilter, setIndustryFilter] = useState('all');
   const [subjectFilter, setSubjectFilter] = useState('all');
@@ -28,18 +28,8 @@ const Courses = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   // Get industries and subjects from master data
-  const industries = ['all', ...masterData.map(industry => industry.name)];
-  
-  // Get available subjects based on selected industry
-  const availableSubjects = useMemo(() => {
-    if (industryFilter === 'all') {
-      const allSubjects = masterData.flatMap(industry => industry.subjects.map(subject => subject.name));
-      return ['all', ...Array.from(new Set(allSubjects))];
-    } else {
-      const selectedIndustry = masterData.find(industry => industry.name === industryFilter);
-      return selectedIndustry ? ['all', ...selectedIndustry.subjects.map(subject => subject.name)] : ['all'];
-    }
-  }, [industryFilter]);
+  const industries = ['all', ...getAllIndustries()];
+  const availableSubjects = industryFilter === 'all' ? ['all', ...Array.from(new Set(courses.map(course => course.subject)))] : ['all', ...getSubjectsByIndustry(industryFilter).map(subject => subject.name)];
 
   // Reset subject filter when industry changes
   const handleIndustryChange = (value: string) => {
@@ -56,8 +46,8 @@ const Courses = () => {
     today.setHours(0, 0, 0, 0);
     return courses.filter(course => {
       const courseStartDate = parseISO(course.startDate);
-      const industryMatch = industryFilter === 'all' || getIndustryNameById(course.industryId) === industryFilter;
-      const subjectMatch = subjectFilter === 'all' || getSubjectNameById(course.industryId, course.subjectId) === subjectFilter;
+      const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
+      const subjectMatch = subjectFilter === 'all' || course.subject === subjectFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
       return industryMatch && subjectMatch && levelMatch && (isSameDay(courseStartDate, today) || isAfter(courseStartDate, today));
     });
@@ -65,9 +55,9 @@ const Courses = () => {
 
   // Filter and sort courses for card/list view
   const filteredAndSortedCourses = useMemo(() => {
-    const filtered = courses.filter(course => {
-      const industryMatch = industryFilter === 'all' || getIndustryNameById(course.industryId) === industryFilter;
-      const subjectMatch = subjectFilter === 'all' || getSubjectNameById(course.industryId, course.subjectId) === subjectFilter;
+    let filtered = courses.filter(course => {
+      const industryMatch = industryFilter === 'all' || course.industry === industryFilter;
+      const subjectMatch = subjectFilter === 'all' || course.subject === subjectFilter;
       const levelMatch = levelFilter === 'all' || course.level === levelFilter;
       return industryMatch && subjectMatch && levelMatch;
     });
@@ -95,30 +85,28 @@ const Courses = () => {
     });
     return filtered;
   }, [industryFilter, subjectFilter, levelFilter, sortBy, sortDirection]);
-
   const toggleSortDirection = () => {
     setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc');
   };
-
-  return (
-    <div className="min-h-full ">
-      <div className={`container mx-auto px-4 py-12 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
-        <div className="mb-10">
-          <TitleComponent
-            title="Available Courses"
-            subtitle="Short, practical crash courses designed for busy professionals"
-            iconName="course"
-          />
+  return <div className={`min-h-full bg-background ${getBackground()}`}>
+      <div className={`container mx-auto px-4 py-8 ${theme.layout === 'compact' ? 'space-y-4' : theme.layout === 'spacious' ? 'space-y-12' : 'space-y-8'}`}>
+        <div className="mb-8">
+          <h1 className={`text-4xl font-bold mb-4 ${theme.designSystem === 'material' ? 'font-medium' : theme.designSystem === 'human' ? 'font-semibold' : 'font-bold'}`}>
+            {getIcon('course')} Available Courses
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Short, practical crash courses designed for busy professionals
+          </p>
         </div>
 
         {/* Filters, Sort Controls and View Mode Toggle */}
-        <div className="flex flex-wrap gap-4 mb-8 p-4 bg-primary/50 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 rounded-xl transition-transform duration-200 relative">
+        <div className="flex flex-wrap gap-4 mb-6 p-4 bg-card rounded-lg border relative">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4" />
             <span className="font-medium">Filters</span>
           </div>
-
-          <div className="flex flex-wrap gap-4 flex-1 items-center" >
+          
+          <div className="flex flex-wrap gap-4 flex-1">
             <div className="min-w-[150px]">
               <Select value={industryFilter} onValueChange={handleIndustryChange}>
                 <SelectTrigger>
@@ -126,21 +114,21 @@ const Courses = () => {
                 </SelectTrigger>
                 <SelectContent>
                   {industries.map(industry => <SelectItem key={industry} value={industry}>
-                    {industry === 'all' ? 'All Industries' : industry}
-                  </SelectItem>)}
+                      {industry === 'all' ? 'All Industries' : industry}
+                    </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
 
-            <div className="min-w-[150px]">
+            <div className="min-w-[150px] mr-[20px]">
               <Select value={subjectFilter} onValueChange={setSubjectFilter}>
                 <SelectTrigger>
                   <SelectValue placeholder="Subject" />
                 </SelectTrigger>
                 <SelectContent>
                   {availableSubjects.map(subject => <SelectItem key={subject} value={subject}>
-                    {subject === 'all' ? 'All Subjects' : subject}
-                  </SelectItem>)}
+                      {subject === 'all' ? 'All Subjects' : subject}
+                    </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -152,8 +140,8 @@ const Courses = () => {
                 </SelectTrigger>
                 <SelectContent>
                   {levels.map(level => <SelectItem key={level} value={level}>
-                    {level === 'all' ? 'All Levels' : level}
-                  </SelectItem>)}
+                      {level === 'all' ? 'All Levels' : level}
+                    </SelectItem>)}
                 </SelectContent>
               </Select>
             </div>
@@ -164,42 +152,42 @@ const Courses = () => {
             </div>
 
             {viewMode !== 'calendar' && viewMode !== 'map' && <div className="flex items-center gap-2">
-              <div className="min-w-[150px]">
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sort by" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="title">Title</SelectItem>
-                    <SelectItem value="price">Price</SelectItem>
-                    <SelectItem value="students">Students</SelectItem>
-                    <SelectItem value="duration">Duration</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <Button variant="outline" size="icon" onClick={toggleSortDirection} className="h-10 w-10" title={`Sort ${sortDirection === 'asc' ? 'ascending' : 'descending'}`}>
-                {sortDirection === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
-              </Button>
-            </div>}
+                <div className="min-w-[150px]">
+                  <Select value={sortBy} onValueChange={setSortBy}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Sort by" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="title">Title</SelectItem>
+                      <SelectItem value="price">Price</SelectItem>
+                      <SelectItem value="students">Students</SelectItem>
+                      <SelectItem value="duration">Duration</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Button variant="outline" size="icon" onClick={toggleSortDirection} className="h-10 w-10" title={`Sort ${sortDirection === 'asc' ? 'ascending' : 'descending'}`}>
+                  {sortDirection === 'asc' ? <ArrowUp className="h-4 w-4" /> : <ArrowDown className="h-4 w-4" />}
+                </Button>
+              </div>}
           </div>
 
           {/* View Mode Toggle - aligned to the right */}
-          <div className="flex items-center bg-transparent gap-2">
-            <span className="font-medium">View</span>
-            <ToggleGroup type="single" value={viewMode} className="gap-2 !bg-primary/10 p-2" onValueChange={value => value && setViewMode(value)}>
-              <ToggleGroupItem value="card" aria-label="Card view" className="gap-1 bg-secondary hover:bg-secondary/80">
+          <div className="flex items-center gap-4 ml-auto">
+            <span className="font-medium">View:</span>
+            <ToggleGroup type="single" value={viewMode} onValueChange={value => value && setViewMode(value)}>
+              <ToggleGroupItem value="card" aria-label="Card view" className="gap-1">
                 <LayoutGrid className="h-4 w-4" />
                 Card
               </ToggleGroupItem>
-              <ToggleGroupItem value="list" aria-label="List view" className="gap-1 bg-secondary hover:bg-secondary/80">
+              <ToggleGroupItem value="list" aria-label="List view" className="gap-1">
                 <List className="h-4 w-4" />
                 List
               </ToggleGroupItem>
-              <ToggleGroupItem value="calendar" aria-label="Calendar view" className="gap-1 bg-secondary hover:bg-secondary/80">
+              <ToggleGroupItem value="calendar" aria-label="Calendar view" className="gap-1">
                 <CalendarIcon className="h-4 w-4" />
                 Calendar
               </ToggleGroupItem>
-              <ToggleGroupItem value="map" aria-label="Map view" className="gap-1 bg-secondary hover:bg-secondary/80">
+              <ToggleGroupItem value="map" aria-label="Map view" className="gap-1">
                 <MapPin className="h-4 w-4" />
                 Map
               </ToggleGroupItem>
@@ -213,22 +201,22 @@ const Courses = () => {
         </div>
 
         {/* Card View */}
-        {viewMode === 'card' && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredAndSortedCourses.map(course => <CourseCard key={course.id} course={course} cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" />)}
-        </div>}
+        {viewMode === 'card' && <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredAndSortedCourses.map(course => <CourseCard key={course.id} course={course} />)}
+          </div>}
 
         {/* List View */}
-        {viewMode === 'list' && <div className="space-y-6">
-          {filteredAndSortedCourses.map(course => <LongCourseCard key={course.id} course={course} cardClassName="bg-white/60 dark:bg-black/40 backdrop-blur-md shadow-xl border-0 hover:scale-[1.025] transition-transform duration-200" />)}
-        </div>}
+        {viewMode === 'list' && <div className="space-y-4">
+            {filteredAndSortedCourses.map(course => <LongCourseCard key={course.id} course={course} />)}
+          </div>}
 
         {/* Calendar View */}
         {viewMode === 'calendar' && <CoursesCalendarView courses={courses} industryFilter={industryFilter} subjectFilter={subjectFilter} levelFilter={levelFilter} calendarViewMode={calendarViewMode} setCalendarViewMode={setCalendarViewMode} currentDate={currentDate} setCurrentDate={setCurrentDate} />}
 
-        {/* Map View - Pass the correct courses array */}
+        {/* Map View */}
         {viewMode === 'map' && <PopularCoursesMapView courses={filteredAndSortedCourses} />}
       </div>
-    </div>
-  );
+    </div>;
 };
+
 export default Courses;

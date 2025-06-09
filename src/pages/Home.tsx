@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { courses } from '@/data/courses';
+import { courses } from '@/data/coursesData/courses';
 import HeroSection from '@/components/home/HeroSection';
 import USPsSection from '@/components/home/USPsSection';
 import ToolsHighlightSection from '@/components/home/ToolsHighlightSection';

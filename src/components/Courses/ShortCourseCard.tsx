@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/hooks/useTheme';
-import { getSubjectById, getIndustryNameById, getSubjectNameById } from '@/data/masterData';
+import { getSubjectById, getIndustryNameById, getSubjectNameById } from '@/data/masterData/industriesSubjects';
 import { useNavigate } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import CourseInfoCard from './CourseInfoCard';
-import { getInstructorById } from '@/data/instructors';
+import { getInstructorById } from '@/data/usersData/instructors';
 import { Wifi, WifiOff, Wrench } from 'lucide-react';
 import { Course } from '@/types';
 

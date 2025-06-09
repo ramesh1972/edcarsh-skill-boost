@@ -4,12 +4,12 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Star, Users, BookOpen, Award, MapPin, Mail, Phone, Globe, Calendar, Clock, GraduationCap, ArrowLeft } from 'lucide-react';
 import ShortCourseCard from '@/components/Courses/ShortCourseCard';
-import { getInstructorById, getInstructorCourses } from '@/data/instructors';
-import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/masterData';
+import { getInstructorById, getInstructorCourses } from '@/data/usersData/instructors';
+import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/masterData/industriesSubjects';
 import { useTheme } from '@/hooks/useTheme';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Instructor } from '@/types/instructor.types';
+import { Instructor } from '@/types/instructor2.type';
 
 interface InstructorDetailsProps {
   instructor?: Instructor;

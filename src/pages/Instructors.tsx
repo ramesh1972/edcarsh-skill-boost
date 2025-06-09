@@ -2,7 +2,7 @@ import TitleComponent from '@/components/common/TitleComponent';
 import InstructorMediumCard from '@/components/instructors/InstructorMediumCard';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { instructors } from '@/data/instructors';
+import { instructors } from '@/data/usersData/instructors';
 
 const Instructors = () => {
   return (

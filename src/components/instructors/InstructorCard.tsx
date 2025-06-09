@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Info } from 'lucide-react';
-import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/masterData';
-import { Instructor } from '@/types/instructor.types';
+import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/masterData/industriesSubjects';
+import { Instructor } from '@/types/instructor2.type';
 
 interface InstructorCardProps {
   instructor: Instructor | null | undefined;

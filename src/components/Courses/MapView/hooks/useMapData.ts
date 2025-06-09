@@ -1,7 +1,7 @@
 
 import { useMemo } from 'react';
 import { Course } from '@/types';
-import { getAllIndustries, getAllSubjects } from '@/data/masterData';
+import { getAllIndustries, getAllSubjects } from '@/data/masterData/industriesSubjects';
 import { ViewMode, MapData, MapDataItem } from '../types';
 import { calculateDynamicRanges } from '../utils/rangeCalculator';
 
