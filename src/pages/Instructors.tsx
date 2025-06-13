@@ -1,10 +1,15 @@
 import TitleComponent from '@/components/common/TitleComponent';
-import InstructorMediumCard from '@/components/instructors/InstructorMediumCard';
+import InstructorDashCard from '@/components/instructors/InstructorDashCard';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { instructors } from '@/data/usersData/instructors';
+import { Instructor } from '@/types';
+import { getAllInstructors } from '@/adapters/superadminDataAdapter';
+import { getOrgInstructors } from '@/adapters/orgDataAdapter';
+
 
 const Instructors = () => {
+  const orgId = 0;
+  const instructors: Instructor[] = getOrgInstructors(orgId);
   return (
     <div className="min-h-full">
       <div className="container mx-auto px-4 py-12 space-y-8">
@@ -16,7 +21,7 @@ const Instructors = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {instructors.map((instructor) => (
-            <InstructorMediumCard key={instructor.id} instructor={instructor} />
+            <InstructorDashCard key={instructor.id} instructor={instructor} />
           ))}
         </div>
 

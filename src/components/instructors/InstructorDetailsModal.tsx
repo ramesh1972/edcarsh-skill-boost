@@ -15,6 +15,7 @@ const InstructorDetailsModal: React.FC<InstructorDetailsModalProps> = ({
   isOpen,
   onClose
 }) => {
+  
   if (!instructor) return null;
 
   return (

@@ -1,6 +1,4 @@
-
 import React, { useState } from 'react';
-import { courses } from '@/data/coursesData/courses';
 import HeroSection from '@/components/home/HeroSection';
 import USPsSection from '@/components/home/USPsSection';
 import ToolsHighlightSection from '@/components/home/ToolsHighlightSection';
@@ -9,20 +7,22 @@ import CourseCalendarSection from '@/components/home/CourseCalendarSection';
 import StatsSection from '@/components/home/StatsSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
 import CTASection from '@/components/home/CTASection';
-import FooterSection from '@/components/home/FooterSection';
+import { getCoursesInfo, getOrgCourses, getOrgDeepCoursesInfo } from '@/adapters/orgDataAdapter';
 
 const Home = () => {
   const [calendarViewMode, setCalendarViewMode] = useState('month');
   const [currentDate, setCurrentDate] = useState(new Date());
 
+  const courses = getOrgDeepCoursesInfo(0);
+
   return (
-    <div className="min-h-screen">
+    <div className="grid grid-cols-1 min-h-screen gap-16">
       <HeroSection />
       <USPsSection />
       <ToolsHighlightSection />
-      <FeaturedCoursesSection courses={courses} />
+      <FeaturedCoursesSection deepCoursesInfo={courses} />
       <CourseCalendarSection 
-        courses={courses}
+        deepCoursesInfo={courses}
         calendarViewMode={calendarViewMode}
         setCalendarViewMode={setCalendarViewMode}
         currentDate={currentDate}
@@ -31,7 +31,6 @@ const Home = () => {
       <StatsSection />
       <TestimonialsSection />
       <CTASection />
-      <FooterSection />
     </div>
   );
 };

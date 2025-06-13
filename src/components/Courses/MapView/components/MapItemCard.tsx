@@ -59,7 +59,7 @@ export const MapItemCard: React.FC<MapItemCardProps> = ({ item, viewMode }) => {
     );
   }
 
-  if (viewMode === 'topic') {
+  if (viewMode === 'tag') {
     return (
       <div className="text-center p-3 bg-green-50/90 border-2 border-green-300 rounded-lg shadow-sm max-w-[100px]">
         <div className="font-bold leading-tight mb-1 break-anywhere">

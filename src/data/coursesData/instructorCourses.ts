@@ -13,7 +13,7 @@ export const instructorCourses: Partial<InstructorCourse>[] = [
   // Org 3
   { courseId: 12, instructorId: 8, whenStartedToCreate: '2025-06-10T09:00:00Z', revisionHistory: [], comments: [], whenPublished: '2025-06-15T09:00:00Z', courseScheduleIds: [111] },
   { courseId: 13, instructorId: 9, whenStartedToCreate: '2025-06-12T09:00:00Z', revisionHistory: [], comments: [], whenPublished: '2025-06-17T09:00:00Z', courseScheduleIds: [112] },
-  { courseId: 14, instructorId: 9, whenStartedToCreate: '2025-06-14T09:00:00Z', revisionHistory: [], comments: [], whenPublished: '2025-06-19T09:00:00Z', courseScheduleIds: [113] },
+  { courseId: 14,  instructorId: 9, whenStartedToCreate: '2025-06-14T09:00:00Z', revisionHistory: [], comments: [], whenPublished: '2025-06-19T09:00:00Z', courseScheduleIds: [113] },
   // Org 4
   { courseId: 16, instructorId: 97, whenStartedToCreate: '2025-06-20T09:00:00Z', revisionHistory: [], comments: [], whenPublished: '2025-06-25T09:00:00Z', courseScheduleIds: [114] },
   { courseId: 17, instructorId: 97, whenStartedToCreate: '2025-06-22T09:00:00Z', revisionHistory: [], comments: [], whenPublished: '2025-06-27T09:00:00Z', courseScheduleIds: [115] },

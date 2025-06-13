@@ -4,19 +4,19 @@ import { ArrowRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Course } from '@/types';
+import { Course, DeepCourseInfo } from '@/types';
 
-import ShortCourseCard from '@/components/Courses/ShortCourseCard';
+import ShortCourseCard from '@/components/Courses/ListView/ShortCourseCard';
 
 interface FeaturedCoursesSectionProps {
-  courses: Course[];
+  deepCoursesInfo: DeepCourseInfo[];
 }
 
-const FeaturedCoursesSection = ({ courses }: FeaturedCoursesSectionProps) => {
+const FeaturedCoursesSection = ({ deepCoursesInfo }: FeaturedCoursesSectionProps) => {
   const coursesAnimation = useScrollAnimation({ threshold: 0.1 });
   
   // Get the first 6 courses for the upcoming courses section
-  const upcomingCourses = courses.slice(0, 6);
+  const upcomingCourses = deepCoursesInfo.slice(0, 6);
 
   return (
     <section 
@@ -48,22 +48,25 @@ const FeaturedCoursesSection = ({ courses }: FeaturedCoursesSectionProps) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {upcomingCourses.map((course, index) => (
+          {upcomingCourses.map((deepCourseInfo, index) => (
             <div
-              key={course.id}
+              key={deepCourseInfo.id}
               className={`transition-all duration-700 ${
                 coursesAnimation.isVisible 
                   ? `opacity-100 ${
-                      index % 3 === 0 ? 'animate-fade-in-left' : 
-                      index % 3 === 1 ? 'animate-zoom-in' : 'animate-fade-in-right'
-                    }` 
+                      index % 3 === 0
+                        ? 'animate-fade-in-left'
+                        : index % 3 === 1
+                        ? 'animate-zoom-in'
+                        : 'animate-fade-in-right'
+                    }`
                   : 'opacity-0 translate-y-10'
               }`}
               style={{
                 transitionDelay: coursesAnimation.isVisible ? `${400 + index * 150}ms` : '0ms'
               }}
             >
-              <ShortCourseCard course={course} />
+              <ShortCourseCard deepCourseInfo={deepCourseInfo} />
             </div>
           ))}
         </div>

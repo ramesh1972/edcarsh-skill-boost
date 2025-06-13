@@ -97,6 +97,9 @@ export interface Instructor extends User {
     specialty: string;
 
     description: string;
+
+    avgRating?: number; // Average rating of the instructor, optional
+    totalReviews?: number; // Total number of reviews, optional
 }
 
 export interface Guest extends User {

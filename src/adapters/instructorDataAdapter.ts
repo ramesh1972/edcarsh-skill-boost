@@ -4,7 +4,7 @@ import { InstructorCourse } from '../types/courseTypes/InstructorCourse.type';
 import { instructorCourses } from '../data/coursesData/instructorCourses';
 import { courseSchedules } from '../data/coursesData/courseSchedules';
 import { getCourseInfoByIds, getStatsForCourses } from './coursesDataAdapter';
-import { Course, CourseStats } from '@/types';
+import { Course, CourseStats, DeepCourseInfo } from '@/types';
 
 export function getInstructorCourses(instructorId: number): Partial<InstructorCourse>[] {
   return instructorCourses.filter(c => c.instructorId === instructorId).map(c => {
@@ -42,4 +42,17 @@ export function getInstructorCourseStats(instructorId: number) : CourseStats {
 export function getInstructorCourseInfo(instructorId: number) : Course[] {
   const courseIds = instructorCourses.filter(c => c.instructorId === instructorId).flatMap(c => c.courseId);
   return getCourseInfoByIds(courseIds);
+}
+
+export function getInstructorDeepCourseInfo(instructorId: number): DeepCourseInfo[] {
+  const courseIds = instructorCourses.filter(c => c.instructorId === instructorId).flatMap(c => c.courseId);
+  const courses = getCourseInfoByIds(courseIds);
+  const courseStats = getStatsForCourses(courseIds);
+
+  return courses.map(course => ({
+    ...course,
+    stats: courseStats,
+    schedules: courseSchedules.filter(cs => cs.courseId === course.id),
+    intents: null // Assuming intents are not needed here, can be modified as required
+  }));
 }

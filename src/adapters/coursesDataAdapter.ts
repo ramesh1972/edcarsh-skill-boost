@@ -5,7 +5,7 @@ import { newCourses } from '../data/coursesData/newCourses';
 import { expressCourseIntents } from '../data/coursesData/expressCourseIntents.ts';
 import { expiredCourses } from '../data/coursesData/expiredCourses';
 import { Course, CourseStatusChange } from '../types/courseTypes/course.type';
-import { CourseSchedule } from '../types/courseTypes/courseSchedule.type';
+import { CourseSchedule, CourseScheduleSessionDay } from '../types/courseTypes/courseSchedule.type';
 import { ExpressCourseIntent } from '../types/courseTypes/expressCourseIntent.type.ts'
 import { NewCourse, NewCourseIntent } from '../types/courseTypes/newCourse.type';
 import { ExpiredCourse, ExpiredCourseIntent } from '../types/courseTypes/expiredCourse.type';
@@ -58,7 +58,7 @@ export function getCourseInfoDeep(courseId: number): DeepCourseInfo | null {
     if (!meta) return null;
     return {
         ...meta,
-        schedules: courseSchedules.filter((s: CourseSchedule) => s.courseId === courseId) || null,
+        schedules: getCourseSchedules(courseId),
         intents: getCourseIntentInfo(courseId),
         stats: getStatsForCourse(courseId)
     };
@@ -92,7 +92,7 @@ export function getCourseIntentInfo(courseId: number): CourseIntentInfo[] | null
     if (intent) {
         totalIntents.push({
             learnerId: intent.intentBy,
-            expressedCourseIntent: { ...meta, ...intent },
+            expressedCourseIntent: intent,
             newCourseIntent: null,
             expiredCourseIntent: null
         });
@@ -101,7 +101,6 @@ export function getCourseIntentInfo(courseId: number): CourseIntentInfo[] | null
     if (newCourse) {
         const intents2 = newCourse.intents.map((i: NewCourseIntent) => ({
             learnerId: i.learnerId,
-            courseId: i.courseId,
             expressedCourseIntent: null,
             expiredCourseIntent: null,
             newCourseIntent: { ...meta, ...i }
@@ -114,7 +113,6 @@ export function getCourseIntentInfo(courseId: number): CourseIntentInfo[] | null
     if (expiredCourse) {
         const intents2 = expiredCourse.intents.map((i: ExpiredCourseIntent) => ({
             learnerId: i.learnerId,
-            courseId: i.courseId,
             expressedCourseIntent: null,
             newCourseIntent: null,
             expiredCourseIntent: { ...meta, ...i }
@@ -172,54 +170,160 @@ export function getAllCourseIntentsInfo(): CourseIntentInfo[] {
 // =====================
 // 3. Course Schedule Section
 // =====================
-export function getCourseSchedule(scheduleId: number): (Course & CourseSchedule) | null {
-    const sch = courseSchedules.find((s: CourseSchedule) => s.scheduleId === scheduleId) || null;
-    if (!sch) return null;
-    const meta = courses.find((m: Course) => m.id === sch.courseId);
-    if (!meta) return null;
-    return {
-        ...meta,
-        ...sch,
+function setScheduleStatus(sch: CourseSchedule) {
+    if (!sch) return {
+        isPast: false,
+        isActive: false,
+        isFuture: false
     };
+    if (!sch.startDate || !sch.endDate) {
+        return {
+            isPast: false,
+            isActive: false,
+            isFuture: false
+        };
+    }
+
+    const now = new Date()
+    const startDate = new Date(sch.startDate);
+    const endDate = new Date(sch.endDate);
+
+    if (endDate < now) {
+        return {
+            isPast: true,
+            isActive: false,
+            isFuture: false
+        }
+    } else if (startDate > now) {
+        return {
+            isPast: false,
+            isActive: false,
+            isFuture: true
+        }
+    } else {
+        return {
+
+            isPast: false,
+            isActive: true,
+            isFuture: false
+        }
+    }
 }
 
-export function getCourseSchedules(courseId: number): (Course & { schedules: CourseSchedule[] }) | null {
-    const schs = courseSchedules.filter((s: CourseSchedule) => s.courseId === courseId);
-    if (schs.length === 0) return null;
+export function getCourseSchedule(scheduleId: number): CourseSchedule | null {
+    const meta: Course = courses.find((m: Course) => m.id === sch.courseId);
+    if (!meta) return null;
+
+    const sch: CourseSchedule = courseSchedules.find((s: CourseSchedule) => s.scheduleId === scheduleId) || null;
+
+    if (!sch) {
+        meta.noSchedules = true; // Mark course as having no schedules
+        return null;
+    }
+
+    meta.noSchedules = false; // Ensure course is marked as having schedules
+
+    sch.course = meta; // Attach course metadata to the schedule
+    sch.courseId = meta.id; // Ensure courseId is set
+    setScheduleStatus(sch); // Set schedule status based on dates
+    return sch;
+}
+
+export function getCourseSchedules(courseId: number): CourseSchedule[] | null {
+
     const meta = courses.find((m: Course) => m.id === courseId);
     if (!meta) return null;
-    return { ...meta, schedules: schs };
+
+    const schs = courseSchedules.filter((s: CourseSchedule) => s.courseId === courseId);
+    if (schs.length === 0) {
+        meta.noSchedules = true; // Mark course as having no schedules
+        return null;
+    }
+
+    meta.noSchedules = false; // Ensure course is marked as having schedules
+
+    return schs.map(s => {
+        const status = setScheduleStatus(s);
+
+        return {
+            ...s,
+            course: meta, // Attach course metadata to each schedule
+            courseId: meta.id, // Ensure courseId is set
+            ...status
+        };
+    }).filter(Boolean) as CourseSchedule[];
 }
 
-export function getCoursesSchedulesByIds(courseIds: number[]): (Course & { schedules: CourseSchedule[] })[] {
-    return courseIds.map(id => getCourseSchedules(id)).filter(Boolean) as (Course & { schedules: CourseSchedule[] })[];
+export function getCoursesSchedulesByIds(courseIds: number[]): CourseSchedule[] {
+    return courseIds.map(id => getCourseSchedules(id)).flat().filter(Boolean) as CourseSchedule[];
 }
 
 export function getAllCourseSchedules(): CourseSchedule[] {
     return (courses as Course[]).map(meta => {
         const schedules = courseSchedules.filter((s: CourseSchedule) => s.courseId === meta.id);
+        if (schedules.length === 0) {
+            meta.noSchedules = true; // Mark course as having no schedules
+            return null;
+        }
 
-        return schedules.map(s => ({
+        meta.noSchedules = false; // Ensure course is marked as having schedules
 
-            courseId: meta.id,
-            course: meta,
-            ...s,
-        }));
-    }).flat();
+        return schedules.map(s => {
+            const status = setScheduleStatus(s);
 
+            return {
+                ...s,
+                course: meta, // Attach course metadata to each schedule
+                courseId: meta.id, // Ensure courseId is set
+                ...status
+            };
+        });
+    }).flat().filter(Boolean) as CourseSchedule[];
 }
 
-export function getAlLCoursesScheduleForIndustryAndSubject(industryId?: number, subjectId?: number): (Course & { schedules: CourseSchedule[] | null })[] {
+export function getNextNCourseSchedules(courseId: number, n: number = -1): CourseSchedule[] | null {
+    const meta = courses.find((m: Course) => m.id === courseId);
+    if (!meta) return null;
+
+    const now = new Date();
+    return courseSchedules
+        .filter((s: CourseSchedule) => s.courseId === courseId && new Date(s.endDate) >= now)
+        .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
+        .slice(0, n === -1 ? courseSchedules.length : n)
+        .map(s => {
+            const status = setScheduleStatus(s);
+            return {
+                ...s,
+                course: meta, // Attach course metadata to each schedule
+                courseId: meta.id, // Ensure courseId is set
+                ...status
+            };
+        });
+}
+
+export function getCourseNextSession(courseId: number): CourseScheduleSessionDay | null {
+    const schedules = getNextNCourseSchedules(courseId, 1);
+    if (!schedules || schedules.length === 0) return null;
+    return schedules[0].sessionDays.find((d: CourseScheduleSessionDay) => new Date(d.sessionDate) >= new Date()) || null;
+}
+
+export function getAlLCoursesScheduleForIndustryAndSubject(industryId?: number, subjectId?: number): CourseSchedule[] | null {
     let filtered = courses as Course[];
     if (industryId) filtered = filtered.filter(m => m.industryId === industryId);
     if (subjectId) filtered = filtered.filter(m => m.subjectId === subjectId);
+
     return filtered.map(meta => {
         const schedules = courseSchedules.filter((s: CourseSchedule) => s.courseId === meta.id);
-        return {
-            ...meta,
-            schedules: schedules.length > 0 ? schedules : null
-        };
-    });
+        return schedules.map(s => {
+            const status = setScheduleStatus(s);
+            return {
+                ...s,
+                course: meta, // Attach course metadata to each schedule
+                courseId: meta.id, // Ensure courseId is set
+                ...status
+            };
+        });
+    }).flat().filter(Boolean) as CourseSchedule[];
 }
 
 // =====================

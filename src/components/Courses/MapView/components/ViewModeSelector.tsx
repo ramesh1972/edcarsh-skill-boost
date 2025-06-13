@@ -20,7 +20,7 @@ export const ViewModeSelector: React.FC<ViewModeSelectorProps> = ({ viewMode, on
         <ToggleGroupItem className="bg-secondary" value="industry" aria-label="By Industry">Industry</ToggleGroupItem>
         <ToggleGroupItem className="bg-secondary" value="subject" aria-label="By Subject">Subject</ToggleGroupItem>
         <ToggleGroupItem className="bg-secondary" value="courses" aria-label="Individual Courses">Courses</ToggleGroupItem>
-        <ToggleGroupItem className="bg-secondary" value="topic" aria-label="By Topic">Topic</ToggleGroupItem>
+        <ToggleGroupItem className="bg-secondary" value="tag" aria-label="By Topic">Tag</ToggleGroupItem>
       </ToggleGroup>
     </div>
   );

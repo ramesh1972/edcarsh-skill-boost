@@ -36,4 +36,8 @@ export interface CourseSchedule {
   learnersEnrolledIds: number[];
   guestLearnersEnrolledIds: number[];
   sessionDays: CourseScheduleSessionDay[];
+
+  isPast?: boolean; // New: indicates if the schedule is for past sessions
+  isActive?: boolean;
+  isFuture?: boolean; // New: indicates if the schedule is for future sessions
 }

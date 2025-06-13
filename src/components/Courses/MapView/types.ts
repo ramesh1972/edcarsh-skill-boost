@@ -1,5 +1,5 @@
 
-export type ViewMode = 'courses' | 'industry' | 'subject' | 'topic';
+export type ViewMode = 'courses' | 'industry' | 'subject' | 'tag';
 
 export interface MapRange {
   min: number;
@@ -13,7 +13,7 @@ export interface MapDataItem {
   students: number;
   industry?: string;
   subject?: string;
-  topics?: string[];
+  tags?: string[];
   x: number;
   y: number;
   fontSize: number;

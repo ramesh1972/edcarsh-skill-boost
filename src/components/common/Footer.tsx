@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
-const FooterSection = () => {
+const Footer = () => {
   const footerAnimation = useScrollAnimation({ threshold: 0.1 });
 
   return (
     <footer 
       ref={footerAnimation.ref}
-      className={`py-12 bg-background border-t rounded-b-[40px] transition-all duration-700 ${
+      className={`py-12 bg-primary/40 border-t transition-all duration-700 ${
         footerAnimation.isVisible ? 'animate-fade-in opacity-100' : 'opacity-0 translate-y-10'
       }`}
     >
@@ -58,4 +58,4 @@ const FooterSection = () => {
   );
 };
 
-export default FooterSection;
+export default Footer;

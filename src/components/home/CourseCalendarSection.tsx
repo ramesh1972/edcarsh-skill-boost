@@ -1,10 +1,10 @@
 
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Course } from '@/types';
-import CoursesCalendarView from '@/components/Courses/CoursesCalendarView';
+import { Course, DeepCourseInfo } from '@/types';
+import CoursesCalendarView from '@/components/Courses/CalendarView/CoursesCalendarView';
 
 interface CourseCalendarSectionProps {
-  courses: Course[];
+  deepCoursesInfo: DeepCourseInfo[];
   calendarViewMode: string;
   setCalendarViewMode: (mode: string) => void;
   currentDate: Date;
@@ -12,7 +12,7 @@ interface CourseCalendarSectionProps {
 }
 
 const CourseCalendarSection = ({ 
-  courses, 
+  deepCoursesInfo, 
   calendarViewMode, 
   setCalendarViewMode, 
   currentDate, 
@@ -44,10 +44,10 @@ const CourseCalendarSection = ({
           }`}
         >
           <CoursesCalendarView
-            courses={courses}
-            industryFilter="all"
-            subjectFilter="all"
-            levelFilter="all"
+            deepCourseInfos={deepCoursesInfo}
+            selectedIndustry={0}
+            selectedSubject={0}
+            selectedLevel="all"
             calendarViewMode={calendarViewMode}
             setCalendarViewMode={setCalendarViewMode}
             currentDate={currentDate}

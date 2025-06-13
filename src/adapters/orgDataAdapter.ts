@@ -9,7 +9,7 @@ import { Org, OrgInfo, OrgMemberInfo, OrgType } from '../types/coreTypes/org.typ
 import { orgs } from '../data/orgData/orgs';
 import { Admin, Instructor, Learner } from '../types/coreTypes/user.type';
 import { LearnerCourse, LearnerGuestJoin } from '../types/courseTypes/learnerCourses.type';
-import { OrgCourse, OrgCoursesInfo, OrgCoursesSchedules } from '@/types/courseTypes/orgCourses.type';
+import { OrgCourse, OrgCoursesInfo, OrgCoursesSchedules, OrgDeepCourseInfo } from '@/types/courseTypes/orgCourses.type';
 import { OrgAdminInfo } from '@/types/coreTypes/org.type'
 import { OrgHeadInstructorInfo } from '@/types/coreTypes/org.type'
 import { Course, CourseStats, RoleType } from '@/types';
@@ -20,25 +20,22 @@ import { orgAdminInfo } from '@/data/orgData/orgAdminInfo';
 import { users } from '@/data/usersData/users';
 import { getLearnerAllCoursesSchedule, getLearnerCourses, getLearnerCourseSchedule, getLearnerGuestJoins, getLearnerIntentedCourses, getLearnerWishlist } from './learnerDataAdapter';
 import { getInstructorCourses, getInstructorCourseStats, getInstructorsCourses } from './instructorDataAdapter';
-import { getAllCourseSchedules, getCourseIntentInfo, getStatsForCourses } from './coursesDataAdapter';
-import { orgHeadInstructorInfo } from '@/data/orgData/orgHeadInstructorInfo';
+import { getAllCourseSchedules, getCourseInfo, getCourseInfoDeep, getCourseIntentInfo, getCourseSchedule, getStatsForCourses } from './coursesDataAdapter';
+import { orgHeadInstructorInfo } from '@/data/orgData/orgHeadInstructorCoursesInfo';
 
 // Get all instructors for an org
 export function getOrgInstructors(orgId: number): Instructor[] {
-  return instructors.filter(i => i.orgId === orgId).map(i => {
-    const user = users.find(u => u.id === i.userId);
-
-    if (!user) {
-      return null; // Skip if user not found
+  return users.filter(u => u.orgId === orgId && u.roleIds.includes(RoleType.INSTRUCTOR)).map(u => {
+    const instructor = instructors.find(i => i.userId === u.id);
+    if (!instructor) {
+      return null; // Skip if instructor not found
     }
-
     return {
-      ...i,
-      ...user,
+      ...u,
+      ...instructor,
       orgId: orgId, // Ensure orgId is set
-
     } as Instructor;
-  }).filter(i => i !== null);     
+  }).filter(i => i !== null);
 }
 // Get all learners for an org
 export function getOrgLearners(orgId: number): Learner[] {
@@ -54,7 +51,7 @@ export function getOrgLearners(orgId: number): Learner[] {
       ...user,
       orgId: orgId, // Ensure orgId is set
     } as Learner;
-  }).filter(l => l !== null); 
+  }).filter(l => l !== null);
 }
 
 export function getOrgAdminInfo(orgId: number): OrgAdminInfo[] {
@@ -98,16 +95,18 @@ export function getOrgMemberInfo(orgId: number): OrgMemberInfo | null {
 }
 
 // Get all courses for an org
-export function getOrgCourses(orgId: number): Course[] {
+export function getOrgCourses(orgId: number, orgIsOwner: boolean = false): Course[] {
   // Courses where any schedule is for this org
-  return instructorCourses.filter(c => c.ownerOrgId === orgId && c.ownedByOrg).map(c => {
-    return courses.find(c1 => c1.id === c.courseId);
+  return courses.filter(c => c.ownerOrgId === orgId && (!orgIsOwner || c.ownedByOrg)).map(c => {
+    return getCourseInfo(c.id);
   });
 }
 
 // Get all course schedules for an org
 export function getOrgCourseSchedules(orgId: number): CourseSchedule[] {
-  return courseSchedules.filter(cs => cs.forOrgId === orgId);
+  return courseSchedules.filter(cs => cs.forOrgId === orgId).map(cs => {
+    return getCourseSchedule(cs.scheduleId);
+  });
 }
 
 // Get all learner enrollments for an org
@@ -117,7 +116,7 @@ export function getOrgLearnerCourses(orgId: number): Partial<LearnerCourse>[] {
 }
 
 // Get all guest joins for an org
-export function getOrgLearnerGuestJoins(orgId: number): LearnerGuestJoin [] {
+export function getOrgLearnerGuestJoins(orgId: number): LearnerGuestJoin[] {
   const orgLearnerIds = learners.filter(l => l.orgId === orgId).map(l => l.userId);
   return learnersGuestJoins.filter(lg => orgLearnerIds.includes(lg.learnerId)) as LearnerGuestJoin[];
 }
@@ -169,16 +168,16 @@ export function getOrgsWithCoursesAndSchedules(orgid: number): OrgCoursesSchedul
 
 // Get all course info for an org
 export function getOrgCourseInfo(orgId: number): Partial<OrgCourse>[] {
-  return instructorCourses.filter(c => c.ownerOrgId === orgId && c.ownedByOrg).map(c => ({
-    ...c,
-    orgId: orgId,
-    courseId: c.id,
-    industryId: c.ownerInstructorId,
-    whenStartedToCreate: c.whenStartedToCreate || new Date().toISOString(),
-    revisionHistory: c.revisionHistory || [],
-    comments: c.comments || [],
-    whenPublished: c.whenPublished || null,
-  }));
+  return instructorCourses.filter(c => c.ownerOrgId === orgId && c.ownedByOrg).map(c => {
+    const course = courses.find(c1 => c1.id === c.courseId);
+    if (!course) {
+      return null; // Skip if course not found
+    }
+    return {
+      ...course,
+      orgId: orgId,
+      ...c,
+    }}).filter(c => c !== null);
 }
 
 export function getCoursesInfo(orgid: number, instructorIds: number[], learnerIds: number[]): OrgCoursesInfo {
@@ -215,6 +214,21 @@ export function getCoursesInfo(orgid: number, instructorIds: number[], learnerId
   };
 }
 
+export function getOrgDeepCoursesInfo(orgId: number, orgIsOwner: boolean = false): OrgDeepCourseInfo[] {
+  const courseids =  courses.filter(c => c.ownerOrgId === orgId && (!orgIsOwner || c.ownedByOrg));
+  
+  return courseids.map(c => {
+    const courseInfo = getCourseInfoDeep(c.id);
+    if (!courseInfo) return null;
+
+    return {
+      ...courseInfo,
+      orgId: orgId, // Ensure orgId is set
+      courseId: c.id,
+    } as OrgDeepCourseInfo;
+  }).filter(c => c !== null);
+}
+
 // Get all info for an org (deep)
 export function getOrgFullInfo(orgId: number): OrgInfo {
   const org = orgs.find(o => o.id === orgId);
@@ -232,7 +246,7 @@ export function getOrgFullInfo(orgId: number): OrgInfo {
     orgId: orgId,
     org,
     registrationInfo: orgRegistration.find(o => o.orgId == orgId),
-    memberInfo:memberInfo,
+    memberInfo: memberInfo,
     coursesInfo: getCoursesInfo(orgId,
       getOrgInstructors(orgId).map(i => i.userId),
       getOrgLearners(orgId).map(l => l.userId)

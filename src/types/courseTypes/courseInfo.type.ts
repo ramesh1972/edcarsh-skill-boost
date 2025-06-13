@@ -14,6 +14,6 @@ export interface DeepCourseInfo extends Course {
 export interface CourseIntentInfo  {
     learnerId: number;
     newCourseIntent: NewCourseIntent | null;
-    expressedCourseIntent: ExpressCourseIntent | null;
+    expressedCourseIntent: Partial<ExpressCourseIntent> | null;
     expiredCourseIntent: ExpiredCourseIntent | null;
 }

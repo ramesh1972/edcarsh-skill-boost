@@ -9,24 +9,29 @@ const ToolsNavigation: React.FC = () => {
 
   const tabItems = [
     {
-      name: 'Your Classroom',
+      name: 'My Virtual Classroom',
       href: '/classroom',
-      icon: 'course'
+      icon: 'education'
     },
     {
-      name: 'Your Analytics',
+      name: 'My LMS',
+      href: '/classroom',
+      icon: 'classroom'
+    },
+    {
+      name: 'My Analytics',
       href: '/analytics',
-      icon: 'tools'
+      icon: 'analytics'
     },
     {
-      name: 'Your Learning Path',
+      name: 'My Learning Path',
       href: '/learning-path',
       icon: 'target'
     },
     {
       name: 'Truth AI',
       href: '/truth-ai',
-      icon: 'student'
+      icon: 'chat'
     },
     {
       name: 'Tools',
@@ -36,7 +41,7 @@ const ToolsNavigation: React.FC = () => {
     {
       name: 'Instructor Q&A',
       href: '/instructor-qa',
-      icon: 'instructor'
+      icon: 'student'
     },
     {
       name: 'Community Discussion',
@@ -95,8 +100,8 @@ const ToolsNavigation: React.FC = () => {
             <div
               key={item.name}
               className={`flex items-center gap-2 px-3 py-2 text-xs  whitespace-nowrap !rounded-b-lg relative ${isActiveRoute(item.href)
-                  ? 'bg-background bg-gradient-to-t from-background/100 to-primary/40 border-0 text-foreground'
-                  : 'text-primary-foreground hover:bg-primary-foreground/10'
+                ? 'bg-background bg-gradient-to-t from-background/100 to-primary/40 border-0 text-foreground'
+                : 'text-primary-foreground hover:bg-primary-foreground/10'
                 }`}
               style={isActiveRoute(item.href) ? {
                 fontSize: '1rem',

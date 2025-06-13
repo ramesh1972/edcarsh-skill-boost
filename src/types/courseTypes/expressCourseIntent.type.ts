@@ -1,7 +1,7 @@
 import { UserExpertiseLevel } from "../coreTypes/user.type";
 import { Course } from "./course.type";
 
-export interface ExpressCourseIntent extends Course {
+export interface ExpressCourseIntent extends Partial<Course> {
     courseId: number;
     orgId: number; // organizationId
     intentId: number;

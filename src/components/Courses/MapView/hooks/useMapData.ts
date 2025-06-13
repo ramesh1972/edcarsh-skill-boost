@@ -1,9 +1,12 @@
 
 import { useMemo } from 'react';
 import { Course } from '@/types';
-import { getAllIndustries, getAllSubjects } from '@/data/masterData/industriesSubjects';
 import { ViewMode, MapData, MapDataItem } from '../types';
 import { calculateDynamicRanges } from '../utils/rangeCalculator';
+import { getStatsForCourse, getStatsForCourses, getStatsForIndustry, getStatsForSubject } from '@/adapters/coursesDataAdapter';
+import { getIndustries, getIndustryById, getSubjectById, getSubjects } from '@/adapters/industrySubjectAdpator';
+import { sub } from 'date-fns';
+
 
 const COLORS = [
   '#dc2626', '#ea580c', '#d97706', '#ca8a04', '#65a30d', 
@@ -14,21 +17,29 @@ const COLORS = [
 export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: number): MapData => {
   return useMemo(() => {
     if (viewMode === 'courses') {
-      const studentValues = courses.map(course => course.students);
+      const studentValues = courses.map(course => getStatsForCourse(course.id).enrollments || 0);
       const ranges = calculateDynamicRanges(studentValues, 9);
       
       const allCourseData: MapDataItem[] = [];
 
       ranges.forEach((range, rangeIndex) => {
+        
         const rangeCourses = courses.filter(course => {
+          const courseStats = getStatsForCourse(course.id);
           if (rangeIndex === 0) {
-            return course.students >= range.min;
+            return courseStats.enrollments >= range.min;
           } else {
-            return course.students >= range.min && course.students <= range.max;
+            return courseStats.enrollments >= range.min && courseStats.enrollments <= range.max;
           }
         });
 
         rangeCourses.forEach((course, index) => {
+          const courseStats = getStatsForCourse(course.id);
+
+          
+          const industryName = getIndustryById(course.industryId)?.name || 'Unknown Industry';
+          const subjectName = getSubjectById(course.industryId, course.subjectId)?.name || 'Unknown Subject';
+
           const angleOffset = (index / Math.max(rangeCourses.length, 1)) * 2 * Math.PI;
           const angle = angleOffset + (Math.random() * 0.8 - 0.4);
           
@@ -40,16 +51,16 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
           
           const maxStudents = Math.max(...studentValues);
           const minStudents = Math.min(...studentValues);
-          const studentRatio = (course.students - minStudents) / (maxStudents - minStudents) || 0;
+          const studentRatio = (courseStats.enrollments - minStudents) / (maxStudents - minStudents) || 0;
           const fontSize = 8 + (studentRatio * 6);
           
           allCourseData.push({
             id: String(course.id),
             title: course.title,
-            students: course.students,
-            industry: course.industry,
-            subject: course.subject,
-            topics: course.topics,
+            students: courseStats.enrollments,
+            industry: industryName,
+            subject: subjectName,
+            tags: course.tags || [],
             x,
             y,
             fontSize,
@@ -64,13 +75,14 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
     }
 
     if (viewMode === 'industry') {
-      const industryData = getAllIndustries().map(industry => {
-        const industryCourses = courses.filter(course => course.industry === industry);
-        const totalStudents = industryCourses.reduce((sum, course) => sum + course.students, 0);
+      const industryData = getIndustries().map(industry => {
+        const industryCourses = courses.filter(course => course.industryId === industry.id);
+        const industryStats = getStatsForIndustry(industry.id);
+
         return {
-          id: industry,
-          title: industry,
-          students: totalStudents,
+          id: String(industry.id),
+          title: industry.name,
+          students: industryStats.enrollments || 0,
           courseCount: industryCourses.length,
           type: 'industry'
         };
@@ -111,16 +123,18 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
     }
 
     if (viewMode === 'subject') {
-      const subjectData = getAllSubjects().map(subject => {
-        const subjectCourses = courses.filter(course => course.subject === subject);
-        const totalStudents = subjectCourses.reduce((sum, course) => sum + course.students, 0);
-        const industry = subjectCourses[0]?.industry || '';
+      const subjectData = getSubjects().map(subject => {
+        const subjectCourses = courses.filter(course => course.subjectId === subject.id);
+        const subjectStats = getStatsForSubject(subject.id);
+        const industryId = subjectCourses[0]?.industryId || null;
+        const industryName = getIndustryById(industryId)?.name || '';
+        const subjectName = subject.name || 'Unknown Subject';
         
         return {
-          id: subject,
-          title: subject,
-          students: totalStudents,
-          industry,
+          id: String(subject.id),
+          title: subjectName,
+          students: subjectStats.enrollments || 0,
+          industry: industryName || '',
           courseCount: subjectCourses.length,
           type: 'subject'
         };
@@ -160,29 +174,32 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
       return { data: mappedData, ranges };
     }
 
-    if (viewMode === 'topic') {
-      const allTopics = Array.from(new Set(courses.flatMap(course => course.topics || [])));
-      const topicData = allTopics.map(topic => {
-        const topicCourses = courses.filter(course => course.topics?.includes(topic));
-        const totalStudents = topicCourses.reduce((sum, course) => sum + course.students, 0);
-        const industry = topicCourses[0]?.industry || '';
-        const subject = topicCourses[0]?.subject || '';
+    if (viewMode === 'tag') {
+      const alltags = Array.from(new Set(courses.flatMap(course => course.tags || [])));
+      const tagData = alltags.map(tag => {
+        const tagCourses = courses.filter(course => course.tags?.includes(tag));
+        const courseStats = getStatsForCourses(tagCourses.map(course => course.id));
+        const industryId = tagCourses[0]?.industryId || null;
+        const subjectId = tagCourses[0]?.subjectId || null;
+      
+        const industryName = getIndustryById(industryId)?.name || '';
+        const subjectName = getSubjectById(industryId, subjectId)?.name || '';
         
         return {
-          id: topic,
-          title: topic,
-          students: totalStudents,
-          industry,
-          subject,
-          courseCount: topicCourses.length,
-          type: 'topic'
+          id: tag,
+          title: tag,
+          students: courseStats.enrollments || 0,
+          industry: industryName,
+          subject:subjectName,
+          courseCount: tagCourses.length,
+          type: 'tag'
         };
       }).filter(item => item.students > 0);
 
-      const studentValues = topicData.map(item => item.students);
+      const studentValues = tagData.map(item => item.students);
       const ranges = calculateDynamicRanges(studentValues, 9);
 
-      const mappedData = topicData.map((item, index) => {
+      const mappedData = tagData.map((item, index) => {
         const rangeIndex = ranges.findIndex(range => {
           if (ranges.indexOf(range) === 0) {
             return item.students >= range.min;
@@ -191,7 +208,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
           }
         });
 
-        const angle = (index / topicData.length) * 2 * Math.PI;
+        const angle = (index / tagData.length) * 2 * Math.PI;
         const baseDistance = 100 + (rangeIndex * 40);
         const distance = baseDistance * zoomLevel;
         const x = Math.cos(angle) * distance;
@@ -205,7 +222,7 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
           x,
           y,
           fontSize,
-          color: COLORS[(index + 8) % COLORS.length], // Offset by 8 for topics
+          color: COLORS[(index + 8) % COLORS.length], // Offset by 8 for tags
           range: ranges[rangeIndex]?.label || ''
         };
       });
@@ -216,3 +233,4 @@ export const useMapData = (courses: Course[], viewMode: ViewMode, zoomLevel: num
     return { data: [], ranges: [] };
   }, [courses, viewMode, zoomLevel]);
 };
+

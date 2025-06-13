@@ -4,8 +4,9 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Info } from 'lucide-react';
-import { getIndustryNameById, getSubjectNameById, getSubjectById } from '@/data/masterData/industriesSubjects';
-import { Instructor } from '@/types/instructor2.type';
+import { Instructor } from '@/types'
+import { getSubjectById, getSubjectBySubjectId } from '@/adapters/industrySubjectAdpator';
+import { getUserName } from '@/adapters/userDataAdapter';
 
 interface InstructorCardProps {
   instructor: Instructor | null | undefined;
@@ -36,7 +37,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
   size = 'md',
   layout = 'horizontal',
   showTitle = true,
-  titleText = 'Instructor:',
+  titleText = 'Instructor',
   className = '',
   onAboutClick
 }) => {
@@ -47,14 +48,13 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
 
   const sizeConfig = {
     sm: {
-      avatar: 'h-8 w-8',
+      avatar: 'h-10 w-10',
       title: 'text-xs',
       name: 'text-xs',
       details: 'text-xs',
       button: 'h-5 px-1 text-xs',
       icon: 'h-2 w-2',
       spacing: 'gap-2 mb-2',
-      padding: 'p-2',
       badge: 'text-xs px-1 py-0.5'
     },
     md: {
@@ -65,7 +65,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
       button: 'h-6 px-2 text-xs',
       icon: 'h-3 w-3',
       spacing: 'gap-3 mb-3',
-      padding: 'p-',
+
       badge: 'text-xs px-2 py-1'
     },
     lg: {
@@ -76,7 +76,6 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
       button: 'h-8 px-3 text-sm',
       icon: 'h-4 w-4',
       spacing: 'gap-4 mb-4',
-      padding: 'p-1',
       badge: 'text-sm px-3 py-1'
     }
   };
@@ -121,37 +120,35 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
   };
 
   const renderSubjects = () => {
-    if (hideSubjects || !instructor.subjects || instructor.subjects.length === 0) {
+    if (hideSubjects || instructor.preferredIndustries.length === 0 || instructor.preferredSubjects.length === 0) {
       return null;
     }
 
     const allSubjects: { name: string; color: string }[] = [];
-    
-    instructor.subjects.forEach(industrySubjects => {
-      industrySubjects.subjectIds.forEach(subjectId => {
-        const subjectName = getSubjectNameById(industrySubjects.industryId, subjectId);
-        const subject = getSubjectById(industrySubjects.industryId, subjectId);
-        if (subjectName !== 'Unknown Subject') {
-          allSubjects.push({
-            name: subjectName,
-            color: subject?.color || '#6b7280'
-          });
-        }
-      });
+
+    instructor.preferredSubjects.forEach(subjectId => {
+      const subject = getSubjectBySubjectId(subjectId);
+      const subjectName = subject?.name || 'Unknown Subject';
+      if (subjectName !== 'Unknown Subject') {
+        allSubjects.push({
+          name: subjectName,
+          color: subject?.color || '#6b7280'
+        });
+      }
     });
 
     if (allSubjects.length === 0) return null;
 
-    const displayedSubjects = allSubjects.slice(0, 2);
+    const displayedSubjects = allSubjects.length > 2 ? allSubjects.slice(0, 2) : allSubjects;
     const extraCount = allSubjects.length - displayedSubjects.length;
 
     return (
-      <div className="mt-2 ml-[-60px]">
-        <h6 className={`font-medium mb-1 ${config.details}`}>Teaches:</h6>
+      <div className="items-start flex flex-col justify-start flex-wrap">
+        <h6 className={`font-medium mb-1 ${config.details}`}>Teaches</h6>
         <div className="flex flex-wrap gap-1">
           {displayedSubjects.map((subject, index) => (
-            <Badge 
-              key={index} 
+            <Badge
+              key={index}
               customColor={subject.color}
               className={`text-white ${config.badge}`}
             >
@@ -166,24 +163,25 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
     );
   };
 
+  const instructorName = getUserName(instructor.id) || "Unknown Instructor";
   if (layout === 'vertical') {
     return (
-      <div className={`flex flex-col items-center text-center ${config.padding} ${className}`}>
+      <div className={`flex flex-col items-center text-center  ${className}`}>
         {showTitle && (
-          <h4 className={`font-medium ${config.title} ${config.spacing.split(' ')[1]}`}>
+          <h4 className={`text-sm font-medium`}>
             {titleText}
           </h4>
         )}
         <Avatar className={`${config.avatar} flex-shrink-0 mb-2`}>
-          <AvatarImage src={instructor.image} alt={instructor.name} className="rounded-full object-cover" />
+          <AvatarImage src={instructor.image} alt={getUserName(instructor.userId)} className="border-2 border-muted-foreground rounded-full object-cover" />
           <AvatarFallback className="rounded-full">
-            {instructor.name.split(' ').map(n => n[0]).join('')}
+            {getUserName(instructor.userId).split(' ').map(n => n[0]).join('')}
           </AvatarFallback>
         </Avatar>
-        <div className="flex-1 min-w-0 w-full">
-          <div className="flex items-center justify-center gap-2 mb-1">
-            <h5 className={`font-medium ${config.name}`}>{instructor.name}</h5>
-            <span className={config.details}>{instructor.flag}</span>
+        <div className="items-center justify-start text-center" style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap' }}>
+          <div className="flex items-center justify-center gap-2 mb-1 ">
+            <h5 className={`font-medium ${config.name}`}>{instructorName}</h5>
+            <span className={config.details}>{"Flag"}</span> {/* Placeholder for flag, replace with actual flag logic */}
           </div>
           <p className={`text-muted-foreground mb-1 ${config.details}`}>{instructor.specialty}</p>
           {!hideExperience && !hideLocation && (
@@ -193,14 +191,17 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
               {!hideLocation && `${instructor.city}, ${instructor.country}`}
             </p>
           )}
-          {renderSubjects()}
+
           <div className="mt-3">
             <AboutButton />
           </div>
         </div>
+        <div className={`flex items-center justify-center mt-4 ${config.spacing}`}>
+          {renderSubjects()}
+        </div>
         {!hideDescription && (
           <p className={`text-muted-foreground line-clamp-2 mt-3 ${config.details}`}>
-            {instructor.description}
+            {instructor.about || instructor.description || "No description available."}
           </p>
         )}
       </div>
@@ -208,23 +209,23 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
   }
 
   return (
-    <div className={`flex flex-col ${config.padding} ${className}`}>
+    <div className={`flex flex-col  ${className} `}>
       {showTitle && (
-        <h4 className={`font-medium ${config.title} ${config.spacing.split(' ')[1]}`}>
+        <h4 className={`text-sm font-medium mb-2`}>
           {titleText}
         </h4>
       )}
       <div className={`flex items-start ${config.spacing.split(' ')[0]}`}>
         <Avatar className={`${config.avatar} flex-shrink-0`}>
-          <AvatarImage src={instructor.image} alt={instructor.name} className="rounded-full object-cover" />
+          <AvatarImage src={instructor.image} alt={instructorName} className="rounded-full object-cover" />
           <AvatarFallback className="rounded-full">
-            {instructor.name.split(' ').map(n => n[0]).join('')}
+            {instructorName}
           </AvatarFallback>
         </Avatar>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
-            <h5 className={`font-medium ${config.name}`}>{instructor.name}</h5>
-            <span className={config.details}>{instructor.flag}</span>
+        <div className="flex-1 min-w-0 flex-wrap" >
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
+            <h5 className={`font-medium ${config.name}`}>{instructorName}</h5>
+            <span className={config.details}>{"Flag"}</span> {/* Placeholder for flag, replace with actual flag logic */}
             <AboutButton />
           </div>
           <p className={`text-muted-foreground mb-1 ${config.details}`}>{instructor.specialty}</p>
@@ -235,12 +236,14 @@ const InstructorCard: React.FC<InstructorCardProps> = ({
               {!hideLocation && `${instructor.city}, ${instructor.country}`}
             </p>
           )}
-          {renderSubjects()}
         </div>
+      </div>
+      <div className={`flex items-start justify-start mt-4 ${config.spacing}`}>
+        {renderSubjects()}
       </div>
       {!hideDescription && (
         <p className={`text-muted-foreground line-clamp-2 mt-3 ${config.details}`}>
-          {instructor.description}
+          {instructor.about || instructor.description || "No description available."}
         </p>
       )}
     </div>

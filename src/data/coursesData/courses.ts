@@ -101,7 +101,7 @@ export const courses: Course[] = [
     description: "Deep dive into advanced TypeScript concepts",
     mediumDescription: "Master advanced TypeScript patterns, generics, and type system features for building robust applications.",
     longDescription: "Dive deep into advanced TypeScript concepts and design patterns. Learn how to leverage TypeScript's powerful type system to build robust, maintainable applications with confidence.",
-    tags: ["Generics", "Types", "Patterns", "Advanced"],
+    tags: ["Generics", "Types", "Patterns", "Classes", "Interfaces"],
     courseTopics: [
       {
         title: "Type System",
@@ -273,7 +273,7 @@ export const courses: Course[] = [
     title: "Node.js Backend Development",
     description: "Build scalable backend applications with Node.js",
     mediumDescription: "Learn Express.js, MongoDB, authentication, and API development in this comprehensive backend course.",
-    longDescription: "Master backend development with Node.js and Express. Learn to build RESTful APIs, handle authentication, work with databases, and deploy scalable server applications.",
+    longDescription: "Master backend development with Node.js and Express. Learn to build RESTful APIs, handle authentication, work with databases, and deploy scalable server applications. Master backend development with Node.js and Express. Learn to build RESTful APIs, handle authentication, work with databases, and deploy scalable server applications",
     tags: ["Node.js", "Express", "MongoDB", "APIs"],
     courseTopics: [
       {
@@ -931,7 +931,14 @@ export const courses: Course[] = [
       {
         title: "Project Planning",
         children: [
-          { title: "Defining Project Goals" },
+          {
+            title: "Defining Project Goals",
+            children: [
+              { title: "Understanding Project Scope" },
+              { title: "Creating a Work Breakdown Structure" },
+              { title: "Setting SMART Objectives" }
+            ]
+          },
           { title: "Creating a Project Charter" },
           { title: "Stakeholder Analysis" }
         ]

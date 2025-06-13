@@ -36,6 +36,8 @@ export const courseStatusTypes: CourseStatusType[] = [
   'couseActive',
 ];
 
+export type Topic = { title: string; children?: Topic[] };
+
 export interface Course {
   id: number;
   title: string;
@@ -43,12 +45,7 @@ export interface Course {
   mediumDescription: string;
   longDescription: string;
   tags: string[];
-  courseTopics: Array<{
-    title: string;
-    children: Array<{ title: string }>;
-
-  }>;
-
+  courseTopics: Array<Topic>;
   subjectId: number;
   industryId: number;
   image: string;
@@ -73,5 +70,8 @@ export interface Course {
   ownerOrgId: number;
   ownerInstructorId: number;
   ownedByOrg: boolean;
+
+  noSchedules?: boolean; // Indicates if the course has no schedules
+
 }
 

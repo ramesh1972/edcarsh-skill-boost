@@ -26,7 +26,7 @@ export const MapTooltip: React.FC<MapTooltipProps> = ({ item, viewMode }) => {
       return `${item.title} (${item.industry}) - ${item.students.toLocaleString()} students across ${item.courseCount} courses`;
     }
 
-    if (viewMode === 'topic') {
+    if (viewMode === 'tag') {
       return `${item.title} (${item.industry} • ${item.subject}) - ${item.students.toLocaleString()} students across ${item.courseCount} courses`;
     }
 

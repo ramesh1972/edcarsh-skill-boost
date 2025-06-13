@@ -4,61 +4,67 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useTheme } from '@/hooks/useTheme';
-import { getSubjectById, getIndustryNameById, getSubjectNameById } from '@/data/masterData/industriesSubjects';
 import { useNavigate } from 'react-router-dom';
-import ActionButtons from './ActionButtons';
-import CourseInfoCard from './CourseInfoCard';
-import { getInstructorById } from '@/data/usersData/instructors';
+import ActionButtons from '../ActionButtons';
+import CourseInfoCard from '../CourseInfoCard';
 import { Wifi, WifiOff, Wrench } from 'lucide-react';
-import { Course } from '@/types';
+import { getInstructor, getUserName } from '@/adapters/userDataAdapter';
+import { DeepCourseInfo, CourseSchedule, CourseStats, Instructor } from '@/types';
+import { getNextNCourseSchedules, getStatsForCourses } from '@/adapters/coursesDataAdapter';
+import { getSubjectById, getIndustryById } from '@/adapters/industrySubjectAdpator';
 
 interface ShortCourseCardProps {
-  course: Course;
+  deepCourseInfo: DeepCourseInfo;
   referrerRoute?: string;
   referrerName?: string;
 }
 
 const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
-  course,
+  deepCourseInfo,
   referrerRoute = '/courses',
   referrerName = 'Courses'
 }) => {
   const { theme } = useTheme();
   const navigate = useNavigate();
-  const instructor = getInstructorById(course.instructorId);
+
+  const schedules: CourseSchedule[] = getNextNCourseSchedules(deepCourseInfo.id, 1);
+  const firstSchedule = schedules?.[0] || null;
+  const instructor: Instructor = getInstructor(firstSchedule?.byInstructorId || deepCourseInfo.ownerInstructorId) || null
+  const instructorName = instructor !== null ? getUserName(instructor.userId) : "Unknown Instructor";
+
+  const subject = getSubjectById(deepCourseInfo.industryId, deepCourseInfo.subjectId) || { name: "Subject Not Set", color: '#000' };
+  const industry = getIndustryById(deepCourseInfo.industryId) || { name: "Industry Not Set" };
+
+  const courseStats: CourseStats = getStatsForCourses([deepCourseInfo.id]);
 
   const handleViewClick = () => {
-    navigate(`/courses/${course.id}`, {
+    navigate(`/courses/${deepCourseInfo.id}`, {
       state: { from: referrerRoute, fromName: referrerName }
     });
   };
 
-  const industryName = getIndustryNameById(course.industryId);
-  const subjectName = getSubjectNameById(course.industryId, course.subjectId);
-  const subject = getSubjectById(course.industryId, course.subjectId);
-
   return (
     <Card className={`h-full hover:shadow-lg transition-all duration-200 overflow-hidden flex flex-col gap-1 w-fit ${theme.designSystem === 'material' ? 'shadow-md' : theme.designSystem === 'fluent' ? 'border-2' : 'hover:shadow-lg'} ${theme.skin === 'gradient' ? 'bg-gradient-to-br from-card to-card/80' : ''}`}>
-      {/* Course Image */}
+      {/* DeepCourseInfo Image */}
       <div className="relative h-48 overflow-hidden flex-shrink-0 rounded-b-none">
-        <img src={course.image} alt={course.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-none" />
+        <img src={deepCourseInfo.image} alt={deepCourseInfo.title} className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 rounded-b-none" />
         <div className="absolute top-2 left-2 flex flex-col gap-1">
           <Badge variant="outline" className="bg-white/90 text-black text-xs">
-            {industryName}
-          </Badge>
+            {industry?.name || 'Industry Not Set'}
+          </Badge> 
           <Badge customColor={subject?.color} className="text-white text-xs">
-            {subjectName}
+            {subject?.name || 'Subject Not Set'}
           </Badge>
         </div>
         <div className="absolute top-2 right-2 flex gap-1 flex-col">
           <Badge variant="secondary" className="bg-white/90 text-black text-xs">
-            {course.level}
+            {deepCourseInfo.level}
           </Badge>
-          <Badge variant="outline" className={`text-xs ${course.mode === 'live' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
-            {course.mode === 'live' ? <Wifi className="w-3 h-3 mr-1" /> : <WifiOff className="w-3 h-3 mr-1" />}
-            {course.mode}
+          <Badge variant="outline" className={`text-xs ${deepCourseInfo.mode === 'live' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
+            {deepCourseInfo.mode === 'live' ? <Wifi className="w-3 h-3 mr-1" /> : <WifiOff className="w-3 h-3 mr-1" />}
+            {deepCourseInfo.mode}
           </Badge>
-          {course.tools && (
+          {deepCourseInfo.hasTools && (
             <Badge variant="outline" className="bg-blue-100 text-blue-800 text-xs">
               <Wrench className="w-3 h-3 mr-1" />
               Tools
@@ -70,10 +76,10 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
       <CardHeader className="flex flex-col justify-start flex-shrink-0 gap-1">
         <div className="flex items-start justify-between">
           <CardTitle className={`text-base leading-tight line-clamp-2 ${theme.designSystem === 'material' ? 'text-sm font-medium' : 'text-base'}`}>
-            {course.title}
+            {deepCourseInfo.title}
           </CardTitle>
         </div>
-        <CardDescription className="text-xs line-clamp-2 flex-1 flex items-start max-h-4 overflow-hidden">{course.description}</CardDescription>
+        <CardDescription className="text-xs line-clamp-2 flex-1 flex items-start max-h-4 overflow-hidden">{deepCourseInfo.description}</CardDescription>
       </CardHeader>
 
       <CardContent className="flex-1 flex flex-col gap-1">
@@ -81,24 +87,23 @@ const ShortCourseCard: React.FC<ShortCourseCardProps> = ({
         <div className="flex-shrink-0 p-0">
           <h4 className="text-xs font-medium mb-1">Topics Covered:</h4>
           <div className="flex flex-wrap mb-2 gap-1 content-start overflow-hidden">
-            {course.topics.slice(0, 6).map((topic, index) => (
+            {deepCourseInfo.tags.slice(0, 6).map((tag, index) => (
               <Badge key={index} variant="secondary" className="text-xs px-2 py-1">
-                {topic}
+                {tag}
               </Badge>
             ))}
           </div>
         </div>
 
-        {/* Course Info Card - moved below image */}
-        <div>
-          <CourseInfoCard duration={course.duration} students={course.students} price={course.price} nextSession={course.nextSession} />
+        {/* DeepCourseInfo Info Card - moved below image */}
+        <div className='mt-4'>
+          <CourseInfoCard deepCourseInfo={deepCourseInfo} />
         </div>
 
         {/* Action Buttons aligned to bottom */}
-        <div className="mt-4 p-0">
-          <ActionButtons 
-            courseId={course.id} 
-            nextSession={course.nextSession}
+        <div className="mt-6 p-0">
+          <ActionButtons
+            deepCourseInfo={deepCourseInfo}
             onViewClick={handleViewClick}
           />
         </div>

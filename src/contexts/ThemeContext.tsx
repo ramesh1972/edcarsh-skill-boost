@@ -19,7 +19,14 @@ const iconLibraries = {
     contact: () => <LucideIcons.Mail className="w-4 h-4" />,
     about: () => <LucideIcons.Info className="w-4 h-4" />,
     tools: () => <LucideIcons.Wrench className="w-5 h-5" />,
-    calendar: () => <LucideIcons.Calendar className="w-5 h-5" />
+    calendar: () => <LucideIcons.Calendar className="w-5 h-5" />,
+    network: () => <LucideIcons.Network className="w-5 h-5" />,
+    online: () => <LucideIcons.Wifi className="w-5 h-5" />,
+    system: () => <LucideIcons.Settings className="w-5 h-5" />,
+    education: () => <LucideIcons.Book className="w-5 h-5" />,
+    classroom: () => <LucideIcons.School className="w-5 h-5" />,
+    analytics: () => <LucideIcons.BarChart className="w-5 h-5" />,
+    chat: () => <LucideIcons.MessageCircle className="w-5 h-5" />
   },
   cartoon: {
     course: () => <LucideIcons.BookOpenCheck className="w-5 h-5" />,
@@ -36,7 +43,14 @@ const iconLibraries = {
     contact: () => <LucideIcons.MailOpen className="w-4 h-4" />,
     about: () => <LucideIcons.InfoIcon className="w-4 h-4" />,
     tools: () => <LucideIcons.Settings className="w-5 h-5" />,
-    calendar: () => <LucideIcons.CalendarCheck className="w-5 h-5" />
+    calendar: () => <LucideIcons.CalendarCheck className="w-5 h-5" />,
+    network: () => <LucideIcons.Network className="w-5 h-5" />,
+    online: () => <LucideIcons.Wifi className="w-5 h-5" />,
+    system: () => <LucideIcons.Settings2 className="w-5 h-5" />,
+    education: () => <LucideIcons.BookOpen className="w-5 h-5" />,
+    classroom: () => <LucideIcons.School className="w-5 h-5" />,
+    analytics: () => <LucideIcons.BarChart2 className="w-5 h-5" />,
+    chat: () => <LucideIcons.MessageCircle className="w-5 h-5" />
   },
   emoji: {
     course: () => <span className="text-lg">📚</span>,
@@ -53,7 +67,14 @@ const iconLibraries = {
     contact: () => <span className="text-lg">📧</span>,
     about: () => <span className="text-lg">ℹ️</span>,
     tools: () => <span className="text-lg">🔧</span>,
-    calendar: () => <span className="text-lg">📅</span>
+    calendar: () => <span className="text-lg">📅</span>,
+    network: () => <span className="text-lg">🌐</span>,
+    online: () => <span className="text-lg">📶</span>,
+    system: () => <span className="text-lg">⚙️</span>,
+    education: () => <span className="text-lg">🎓</span>,
+    classroom: () => <span className="text-lg">🏫</span>,
+    analytics: () => <span className="text-lg">📊</span>,
+    chat: () => <span className="text-lg">💬</span>
   },
   avatars: {
     course: () => <LucideIcons.Library className="w-5 h-5" />,
@@ -70,7 +91,14 @@ const iconLibraries = {
     contact: () => <LucideIcons.AtSign className="w-4 h-4" />,
     about: () => <LucideIcons.FileText className="w-4 h-4" />,
     tools: () => <LucideIcons.Hammer className="w-5 h-5" />,
-    calendar: () => <LucideIcons.CalendarIcon className="w-5 h-5" />
+    calendar: () => <LucideIcons.CalendarIcon className="w-5 h-5" />,
+    network: () => <LucideIcons.NetworkIcon className="w-5 h-5" />,
+    online: () => <LucideIcons.Wifi className="w-5 h-5" />,
+    system: () => <LucideIcons.Settings2 className="w-5 h-5" />,
+    education: () => <LucideIcons.BookOpen className="w-5 h-5" />,
+    classroom: () => <LucideIcons.SchoolIcon className="w-5 h-5" />,
+    analytics: () => <LucideIcons.BarChart3 className="w-5 h-5" />,
+    chat: () => <LucideIcons.MessageCircle className="w-5 h-5" />
   }
 };
 

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -6,13 +5,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useTheme } from '@/hooks/useTheme';
-import { getSubjectById, getIndustryNameById, getSubjectNameById } from '@/data/masterData/industriesSubjects';
-import { courses } from '@/data/coursesData/courses';
-import { getInstructorById } from '@/data/usersData/instructors';
 import { ArrowLeft, Wifi, WifiOff, Wrench, Calendar, Clock } from 'lucide-react';
 import CourseInfoCard from './CourseInfoCard';
 import ActionButtons from './ActionButtons';
 import InstructorCard from '@/components/instructors/InstructorCard';
+import { getInstructor, getUserName } from '@/adapters/userDataAdapter';
+import { getCourseInfo, getCourseInfoDeep, getNextNCourseSchedules, getStatsForCourses } from '@/adapters/coursesDataAdapter';
+import { CourseSchedule, Instructor, CourseStats } from '@/types';
+import { getSubjectById, getIndustryById } from '@/adapters/industrySubjectAdpator';
+import { set, sub } from 'date-fns';
+import { getInstructorDeepCourseInfo } from '@/adapters/instructorDataAdapter';
+import CourseSchedules from './CourseSchedules';
+import CourseTopics from './CourseTopics';
 
 const CourseView: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -21,15 +25,23 @@ const CourseView: React.FC = () => {
   const { theme, getBackground } = useTheme();
   const [referrerRoute, setReferrerRoute] = useState('/courses');
   const [referrerName, setReferrerName] = useState('Courses');
-  
-  const course = courses.find(c => c.id === parseInt(id || '0'));
-  const instructor = course ? getInstructorById(course.instructorId) : null;
+  const [nextNSchedules, setNextNSchedules] = useState<CourseSchedule[]>([]);
 
+  const courseInfoDeep = getCourseInfoDeep(parseInt(id)) || null;
+
+  const instructors = courseInfoDeep?.schedules?.map(schedule => getInstructor(schedule.byInstructorId)) || [];
+
+  const subject = getSubjectById(courseInfoDeep.industryId, courseInfoDeep.subjectId) || { name: "Subject Not Set", color: '#000' };
+  const industry = getIndustryById(courseInfoDeep.industryId) || { name: "Industry Not Set" };
+
+  const { getIcon } = useTheme();
   useEffect(() => {
     // Get the referrer from location state or session storage
     const state = location.state as { from?: string; fromName?: string } | null;
     const storedReferrer = sessionStorage.getItem('courseViewReferrer');
     const storedReferrerName = sessionStorage.getItem('courseViewReferrerName');
+
+    setNextNSchedules(getNextNCourseSchedules(parseInt(id)));
 
     if (state?.from) {
       setReferrerRoute(state.from);
@@ -40,7 +52,7 @@ const CourseView: React.FC = () => {
       setReferrerRoute(storedReferrer);
       setReferrerName(storedReferrerName || 'Back');
     }
-  }, [location]);
+  }, [id, location]);
 
   const handleBackClick = () => {
     // Clear the stored referrer
@@ -49,7 +61,7 @@ const CourseView: React.FC = () => {
     navigate(referrerRoute);
   };
 
-  if (!course || !instructor) {
+  if (!courseInfoDeep || !instructors) {
     return (
       <div className={`min-h-full bg-background ${getBackground()} flex items-center justify-center`}>
         <Card className="p-8 text-center">
@@ -61,51 +73,47 @@ const CourseView: React.FC = () => {
     );
   }
 
-  const industryName = getIndustryNameById(course.industryId);
-  const subjectName = getSubjectNameById(course.industryId, course.subjectId);
-  const subject = getSubjectById(course.industryId, course.subjectId);
-
   return (
     <div className={`min-h-full bg-background ${getBackground()}`}>
       <div className="container mx-auto px-4 py-8">
         {/* Back button */}
-        <Button 
-          variant="outline" 
-          onClick={handleBackClick} 
+        <Button
+          variant="outline"
+          onClick={handleBackClick}
           className="mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to {referrerName}
         </Button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-7 gap-8">
           {/* Main content - left side */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-4 space-y-6">
             {/* Course header */}
             <Card>
               <div className="relative h-64 overflow-hidden rounded-t-lg">
-                <img 
-                  src={course.image} 
-                  alt={course.title} 
+                <img
+                  src={courseInfoDeep.image}
+                  alt={courseInfoDeep.title}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4 flex flex-col gap-2">
                   <Badge variant="outline" className="bg-white/90 text-black">
-                    {industryName}
+                    {industry?.name || 'Industry Not Set'}
                   </Badge>
                   <Badge customColor={subject?.color} className="text-white">
-                    {subjectName}
+                    {subject?.name || 'Subject Not Set'}
                   </Badge>
                 </div>
                 <div className="absolute top-4 right-4 flex gap-2 flex-col">
                   <Badge variant="secondary" className="bg-white/90 text-black">
-                    {course.level}
+                    {courseInfoDeep.level}
                   </Badge>
-                  <Badge variant="outline" className={`${course.mode === 'live' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
-                    {course.mode === 'live' ? <Wifi className="w-3 h-3 mr-1" /> : <WifiOff className="w-3 h-3 mr-1" />}
-                    {course.mode}
+                  <Badge variant="outline" className={`${courseInfoDeep.mode === 'live' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
+                    {courseInfoDeep.mode === 'live' ? <Wifi className="w-3 h-3 mr-1" /> : <WifiOff className="w-3 h-3 mr-1" />}
+                    {courseInfoDeep.mode}
                   </Badge>
-                  {course.tools && (
+                  {courseInfoDeep.hasTools && (
                     <Badge variant="outline" className="bg-blue-100 text-blue-800">
                       <Wrench className="w-3 h-3 mr-1" />
                       Tools
@@ -114,8 +122,8 @@ const CourseView: React.FC = () => {
                 </div>
               </div>
               <CardHeader>
-                <CardTitle className="text-3xl">{course.title}</CardTitle>
-                <p className="text-lg text-muted-foreground">{course.longDescription}</p>
+                <CardTitle className="text-3xl">{courseInfoDeep.title}</CardTitle>
+                <p className="text-md text-muted-foreground">{courseInfoDeep.longDescription}</p>
               </CardHeader>
             </Card>
 
@@ -125,77 +133,62 @@ const CourseView: React.FC = () => {
                 <CardTitle>Topics Covered</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-3 mb-6">
-                  {course.topics.map((topic, index) => (
-                    <Badge 
-                      key={index} 
-                      variant="secondary" 
-                      className="px-4 py-2 text-sm font-medium bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer"
-                    >
-                      {topic}
-                    </Badge>
-                  ))}
-                </div>
-                <ul className="space-y-2">
-                  {course.longTopics.map((topic, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <span className="text-primary mt-1">•</span>
-                      <span>{topic}</span>
-                    </li>
-                  ))}
-                </ul>
+                <CourseTopics deepCourseInfo={courseInfoDeep} showHeader={false} />
               </CardContent>
             </Card>
 
             {/* Instructor details using InstructorCard */}
             <Card>
               <CardHeader>
-                <CardTitle>Your Instructor</CardTitle>
+                {instructors.length > 1 && (
+                  <CardTitle>This Course is taught by different Instructors</CardTitle>
+                ) || (
+                    <CardTitle>Your Instructor</CardTitle>
+                  )}
               </CardHeader>
               <CardContent>
-                <InstructorCard 
-                  instructor={instructor}
-                  size="lg"
-                  layout="horizontal"
-                  showTitle={false}
-                  referrerRoute={`/courses/${course.id}`}
-                  referrerName={course.title}
-                />
+                {instructors.length === 0 ? (
+                  <p className="text-muted-foreground">No instructor assigned yet.</p>
+                ) : (
+                  <div className="flex flex-col flex-wrap gap-8">
+
+                    {instructors.map((instructor, index) => (
+                      <>
+                        <InstructorCard
+                          key={index}
+                          instructor={instructor}
+                          size="lg"
+                          layout="horizontal"
+                          showTitle={false}
+                          referrerRoute={`/courses/${courseInfoDeep.id}`}
+                          referrerName={courseInfoDeep.title}
+
+                        />
+
+                        {instructors.length > 1 && <hr className="border-b border-muted-foreground my-2" />}
+                      </>
+                    ))}
+                  </div>
+                )}
+          
               </CardContent>
             </Card>
           </div>
 
           {/* Sidebar - right side */}
-          <div className="space-y-6">
+          <div className="space-y-6 lg:col-span-3" >
             {/* Course info card */}
             <Card>
               <CardHeader>
                 <CardTitle>Course Details</CardTitle>
               </CardHeader>
               <CardContent>
-                <CourseInfoCard 
-                  duration={course.duration}
-                  students={course.students}
-                  price={course.price}
-                  nextSession={course.nextSession}
+                <CourseInfoCard
+                  deepCourseInfo={courseInfoDeep}
                 />
               </CardContent>
             </Card>
 
-            {/* Action buttons */}
-            <Card>
-              <CardContent className="pt-6">
-                <div className="space-y-3">
-                  <ActionButtons 
-                    showJoinNow={true}
-                    joinNowEnabled={true}
-                    showJoinAsGuest={true}
-                    showView={false}
-                    nextSession={course.nextSession}
-                  />
-                </div>
-              </CardContent>
-            </Card>
 
             {/* Additional course details */}
             <Card>
@@ -203,28 +196,16 @@ const CourseView: React.FC = () => {
                 <CardTitle>Schedule</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-sm">Start Date: {course.startDate}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-sm">End Date: {course.endDate}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-sm">Time: {course.startTime}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-sm">Daily Duration: {course.dailySessionDuration} hours</span>
-                </div>
+                <CourseSchedules
+                  courseInfoDeep={courseInfoDeep}
+                  showWishList={false}
+                />
               </CardContent>
             </Card>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

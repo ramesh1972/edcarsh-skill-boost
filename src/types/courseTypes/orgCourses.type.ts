@@ -40,3 +40,8 @@ export interface OrgCourse extends InstructorCourse {
   instructorId: number;
   orgId: number;
 }
+
+export interface OrgDeepCourseInfo  extends DeepCourseInfo {
+  orgId: number; // The organization ID
+  courseId: number;
+}
