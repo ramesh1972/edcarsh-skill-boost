@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/hooks/useTheme';
@@ -99,14 +98,14 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   const displayJoinNow = showJoinNow && shouldShowJoinNow();
 
   return (
-    <div className="flex justify-between items-center gap-2">
+    <div className="flex justify-between items-center gap-2 w-full flex-wrap min-w-0">
       {/* Left side - Join as Guest */}
-      <div className="flex-shrink-0">
+      <div className="flex-shrink-0 min-w-0">
         {showJoinAsGuest && (
           <Button
             variant="outline"
             size="sm"
-            className="flex items-center gap-1 border-2"
+            className="flex items-center gap-1 border-2 min-w-0 max-w-xs"
             disabled={isDisabled}
             onClick={handleJoinAsGuestClick}
           >
@@ -117,11 +116,11 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
       </div>
 
       {/* Right side - Other buttons */}
-      <div className="flex flex-nowrap gap-2">
+      <div className="flex flex-nowrap gap-2 min-w-0 flex-shrink flex-wrap">
         {displayJoinNow && (
           <Button
             size="sm"
-            className={`flex items-center gap-1 border-2 ${showJoinNow && !isDisabled ?
+            className={`flex items-center gap-1 border-2 min-w-0 max-w-xs ${showJoinNow && !isDisabled ?
               'bg-red-500 hover:bg-red-600 text-white font-bold shadow-lg border-red-600 animate-flash' :
               ''
               }`}
@@ -135,7 +134,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           <Button
             variant="secondary"
             size="sm"
-            className="flex items-center gap-1"
+            className="flex items-center gap-1 min-w-0 max-w-xs"
             disabled={isDisabled}
             onClick={handleViewClick}
           >
@@ -146,7 +145,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
         {showEnrollNow && (
           <Button
             size="sm"
-            className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''}`}
+            className={`${theme.designSystem === 'material' ? 'rounded-none uppercase text-sm font-medium' : theme.designSystem === 'human' ? 'rounded-lg' : theme.designSystem === 'fluent' ? 'rounded-sm' : ''} min-w-0 max-w-xs`}
             disabled={isDisabled}
             onClick={handleEnrollNowClick}
           >
@@ -157,7 +156,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           <Button
             variant="secondary"
             size="sm"
-            className="px-2"
+            className="px-2 min-w-0 max-w-xs"
             disabled={isDisabled}
             onClick={handleWishListClick}
           >

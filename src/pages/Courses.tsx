@@ -19,7 +19,6 @@ import { Course, CourseSchedule, DeepCourseInfo, Industry, Subject } from '@/typ
 import TitleComponent from '@/components/common/TitleComponent';
 import LevelFilter from '@/components/filters/LevelFilter';
 import { orgs } from '@/data/orgData/orgs';
-import { KnowledgeGraphView } from '../components/Courses/KnowledgeGraphView';
 
 const Courses = () => {
   const {
@@ -292,15 +291,7 @@ const Courses = () => {
                 <MapPin className="h-5 w-5" />
                 <span className="hidden sm:inline text-xs font-medium">Map</span>
               </Button>
-              <Button
-                variant={viewMode === 'graph' ? 'default' : 'outline'}
-                aria-label="Knowledge Graph View"
-                onClick={() => setViewMode('graph')}
-                className="flex items-center gap-1 px-3"
-              >
-                <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/><circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none"/><line x1="12" y1="3" x2="12" y2="9" stroke="currentColor" strokeWidth="2"/><line x1="12" y1="15" x2="12" y2="21" stroke="currentColor" strokeWidth="2"/><line x1="3" y1="12" x2="9" y2="12" stroke="currentColor" strokeWidth="2"/><line x1="15" y1="12" x2="21" y2="12" stroke="currentColor" strokeWidth="2"/></svg>
-                <span className="hidden sm:inline text-xs font-medium">Graph</span>
-              </Button>
+              
             </div>
           </div>
           {/* Card View */}
@@ -340,25 +331,7 @@ const Courses = () => {
           {viewMode === 'map' && (
             <PopularCoursesMapView deepCourseInfos={filteredAndSortedCourses} />
           )}
-          {/* Knowledge Graph View (reagraph) */}
-          {viewMode === 'graph' && (
-            <KnowledgeGraphView
-              industries={availableIndustries}
-              subjects={availableSubjects?.length === 0 ? getSubjects() : availableSubjects}
-              courses={filteredAndSortedCourses.length === 0 ? getOrgDeepCoursesInfo(0) : filteredAndSortedCourses}
-              topics={[]} // TODO: extract topics from courses
-              instructors={[]} // TODO: get instructors for filtered courses
-              learners={[]} // TODO: get learners for filtered courses
-              orgs={orgs}
-              selectedIndustries={selectedIndustry === 0 ? [] : [String(selectedIndustry)]}
-              selectedSubjects={selectedSubject === 0 ? [] : [String(selectedSubject)]}
-              selectedOrgs={selectedOrgId === 'all' ? [] : [String(selectedOrgId)]}
-              selectedLevels={selectedLevel === 'all' ? [] : [selectedLevel]}
-              selectedScheduleStatus={scheduleStatus}
-              visibleNodeTypes={graphNodeTypes}
-              onVisibleNodeTypesChange={setGraphNodeTypes}
-            />
-          )}
+          
           
         </main>
       </div>
