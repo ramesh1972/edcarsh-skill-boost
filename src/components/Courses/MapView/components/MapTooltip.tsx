@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { ViewMode, MapDataItem } from '../types';
 
@@ -13,7 +14,7 @@ export const MapTooltip: React.FC<MapTooltipProps> = ({ item, viewMode }) => {
       return (
         <div className="max-w-[200px]">
           {item.title} - {item.students} students
-          <div className="text-xs opacity-75">{item.topics?.join(', ')} • {item.subject}</div>
+          <div className="text-xs opacity-75">{item.tags?.join(', ')} • {item.subject}</div>
         </div>
       );
     }
@@ -39,3 +40,4 @@ export const MapTooltip: React.FC<MapTooltipProps> = ({ item, viewMode }) => {
     </div>
   );
 };
+

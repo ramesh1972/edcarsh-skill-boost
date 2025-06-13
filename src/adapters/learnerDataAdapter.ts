@@ -1,3 +1,4 @@
+
 import { Learner, Course, CourseSchedule, CourseScheduleSessionDay, ExpressCourseIntent, CourseStatusChange } from '../types';
 import { LearnerCourse, LearnerWishlistItem, LearnerGuestJoin } from '../types/courseTypes/learnerCourses.type';
 
@@ -65,7 +66,8 @@ export function getLearnerCourseSchedule(learnerId: number, courseId: number): (
     const enrolled = learnerCourses.find(lc => lc.learnerId === learnerId && lc.id === courseId);
     if (!enrolled) return { schedules: [] } as Course & { schedules: CourseSchedule[] };
 
-    return getCourseSchedules(courseId)
+    const courseWithSchedules = getCourseSchedules(courseId);
+    return courseWithSchedules;
 }
 
 /**
